@@ -36,7 +36,7 @@ df_csv
 
 正確にはShift-JISの拡張版であるcp932でエンコードされたファイルです。変数名も文字化けして読みこみ自体できなくなるので、`clean_names()`で読める形式に変換しています。
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 read_csv("data/csv/ペンギン（ひどい列名）ver_cp932.csv") %>% 
   clean_names(case = "old_janitor") %>% 
   select(1:3) # 紙面の都合で最初の3つの変数に限定

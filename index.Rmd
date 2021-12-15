@@ -1,6 +1,8 @@
 ---
 site: bookdown::bookdown_site
-github-repo: izunyan/excel_r
+title:  "タイトル"
+author: "著者名"
+github-repo: https://github.com/izunyan/gisyo12.git
 cover-image: images/cover.png
 documentclass: bxjsbook
 classoption: xelatex,ja=standard, b5paper
@@ -23,7 +25,7 @@ options(tibble_opt)
 # はじめに {-#hajimeni}
 
 ```{r cover, echo=FALSE, fig.align='center', out.width='60%'}
-knitr::include_graphics("images/cover.png")
+# knitr::include_graphics("images/cover.png")
 ```
 
 本書『**Rで読むExcelファイル**』を書こうと思ったのは「RとRStudioを使いたい！と思う人がもっと増えればいいのに」という願いからです。使う人が多くなれば、新しい知識に出会いやすくなりますし、仕事でも使う機会が増える可能性があります。
@@ -97,4 +99,4 @@ Twitterで応援してもらったら項目が増えていく仕様にしてい�
        
 ******  
           
-![](images/tweet.png)      
+<!-- ![](images/tweet.png)       -->

@@ -27,7 +27,7 @@ skim(df)
 (ref:skim) skim()の出力
 
 ```{r skim, echo=FALSE, fig.align='center', fig.cap='(ref:skim)', out.width='80%'}
-knitr::include_graphics("images/skim.png")
+# knitr::include_graphics("images/skim.png")
 ```
 
 データの型が数値である変数（ここでは`Variable type:numeric`）については、`hist`列に簡単なヒストグラムが表示されます（図\@ref(fig:skim)）。しかしデータが大量な場合、動作が遅くなります。その場合は、ヒストグラムを描かない以下の関数が使えます。

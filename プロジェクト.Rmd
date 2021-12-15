@@ -14,7 +14,7 @@ Excelファイルに限らず、ファイルをRに読み込む際は、どの�
 RStudioの「プロジェクト」とは、作業フォルダにまつわる面倒な設定を意識しないですむ非常に便利な機能です。RStudioを開いて右上のところに設定アイコンがあります（Figure\@ref(fig:projectfig)）。
 
 ```{r projectfig, echo = FALSE, fig.cap = "プロジェクトの場所", fig.align = "center"}
-knitr::include_graphics("images/project.png")
+# knitr::include_graphics("images/project.png")
 ```
 
 
