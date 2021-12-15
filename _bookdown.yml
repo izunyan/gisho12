@@ -1,6 +1,6 @@
 book_filename: "gisho12"
 # chapter_name: "ch: " # 自動で章の名前をつける
-repo: https://github.com/izunyan/gisyo12.git
+repo: https://github.com/izunyan/gisho12.git
 output_dir: "docs"   # githubでweb公開するためにdocsフォルダに変更
 rmd_files: ["index.Rmd", 
             "プロジェクト.Rmd",

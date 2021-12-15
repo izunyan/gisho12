@@ -2,7 +2,7 @@
 site: bookdown::bookdown_site
 title:  "タイトル"
 author: "著者名"
-github-repo: https://github.com/izunyan/gisyo12.git
+github-repo: https://github.com/izunyan/gisho12.git
 cover-image: images/cover.png
 documentclass: bxjsbook
 classoption: xelatex,ja=standard, b5paper
