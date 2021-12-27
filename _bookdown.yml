@@ -3,6 +3,8 @@ book_filename: "gisho12"
 repo: https://github.com/izunyan/gisho12.git
 output_dir: "docs"   # githubでweb公開するためにdocsフォルダに変更
 rmd_files: ["index.Rmd", 
-            "プロジェクト.Rmd",
-            "excelファイルの読み込み.Rmd",
+            "select.Rmd",
+            "filter.Rmd",
+            "mutate.Rmd",
+            "summarise.Rmd",
             "あとがき.Rmd"] # rmdファイルの順番指定

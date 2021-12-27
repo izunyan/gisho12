@@ -1,0 +1,214 @@
+# 変数（列）を選ぶ {#select}
+
+* パッケージ`dplyr`の関数`select()`
+* tidyな世界では「列名 = 変数名」
+* 変数が多い時に関心ある変数に限定したデータにしたい
+* 関心ある変数の名前を取得したい
+
+
+## データ読み込み {#select_read}
+```{r}
+library(tidyverse)
+library(readxl)
+
+df <- 
+ read_xlsx("data/ペンギン.xlsx") # Excelファイルの読み込み
+
+df # データの表示 
+``` 
+
+* 読み込みの様々な方法については拙書[『Rで読むExcelファイル』](https://izunyan.github.io/excel_r/)参照
+
+
+## 基本 {#select1}
+
+* `select( )`の中に関心のある変数名を`,`をつけて並べる
+  + 変数は1つからOK
+
+```{r}
+df %>% 
+  select(bill_length_mm, bill_depth_mm)
+
+```
+
+* 新しいデータフレームを作りたい場合は`<-`を使って新しいオブジェクトに格納する
+
+```{r}
+df2 <- 
+  df %>% select(bill_length_mm)
+
+df2
+```
+
+
+### 範囲指定 {#select_range}
+
+* 関心ある変数が指定された範囲に含まれていれば`:`でつなげて取得できる
+  + 変数の連番をまとめて指定する時などに便利（例 `変数1:変数100`）
+
+```{r}
+df %>% 
+  select(bill_length_mm:flipper_length_mm)
+```
+
+* 範囲に加えて追加の変数を追加できる
+  + 飛び飛びの変数群を選びたいときに有用
+
+```{r}
+df %>% 
+  select(bill_length_mm:flipper_length_mm, sex)
+```
+
+### 中身が文字でも動く {#select_cha}
+
+* 変数名が`" "`で囲われていると，Rでは文字(character)だと認識される
+
+```{r}
+df %>% 
+  select("bill_length_mm", "bill_depth_mm")
+
+```
+
+* これは効率化を図りたいときに重要な特徴
+* `select( )`の中にたくさんの変数名を並べるより，事前に指定しておき代入した方が読みやすい
+  + 様々なコード例でこの事前指定が多用されるので慣れるとよい
+
+```{r}
+# あらかじめオブジェクト（ここではvars）に引数を格納して後で使える
+vars <- c("bill_length_mm", "bill_depth_mm")
+
+df %>% 
+  select(all_of(vars))
+```
+
+* ここで`vars`は文字ベクトル（vector）のオブジェクトとなっている
+* `all_of( )`の中に文字ベクトルを指定することで，それぞれの中身を変数名として認識する
+  + 以前は`one_of`が使われていたが，現在は非推奨
+
+## 変数の指定に便利なヘルパー関数 {#select_helper}
+
+* selection helperと呼ばれる`tidyselect`パッケージの関数群
+
+### 変数名の最初の文字列 {#select_helper1}
+
+* `bill`から始まる変数を選ぶ
+
+```{r}
+df %>%
+  select(starts_with("bill"))
+```
+
+### 変数名の最後の文字列 {#select_helper2}
+
+* `_mm`で終わる変数を選ぶ
+  + `mm`だけだと他にも含まれる場合が出てくるので，`_`も含めた方が安全
+
+```{r}
+df %>%
+  select(ends_with("_mm"))
+```
+
+### 変数名のどこかに含まれる文字列 {#select_helper3}
+
+```{r}
+df %>%
+  select(contains("length"))
+```
+
+### 変数名のどこかに含まれる文字列：その2 {#select_helper4}
+
+* 文字列で正規表現が使えるため柔軟な指定が可能
+
+```{r}
+df %>%
+  select(matches("length"))
+```
+
+
+### 上記の組み合わせ {#select_helper5}
+
+#### かつ {#select_helper5_1}
+
+* それぞれの条件を両方満たす
+
+```{r}
+df %>%
+  select(starts_with("bill") & contains("length"))
+```
+
+#### または {#select_helper5_2}
+
+* それぞれの条件をいずれか満たす
+
+```{r}
+df %>%
+  select(starts_with("bill") | contains("length"))
+```
+
+#### matches( )を使った指定 {#select_helper5_3}
+```{r}
+df %>%
+  select(matches("bill|length"))
+
+```
+
+### 数値範囲 {#select_helper6}
+```{r}
+num_range
+```
+
+
+## 特定の変数を選ばない（落とす） {#select_drop}
+
+* 変数名の前に`!`をつける
+
+```{r}
+df %>% 
+  select(!species)
+
+```
+
+* 複数列を落としたい場合は，`!c( )`の中に対象の列名を含める
+
+```{r}
+df %>% 
+  select(!c(bill_length_mm:flipper_length_mm, sex))
+
+```
+
+
+## 変数を並び変える
+## 変数名を変更する
+
+## 関心のある変数名を取得する
+
+* データ分析の段階では，関心のある変数名を選択して，それらを代入する作業が頻出
+* 変数名手打ちだと時間もかかるしミスもあるので，効率化のために必ずおさえておきたい技術
+
+### 全ての変数名
+```{r}
+df %>% names()
+```
+
+### 選択した変数名
+```{r}
+bill_vars <- 
+  df %>% 
+  select(starts_with("bill")) %>% 
+  names()
+
+bill_vars
+```
+
+### コピペに便利な形式に出力
+
+* `,`で区切られた形式で出てくればそのまま`select()`に入れられるのに…と思った方のための便利関数`dput()`
+```{r}
+df %>% 
+  select(starts_with("b")) %>% # bから始まる変数名
+  names() %>% 
+  dput()
+```
+
+* `" "`すらもいらない，という時は，新しくr script(アイコンNew Fileまたは`ctrl + shift + n`)開いて，`dput()`の出力を貼り付けてすべて置換する方法も
+
