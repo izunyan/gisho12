@@ -1,0 +1,293 @@
+# 新しい変数（列）の作成 {#mutate}
+
+* パッケージ`dplyr`の関数`mutate()`
+* 新しい変数の列を作成する
+  + 既にある
+
+* mutateの機能解説
+* 効率化のための`across()`
+
+## データ読み込み {#mutate-read}
+
+* 国際パーソナリティ項目プールからの2800名分のデータ。
+* 質問項目が25問あり，5つの構成概念（ここでは因子という）に対応する項目への回答を足し合わせたスコアを計算する
+* 性，教育歴，年齢の変数もあり
+* 項目に対し想定される因子（因子名の頭文字が変数名と対応）
+  + Agree           A1からA5
+  + Conscientious　 C1からC5
+  + Extraversion    E1からE5
+  + Neuroticism　   N1からN5
+  + Openness　　    O1からO5
+
+* 回答選択肢
+  + 1 Very Inaccurate        まったくあてはまらない
+  + 2 Moderately Inaccurate  あてはまらない
+  + 3 Slightly Inaccurate    ややあてはまらない
+  + 4 Slightly Accurate      ややあてはまる
+  + 5 Moderately Accurate    あてはまる
+  + 6 Very Accurate          非常にあてはまる
+  
+```{r}
+# パッケージが入ってなければ下記実行
+# install.packages("psychTools")
+
+df_bfi <- 
+  psychTools::bfi %>% 
+  as_tibble()         # 表示に便利なtibble形式に
+```
+
+
+## 基本 {#mutate-standard}
+
+* `mutate( )`の中に新しく作成する変数名を入れ，`=`でつないで計算式を入れる
+* ここでは，まず変数A1の平均値（全ケース同じ値が入る）を計算し，個々の値の差分をする例を示す
+
+```{r}
+df_bfi %>% 
+  select(A1) %>%                      # A1のみを残す
+  mutate(
+    mean_a1 = mean(A1, na.rm = TRUE), # A1の平均値を作成（NAは除外）
+    dif_a1_mean = A1 - mean_a1)       # 各個体のA1と平均値の差分を計算
+  
+```
+
+## 変数の型の変換 {#mutate-kata}
+
+* 変数には型の情報が伴い，統計解析やデータ加工の際に適切な型を求められることがあるため理解が必要
+  + 小数も扱う数値 _`<dbl>`_
+  + 整数 _`<int>`_
+  + 文字 _`<chr>`_ 
+  + 因子 _`<fct>`_
+* 変数の型の確認は色々方法があるが，tibble形式のデータフレームなら`select()`でOK
+  + tibble形式でなくても，最後に`glimpse()`で確認可能
+
+```{r}
+df_bfi %>% 
+  select(gender, education)
+
+df_bfi %>%
+  select(gender, education) %>%
+  glimpse()
+
+```
+
+* gender, education列が _`<int>`_ になっているので整数型になっている 
+
+
+### 型の変換 {#mutate-kata-trans}
+
+* ここでは，2つの数値型変数gender, educationを因子型に変換する例を示す
+* それぞれ`factor()`で因子型に変換
+
+```{r}
+df_bfi %>%
+  select(gender, education) %>% 
+  mutate(gender = factor(gender),
+         education = factor(education))
+```
+
+* gender, education列が _`<fct>`_ になっているので整数型になっている 
+
+#### 【効率化】複数の変数に対し一度の指定で実行 {#mutate-kata-trans1}
+
+*  変換したい変数が大量にあるときは上記の方法では大変
+* `across()`を使うと，指定した変数に対して同じ内容の処理なら __1回__ ですむようになる
+  + かつての`mutate_at()`, `mutate_if()`など
+
+```{r}
+df_bfi %>%
+  mutate(across(c(gender, education),
+                factor)) %>% 
+  select(gender, education)   # 結果表示のため冗長だが変わった変数だけselect
+```
+
+## 【効率化】across( )の特徴 {#mutate-across}
+
+
+* 変数の指定に\@ref(select-helper)で解説したヘルパー関数が使える  
+
+  
+```{r}
+df_bfi %>%
+  mutate(across(starts_with("n"),
+                factor)) %>% 
+  select(starts_with("n"))   # 結果表示のため
+
+```
+
+* \@ref(select-cha) で解説した文字も使える
+
+```{r}
+vars <- c("N1", "N2", "N3", "N4", "N5")
+
+df_bfi %>%
+  mutate(across(all_of(vars),
+                factor)) %>% 
+  select(starts_with("n"))   # 結果表示のため
+
+```
+
+### 【重要知識！】新しい変数名にして追加 {#mutate-across-list}
+
+* ここはこの後色々なところで出てくる方法のため理解しておきたい
+* 適用する関数をリストにする（`list()`に入れる）ことで，変数名を変更して追加できる
+* `list()`に入れるときはこれまでと異なる書き方が必要になる
+  + 関数名の前に`~`（チルダ）が必要
+  + list内の関数`()`内に`.`（ピリオド）が必要。ここに`across()`内に指定した変数が入っていくという意味
+
+```{r}
+df_bfi %>%
+  mutate(across(c(gender, education),
+                list(f = ~factor(.)))) %>% 
+  select(matches("gender|education"))   
+```
+
+* 因子型に変換した変数の末尾に_fがつく
+
+## 合計点の作成 {#mutate-total}
+```{r}
+df_bfi_n <- 
+  df_bfi %>%
+  select(N1:N5) %>%                       
+  mutate(neuroticism = N1 + N2 + N3 + N4 + N5)
+  
+df_bfi_n
+```
+
+### 足し上げる変数に欠損があるとどうなるか{#mutate-total-na}
+```{r}
+df_bfi_n %>% 
+  filter(is.na(neuroticism))     # neuroticismがNAなケースに限定
+
+```
+
+
+## 連番からIDの作成 {#mutate-seq}
+
+* `dplyr::row_number()`で行番号からIDを作成
+
+```{r}
+df_bfi_n %>% 
+  mutate(id = row_number())
+```
+
+### 【別解】行の名前を直接変数化 {#mutate-seq-other}
+
+* 実はmutateを使わなくてもできて，データの最初に持ってこれる便利関数がある
+* `tibble::rowid_to_column()`
+  + `var =`で変数名を指定
+
+```{r}
+df_bfi_n %>% 
+  rowid_to_column(var = "id")
+
+# この先使わないのでデータフレーム削除
+rm(df_bfi_n)
+```
+
+## 逆転項目を作る {#mutate-rev}
+### 逆転項目の確認 {#mutate-rev-check}
+
+* bfiデータの場合，どの項目を逆転する必要があるかを示す情報（`-変数名`で表現）がパッケージに含まれている
+  + `psychTools::bfi.keys` で確認可能
+* したがって，"-A1", "-C4", "-C5", "-E1", "-E2", "-O2", "-O5"が対象
+
+### 逆転（recode） {#mutate-rev-recode}
+
+* `dplyr::recode()`を使用
+* 入れ替えたい値をold = newで並べていく
+  + この等式の順番が他(mutateなど)と逆になるため，`recode()`は将来引退する可能性あり
+
+```{r}
+df_bfi %>% 
+  mutate(A1_r = recode(A1, `1` = 6L, `2` = 5L, `3` = 4L,      # oldの数値は` `で囲む必要がある
+                           `4` = 3L, `5` = 2L, `6` = 1L)) %>% # newの数値にLがつくのは，型を整数のままにするため
+  select(A1, A1_r)
+```
+
+
+
+#### 変数2つ以上を逆転 {#mutate-rev-recode1}
+
+* A1と同様に同じ形をくり返し変数名だけ変えていけばできるが，コードが長くなりミスも生じやすくなる
+
+```{r}
+df_bfi %>% 
+  mutate(A1_r = recode(A1, `1` = 6L, `2` = 5L, `3` = 4L, 
+                           `4` = 3L, `5` = 2L, `6` = 1L),
+         C4_r = recode(C4, `1` = 6L, `2` = 5L, `3` = 4L, 
+                           `4` = 3L, `5` = 2L, `6` = 1L)) %>% 
+  select(A1, A1_r, C4, C4_r)
+```
+
+
+#### 【効率化】 変数2つ以上を逆転 {#mutate-rev-recode2}
+
+* \@ref(mutate-across-list) で解説したlistに関数を入れる方法
+
+```{r}
+
+df_bfi %>% 
+  mutate(across(c(A1, C4, C5, E1, E2, O2, O5),
+                list(r = ~recode(., `1` = 6, `2` = 5, `3` = 4, 
+                                 `4` = 3, `5` = 2, `6` = 1)))) %>% 
+  select(A1, A1_r, C4,  C4, C5, C5_r, E1, E1_r, E2, E2_r, O2, O2_r, O5, O5_r)
+```
+
+### 【別解】逆転（公式） {#mutate-rev-rule}
+
+* 項目を反転する公式が「(max + min) - 回答値」であることを利用
+  + `psych::reverse.code()`のhelp参照
+
+```{r}
+min <- 1
+max <- 6
+
+
+df_bfi %>% 
+  mutate(A1_r = max + min - A1,
+         C4_r = max + min - C4) %>% 
+  select(A1, A1_r, C4, C4_r)
+```
+
+#### 【効率化】 変数2つ以上を逆転 {#mutate-rev-rule1}
+
+* `~`の後に計算式がきても動く
+* ここでは，`max + min - .` のピリオド部分にacross内に置かれた変数が入っていく
+
+```{r}
+df_bfi %>% 
+  mutate(across(c(A1,C4),
+                list(r = ~ max + min - .))) %>% 
+  select(A1, A1_r, C4, C4_r)
+```
+
+
+#### 逆転した変数を含むデータフレーム作成
+
+* これ以降で使用するため，項目を逆転した変数を格納しておく
+
+```{r}
+df_bfi <- 
+  df_bfi %>% 
+  mutate(across(c(A1, C4, C5, E1, E2, O2, O5),
+                list(r = ~ max + min - .)))
+```
+
+
+## 2区分変数
+
+```{r}
+
+  # bfi_a %>% 
+  # mutate(gender = fct_recode(gender, male   = "1", 
+  #                                    female = "2"),
+  #        education = fct_recode(education, "HS" = "1",
+  #                                          "finished HS" = "2",
+  #                                          "some college" = "3",
+  #                                          "college graduate" = "4",
+  #                                          "graduate degree" = "5"
+  #                               )
+  # )
+
+```

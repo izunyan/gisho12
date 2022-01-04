@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Page not found | がんばらないデータ加工：Rによる繰り返し作業入門</title>
-  <meta name="description" content="Page not found | がんばらないデータ加工：Rによる繰り返し作業入門" />
+  <title>4 要約値を作る | がんばらないデータ加工：Rによる繰り返し作業入門</title>
+  <meta name="description" content="4 要約値を作る | がんばらないデータ加工：Rによる繰り返し作業入門" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Page not found | がんばらないデータ加工：Rによる繰り返し作業入門" />
+  <meta property="og:title" content="4 要約値を作る | がんばらないデータ加工：Rによる繰り返し作業入門" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/cover.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="https://github.com/izunyan/gisho12.git" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Page not found | がんばらないデータ加工：Rによる繰り返し作業入門" />
+  <meta name="twitter:title" content="4 要約値を作る | がんばらないデータ加工：Rによる繰り返し作業入門" />
   
   
   <meta name="twitter:image" content="/images/cover.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-
+<link rel="prev" href="mutate.html"/>
+<link rel="next" href="あとがき.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -247,19 +247,65 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="page-not-found" class="section level1">
-<h1>Page not found</h1>
-<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
-<p>You may want to try searching to find the page's new location, or use
-the table of contents to find the page you are looking for.</p>
+<div id="summarise" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> 要約値を作る</h1>
+<ul>
+<li>パッケージ<code>dplyr</code>の関数<code>summarise()</code></li>
+<li>tidyな世界では「行 = ケース, 個人（wide形式の場合）」</li>
+<li>ケースが多い時に関心あるケースに限定したデータにしたい</li>
+<li>関心ある変数の名前を取得したい</li>
+</ul>
+<div id="summarise1" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> 基本</h2>
+<ul>
+<li><code>( )</code>の中に関心のある変数名を<code>,</code>をつけて並べる
+<ul>
+<li>変数は1つからOK</li>
+</ul></li>
+</ul>
+<div id="summarise-range" class="section level3" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> 範囲指定</h3>
+<ul>
+<li>関心ある変数が指定された範囲に含まれていれば<code>:</code>でつなげて取得できる
+<ul>
+<li>変数の連番をまとめて指定する時などに便利（例 <code>変数1:変数100</code>）</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="summarise.html#cb105-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb105-2"><a href="summarise.html#cb105-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(bill_length_mm<span class="sc">:</span>flipper_length_mm)</span></code></pre></div>
+<pre><code>## # A tibble: 344 x 3
+##   bill_length_mm bill_depth_mm flipper_length_mm
+##            &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;
+## 1           39.1          18.7               181
+## 2           39.5          17.4               186
+## 3           40.3          18                 195
+## # ... with 341 more rows</code></pre>
+<ul>
+<li>範囲に加えて追加の変数を追加できる
+<ul>
+<li>飛び飛びの変数群を選びたいときに有用</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="summarise.html#cb107-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb107-2"><a href="summarise.html#cb107-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(bill_length_mm<span class="sc">:</span>flipper_length_mm, sex)</span></code></pre></div>
+<pre><code>## # A tibble: 344 x 4
+##   bill_length_mm bill_depth_mm flipper_length_mm sex   
+##            &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt; &lt;fct&gt; 
+## 1           39.1          18.7               181 male  
+## 2           39.5          17.4               186 female
+## 3           40.3          18                 195 female
+## # ... with 341 more rows</code></pre>
+
+</div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-
+<a href="mutate.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="あとがき.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

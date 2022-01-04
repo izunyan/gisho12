@@ -1,0 +1,163 @@
+# 変数名を変更する {#rename}
+
+* パッケージ`dplyr`の関数`rename()`
+* tidyな世界では「列名 = 変数名」
+* 変数が多い時に関心ある変数に限定したデータにしたい
+* 関心ある変数の名前を取得したい
+
+## 基本 {#rename-standard}
+
+* 変更したい変数名を new = old の順に入力する
+  + ここではbill_length_mmをblmmに変更してみる
+* 複数の変数名を変更する場合は，`rename()`の中に`,`でつなげていく
+  + たくさんある場合に一つ一つ書いていくのは大変
+
+
+```{r}
+df %>% names()
+
+df %>% 
+  rename(blmm = bill_length_mm)
+
+# 複数をrenameする場合
+df %>% 
+  rename(blmm = bill_length_mm,
+         bdmm = bill_depth_mm)
+
+
+```
+
+
+* 複数変数を扱うときは`rename_with()`が便利。以下はそれを用いた例を示していく
+
+## 同じ語を共通の語で置き換える{#rename-samew}
+
+* 変数名の"bill"の部分を日本語の"くちばし"に変更していく
+* まずは基本の知識でできる方法
+
+
+```{r}
+
+df %>% 
+  rename(くちばし_length_mm = bill_length_mm,
+         くちばし_depth_mm = bill_depth_mm)
+```
+
+### 【効率化】str_replace()で一括変換(1){#rename-strreplace1}
+
+* `rename_with``は，まず適用したい関数を示し，そのあとに該当する変数を選ぶ
+* 適用したい関数の中にある`.`の部分に，その後選ぶ変数が入っていく
+* 語の置き換えは`stringr::str_replace()`を使う
+
+```{r}
+df %>% 
+  rename_with(~str_replace(., "bill", "くちばし"),
+              starts_with("bill"))
+```
+
+#### 【別解】
+
+* selectのように単に`c( )`の中に変数を指定していくだけでも動く
+
+```{r}
+df %>% 
+  rename_with(~str_replace(., "bill", "くちばし"),
+              c(bill_length_mm, bill_depth_mm))
+
+```
+
+
+
+## 同じ語を削除する{#rename-remove}
+
+* "_mm"を取り除きたい場合，それを削除した変数名を指定すればよいが，たくさんあると大変
+
+```{r}
+
+df %>% 
+  rename(bill_length = bill_length_mm,
+         bill_depth  = bill_depth_mm,
+         flipper_length = flipper_length_mm)
+```
+
+### 【効率化】str_replace()で一括変換（2）{#rename-strreplace2}
+
+* `str_replace()`で変換先に空白`""`を指定すると削除できる
+
+```{r}
+df %>% 
+  rename_with(~str_replace(., "_mm", ""),
+              ends_with("mm"))
+```
+
+#### 【別解】 
+
+* `stringr::str_remove()`の方が直接的
+
+```{r}
+df %>% 
+  rename_with(~str_remove(., "_mm"),
+              ends_with("mm"))
+```
+
+
+## 同じ接尾辞をつける{#rename-add}
+
+* 変数yearで2007年のみのデータに限定し，くちばし（bill）と翼（flipper）の変数名の末に"_2007"をつける
+* renameの中に全部書いていけばできれば数が多いと大変
+
+
+```{r}
+
+df %>% 
+  filter(year == 2007) %>% 
+  select(bill_length_mm:flipper_length_mm, year) %>% 
+  rename(bill_length_mm_2007 = bill_length_mm,
+         bill_depth_mm_2007  = bill_depth_mm,
+         flipper_length_mm_2007 = flipper_length_mm)
+```
+
+### 【効率化】str_c()で一括指定{#rename-strc}
+
+* 適用したい関数の中にある`.`の部分に，その後選ぶ変数が入っていく
+* `stringr::str_c()`で指定した語をくっつける
+* ここでは変数year以外なので，`!`をつけることで変数を指定できる
+
+```{r}
+df %>% 
+  filter(year == 2007) %>% 
+  select(bill_length_mm:flipper_length_mm, year) %>% 
+  rename_with(~str_c(., "_2007"),
+               !year)
+```
+
+#### 【別解】{#rename-strc-other}
+```{r}
+df %>% 
+filter(year == 2007) %>% 
+  rename_with(~str_c(., "_2007"),
+               matches("bill|flipper"))
+```
+
+
+## 同{#rename-samew-z}
+
+* 
+
+
+```{r}
+
+df %>% 
+  rename(くちばし_length_mm = bill_length_mm,
+         くちばし_depth_mm = bill_depth_mm)
+```
+
+### 【効率化】{#rename-z2}
+
+* 
+
+```{r}
+df %>% 
+  rename_with(~str_replace(., "bill", "くちばし"),
+              starts_with("bill"))
+```
