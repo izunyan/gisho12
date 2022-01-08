@@ -7,9 +7,11 @@
 * 後々出てくる繰り返し作業で便利なヘルパー関数
 
 ## データ読み込み {#select-read}
+
+* データの指定を簡単にするために，`palmerpenguins`パッケージのpenguinsデータを`df`と読み込む
+
 ```{r}
 library(tidyverse)
-library(readxl)
 
 # パッケージが入ってなければ下記実行
 # install.packages("palmerpenguins")

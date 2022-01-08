@@ -1,22 +1,76 @@
 # 要約値を作る {#summarise}
 
 * パッケージ`dplyr`の関数`summarise()`
-* tidyな世界では「行 = ケース, 個人（wide形式の場合）」
-* ケースが多い時に関心あるケースに限定したデータにしたい
-* 関心ある変数の名前を取得したい
+* 結果をデータフレームとして出力するため，扱いが便利
+* データの要約作業はデータを知るうえで頻繁に行うことが想定される
+  + 便利な要約パッケージが色々あるものの，`summarise()`を使いこなせると役に立つことが多い
 
 
 
-## 基本 {#summarise1}
+## 基本 {#summarise-standard}
 
-* `( )`の中に関心のある変数名を`,`をつけて並べる
-  + 変数は1つからOK
+* `( )`の中に出力したい変数名を書き，`=`の後に関数を入れる
+* NAがある場合，引数`na.rm = TRUE`がないと結果が出ないので，ほとんどの場合つけて置いた方がよい
 
 ```{r}
+df %>% 
+  summarise(blm_平均値 = mean(bill_length_mm, na.rm = TRUE))
+```
+
+### 複数の計算 {#summarise-standard-multiple}
+
+* 複数の変数について平均値とSDとnを出したいときは，基本知識では全部書くので長くなる
+
+```{r}
+df %>% 
+  summarise(blm_mean = mean(bill_length_mm, na.rm = TRUE),
+            bdm_mean = mean(bill_depth_mm, na.rm = TRUE),
+            blm_sd = sd(bill_length_mm, na.rm = TRUE),
+            bdm_sd = sd(bill_depth_mm, na.rm = TRUE),
+            blm_n  = sum(!is.na(bill_length_mm)),
+            bdm_n  = sum(!is.na(bill_depth_mm)))
 
 ```
 
-### 範囲指定 {#summarise-range}
+#### 【効率化】
+```{r}
+df %>% 
+  summarise(across(c(bill_length_mm, bill_depth_mm),
+                   list(mean = ~mean(., na.rm = TRUE),
+                        sd = ~sd(., na.rm = TRUE),
+                        n = ~sum(!is.na(.)))))
+```
+
+
+* `across()`ではヘルパー関数が使える！
+
+```{r}
+df %>% 
+  summarise(across(starts_with("bill"),
+                   list(mean = ~mean(., na.rm = TRUE),
+                        sd = ~sd(., na.rm = TRUE),
+                        n = ~sum(!is.na(.)))))
+```
+
+#### 【並び替え】
+
+* `tidyr::pivot_longer()`で，データフレームの行列入れ替えができる
+* 引数
+
+
+```{r}
+df %>% 
+  summarise(across(bill_length_mm:body_mass_g,
+                   list(mean = ~mean(., na.rm = TRUE),
+                        sd = ~sd(., na.rm = TRUE),
+                        n = ~sum(!is.na(.))))) %>% 
+  pivot_longer(everything(),
+               names_to = c("items", ".value"), # ".value"の部分を列名に
+               names_pattern = "(.*)_(.*)") 　  # 正規表現
+```
+
+
+###  {#summarise-range}
 
 * 関心ある変数が指定された範囲に含まれていれば`:`でつなげて取得できる
   + 変数の連番をまとめて指定する時などに便利（例 `変数1:変数100`）
