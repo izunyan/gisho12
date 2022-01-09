@@ -4,22 +4,22 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>2 ケース（行）を選ぶ | がんばらないデータ加工：Rによる繰り返し作業入門</title>
+<title>4 ケース（行）を選ぶ | がんばらないデータ加工：Rによる繰り返し作業入門（前編）</title>
 <meta name="author" content="やわらかクジラ">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="2 ケース（行）を選ぶ | がんばらないデータ加工：Rによる繰り返し作業入門">
+<meta property="og:title" content="4 ケース（行）を選ぶ | がんばらないデータ加工：Rによる繰り返し作業入門（前編）">
 <meta property="og:type" content="book">
 <meta property="og:image" content="/images/cover.png">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="2 ケース（行）を選ぶ | がんばらないデータ加工：Rによる繰り返し作業入門">
+<meta name="twitter:title" content="4 ケース（行）を選ぶ | がんばらないデータ加工：Rによる繰り返し作業入門（前編）">
 <meta name="twitter:image" content="/images/cover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="bs4_style.css">
-<meta name="description" content="パッケージdplyrの関数filter() tidyな世界では「行 = ケース, 個人（wide形式の場合）」 ケースが多い時に関心あるケースに限定したデータにしたい 関心ある変数の名前を取得したい  2.1 基本  select( )の中に関心のある変数名を,をつけて並べる 変数は1つからOK df %&gt;%  select(bill_length_mm, bill_depth_mm)...">
-<meta property="og:description" content="パッケージdplyrの関数filter() tidyな世界では「行 = ケース, 個人（wide形式の場合）」 ケースが多い時に関心あるケースに限定したデータにしたい 関心ある変数の名前を取得したい  2.1 基本  select( )の中に関心のある変数名を,をつけて並べる 変数は1つからOK df %&gt;%  select(bill_length_mm, bill_depth_mm)...">
-<meta name="twitter:description" content="パッケージdplyrの関数filter() tidyな世界では「行 = ケース, 個人（wide形式の場合）」 ケースが多い時に関心あるケースに限定したデータにしたい 関心ある変数の名前を取得したい  2.1 基本  select( )の中に関心のある変数名を,をつけて並べる 変数は1つからOK df %&gt;%  select(bill_length_mm, bill_depth_mm)...">
+<meta name="description" content="パッケージdplyrの関数filter() tidyな世界では「行 = ケース, 個人（wide形式の場合）」 ケースが多い時に関心あるケースに限定したデータにしたい  4.1 基本  filter( )の引数に論理式（TRUE or FALSEになるもの）を入れる 論理式の部分について，最初の内はselect( )に入れるものと違って混乱するかもしれないが，慣れると段々分かってくると思う...">
+<meta property="og:description" content="パッケージdplyrの関数filter() tidyな世界では「行 = ケース, 個人（wide形式の場合）」 ケースが多い時に関心あるケースに限定したデータにしたい  4.1 基本  filter( )の引数に論理式（TRUE or FALSEになるもの）を入れる 論理式の部分について，最初の内はselect( )に入れるものと違って混乱するかもしれないが，慣れると段々分かってくると思う...">
+<meta name="twitter:description" content="パッケージdplyrの関数filter() tidyな世界では「行 = ケース, 個人（wide形式の場合）」 ケースが多い時に関心あるケースに限定したデータにしたい  4.1 基本  filter( )の引数に論理式（TRUE or FALSEになるもの）を入れる 論理式の部分について，最初の内はselect( )に入れるものと違って混乱するかもしれないが，慣れると段々分かってくると思う...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -29,7 +29,7 @@
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
-        <a href="index.html" title="">がんばらないデータ加工：Rによる繰り返し作業入門</a>
+        <a href="index.html" title="">がんばらないデータ加工：Rによる繰り返し作業入門（前編）</a>
       </h1>
       <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
@@ -42,10 +42,12 @@
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">はじめに</a></li>
-<li><a class="" href="select.html"><span class="header-section-number">1</span> 変数（列）を選ぶ</a></li>
-<li><a class="active" href="filter.html"><span class="header-section-number">2</span> ケース（行）を選ぶ</a></li>
-<li><a class="" href="mutate.html"><span class="header-section-number">3</span> ケース（行）を選ぶ</a></li>
-<li><a class="" href="summarise.html"><span class="header-section-number">4</span> ケース（行）を選ぶ</a></li>
+<li><a class="" href="premise.html"><span class="header-section-number">1</span> 前提知識</a></li>
+<li><a class="" href="select.html"><span class="header-section-number">2</span> 変数（列）を選ぶ：select( )</a></li>
+<li><a class="" href="rename.html"><span class="header-section-number">3</span> 変数名を変更する：rename( )</a></li>
+<li><a class="active" href="filter.html"><span class="header-section-number">4</span> ケース（行）を選ぶ</a></li>
+<li><a class="" href="mutate.html"><span class="header-section-number">5</span> 新しい変数（列）の作成：mutate( )</a></li>
+<li><a class="" href="summarise.html"><span class="header-section-number">6</span> 要約値を作る：summarise( )</a></li>
 <li><a class="" href="%E3%81%82%E3%81%A8%E3%81%8C%E3%81%8D.html">あとがき</a></li>
 </ul>
 
@@ -54,336 +56,66 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="filter" class="section level1" number="2">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="filter" class="section level1" number="4">
 <h1>
-<span class="header-section-number">2</span> ケース（行）を選ぶ<a class="anchor" aria-label="anchor" href="#filter"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4</span> ケース（行）を選ぶ<a class="anchor" aria-label="anchor" href="#filter"><i class="fas fa-link"></i></a>
 </h1>
 <ul>
 <li>パッケージ<code>dplyr</code>の関数<code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code>
 </li>
 <li>tidyな世界では「行 = ケース, 個人（wide形式の場合）」</li>
 <li>ケースが多い時に関心あるケースに限定したデータにしたい</li>
-<li>関心ある変数の名前を取得したい</li>
 </ul>
-<div id="filter1" class="section level2" number="2.1">
+<div id="filter1" class="section level2" number="4.1">
 <h2>
-<span class="header-section-number">2.1</span> 基本<a class="anchor" aria-label="anchor" href="#filter1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.1</span> 基本<a class="anchor" aria-label="anchor" href="#filter1"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
-<code><a href="https://dplyr.tidyverse.org/reference/select.html">select( )</a></code>の中に関心のある変数名を<code>,</code>をつけて並べる
+<code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter( )</a></code>の引数に論理式（TRUE or FALSEになるもの）を入れる
 <ul>
-<li>変数は1つからOK</li>
+<li>論理式の部分について，最初の内は<code><a href="https://dplyr.tidyverse.org/reference/select.html">select( )</a></code>に入れるものと違って混乱するかもしれないが，慣れると段々分かってくると思う</li>
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">bill_length_mm</span>, <span class="va">bill_depth_mm</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 344 x 2
-##   bill_length_mm bill_depth_mm
-##            &lt;dbl&gt;         &lt;dbl&gt;
-## 1           39.1          18.7
-## 2           39.5          17.4
-## 3           40.3          18  
-## # ... with 341 more rows</code></pre>
-<div id="filter_range" class="section level3" number="2.1.1">
-<h3>
-<span class="header-section-number">2.1.1</span> 範囲指定<a class="anchor" aria-label="anchor" href="#filter_range"><i class="fas fa-link"></i></a>
-</h3>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">species</span> <span class="op">==</span> <span class="st">"Adelie"</span><span class="op">)</span></code></pre></div>
+<pre><code>## # A tibble: 152 x 8
+##   species island    bill_length_mm bill_depth_mm flipper_length_~
+##   &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;            &lt;int&gt;
+## 1 Adelie  Torgersen           39.1          18.7              181
+## 2 Adelie  Torgersen           39.5          17.4              186
+## 3 Adelie  Torgersen           40.3          18                195
+## # ... with 149 more rows, and 3 more variables:
+## #   body_mass_g &lt;int&gt;, sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
 <ul>
-<li>関心ある変数が指定された範囲に含まれていれば<code>:</code>でつなげて取得できる
-<ul>
-<li>変数の連番をまとめて指定する時などに便利（例 <code>変数1:変数100</code>）</li>
+<li>種（species）がAdelieのケースのみ選ばれた</li>
 </ul>
-</li>
-</ul>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">bill_length_mm</span><span class="op">:</span><span class="va">flipper_length_mm</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 344 x 3
-##   bill_length_mm bill_depth_mm flipper_length_mm
-##            &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;
-## 1           39.1          18.7               181
-## 2           39.5          17.4               186
-## 3           40.3          18                 195
-## # ... with 341 more rows</code></pre>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">bill_length_mm</span> <span class="op">&gt;=</span> <span class="fl">50</span><span class="op">)</span></code></pre></div>
+<pre><code>## # A tibble: 57 x 8
+##   species island bill_length_mm bill_depth_mm flipper_length_mm
+##   &lt;fct&gt;   &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;
+## 1 Gentoo  Biscoe           50            16.3               230
+## 2 Gentoo  Biscoe           50            15.2               218
+## 3 Gentoo  Biscoe           50.2          14.3               218
+## # ... with 54 more rows, and 3 more variables:
+## #   body_mass_g &lt;int&gt;, sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
 <ul>
-<li>範囲に加えて追加の変数を追加できる
-<ul>
-<li>飛び飛びの変数群を選びたいときに有用</li>
+<li>くちばしの長さ（bill_length_mm）が50以上のケースのみ選ばれた</li>
 </ul>
-</li>
-</ul>
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">bill_length_mm</span><span class="op">:</span><span class="va">flipper_length_mm</span>, <span class="va">sex</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 344 x 4
-##   bill_length_mm bill_depth_mm flipper_length_mm sex   
-##            &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt; &lt;chr&gt; 
-## 1           39.1          18.7               181 male  
-## 2           39.5          17.4               186 female
-## 3           40.3          18                 195 female
-## # ... with 341 more rows</code></pre>
-</div>
-<div id="filter_cha" class="section level3" number="2.1.2">
-<h3>
-<span class="header-section-number">2.1.2</span> 中身が文字でも動く<a class="anchor" aria-label="anchor" href="#filter_cha"><i class="fas fa-link"></i></a>
-</h3>
-<ul>
-<li>変数名が<code>" "</code>で囲われていると，Rでは文字(character)だと認識される</li>
-</ul>
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="st">"bill_length_mm"</span>, <span class="st">"bill_depth_mm"</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 344 x 2
-##   bill_length_mm bill_depth_mm
-##            &lt;dbl&gt;         &lt;dbl&gt;
-## 1           39.1          18.7
-## 2           39.5          17.4
-## 3           40.3          18  
-## # ... with 341 more rows</code></pre>
-<ul>
-<li>これは効率化を図りたいときに重要な特徴</li>
-<li>
-<code><a href="https://dplyr.tidyverse.org/reference/select.html">select( )</a></code>の中にたくさんの変数名を並べるより，事前に指定しておき代入した方が読みやすい
-<ul>
-<li>様々なコード例でこの事前指定が多用されるので慣れるとよい</li>
-</ul>
-</li>
-</ul>
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># 縺ゅｉ縺九§繧√が繝悶ず繧ｧ繧ｯ繝茨ｼ医％縺薙〒縺ｯvars<ef>ｼ峨↓蠑墓焚繧呈<a0>ｼ邏阪＠縺ｦ蠕後〒菴ｿ縺医ｋ</a0></ef></span>NA<span class="va">vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"bill_length_mm"</span>, <span class="st">"bill_depth_mm"</span><span class="op">)</span>
-
-<span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html">all_of</a></span><span class="op">(</span><span class="va">vars</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 344 x 2
-##   bill_length_mm bill_depth_mm
-##            &lt;dbl&gt;         &lt;dbl&gt;
-## 1           39.1          18.7
-## 2           39.5          17.4
-## 3           40.3          18  
-## # ... with 341 more rows</code></pre>
-<ul>
-<li>ここで<code>vars</code>は文字ベクトル（vector）のオブジェクトとなっている</li>
-<li>
-<code><a href="https://tidyselect.r-lib.org/reference/all_of.html">all_of( )</a></code>の中に文字ベクトルを指定することで，それぞれの中身を変数名として認識する
-<ul>
-<li>以前は<code>one_of</code>が使われていたが，現在は非推奨</li>
-</ul>
-</li>
-</ul>
-</div>
-</div>
-<div id="filter_helper" class="section level2" number="2.2">
-<h2>
-<span class="header-section-number">2.2</span> 変数の指定に便利なヘルパー関数<a class="anchor" aria-label="anchor" href="#filter_helper"><i class="fas fa-link"></i></a>
-</h2>
-<ul>
-<li>selection helper</li>
-</ul>
-<div id="filter_helper1" class="section level3" number="2.2.1">
-<h3>
-<span class="header-section-number">2.2.1</span> 変数名の最初の文字列<a class="anchor" aria-label="anchor" href="#filter_helper1"><i class="fas fa-link"></i></a>
-</h3>
-<ul>
-<li>
-<code>bill</code>から始まる変数を選ぶ</li>
-</ul>
-<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"bill"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 344 x 2
-##   bill_length_mm bill_depth_mm
-##            &lt;dbl&gt;         &lt;dbl&gt;
-## 1           39.1          18.7
-## 2           39.5          17.4
-## 3           40.3          18  
-## # ... with 341 more rows</code></pre>
-</div>
-<div id="filter_helper2" class="section level3" number="2.2.2">
-<h3>
-<span class="header-section-number">2.2.2</span> 変数名の最後の文字列<a class="anchor" aria-label="anchor" href="#filter_helper2"><i class="fas fa-link"></i></a>
-</h3>
-<ul>
-<li>
-<code>_mm</code>で終わる変数を選ぶ
-<ul>
-<li>
-<code>mm</code>だけだと他にも含まれる場合が出てくるので，<code>_</code>も含めた方が安全</li>
-</ul>
-</li>
-</ul>
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">ends_with</a></span><span class="op">(</span><span class="st">"_mm"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 344 x 3
-##   bill_length_mm bill_depth_mm flipper_length_mm
-##            &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;
-## 1           39.1          18.7               181
-## 2           39.5          17.4               186
-## 3           40.3          18                 195
-## # ... with 341 more rows</code></pre>
-</div>
-<div id="filter_helper3" class="section level3" number="2.2.3">
-<h3>
-<span class="header-section-number">2.2.3</span> 変数名のどこかに含まれる文字列<a class="anchor" aria-label="anchor" href="#filter_helper3"><i class="fas fa-link"></i></a>
-</h3>
-<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains</a></span><span class="op">(</span><span class="st">"length"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 344 x 2
-##   bill_length_mm flipper_length_mm
-##            &lt;dbl&gt;             &lt;dbl&gt;
-## 1           39.1               181
-## 2           39.5               186
-## 3           40.3               195
-## # ... with 341 more rows</code></pre>
-</div>
-<div id="filter_helper4" class="section level3" number="2.2.4">
-<h3>
-<span class="header-section-number">2.2.4</span> 変数名のどこかに含まれる文字列：その2<a class="anchor" aria-label="anchor" href="#filter_helper4"><i class="fas fa-link"></i></a>
-</h3>
-<ul>
-<li>文字列で正規表現が使えるため柔軟な指定が可能</li>
-</ul>
-<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">matches</a></span><span class="op">(</span><span class="st">"length"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 344 x 2
-##   bill_length_mm flipper_length_mm
-##            &lt;dbl&gt;             &lt;dbl&gt;
-## 1           39.1               181
-## 2           39.5               186
-## 3           40.3               195
-## # ... with 341 more rows</code></pre>
-</div>
-<div id="filter_helper5" class="section level3" number="2.2.5">
-<h3>
-<span class="header-section-number">2.2.5</span> 上記の組み合わせ<a class="anchor" aria-label="anchor" href="#filter_helper5"><i class="fas fa-link"></i></a>
-</h3>
-<div id="filter_helper5_1" class="section level4" number="2.2.5.1">
-<h4>
-<span class="header-section-number">2.2.5.1</span> かつ<a class="anchor" aria-label="anchor" href="#filter_helper5_1"><i class="fas fa-link"></i></a>
-</h4>
-<ul>
-<li>それぞれの条件を両方満たす</li>
-</ul>
-<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"bill"</span><span class="op">)</span> <span class="op">&amp;</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains</a></span><span class="op">(</span><span class="st">"length"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 344 x 1
-##   bill_length_mm
-##            &lt;dbl&gt;
-## 1           39.1
-## 2           39.5
-## 3           40.3
-## # ... with 341 more rows</code></pre>
-</div>
-<div id="filter_helper5_2" class="section level4" number="2.2.5.2">
-<h4>
-<span class="header-section-number">2.2.5.2</span> または<a class="anchor" aria-label="anchor" href="#filter_helper5_2"><i class="fas fa-link"></i></a>
-</h4>
-<ul>
-<li>それぞれの条件をいずれか満たす</li>
-</ul>
-<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"bill"</span><span class="op">)</span> <span class="op">|</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains</a></span><span class="op">(</span><span class="st">"length"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 344 x 3
-##   bill_length_mm bill_depth_mm flipper_length_mm
-##            &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;
-## 1           39.1          18.7               181
-## 2           39.5          17.4               186
-## 3           40.3          18                 195
-## # ... with 341 more rows</code></pre>
-</div>
-<div id="filter_helper5_3" class="section level4" number="2.2.5.3">
-<h4>
-<span class="header-section-number">2.2.5.3</span> matches( )を使った指定<a class="anchor" aria-label="anchor" href="#filter_helper5_3"><i class="fas fa-link"></i></a>
-</h4>
-<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">matches</a></span><span class="op">(</span><span class="st">"bill|length"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 344 x 3
-##   bill_length_mm bill_depth_mm flipper_length_mm
-##            &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;
-## 1           39.1          18.7               181
-## 2           39.5          17.4               186
-## 3           40.3          18                 195
-## # ... with 341 more rows</code></pre>
-</div>
-</div>
-</div>
-<div id="filter_drop" class="section level2" number="2.3">
-<h2>
-<span class="header-section-number">2.3</span> 特定の変数を選ばない（落とす）<a class="anchor" aria-label="anchor" href="#filter_drop"><i class="fas fa-link"></i></a>
-</h2>
-<ul>
-<li>変数名の前に<code>!</code>をつける</li>
-</ul>
-<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">!</span><span class="va">species</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 344 x 8
-##   種類     island   bill_length_mm bill_depth_mm flipper_length_~
-##   &lt;chr&gt;    &lt;chr&gt;             &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;
-## 1 アデリー Torgers~           39.1          18.7              181
-## 2 アデリー Torgers~           39.5          17.4              186
-## 3 アデリー Torgers~           40.3          18                195
-## # ... with 341 more rows, and 3 more variables:
-## #   body_mass_g &lt;dbl&gt;, sex &lt;chr&gt;, year &lt;dbl&gt;</code></pre>
-<ul>
-<li>複数列を落としたい場合は，<code>!c( )</code>の中に対象の列名を含める</li>
-</ul>
-<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">bill_length_mm</span><span class="op">:</span><span class="va">flipper_length_mm</span>, <span class="va">sex</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 344 x 5
-##   species 種類     island    body_mass_g  year
-##   &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;           &lt;dbl&gt; &lt;dbl&gt;
-## 1 Adelie  アデリー Torgersen        3750  2007
-## 2 Adelie  アデリー Torgersen        3800  2007
-## 3 Adelie  アデリー Torgersen        3250  2007
-## # ... with 341 more rows</code></pre>
-</div>
-<div id="変数を並び変える-1" class="section level2" number="2.4">
-<h2>
-<span class="header-section-number">2.4</span> 変数を並び変える<a class="anchor" aria-label="anchor" href="#%E5%A4%89%E6%95%B0%E3%82%92%E4%B8%A6%E3%81%B3%E5%A4%89%E3%81%88%E3%82%8B-1"><i class="fas fa-link"></i></a>
-</h2>
-</div>
-<div id="変数名を変更する-1" class="section level2" number="2.5">
-<h2>
-<span class="header-section-number">2.5</span> 変数名を変更する<a class="anchor" aria-label="anchor" href="#%E5%A4%89%E6%95%B0%E5%90%8D%E3%82%92%E5%A4%89%E6%9B%B4%E3%81%99%E3%82%8B-1"><i class="fas fa-link"></i></a>
-</h2>
-
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="select.html"><span class="header-section-number">1</span> 変数（列）を選ぶ</a></div>
-<div class="next"><a href="mutate.html"><span class="header-section-number">3</span> ケース（行）を選ぶ</a></div>
+<div class="prev"><a href="rename.html"><span class="header-section-number">3</span> 変数名を変更する：rename( )</a></div>
+<div class="next"><a href="mutate.html"><span class="header-section-number">5</span> 新しい変数（列）の作成：mutate( )</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#filter"><span class="header-section-number">2</span> ケース（行）を選ぶ</a></li>
-<li>
-<a class="nav-link" href="#filter1"><span class="header-section-number">2.1</span> 基本</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#filter_range"><span class="header-section-number">2.1.1</span> 範囲指定</a></li>
-<li><a class="nav-link" href="#filter_cha"><span class="header-section-number">2.1.2</span> 中身が文字でも動く</a></li>
-</ul>
-</li>
-<li>
-<a class="nav-link" href="#filter_helper"><span class="header-section-number">2.2</span> 変数の指定に便利なヘルパー関数</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#filter_helper1"><span class="header-section-number">2.2.1</span> 変数名の最初の文字列</a></li>
-<li><a class="nav-link" href="#filter_helper2"><span class="header-section-number">2.2.2</span> 変数名の最後の文字列</a></li>
-<li><a class="nav-link" href="#filter_helper3"><span class="header-section-number">2.2.3</span> 変数名のどこかに含まれる文字列</a></li>
-<li><a class="nav-link" href="#filter_helper4"><span class="header-section-number">2.2.4</span> 変数名のどこかに含まれる文字列：その2</a></li>
-<li><a class="nav-link" href="#filter_helper5"><span class="header-section-number">2.2.5</span> 上記の組み合わせ</a></li>
-</ul>
-</li>
-<li><a class="nav-link" href="#filter_drop"><span class="header-section-number">2.3</span> 特定の変数を選ばない（落とす）</a></li>
-<li><a class="nav-link" href="#%E5%A4%89%E6%95%B0%E3%82%92%E4%B8%A6%E3%81%B3%E5%A4%89%E3%81%88%E3%82%8B-1"><span class="header-section-number">2.4</span> 変数を並び変える</a></li>
-<li><a class="nav-link" href="#%E5%A4%89%E6%95%B0%E5%90%8D%E3%82%92%E5%A4%89%E6%9B%B4%E3%81%99%E3%82%8B-1"><span class="header-section-number">2.5</span> 変数名を変更する</a></li>
+<li><a class="nav-link" href="#filter"><span class="header-section-number">4</span> ケース（行）を選ぶ</a></li>
+<li><a class="nav-link" href="#filter1"><span class="header-section-number">4.1</span> 基本</a></li>
 </ul>
 
       <div class="book-extra">
@@ -401,7 +133,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>がんばらないデータ加工：Rによる繰り返し作業入門</strong>" was written by やわらかクジラ. </p>
+    <p>"<strong>がんばらないデータ加工：Rによる繰り返し作業入門（前編）</strong>" was written by やわらかクジラ. </p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

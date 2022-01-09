@@ -1,4 +1,4 @@
-# 新しい変数（列）の作成 {#mutate}
+# 新しい変数（列）の作成：mutate( ) {#mutate}
 
 * パッケージ`dplyr`の関数`mutate()`
 * 新しい変数の列を作成する
@@ -7,7 +7,7 @@
 * mutateの機能解説
 * 効率化のための`across()`
 
-## データ読み込み {#mutate-read}
+## データ読み込み {#mu-read}
 
 * 国際パーソナリティ項目プールからの2800名分のデータ。
 * 質問項目が25問あり，5つの構成概念（ここでは因子という）に対応する項目への回答を足し合わせたスコアを計算する
@@ -37,7 +37,7 @@ df_bfi <-
 ```
 
 
-## 基本 {#mutate-standard}
+## 基本 {#mu-standard}
 
 * データフレームに新しい列を計算して追加する関数
 * `mutate( )`の中に新しく作成する変数名を入れ，`=`でつないで計算式を入れる
@@ -55,7 +55,7 @@ df_bfi %>%
 * mean_a1列にはA1の平均値がすべて同じ値で入る（平均値だけの計算がしたければ\@ref(summarise)を参照）
 * dif_a1_mean列は，A1列からmean_a1列を引いた値が入る
 
-## 変数の型の変換 {#mutate-kata}
+## 変数の型の変換 {#mu-kata}
 
 * 変数には型の情報が伴い，統計解析やデータ加工の際に適切な型を求められることがあるため理解が必要
   + 小数も扱う数値 _`<dbl>`_
@@ -78,7 +78,7 @@ df_bfi %>%
 * gender, education列が _`<int>`_ になっているので整数型になっている 
 
 
-### 型の変換 {#mutate-kata-trans}
+### 型の変換 {#mu-kata-trans}
 
 * ここでは，2つの数値型変数gender, educationを因子型に変換する例を示す
 * それぞれ`factor()`で因子型に変換
@@ -92,7 +92,7 @@ df_bfi %>%
 
 * gender, education列が _`<fct>`_ になっているので整数型になっている 
 
-#### 【効率化】複数の変数に対し一度の指定で実行 {#mutate-kata-trans1}
+### 【効率化】複数の変数に対し一度の指定で実行 {#mu-kata-across}
 
 *  変換したい変数が大量にあるときは上記の方法では大変
 * `across()`を使うと，指定した変数に対して同じ内容の処理なら __1回__ ですむようになる
@@ -105,7 +105,7 @@ df_bfi %>%
   select(gender, education)   # 結果表示のため冗長だが変わった変数だけselect
 ```
 
-## 【効率化】across( )の特徴 {#mutate-across}
+## across( )の特徴 {#mu-across}
 
 
 * 変数の指定に\@ref(select-helper)で解説したヘルパー関数が使える  
@@ -119,7 +119,7 @@ df_bfi %>%
 
 ```
 
-* \@ref(select-cha) で解説した文字も使える
+* \@ref(select-cha)で解説した文字も使える
 
 ```{r}
 vars <- c("N1", "N2", "N3", "N4", "N5")
@@ -131,24 +131,24 @@ df_bfi %>%
 
 ```
 
-### 【重要知識！】新しい変数名にして追加 {#mutate-across-list}
+### 【重要知識！】新しい変数名にして追加 {#mu-across-list}
 
 * ここはこの後色々なところで出てくる方法のため理解しておきたい
 * 適用する関数をリストにする（`list()`に入れる）ことで，変数名を変更して追加できる
 * `list()`に入れるときはこれまでと異なる書き方が必要になる
   + 関数名の前に`~`（チルダ）が必要
-  + list内の関数`()`内に`.`（ピリオド）が必要。ここに`across()`内に指定した変数が入っていくという意味
+  + list内の関数`()`内に`.x`が必要（この場合はxがなくても動く）。ここに`across()`の第一引数に指定した変数が入っていくという意味
 
 ```{r}
 df_bfi %>%
   mutate(across(c(gender, education),
-                list(f = ~factor(.)))) %>% 
+                list(f = ~factor(.x)))) %>% 
   select(matches("gender|education"))   
 ```
 
 * 因子型に変換した変数の末尾に_fがつく
 
-## 合計点の作成 {#mutate-total}
+## 合計点の作成 {#mu-total}
 ```{r}
 df_bfi_n <- 
   df_bfi %>%
@@ -158,7 +158,7 @@ df_bfi_n <-
 df_bfi_n
 ```
 
-### 足し上げる変数に欠損があるとどうなるか{#mutate-total-na}
+### 足し上げる変数に欠損があるとどうなるか{#mu-total-na}
 ```{r}
 df_bfi_n %>% 
   filter(is.na(neuroticism))     # neuroticismがNAなケースに限定
@@ -166,7 +166,7 @@ df_bfi_n %>%
 ```
 
 
-## 連番からIDの作成 {#mutate-seq}
+## 連番からIDの作成 {#mu-seq}
 
 * `dplyr::row_number()`で行番号からIDを作成
 
@@ -175,7 +175,7 @@ df_bfi_n %>%
   mutate(id = row_number())
 ```
 
-### 【別解】行の名前を直接変数化 {#mutate-seq-other}
+### 【別解】行の名前を直接変数化 {#mu-seq-other}
 
 * 実はmutateを使わなくてもできて，データの最初に持ってこれる便利関数がある
 * `tibble::rowid_to_column()`
@@ -189,14 +189,14 @@ df_bfi_n %>%
 rm(df_bfi_n)
 ```
 
-## 逆転項目を作る {#mutate-rev}
-### 逆転項目の確認 {#mutate-rev-check}
+## 逆転項目を作る {#mu-rev}
+### 逆転項目の確認 {#mu-rev-check}
 
 * bfiデータの場合，どの項目を逆転する必要があるかを示す情報（`-変数名`で表現）がパッケージに含まれている
   + `psychTools::bfi.keys` で確認可能
 * したがって，"-A1", "-C4", "-C5", "-E1", "-E2", "-O2", "-O5"が対象
 
-### 逆転（recode） {#mutate-rev-recode}
+### 逆転（recode） {#mu-rev-recode}
 
 * `dplyr::recode()`を使用
 * 入れ替えたい値をold = newで並べていく
@@ -211,7 +211,7 @@ df_bfi %>%
 
 
 
-#### 変数2つ以上を逆転 {#mutate-rev-recode1}
+#### 変数2つ以上を逆転 {#mu-rev-recode1}
 
 * A1と同様に同じ形をくり返し変数名だけ変えていけばできるが，コードが長くなりミスも生じやすくなる
 
@@ -225,28 +225,28 @@ df_bfi %>%
 ```
 
 
-#### 【効率化】 変数2つ以上を逆転 {#mutate-rev-recode2}
+#### 【効率化】 変数2つ以上を逆転 {#mu-rev-recode2}
 
-* \@ref(mutate-across-list) で解説したlistに関数を入れる方法
+* \@ref(mu-across-list) で解説したlistに関数を入れる方法
 
 ```{r}
 
 df_bfi %>% 
   mutate(across(c(A1, C4, C5, E1, E2, O2, O5),
-                list(r = ~recode(., `1` = 6, `2` = 5, `3` = 4, 
+                list(r = ~recode(.x, `1` = 6, `2` = 5, `3` = 4, 
                                  `4` = 3, `5` = 2, `6` = 1)))) %>% 
   select(A1, A1_r, C4,  C4, C5, C5_r, E1, E1_r, E2, E2_r, O2, O2_r, O5, O5_r)
 ```
 
-### 【別解】逆転（公式） {#mutate-rev-rule}
+### 【別解】逆転（公式） {#mu-rev-rule}
 
 * 項目を反転する公式が「(max + min) - 回答値」であることを利用
   + `psych::reverse.code()`のhelp参照
+  + 例：最小値1,最大値4の場合，max + min = 5となり，回答値が2の場合，5 - 2 = 3となり反転された結果となる
 
 ```{r}
 min <- 1
 max <- 6
-
 
 df_bfi %>% 
   mutate(A1_r = max + min - A1,
@@ -254,20 +254,20 @@ df_bfi %>%
   select(A1, A1_r, C4, C4_r)
 ```
 
-#### 【効率化】 変数2つ以上を逆転 {#mutate-rev-rule1}
+#### 【効率化】 変数2つ以上を逆転 {#mu-rev-rule1}
 
 * `~`の後に計算式がきても動く
-* ここでは，`max + min - .` のピリオド部分にacross内に置かれた変数が入っていく
+* ここでは，`max + min - .x` の`.x`にacross内に置かれた変数が入っていく
 
 ```{r}
 df_bfi %>% 
   mutate(across(c(A1,C4),
-                list(r = ~ max + min - .))) %>% 
+                list(r = ~ max + min - .x))) %>% 
   select(A1, A1_r, C4, C4_r)
 ```
 
 
-#### 逆転した変数を含むデータフレーム作成
+#### 逆転した変数を含むデータフレーム作成 {#mu-rev-rule2}
 
 * これ以降で使用するため，項目を逆転した変数を格納しておく
 
@@ -275,7 +275,7 @@ df_bfi %>%
 df_bfi <- 
   df_bfi %>% 
   mutate(across(c(A1, C4, C5, E1, E2, O2, O5),
-                list(r = ~ max + min - .)))
+                list(r = ~ max + min - .x)))
 ```
 
 

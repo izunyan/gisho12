@@ -1,4 +1,4 @@
-# 変数名を変更する {#rename}
+# 変数名を変更する：rename( ) {#rename}
 
 * パッケージ`dplyr`の関数`rename()`
 * tidyな世界では「列名 = 変数名」
@@ -55,7 +55,7 @@ df %>%
               starts_with("bill"))
 ```
 
-#### 【別解】
+#### 【別解】{#rename-strreplace1-other}
 
 * selectのように単に`c( )`の中に変数を指定していくだけでも動く
 

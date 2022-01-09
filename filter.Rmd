@@ -3,151 +3,24 @@
 * パッケージ`dplyr`の関数`filter()`
 * tidyな世界では「行 = ケース, 個人（wide形式の場合）」
 * ケースが多い時に関心あるケースに限定したデータにしたい
-* 関心ある変数の名前を取得したい
 
 
 
 ## 基本 {#filter1}
 
-* `select( )`の中に関心のある変数名を`,`をつけて並べる
-  + 変数は1つからOK
+* `filter( )`の引数に論理式（TRUE or FALSEになるもの）を入れる
+  + 論理式の部分について，最初の内は`select( )`に入れるものと違って混乱するかもしれないが，慣れると段々分かってくると思う
 
 ```{r}
 df %>% 
-  select(bill_length_mm, bill_depth_mm)
-
+  filter(species == "Adelie")
 ```
 
-### 範囲指定 {#filter_range}
-
-* 関心ある変数が指定された範囲に含まれていれば`:`でつなげて取得できる
-  + 変数の連番をまとめて指定する時などに便利（例 `変数1:変数100`）
+* 種（species）がAdelieのケースのみ選ばれた
 
 ```{r}
 df %>% 
-  select(bill_length_mm:flipper_length_mm)
+  filter(bill_length_mm >= 50)
 ```
 
-* 範囲に加えて追加の変数を追加できる
-  + 飛び飛びの変数群を選びたいときに有用
-
-```{r}
-df %>% 
-  select(bill_length_mm:flipper_length_mm, sex)
-```
-
-### 中身が文字でも動く {#filter_cha}
-
-* 変数名が`" "`で囲われていると，Rでは文字(character)だと認識される
-
-```{r}
-df %>% 
-  select("bill_length_mm", "bill_depth_mm")
-
-```
-
-* これは効率化を図りたいときに重要な特徴
-* `select( )`の中にたくさんの変数名を並べるより，事前に指定しておき代入した方が読みやすい
-  + 様々なコード例でこの事前指定が多用されるので慣れるとよい
-
-```{r}
-# あらかじめオブジェクト（ここではvars）に引数を格納して後で使える
-vars <- c("bill_length_mm", "bill_depth_mm")
-
-df %>% 
-  select(all_of(vars))
-```
-
-* ここで`vars`は文字ベクトル（vector）のオブジェクトとなっている
-* `all_of( )`の中に文字ベクトルを指定することで，それぞれの中身を変数名として認識する
-  + 以前は`one_of`が使われていたが，現在は非推奨
-
-## 変数の指定に便利なヘルパー関数 {#filter_helper}
-
-* selection helper
-
-### 変数名の最初の文字列 {#filter_helper1}
-
-* `bill`から始まる変数を選ぶ
-
-```{r}
-df %>%
-  select(starts_with("bill"))
-```
-
-### 変数名の最後の文字列 {#filter_helper2}
-
-* `_mm`で終わる変数を選ぶ
-  + `mm`だけだと他にも含まれる場合が出てくるので，`_`も含めた方が安全
-
-```{r}
-df %>%
-  select(ends_with("_mm"))
-```
-
-### 変数名のどこかに含まれる文字列 {#filter_helper3}
-
-```{r}
-df %>%
-  select(contains("length"))
-```
-
-### 変数名のどこかに含まれる文字列：その2 {#filter_helper4}
-
-* 文字列で正規表現が使えるため柔軟な指定が可能
-
-```{r}
-df %>%
-  select(matches("length"))
-```
-
-
-### 上記の組み合わせ {#filter_helper5}
-
-#### かつ {#filter_helper5_1}
-
-* それぞれの条件を両方満たす
-
-```{r}
-df %>%
-  select(starts_with("bill") & contains("length"))
-```
-
-#### または {#filter_helper5_2}
-
-* それぞれの条件をいずれか満たす
-
-```{r}
-df %>%
-  select(starts_with("bill") | contains("length"))
-```
-
-#### matches( )を使った指定 {#filter_helper5_3}
-```{r}
-df %>%
-  select(matches("bill|length"))
-
-```
-
-
-## 特定の変数を選ばない（落とす） {#filter_drop}
-
-* 変数名の前に`!`をつける
-
-```{r}
-df %>% 
-  select(!species)
-
-```
-
-* 複数列を落としたい場合は，`!c( )`の中に対象の列名を含める
-
-```{r}
-df %>% 
-  select(!c(bill_length_mm:flipper_length_mm, sex))
-
-```
-
-
-## 変数を並び変える
-## 変数名を変更する
+* くちばしの長さ（bill_length_mm）が50以上のケースのみ選ばれた

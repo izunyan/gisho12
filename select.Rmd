@@ -1,4 +1,4 @@
-# 変数（列）を選ぶ {#select}
+# 変数（列）を選ぶ：select( ) {#select}
 
 * パッケージ`dplyr`の関数`select()`
 * tidyな世界では「列名 = 変数名」
@@ -8,7 +8,7 @@
 
 ## データ読み込み {#select-read}
 
-* データの指定を簡単にするために，`palmerpenguins`パッケージのpenguinsデータを`df`と読み込む
+* データの指定を簡単にするために，penguinsデータを`df`と読み込む
 
 ```{r}
 library(tidyverse)

@@ -4,8 +4,8 @@
 %
 \documentclass[
   xelatex,ja=standard, b5paper]{bxjsbook}
-\title{タイトル}
-\author{著者名}
+\title{がんばらないデータ加工：Rによる繰り返し作業入門（前編）}
+\author{やわらかクジラ}
 \date{}
 
 \usepackage{amsmath,amssymb}
@@ -40,8 +40,8 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
-  pdftitle={タイトル},
-  pdfauthor={著者名},
+  pdftitle={がんばらないデータ加工：Rによる繰り返し作業入門（前編）},
+  pdfauthor={やわらかクジラ},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
@@ -129,8 +129,6 @@
         \fi%
     }%
 \makeatother
-\usepackage{fancyhdr}
-\fancypagestyle{plain}{\pagestyle{fancy}}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -166,24 +164,38 @@
 \section*{本書の特徴}\label{ux672cux66f8ux306eux7279ux5fb4}}
 \addcontentsline{toc}{section}{本書の特徴}
 
-便利なことといってもいろいろあるので、その中でも、つまづくと嫌になってしまうことの多そうな、\textbf{「手元のExcelファイルを読み込む」}所に着目しました。このトピックだけをRのいわゆるモダンな方法を使って重点的に解説した資料は、筆者の知る範囲では見つけられてないので、本書の最も際立った特徴といえます。また、関連するファイル形式として、csvファイルの読み書きも少しだけ触れています。こちらはつまづくことの多いであろう文字コードについても解説しました。
-
-解析したいデータが、綺麗な一つにまとまったデータばかりとは限りません。たとえば、会社の部署ごとに分かれたデータなど、解析に持っていくまでに大量のファイルを読みこまなければいけない場合もあります。その読み込みの際にいかに楽をできるかという点を意識しています。データさえスムーズに読み込めれば、後はすぐれた解説がネット上でもたくさんあり、やりたいことが可能になる環境が整うからです。
-
-Excelファイルをただ読みこむといってもいろんなバリエーションが考えられます。その単なる読みこみプロセスを通じて、Rを使う上で便利な関数や手続きを学ぶこともできるでしょう。\textbf{戦いの中で自然に強くなった的な効果}も見込めるかもしれません。
-
-本書の内容は、githubレポジトリの \url{https://github.com/izunyan/excel_r} ですべて公開しています。コードやサンプルデータはこちらのレポジトリをダウンロードしてお試しください。pdf版が読みたい方は、以下のページで無料で入手可能です。自力でできる方は、\texttt{Build\ Book}でも作成できます。
-
 \begin{itemize}
-\tightlist
 \item
-  \href{https://techbookfest.org/product/4794168259903488?productVariantID=5913872206659584}{技術書典マーケットの販売ページ}
+  これまでの解説で不足していること
 
   \begin{itemize}
   \tightlist
   \item
-    \url{https://techbookfest.org/product/4794168259903488?productVariantID=5913872206659584}
+    便利な関数や基本的な使い方の解説は多いが，データ加工の実務上知りたいコード例が豊富なわけではない
+  \item
+    同じ作業を大量の変数についてくり返し実行したい時のやり方の解説は少ない
   \end{itemize}
+\item
+  まずはよくあるモダンなRのデータラングリング解説
+\item
+  本書の強みは，くり返し同じ作業する部分を効率化したコードを併せて解説する点
+\item
+  自分の学習経験から，そのコード例が知りたかったんだ！という実用的な方法を収集
+\item
+  「がんばらない」とは，単純作業のくり返しに無駄なエネルギーを注がなくてよいようにすること
+\item
+  まず基本の書き方を解説した後に，\_\_【効率化】\_\_でより効率的にコードを書く解説を行う
+  *【効率化】のタグが本書の核心になる。手作業の繰り返しをなるべく避けることが目指すべき点だからである。
+\item
+  冗長だが【別解】を示すことで様々な関数の働きを理解でき，データ加工の幅が広がる
+\end{itemize}
+
+本書の内容は、githubレポジトリの \href{https://github.com/izunyan/excel_r}{} ですべて公開しています。コードやサンプルデータはこちらのレポジトリをダウンロードしてお試しください。pdf版が読みたい方は、以下のページで無料で入手可能です。自力でできる方は、\texttt{Build\ Book}でも作成できます。
+
+\begin{itemize}
+\tightlist
+\item
+  \href{}{技術書典マーケットの販売ページ}
 \end{itemize}
 
 \hypertarget{ux60f3ux5b9aux8aadux8005}{%
@@ -196,19 +208,28 @@ Excelファイルをただ読みこむといってもいろんなバリエーシ
 
 なお、データをきれいにする過程（例：前処理、データクリーニング、データクレンジング、データラングリングなど）については多くの説明を要するため、本書の範囲を超えます。これはまた別機会にまとめられたらなと思っています。
 
-\hypertarget{structure}{%
-\subsection*{本書の構成}\label{structure}}
-\addcontentsline{toc}{subsection}{本書の構成}
+まず\ref{select}章では、RStudioでファイルを読み書きする際に、最低限知っておいた方がよい知識について解説しておきます。とっつきにくいかもしれませんが、知っておいてよかったと後になって実感する類のものなので、使って慣れていきましょう。
 
-まず\ref{project}章では、RStudioでファイルを読み書きする際に、最低限知っておいた方がよい知識について解説しておきます。とっつきにくいかもしれませんが、知っておいてよかったと後になって実感する類のものなので、使って慣れていきましょう。
+\ref{filter}章は本書のメインであるExcelファイルの読み込みについて解説します。一つのファイルの読み込みから、複数シート、複数ファイルの読み込みまで、様々なシーンに対応しました。また、読みこんだファイルを一つのデータフレーム\footnote{変数（列）とオブザベーション（行）が碁盤の目のようになった集まりの形のデータ。Excelであれば通常1行目に列名が入り、2行目以降が個別のデータを表す。データ解析において便利で分かりやすいため、本書ではデータフレームの形で説明していく}にまとめる方法についても触れています。
 
-\ref{readexcel}章は本書のメインであるExcelファイルの読み込みについて解説します。一つのファイルの読み込みから、複数シート、複数ファイルの読み込みまで、様々なシーンに対応しました。また、読みこんだファイルを一つのデータフレーム\footnote{変数（列）とオブザベーション（行）が碁盤の目のようになった集まりの形のデータ。Excelであれば通常1行目に列名が入り、2行目以降が個別のデータを表す。データ解析において便利で分かりやすいため、本書ではデータフレームの形で説明していく}にまとめる方法についても触れています。
+章はExcelファイルの保存についてです。ここでも、一つのファイルの保存から、複数ファイルの保存まで解説します。ここまでの内容が理解できれば、大量ファイルの読み書きにまつわる単純な繰り返し作業とはさよならできるでしょう。
 
-\ref{writeexcel}章はExcelファイルの保存についてです。ここでも、一つのファイルの保存から、複数ファイルの保存まで解説します。ここまでの内容が理解できれば、大量ファイルの読み書きにまつわる単純な繰り返し作業とはさよならできるでしょう。
+章は関連知識としてcsvファイルの読み込みと保存について解説します。windowsユーザーは文字コードの違いによる文字化けというつらみと対峙することになり、初学者はここで脱落していくことが多いのではないかと思います。そのために、サバイバルスキルとして知っておくことが有用だと思い書いておきました。自分が相当苦しんだので\ldots{}
 
-\ref{readsavecsv}章は関連知識としてcsvファイルの読み込みと保存について解説します。windowsユーザーは文字コードの違いによる文字化けというつらみと対峙することになり、初学者はここで脱落していくことが多いのではないかと思います。そのために、サバイバルスキルとして知っておくことが有用だと思い書いておきました。自分が相当苦しんだので\ldots{}
+章は、読み込んだファイルの特徴をざっと把握する方法について解説しました。ここまでやれば、（きれいなデータであれば！）きっとデータ解析に入っていくことができるでしょう。
 
-\ref{dataanal}章は、読み込んだファイルの特徴をざっと把握する方法について解説しました。ここまでやれば、（きれいなデータであれば！）きっとデータ解析に入っていくことができるでしょう。
+\hypertarget{ux524dux63d0}{%
+\subsection{前提}\label{ux524dux63d0}}
+
+\begin{itemize}
+\tightlist
+\item
+  プロジェクト
+\item
+  \%\textgreater\% tidyverseを読み込めば使える
+\item
+  \texttt{dplyr::select()}
+\end{itemize}
 
 \hypertarget{ux57f7ux7b46ux74b0ux5883}{%
 \subsection*{執筆環境}\label{ux57f7ux7b46ux74b0ux5883}}
@@ -266,1403 +287,2446 @@ Twitterで応援してもらったら項目が増えていく仕様にしてい�
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\hypertarget{project}{%
-\chapter{前提：プロジェクトの設定}\label{project}}
+\hypertarget{premise}{%
+\chapter{前提知識}\label{premise}}
 
-Rの基本的な使い方は他の情報源にゆだねていますが、ここだけは避けて通れないので解説しておきます。
+\begin{itemize}
+\tightlist
+\item
+\end{itemize}
 
-\hypertarget{ux3069ux306eux30d5ux30a9ux30ebux30c0ux306eux30d5ux30a1ux30a4ux30ebux304bux306eux6307ux5b9a}{%
-\section{どのフォルダのファイルかの指定}\label{ux3069ux306eux30d5ux30a9ux30ebux30c0ux306eux30d5ux30a1ux30a4ux30ebux304bux306eux6307ux5b9a}}
+\hypertarget{p-howtoread}{%
+\section{本書に出てくるコード部分の見方}\label{p-howtoread}}
 
-Excelファイルに限らず、ファイルをRに読み込む際は、どのフォルダから読むのか、位置を正確に指定する必要があります。
+\begin{itemize}
+\tightlist
+\item
+  グレーの背景部分はRのコードが書いてあり，その下の\texttt{\#\#}で始まる部分は出力結果を表す
 
-そこで重要となる概念が、「作業フォルダ」というものです。
-
-コンソールに\texttt{getwd()}と打って出てくるフォルダが現在の作業フォルダになります。
-
-\hypertarget{projecttoha}{%
-\section{プロジェクトとは}\label{projecttoha}}
-
-RStudioの「プロジェクト」とは、作業フォルダにまつわる面倒な設定を意識しないですむ非常に便利な機能です。RStudioを開いて右上のところに設定アイコンがあります（Figure\ref{fig:projectfig}）。
-
-ざっくり説明すると、データを加工して解析する際に、1つのフォルダ（サブフォルダも含む）の中に関連するデータやコード、出力をまとめておき、そのフォルダをプロジェクトとして設定するのです。これにより、ファイルの読み書きの際の場所指定をいちいち意識しないで作業できるようになります。
-
-したがって、本書に出てくる内容をご自身のPC上で再現するには、Githubレポジトリhttps://github.com/izunyan/excel\_r をダウンロードして、その中にある\texttt{excel\_r.Rproj}ファイルを実行すればお手軽です。
-
-詳しくは、先述のR for Data Scienceでの\href{https://r4ds.had.co.nz/workflow-projects.html}{解説}が参考になります。\footnote{\url{https://r4ds.had.co.nz/workflow-projects.html}}
-
-\hypertarget{readexcel}{%
-\chapter{Excelファイルの読み込み}\label{readexcel}}
-
-\hypertarget{readoneexcel}{%
-\section{一つのExcelファイルを読み込む}\label{readoneexcel}}
-
-\hypertarget{junbiyomikomi}{%
-\subsection{ファイルの準備と読み込み}\label{junbiyomikomi}}
-
-ExcelファイルをRに読み込むには、\texttt{readxl}パッケージが便利です。\footnote{以下、まだインストールしていないパッケージがあれば、\texttt{install.packages("")}の\texttt{""}中にパッケージ名を入れて実行するか、RStudioの\texttt{Packages}タブの\texttt{Install}からインストールしてください}セクション\ref{projecttoha}で述べた通り、ここからは、githubレポジトリのhttps://github.com/izunyan/excel\_r をダウンロードしてプロジェクトを開いて進めてみてください。dataフォルダ（\texttt{data/}で表現）に入っている「ペンギン.xlsx」\footnote{Horst AM, Hill AP, Gorman KB (2020). palmerpenguins: Palmer Archipelago
-  (Antarctica) penguin data. R package version 0.1.0.
-  \url{https://allisonhorst.github.io/palmerpenguins/}}を読み込んでみましょう。
-
-読み込みには\texttt{read\_xlsx()}関数を使います。したがって、以下すべてExcelファイル形式は\texttt{.xlsx}を想定します。\texttt{read\_xls()}や\texttt{read\_excel()}という関数もあるので、ファイル形式によって使い分けられます。ファイル形式が混ざっている時は\texttt{read\_excel()}が有用かもしれません。
+  \begin{itemize}
+  \tightlist
+  \item
+  \end{itemize}
+\end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(readxl)}
+\DecValTok{1} \SpecialCharTok{+} \DecValTok{1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  ここでは\texttt{1\ +\ 1}がコード部分で，\texttt{\#\#\ {[}1{]}\ 2}が出力結果部分
+\item
+  \texttt{{[}1{]}}というのは，その次にくる値（ここでは１つしかないが）が何番目にあるかを示している
+\item
+  たとえば，1から50までの数値を出力してみる
+
+  \begin{itemize}
+  \tightlist
+  \item
+    コロン\texttt{:}で最初と最後の値をつなぐことで連番を表現できる
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{1}\SpecialCharTok{:}\DecValTok{50}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
+## [26] 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  コード部分に\texttt{\#}で始まる文章がある場合は，コメントを表す。ここは実行されないので説明のために書かれる
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# *（アスタリスク） は掛け算であることを示す}
+
+\DecValTok{2} \SpecialCharTok{*} \DecValTok{3}  \CommentTok{\# ここにもコメントを入れられる}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 6
+\end{verbatim}
+
+\hypertarget{p-project}{%
+\section{プロジェクト}\label{p-project}}
+
+\begin{itemize}
+\tightlist
+\item
+  データを加工して解析する際に、1つのフォルダ（サブフォルダも含む）の中に関連するデータやコードなどをまとめておき、そのフォルダを \textbf{プロジェクト} と設定する
+\item
+  これにより、ファイルの読み書きの際の場所指定をいちいち意識しないで作業できるようになる
+\item
+  詳しくは\href{https://izunyan.github.io/excel_r/project.html\#project}{拙書の解説}参照
+\end{itemize}
+
+\hypertarget{p-package}{%
+\section{パッケージ}\label{p-package}}
+
+\begin{itemize}
+\tightlist
+\item
+  様々な関数やデータなどがまとまっていて，読み込むと色々なことができる
+
+  \begin{itemize}
+  \tightlist
+  \item
+    逆にいえば読み込まないと便利な作業ができないことが多い
+  \end{itemize}
+\item
+  例：\texttt{library(tidyverse)}または\texttt{require(tidyverse)} のように書くことで読み込める
+\item
+  パッケージを読み込まなくても，\texttt{パッケージ名::関数名()}でパッケージ内の関数が使える
+
+  \begin{itemize}
+  \tightlist
+  \item
+    どのパッケージの関数か明示するのにも便利なので，本書では多用する
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{p-function}{%
+\section{関数}\label{p-function}}
+
+\begin{itemize}
+\tightlist
+\item
+  適切な値や変数などを指定すれば，データの処理や計算，統計解析など様々な処理を簡単に実行してくれる
+\item
+  例えば \texttt{mean(\ )} などのように\texttt{関数名(\ )}で出てくるので，\texttt{(\ )}で囲まれてる所を見たらほぼ関数だと思えばよさそう
+\item
+  \texttt{(\ )}の中に入る値を \textbf{引数} （ひきすう）と呼ぶ
+\item
+  引数は\texttt{,}でつないで追加していき，これによって実行したい処理のカスタマイズが可能
+  　 + 関数の\texttt{(\ )}の最初の位置に来るものを \textbf{第一引数} という
+\end{itemize}
+
+\hypertarget{p-function-ex}{%
+\subsection{例}\label{p-function-ex}}
+
+\hypertarget{p-function-ex-c}{%
+\subsubsection{複数のものを1つにする: c( )}\label{p-function-ex-c}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{ベクトル}を作る（複数のものを1つにする）ための関数。
+\item
+  慣れてる人は当たり前に使っているので，初学者にとって理解しとくとよい最重要関数と思われる
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1 2 3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{c}\NormalTok{(}\StringTok{"a"}\NormalTok{, }\StringTok{"b"}\NormalTok{, }\StringTok{"c"}\NormalTok{) }\CommentTok{\# " "で囲まれる値は文字を表す}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "a" "b" "c"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 複数あるように見えるが実は1つのベクトルになっている例}
+\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1]  1  2  3  4  5  6  7  8  9 10
+\end{verbatim}
+
+\hypertarget{p-function-ex-m}{%
+\subsubsection{平均値：mean( )}\label{p-function-ex-m}}
+
+\begin{itemize}
+\tightlist
+\item
+  引数にベクトルを入れることで平均値を計算する
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 欠損値（NA）があると結果がNA}
+\FunctionTok{mean}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\ConstantTok{NA}\NormalTok{, }\DecValTok{3}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] NA
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 引数にna.rm = TRUEを追加すると結果が出る。基本的に実務上は常につけておいたほうがよい}
+\FunctionTok{mean}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\ConstantTok{NA}\NormalTok{, }\DecValTok{3}\NormalTok{), }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2
+\end{verbatim}
+
+\hypertarget{p-object}{%
+\section{オブジェクト}\label{p-object}}
+
+\begin{itemize}
+\tightlist
+\item
+  計算の結果や，複数の数値や文字など（他にも色々）を1つの文字列に格納することができ，その後のコードで活用できる
+\item
+  \texttt{\textless{}-}RStudioではショートカット\texttt{alt\ +\ -}で出せる(Macは\texttt{Option\ +\ -})
+\item
+  この後説明するデータフレームもオブジェクトに入れられる
+
+  \begin{itemize}
+  \tightlist
+  \item
+    データの少ないミニデータを作る時や，計算結果を格納するときに多用
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{p-object-ex}{%
+\subsection{例}\label{p-object-ex}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{res }\OtherTok{\textless{}{-}} \DecValTok{1} \SpecialCharTok{+} \DecValTok{1}
+\NormalTok{res}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{res2 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\SpecialCharTok{:}\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{)}
+\NormalTok{res2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1 2 3 4 5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{res3 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"a"}\NormalTok{, }\StringTok{"b"}\NormalTok{)}
+\NormalTok{res3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "a" "b"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{rm}\NormalTok{(res, res2, res3)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{p-df}{%
+\section{データフレーム}\label{p-df}}
+
+\hypertarget{ux672cux66f8ux3067ux4f7fux3046ux4e3bux306aux30c7ux30fcux30bf}{%
+\subsection{本書で使う主なデータ}\label{ux672cux66f8ux3067ux4f7fux3046ux4e3bux306aux30c7ux30fcux30bf}}
+
+\hypertarget{ux30daux30f3ux30aeux30f3ux30c7ux30fcux30bf}{%
+\subsubsection{ペンギンデータ}\label{ux30daux30f3ux30aeux30f3ux30c7ux30fcux30bf}}
+
+\href{images/penguins_logo.png}{}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{palmerpenguins}パッケージのpenguinsデータ
+\end{itemize}
+
+\hypertarget{p-pipe}{%
+\section{\%\textgreater\% （パイプ演算子）}\label{p-pipe}}
+
+\begin{itemize}
+\tightlist
+\item
+  RStudioのショートカットは\texttt{Ctrl\ +\ Shift\ +\ M}(Macは\texttt{Cmd\ +\ Shift\ +\ M})
+\item
+  R version 4.1からは\texttt{\textbar{}\textgreater{}}が同じ機能を持つと演算子して実装されたので，特にパッケージの読み込みをせずに使えるようになった。こちらを使う説明も今後増えていくと思われる
+
+  \begin{itemize}
+  \tightlist
+  \item
+    ショートカットで出るパイプを切り替えたい場合は，RStudioの\texttt{Tools\ \textgreater{}\ Global\ Options\ \textgreater{}\ Code\ \textgreater{}\ Editing\ \textgreater{}\ use\ native\ pipe\ operator}にチェックを入れる
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{select}{%
+\chapter{変数（列）を選ぶ：select( )}\label{select}}
+
+\begin{itemize}
+\tightlist
+\item
+  パッケージ\texttt{dplyr}の関数\texttt{select()}
+\item
+  tidyな世界では「列名 = 変数名」
+\item
+  変数が多い時に関心ある変数に限定したデータにしたい
+\item
+  関心ある変数の名前を取得したい
+\item
+  後々出てくる繰り返し作業で便利なヘルパー関数
+\end{itemize}
+
+\hypertarget{select-read}{%
+\section{データ読み込み}\label{select-read}}
+
+\begin{itemize}
+\tightlist
+\item
+  データの指定を簡単にするために，penguinsデータを\texttt{df}と読み込む
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+
+\CommentTok{\# パッケージが入ってなければ下記実行}
+\CommentTok{\# install.packages("palmerpenguins")}
 
 \NormalTok{df }\OtherTok{\textless{}{-}} 
- \FunctionTok{read\_xlsx}\NormalTok{(}\StringTok{"data/ペンギン.xlsx"}\NormalTok{) }\CommentTok{\# Excelファイルの読み込み}
-
+\NormalTok{  palmerpenguins}\SpecialCharTok{::}\NormalTok{penguins}
+  
 \NormalTok{df }\CommentTok{\# データの表示 }
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 344 x 9
-##   species 種類     island    bill_length_mm bill_depth_mm
-##   <chr>   <chr>    <chr>              <dbl>         <dbl>
-## 1 Adelie  アデリー Torgersen           39.1          18.7
-## 2 Adelie  アデリー Torgersen           39.5          17.4
-## 3 Adelie  アデリー Torgersen           40.3          18  
-## # ... with 341 more rows, and 4 more variables:
-## #   flipper_length_mm <dbl>, body_mass_g <dbl>, sex <chr>,
-## #   year <dbl>
+## # A tibble: 344 x 8
+##   species island    bill_length_mm bill_depth_mm flipper_length_~
+##   <fct>   <fct>              <dbl>         <dbl>            <int>
+## 1 Adelie  Torgersen           39.1          18.7              181
+## 2 Adelie  Torgersen           39.5          17.4              186
+## 3 Adelie  Torgersen           40.3          18                195
+## # ... with 341 more rows, and 3 more variables:
+## #   body_mass_g <int>, sex <fct>, year <int>
 \end{verbatim}
 
-上記コードを実行すると、RStudioの右上（デフォルトの配置であれば）のEnvironmentタブに、
+\begin{itemize}
+\tightlist
+\item
+  読み込みの様々な方法については拙書\href{https://izunyan.github.io/excel_r/}{『Rで読むExcelファイル』}参照
+\end{itemize}
 
-\begin{verbatim}
-df  344 obs. of 9 variables
-\end{verbatim}
+\hypertarget{select-standard}{%
+\section{基本}\label{select-standard}}
 
-という表示が出ると思います。つまり、344行のデータと9列の変数が入っているデータを、\texttt{df}という名前のもの（オブジェクト）としてRに読みこんだ、ということを示しています。\texttt{df\ \textless{}-}の部分がその作業に該当します。\texttt{\textless{}-}の右側の内容を左側のオブジェクトに格納するという意味です。ここで読み込まれた形がデータフレーム（\protect\hyperlink{structure}{はじめに\textgreater 本書の構成}の注参照）です。
+\begin{itemize}
+\tightlist
+\item
+  \texttt{select(\ )}の中に関心のある変数名を\texttt{,}をつけて並べる
 
-オブジェクト名である\texttt{df}と打つことで、デフォルトでは最初の10行分のデータが表示されます。ここでは紙面の都合で設定を変えているので3行だけにしています。表示された最初の行にも、\texttt{A\ tibble:\ 344\ x\ 9}と、行数x列数の情報が出ています。表示しきれなかった行は、\texttt{with\ 341\ more\ rows}と省略され、表示しきれなかった列は、\texttt{flipper\_length\_mm\ \textless{}dbl\textgreater{},\ body\_mass\_g\ \textless{}dbl\textgreater{},\ sex\ \textless{}chr\textgreater{},\ year\ \textless{}dbl\textgreater{}}と、\texttt{名前\textless{}データの型名\textgreater{}}が表示されます。なお、読みこんだファイルの保存については\ref{writeoneexcel}章で解説します。
-
-\hypertarget{hokan}{%
-\subsubsection{最高な機能だよ！パスの自動補完}\label{hokan}}
-
-\texttt{read\_xlsx("")}と打った後に、\texttt{"\ "}の中にカーソルを置いて、tabキーを押すと、プロジェクトの中身が一覧で表示されるので、選んでいくだけで目的のファイルがキーボードを打つことなしに選べます！RStudioは\texttt{"\ "}と打てばどこでもこの補完が可能です。\footnote{ただし、R version 4.0で文字コード関連の挙動が変わったみたいで、R 4.0.2ではエラーになりました\ldots（未解決）}
-
-上の階層のフォルダに行きたいときは、\texttt{"\ "}の中に\texttt{../}と打てば可能です。その後にtabキーを押せば上の階層のフォルダが選べます。
-
-\hypertarget{ux5217ux540dux5909ux6570ux540dux304cux3072ux3069ux3044ux5834ux5408ux306eux8aadux307fux8fbcux307f}{%
-\subsection{列名（変数名）がひどい場合の読み込み}\label{ux5217ux540dux5909ux6570ux540dux304cux3072ux3069ux3044ux5834ux5408ux306eux8aadux307fux8fbcux307f}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{read\_xlsx}\NormalTok{(}\StringTok{"data/ペンギン（ひどい列名）ver.xlsx"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## # A tibble: 344 x 9
-##   Sｐｅｃｉｅｓ `種　類` `※島の名前` `①クチバシ　長さ（ｍｍ）`
-##   <chr>         <chr>    <chr>                           <dbl>
-## 1 Adelie        アデリー Torgersen                        39.1
-## 2 Adelie        アデリー Torgersen                        39.5
-## 3 Adelie        アデリー Torgersen                        40.3
-## # ... with 341 more rows, and 5 more variables:
-## #   ②ｸﾁﾊﾞｼ＿大きさ（ｍｍ） <dbl>, 翼：長さ(mm) <dbl>,
-## #   ■体重　単位はｇ <dbl>, <U+329B><U+329A> <chr>, ２００７～２００９ <dbl>
-\end{verbatim}
-
-読めることは読めますが、今後のデータ処理を進めるうえで不安が残ります。
-
-\hypertarget{ux30b9ux30daux30fcux30b9ux3084ux8a18ux53f7ux306aux3069ux3092ux81eaux52d5ux7684ux306bux5909ux63dbux3057ux3066ux304fux308cux308bux95a2ux6570ux3067ux304dux308cux3044ux306b}{%
-\subsubsection{スペースや記号などを自動的に変換してくれる関数できれいに}\label{ux30b9ux30daux30fcux30b9ux3084ux8a18ux53f7ux306aux3069ux3092ux81eaux52d5ux7684ux306bux5909ux63dbux3057ux3066ux304fux308cux308bux95a2ux6570ux3067ux304dux308cux3044ux306b}}
-
-\texttt{janitor}パッケージの\texttt{clean\_names()}関数を使って、列名に入り込んでいるスペースや記号などを安全な記号に変換します。
-
-なお、日本語の列名では、\texttt{clean\_names()}関数に\texttt{case\ =\ "old\_janitor"}をつけないと読みにくい結果になります。このように、関数の中に追加する情報のことを引数（ひきすう）と言います。引数によってさまざまな条件を変更することが可能になります。
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(tidyverse)}
-    \CommentTok{\# ↑は普通まず最初に読み込むパッケージですが、本書ではここで初めて使います}
-\FunctionTok{library}\NormalTok{(janitor)}
-
-\FunctionTok{read\_xlsx}\NormalTok{(}\StringTok{"data/ペンギン（ひどい列名）ver.xlsx"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{clean\_names}\NormalTok{(}\AttributeTok{case =} \StringTok{"old\_janitor"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## # A tibble: 344 x 9
-##   sｐｅｃｉｅｓ 種_類    x_島の名前 x_クチバシ_長さ_ｍｍ
-##   <chr>         <chr>    <chr>                     <dbl>
-## 1 Adelie        アデリー Torgersen                  39.1
-## 2 Adelie        アデリー Torgersen                  39.5
-## 3 Adelie        アデリー Torgersen                  40.3
-## # ... with 341 more rows, and 5 more variables:
-## #   x_ｸﾁﾊﾞｼ_大きさ_ｍｍ <dbl>, 翼_長さ_mm <dbl>,
-## #   x_体重_単位はｇ <dbl>, x_u_329b_u_329a <chr>,
-## #   ２００７_２００９ <dbl>
-\end{verbatim}
-
-さて、ここで使われている \texttt{\%\textgreater{}\%} は非常に大事なので解説しておきます。
-
-\hypertarget{pipe}{%
-\subsubsection{\%\textgreater\% とは？}\label{pipe}}
-
-「パイプ」と読みます。処理を重ねてコードに書いていきたい際に重宝し、現代の\texttt{tidyverse}を使ったRのコードに欠かせないものです。たとえば、データフレームdfのspecies列を選択する、という処理の
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{select}\NormalTok{(df, species)}
-\end{Highlighting}
-\end{Shaded}
-
-は
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(species)}
-\end{Highlighting}
-\end{Shaded}
-
-と書けます。 \texttt{\%\textgreater{}\%}の左側にあるものを右側の最初の部分（第1引数）に渡すという働きです。パイプの利点は、いくつもつないで書いていけることです。たとえば、ペンギンの種類別にクチバシの長さの平均値を出したいときには次のようにできます。
+  \begin{itemize}
+  \tightlist
+  \item
+    変数は1つからOK
+  \end{itemize}
+\end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{group\_by}\NormalTok{(species) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{summarise}\NormalTok{(平均値 }\OtherTok{=} \FunctionTok{mean}\NormalTok{(bill\_length\_mm, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{))}
+  \FunctionTok{select}\NormalTok{(bill\_length\_mm, bill\_depth\_mm)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 3 x 2
-##   species   平均値
-##   <chr>      <dbl>
-## 1 Adelie      38.8
-## 2 Chinstrap   48.8
-## 3 Gentoo      47.5
+## # A tibble: 344 x 2
+##   bill_length_mm bill_depth_mm
+##            <dbl>         <dbl>
+## 1           39.1          18.7
+## 2           39.5          17.4
+## 3           40.3          18  
+## # ... with 341 more rows
 \end{verbatim}
 
-以下では\texttt{\%\textgreater{}\%}を多用していきます。
-
-なお、ショートカット\texttt{ctrl\ +\ shit\ +\ M}（Macだと\texttt{Cmd\ +\ Shift\ +\ M}）で出せます。
-
-\hypertarget{ux5168ux89d2ux534aux89d2ux3092ux81eaux52d5ux3067}{%
-\subsubsection{全角←→半角を自動で}\label{ux5168ux89d2ux534aux89d2ux3092ux81eaux52d5ux3067}}
-
-\texttt{stringi}パッケージの\texttt{stri\_trans\_nfkc()}関数を使って、変数名で全角-半角のばらつきを統一させます。
-
-ここでは、変数名をリネームするのに\texttt{dplyr\ 1.0.0}で登場した\texttt{rename\_with()}関数を使いました。\texttt{everything()}という引数を含めているので、すべての変数に対し、全角文字を含んでいたら半角に直すというコードになります。
+\begin{itemize}
+\tightlist
+\item
+  新しいデータフレームを作りたい場合は\texttt{\textless{}-}を使って新しいオブジェクトに格納する
+\end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(stringi)}
-\FunctionTok{read\_xlsx}\NormalTok{(}\StringTok{"data/ペンギン（ひどい列名）ver.xlsx"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{rename\_with}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\FunctionTok{stri\_trans\_nfkc}\NormalTok{(.),}
-              \FunctionTok{everything}\NormalTok{())}
+\NormalTok{df2 }\OtherTok{\textless{}{-}} 
+\NormalTok{  df }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(bill\_length\_mm)}
+
+\NormalTok{df2}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 344 x 9
-##   Species `種 類`  `※島の名前` `1クチバシ 長さ(~ `2クチバシ_大き~
-##   <chr>   <chr>    <chr>                   <dbl>            <dbl>
-## 1 Adelie  アデリー Torgersen                39.1             18.7
-## 2 Adelie  アデリー Torgersen                39.5             17.4
-## 3 Adelie  アデリー Torgersen                40.3             18  
+## # A tibble: 344 x 1
+##   bill_length_mm
+##            <dbl>
+## 1           39.1
+## 2           39.5
+## 3           40.3
+## # ... with 341 more rows
+\end{verbatim}
+
+\hypertarget{select-range}{%
+\subsection{範囲指定}\label{select-range}}
+
+\begin{itemize}
+\tightlist
+\item
+  関心ある変数が指定された範囲に含まれていれば\texttt{:}でつなげて取得できる
+
+  \begin{itemize}
+  \tightlist
+  \item
+    変数の連番をまとめて指定する時などに便利（例 \texttt{変数1:変数100}）
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(bill\_length\_mm}\SpecialCharTok{:}\NormalTok{flipper\_length\_mm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 344 x 3
+##   bill_length_mm bill_depth_mm flipper_length_mm
+##            <dbl>         <dbl>             <int>
+## 1           39.1          18.7               181
+## 2           39.5          17.4               186
+## 3           40.3          18                 195
+## # ... with 341 more rows
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  範囲に加えて追加の変数を追加できる
+
+  \begin{itemize}
+  \tightlist
+  \item
+    飛び飛びの変数群を選びたいときに有用
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(bill\_length\_mm}\SpecialCharTok{:}\NormalTok{flipper\_length\_mm, sex)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 344 x 4
+##   bill_length_mm bill_depth_mm flipper_length_mm sex   
+##            <dbl>         <dbl>             <int> <fct> 
+## 1           39.1          18.7               181 male  
+## 2           39.5          17.4               186 female
+## 3           40.3          18                 195 female
+## # ... with 341 more rows
+\end{verbatim}
+
+\hypertarget{select_cha}{%
+\subsection{中身が文字でも動く}\label{select_cha}}
+
+\begin{itemize}
+\tightlist
+\item
+  変数名が\texttt{"\ "}で囲われていると，Rでは文字(character)だと認識される
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(}\StringTok{"bill\_length\_mm"}\NormalTok{, }\StringTok{"bill\_depth\_mm"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 344 x 2
+##   bill_length_mm bill_depth_mm
+##            <dbl>         <dbl>
+## 1           39.1          18.7
+## 2           39.5          17.4
+## 3           40.3          18  
+## # ... with 341 more rows
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  これは効率化を図りたいときに重要な特徴
+\item
+  \texttt{select(\ )}の中にたくさんの変数名を並べるより，事前に指定しておき代入した方が読みやすい
+
+  \begin{itemize}
+  \tightlist
+  \item
+    様々なコード例でこの事前指定が多用されるので慣れるとよい
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# あらかじめオブジェクト（ここではvars）に引数を格納して後で使える}
+\NormalTok{vars }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"bill\_length\_mm"}\NormalTok{, }\StringTok{"bill\_depth\_mm"}\NormalTok{)}
+
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(}\FunctionTok{all\_of}\NormalTok{(vars))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 344 x 2
+##   bill_length_mm bill_depth_mm
+##            <dbl>         <dbl>
+## 1           39.1          18.7
+## 2           39.5          17.4
+## 3           40.3          18  
+## # ... with 341 more rows
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  ここで\texttt{vars}は文字ベクトル（vector）のオブジェクトとなっている
+\item
+  \texttt{all\_of(\ )}の中に文字ベクトルを指定することで，それぞれの中身を変数名として認識する
+
+  \begin{itemize}
+  \tightlist
+  \item
+    以前使われていた\texttt{one\_of}は現在は非推奨
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{select-helper}{%
+\section{変数の指定に便利なヘルパー関数}\label{select-helper}}
+
+\begin{itemize}
+\tightlist
+\item
+  selection helperと呼ばれる\texttt{tidyselect}パッケージの関数群
+\item
+  selectの所で解説されることが多いが，後から出てくる\texttt{across()}と併せた活用場面が多いため，なじんでおくと後から楽になる
+\end{itemize}
+
+\hypertarget{select_helper1}{%
+\subsection{変数名の最初の文字列}\label{select_helper1}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{bill}から始まる変数を選ぶ
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"bill"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 344 x 2
+##   bill_length_mm bill_depth_mm
+##            <dbl>         <dbl>
+## 1           39.1          18.7
+## 2           39.5          17.4
+## 3           40.3          18  
+## # ... with 341 more rows
+\end{verbatim}
+
+\hypertarget{select-helper2}{%
+\subsection{変数名の最後の文字列}\label{select-helper2}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{\_mm}で終わる変数を選ぶ
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{mm}だけだと他にも含まれる場合が出てくるので，\texttt{\_}も含めた方が安全
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(}\FunctionTok{ends\_with}\NormalTok{(}\StringTok{"\_mm"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 344 x 3
+##   bill_length_mm bill_depth_mm flipper_length_mm
+##            <dbl>         <dbl>             <int>
+## 1           39.1          18.7               181
+## 2           39.5          17.4               186
+## 3           40.3          18                 195
+## # ... with 341 more rows
+\end{verbatim}
+
+\hypertarget{select-helper3}{%
+\subsection{変数名のどこかに含まれる文字列}\label{select-helper3}}
+
+\begin{itemize}
+\tightlist
+\item
+  指定した文字列を含んだ変数名を対象とする
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(}\FunctionTok{contains}\NormalTok{(}\StringTok{"length"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 344 x 2
+##   bill_length_mm flipper_length_mm
+##            <dbl>             <int>
+## 1           39.1               181
+## 2           39.5               186
+## 3           40.3               195
+## # ... with 341 more rows
+\end{verbatim}
+
+\hypertarget{select-helper4}{%
+\subsubsection{変数名のどこかに含まれる文字列：その2}\label{select-helper4}}
+
+\begin{itemize}
+\tightlist
+\item
+  文字列で \textbf{正規表現} が使えるため柔軟な指定が可能
+\item
+  ここでは，``length''または''depth''を含む変数名を対象
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{\textbar{}}が「または」を意味する
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(}\FunctionTok{matches}\NormalTok{(}\StringTok{"length|depth"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 344 x 3
+##   bill_length_mm bill_depth_mm flipper_length_mm
+##            <dbl>         <dbl>             <int>
+## 1           39.1          18.7               181
+## 2           39.5          17.4               186
+## 3           40.3          18                 195
+## # ... with 341 more rows
+\end{verbatim}
+
+\hypertarget{select-helper5}{%
+\subsection{上記の組み合わせ}\label{select-helper5}}
+
+\hypertarget{select-helper5-1}{%
+\subsubsection{かつ}\label{select-helper5-1}}
+
+\begin{itemize}
+\tightlist
+\item
+  それぞれの条件を両方満たす
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"bill"}\NormalTok{) }\SpecialCharTok{\&} \FunctionTok{contains}\NormalTok{(}\StringTok{"length"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 344 x 1
+##   bill_length_mm
+##            <dbl>
+## 1           39.1
+## 2           39.5
+## 3           40.3
+## # ... with 341 more rows
+\end{verbatim}
+
+\hypertarget{select-helper5-2}{%
+\subsubsection{または}\label{select-helper5-2}}
+
+\begin{itemize}
+\tightlist
+\item
+  それぞれの条件をいずれか満たす
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"bill"}\NormalTok{) }\SpecialCharTok{|} \FunctionTok{contains}\NormalTok{(}\StringTok{"length"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 344 x 3
+##   bill_length_mm bill_depth_mm flipper_length_mm
+##            <dbl>         <dbl>             <int>
+## 1           39.1          18.7               181
+## 2           39.5          17.4               186
+## 3           40.3          18                 195
+## # ... with 341 more rows
+\end{verbatim}
+
+\hypertarget{select-helper6}{%
+\subsection{数値範囲}\label{select-helper6}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{num\_range}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## function (prefix, range, width = NULL, vars = NULL) 
+## {
+##     vars <- vars %||% peek_vars(fn = "num_range")
+##     if (!is_null(width)) {
+##         range <- sprintf(paste0("%0", width, "d"), range)
+##     }
+##     match_vars(paste0(prefix, range), vars)
+## }
+## <bytecode: 0x0000000019c66e88>
+## <environment: namespace:tidyselect>
+\end{verbatim}
+
+\hypertarget{select-drop}{%
+\section{特定の変数を選ばない（落とす）}\label{select-drop}}
+
+\begin{itemize}
+\tightlist
+\item
+  変数名の前に\texttt{!}をつける
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{!}\NormalTok{species)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 344 x 7
+##   island    bill_length_mm bill_depth_mm flipper_length_mm
+##   <fct>              <dbl>         <dbl>             <int>
+## 1 Torgersen           39.1          18.7               181
+## 2 Torgersen           39.5          17.4               186
+## 3 Torgersen           40.3          18                 195
+## # ... with 341 more rows, and 3 more variables:
+## #   body_mass_g <int>, sex <fct>, year <int>
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  複数列を落としたい場合は，\texttt{!c(\ )}の中に対象の列名を含める
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{c}\NormalTok{(bill\_length\_mm}\SpecialCharTok{:}\NormalTok{flipper\_length\_mm, sex))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 344 x 4
+##   species island    body_mass_g  year
+##   <fct>   <fct>           <int> <int>
+## 1 Adelie  Torgersen        3750  2007
+## 2 Adelie  Torgersen        3800  2007
+## 3 Adelie  Torgersen        3250  2007
+## # ... with 341 more rows
+\end{verbatim}
+
+\hypertarget{ux5909ux6570ux3092ux4e26ux3073ux5909ux3048ux308b}{%
+\section{変数を並び変える}\label{ux5909ux6570ux3092ux4e26ux3073ux5909ux3048ux308b}}
+
+\hypertarget{ux5909ux6570ux540dux3092ux5909ux66f4ux3059ux308b}{%
+\section{変数名を変更する}\label{ux5909ux6570ux540dux3092ux5909ux66f4ux3059ux308b}}
+
+\hypertarget{ux95a2ux5fc3ux306eux3042ux308bux5909ux6570ux540dux3092ux53d6ux5f97ux3059ux308b}{%
+\section{関心のある変数名を取得する}\label{ux95a2ux5fc3ux306eux3042ux308bux5909ux6570ux540dux3092ux53d6ux5f97ux3059ux308b}}
+
+\begin{itemize}
+\tightlist
+\item
+  データ分析の段階では，関心のある変数名を選択して，それらを代入する作業が頻出
+\item
+  変数名手打ちだと時間もかかるしミスもあるので，効率化のために必ずおさえておきたい技術
+\end{itemize}
+
+\hypertarget{ux5168ux3066ux306eux5909ux6570ux540d}{%
+\subsection{全ての変数名}\label{ux5168ux3066ux306eux5909ux6570ux540d}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{names}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "species"           "island"            "bill_length_mm"   
+## [4] "bill_depth_mm"     "flipper_length_mm" "body_mass_g"      
+## [7] "sex"               "year"
+\end{verbatim}
+
+\hypertarget{ux9078ux629eux3057ux305fux5909ux6570ux540dux3092ux53d6ux5f97}{%
+\subsection{選択した変数名を取得}\label{ux9078ux629eux3057ux305fux5909ux6570ux540dux3092ux53d6ux5f97}}
+
+\begin{itemize}
+\tightlist
+\item
+  ベクトル
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bill\_vars }\OtherTok{\textless{}{-}} 
+\NormalTok{  df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"bill"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{names}\NormalTok{()}
+
+\NormalTok{bill\_vars}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "bill_length_mm" "bill_depth_mm"
+\end{verbatim}
+
+\hypertarget{ux30b3ux30d4ux30daux306bux4fbfux5229ux306aux5f62ux5f0fux306bux51faux529b}{%
+\subsection{コピペに便利な形式に出力}\label{ux30b3ux30d4ux30daux306bux4fbfux5229ux306aux5f62ux5f0fux306bux51faux529b}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{,}で区切られた形式で出てくればそのまま\texttt{select()}に入れられるのに\ldots と思った方のための便利関数\texttt{dput()}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"b"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# bから始まる変数名}
+  \FunctionTok{names}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{dput}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## c("bill_length_mm", "bill_depth_mm", "body_mass_g")
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{"\ "}すらもいらない，という時は，新しくr script(アイコンNew Fileまたは\texttt{ctrl\ +\ shift\ +\ n})開いて，\texttt{dput()}の出力を貼り付けてすべて置換する方法も
+\end{itemize}
+
+\hypertarget{ux5fdcux7528ux7de8ux8907ux6570ux30c7ux30fcux30bfux30d5ux30ecux30fcux30e0ux3067ux540cux6642ux306bselect}{%
+\section{【応用編】複数データフレームで同時にselect}\label{ux5fdcux7528ux7de8ux8907ux6570ux30c7ux30fcux30bfux30d5ux30ecux30fcux30e0ux3067ux540cux6642ux306bselect}}
+
+\hypertarget{ux8907ux6570ux30c7ux30fcux30bfux30d5ux30ecux30fcux30e0ux3067ux540cux3058ux3088ux3046ux306bselect}{%
+\subsection{複数データフレームで同じようにselect}\label{ux8907ux6570ux30c7ux30fcux30bfux30d5ux30ecux30fcux30e0ux3067ux540cux3058ux3088ux3046ux306bselect}}
+
+\hypertarget{ux8907ux6570ux30c7ux30fcux30bfux30d5ux30ecux30fcux30e0ux3067ux5225ux3005ux306bselect}{%
+\subsection{複数データフレームで別々にselect}\label{ux8907ux6570ux30c7ux30fcux30bfux30d5ux30ecux30fcux30e0ux3067ux5225ux3005ux306bselect}}
+
+\url{https://izunyan.github.io/practice_bfi/\#13_\%E3\%82\%AF\%E3\%83\%AD\%E3\%83\%B3\%E3\%83\%90\%E3\%83\%83\%E3\%82\%AF\%E3\%81\%AE\%E3\%82\%A2\%E3\%83\%AB\%E3\%83\%95\%E3\%82\%A1}
+
+\hypertarget{rename}{%
+\chapter{変数名を変更する：rename( )}\label{rename}}
+
+\begin{itemize}
+\tightlist
+\item
+  パッケージ\texttt{dplyr}の関数\texttt{rename()}
+\item
+  tidyな世界では「列名 = 変数名」
+\item
+  変数が多い時に関心ある変数に限定したデータにしたい
+\item
+  関心ある変数の名前を取得したい
+\end{itemize}
+
+\hypertarget{rename-standard}{%
+\section{基本}\label{rename-standard}}
+
+\begin{itemize}
+\tightlist
+\item
+  変更したい変数名を new = old の順に入力する
+
+  \begin{itemize}
+  \tightlist
+  \item
+    ここではbill\_length\_mmをblmmに変更してみる
+  \end{itemize}
+\item
+  複数の変数名を変更する場合は，\texttt{rename()}の中に\texttt{,}でつなげていく
+
+  \begin{itemize}
+  \tightlist
+  \item
+    たくさんある場合に一つ一つ書いていくのは大変
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{names}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "species"           "island"            "bill_length_mm"   
+## [4] "bill_depth_mm"     "flipper_length_mm" "body_mass_g"      
+## [7] "sex"               "year"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{rename}\NormalTok{(}\AttributeTok{blmm =}\NormalTok{ bill\_length\_mm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 344 x 8
+##   species island  blmm bill_depth_mm flipper_length_~ body_mass_g
+##   <fct>   <fct>  <dbl>         <dbl>            <int>       <int>
+## 1 Adelie  Torge~  39.1          18.7              181        3750
+## 2 Adelie  Torge~  39.5          17.4              186        3800
+## 3 Adelie  Torge~  40.3          18                195        3250
+## # ... with 341 more rows, and 2 more variables: sex <fct>,
+## #   year <int>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 複数をrenameする場合}
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{rename}\NormalTok{(}\AttributeTok{blmm =}\NormalTok{ bill\_length\_mm,}
+         \AttributeTok{bdmm =}\NormalTok{ bill\_depth\_mm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 344 x 8
+##   species island    blmm  bdmm flipper_length_~ body_mass_g sex  
+##   <fct>   <fct>    <dbl> <dbl>            <int>       <int> <fct>
+## 1 Adelie  Torgers~  39.1  18.7              181        3750 male 
+## 2 Adelie  Torgers~  39.5  17.4              186        3800 fema~
+## 3 Adelie  Torgers~  40.3  18                195        3250 fema~
+## # ... with 341 more rows, and 1 more variable: year <int>
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  複数変数を扱うときは\texttt{rename\_with()}が便利。以下はそれを用いた例を示していく
+\end{itemize}
+
+\hypertarget{rename-samew}{%
+\section{同じ語を共通の語で置き換える}\label{rename-samew}}
+
+\begin{itemize}
+\tightlist
+\item
+  変数名の''bill''の部分を日本語の''くちばし''に変更していく
+\item
+  まずは基本の知識でできる方法
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{rename}\NormalTok{(くちばし}\AttributeTok{\_length\_mm =}\NormalTok{ bill\_length\_mm,}
+\NormalTok{         くちばし}\AttributeTok{\_depth\_mm =}\NormalTok{ bill\_depth\_mm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 344 x 8
+##   species island    くちばし_length_mm くちばし_depth_mm
+##   <fct>   <fct>                  <dbl>             <dbl>
+## 1 Adelie  Torgersen               39.1              18.7
+## 2 Adelie  Torgersen               39.5              17.4
+## 3 Adelie  Torgersen               40.3              18  
 ## # ... with 341 more rows, and 4 more variables:
-## #   翼:長さ(mm) <dbl>, ■体重 単位はg <dbl>, 女男 <chr>,
-## #   2007~2009 <dbl>
+## #   flipper_length_mm <int>, body_mass_g <int>, sex <fct>,
+## #   year <int>
 \end{verbatim}
 
-\newpage
+\hypertarget{rename-strreplace1}{%
+\subsection{【効率化】str\_replace()で一括変換(1)}\label{rename-strreplace1}}
 
-\hypertarget{ux4e0aux8a18ux306eux5408ux308fux305bux6280}{%
-\subsubsection{上記の合わせ技}\label{ux4e0aux8a18ux306eux5408ux308fux305bux6280}}
-
-\texttt{\%\textgreater{}\%} でつなぎ合わせて1つの実行で合わせてしまうこともできます。
+\begin{itemize}
+\tightlist
+\item
+  `rename\_with``は，まず適用したい関数を示し，そのあとに該当する変数を選ぶ
+\item
+  適用したい関数の中にある\texttt{.}の部分に，その後選ぶ変数が入っていく
+\item
+  語の置き換えは\texttt{stringr::str\_replace()}を使う
+\end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{read\_xlsx}\NormalTok{(}\StringTok{"data/ペンギン（ひどい列名）ver.xlsx"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{rename\_with}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\FunctionTok{stri\_trans\_nfkc}\NormalTok{(.),}
-              \FunctionTok{everything}\NormalTok{()) }\SpecialCharTok{\%\textgreater{}\%} 
-    \FunctionTok{clean\_names}\NormalTok{(}\AttributeTok{case =} \StringTok{"old\_janitor"}\NormalTok{)}
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{rename\_with}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\FunctionTok{str\_replace}\NormalTok{(., }\StringTok{"bill"}\NormalTok{, }\StringTok{"くちばし"}\NormalTok{),}
+              \FunctionTok{starts\_with}\NormalTok{(}\StringTok{"bill"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 344 x 9
-##   species 種_類    x_島の名前 x1クチバシ_長さ_mm x2クチバシ_大き~
-##   <chr>   <chr>    <chr>                   <dbl>            <dbl>
-## 1 Adelie  アデリー Torgersen                39.1             18.7
-## 2 Adelie  アデリー Torgersen                39.5             17.4
-## 3 Adelie  アデリー Torgersen                40.3             18  
+## # A tibble: 344 x 8
+##   species island    くちばし_length_mm くちばし_depth_mm
+##   <fct>   <fct>                  <dbl>             <dbl>
+## 1 Adelie  Torgersen               39.1              18.7
+## 2 Adelie  Torgersen               39.5              17.4
+## 3 Adelie  Torgersen               40.3              18  
 ## # ... with 341 more rows, and 4 more variables:
-## #   翼_長さ_mm <dbl>, x_体重_単位はg <dbl>, 女男 <chr>,
-## #   x2007_2009 <dbl>
+## #   flipper_length_mm <int>, body_mass_g <int>, sex <fct>,
+## #   year <int>
 \end{verbatim}
 
-\hypertarget{ux958bux59cbux884cux3092ux6307ux5b9aux3057ux3066ux8aadux307fux8fbcux3080}{%
-\subsection{開始行を指定して読み込む}\label{ux958bux59cbux884cux3092ux6307ux5b9aux3057ux3066ux8aadux307fux8fbcux3080}}
+\hypertarget{rename-strreplace1-other}{%
+\subsubsection{【別解】}\label{rename-strreplace1-other}}
 
-理想的なデータは1行目に列名が入力されている形ですが、最初の数行が空だったり、文字の説明が入っていたりすることも多いです。そうした場合は、以下のような読み込み結果になります。
+\begin{itemize}
+\tightlist
+\item
+  selectのように単に\texttt{c(\ )}の中に変数を指定していくだけでも動く
+\end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{read\_xlsx}\NormalTok{(}\StringTok{"data/ペンギン（3行空き）.xlsx"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{select}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{) }\CommentTok{\# 紙面の都合のため最初の3列に制限}
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{rename\_with}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\FunctionTok{str\_replace}\NormalTok{(., }\StringTok{"bill"}\NormalTok{, }\StringTok{"くちばし"}\NormalTok{),}
+              \FunctionTok{c}\NormalTok{(bill\_length\_mm, bill\_depth\_mm))}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 346 x 3
-##   ...1    ここに説明とか書いてあるファイル読むのつら~ ...3       
-##   <chr>   <chr>                                       <chr>      
-## 1 <NA>    <NA>                                        <NA>       
-## 2 species island                                      bill_lengt~
-## 3 Adelie  Torgersen                                   39.1       
-## # ... with 343 more rows
+## # A tibble: 344 x 8
+##   species island    くちばし_length_mm くちばし_depth_mm
+##   <fct>   <fct>                  <dbl>             <dbl>
+## 1 Adelie  Torgersen               39.1              18.7
+## 2 Adelie  Torgersen               39.5              17.4
+## 3 Adelie  Torgersen               40.3              18  
+## # ... with 341 more rows, and 4 more variables:
+## #   flipper_length_mm <int>, body_mass_g <int>, sex <fct>,
+## #   year <int>
 \end{verbatim}
 
-列名が、セルに内容が入っている行から始まり、他の列名が\texttt{...1}, \texttt{...3}といったものになりました。そしてデータがうまく読み込めていません。これを、指定した行から読み込むには、引数\texttt{skip\ =}にとばしたい行の数を指定します。
+\hypertarget{rename-remove}{%
+\section{同じ語を削除する}\label{rename-remove}}
+
+\begin{itemize}
+\tightlist
+\item
+  ``\_mm''を取り除きたい場合，それを削除した変数名を指定すればよいが，たくさんあると大変
+\end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{read\_xlsx}\NormalTok{(}\StringTok{"data/ペンギン（3行空き）.xlsx"}\NormalTok{, }\AttributeTok{skip =} \DecValTok{3}\NormalTok{)}
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{rename}\NormalTok{(}\AttributeTok{bill\_length =}\NormalTok{ bill\_length\_mm,}
+         \AttributeTok{bill\_depth  =}\NormalTok{ bill\_depth\_mm,}
+         \AttributeTok{flipper\_length =}\NormalTok{ flipper\_length\_mm)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 344 x 9
+## # A tibble: 344 x 8
+##   species island    bill_length bill_depth flipper_length
+##   <fct>   <fct>           <dbl>      <dbl>          <int>
+## 1 Adelie  Torgersen        39.1       18.7            181
+## 2 Adelie  Torgersen        39.5       17.4            186
+## 3 Adelie  Torgersen        40.3       18              195
+## # ... with 341 more rows, and 3 more variables:
+## #   body_mass_g <int>, sex <fct>, year <int>
+\end{verbatim}
+
+\hypertarget{rename-strreplace2}{%
+\subsection{【効率化】str\_replace()で一括変換（2）}\label{rename-strreplace2}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{str\_replace()}で変換先に空白\texttt{""}を指定すると削除できる
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{rename\_with}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\FunctionTok{str\_replace}\NormalTok{(., }\StringTok{"\_mm"}\NormalTok{, }\StringTok{""}\NormalTok{),}
+              \FunctionTok{ends\_with}\NormalTok{(}\StringTok{"mm"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 344 x 8
+##   species island    bill_length bill_depth flipper_length
+##   <fct>   <fct>           <dbl>      <dbl>          <int>
+## 1 Adelie  Torgersen        39.1       18.7            181
+## 2 Adelie  Torgersen        39.5       17.4            186
+## 3 Adelie  Torgersen        40.3       18              195
+## # ... with 341 more rows, and 3 more variables:
+## #   body_mass_g <int>, sex <fct>, year <int>
+\end{verbatim}
+
+\hypertarget{ux5225ux89e3}{%
+\subsubsection{【別解】}\label{ux5225ux89e3}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{stringr::str\_remove()}の方が直接的
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{rename\_with}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\FunctionTok{str\_remove}\NormalTok{(., }\StringTok{"\_mm"}\NormalTok{),}
+              \FunctionTok{ends\_with}\NormalTok{(}\StringTok{"mm"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 344 x 8
+##   species island    bill_length bill_depth flipper_length
+##   <fct>   <fct>           <dbl>      <dbl>          <int>
+## 1 Adelie  Torgersen        39.1       18.7            181
+## 2 Adelie  Torgersen        39.5       17.4            186
+## 3 Adelie  Torgersen        40.3       18              195
+## # ... with 341 more rows, and 3 more variables:
+## #   body_mass_g <int>, sex <fct>, year <int>
+\end{verbatim}
+
+\hypertarget{rename-add}{%
+\section{同じ接尾辞をつける}\label{rename-add}}
+
+\begin{itemize}
+\tightlist
+\item
+  変数yearで2007年のみのデータに限定し，くちばし（bill）と翼（flipper）の変数名の末に''\_2007''をつける
+\item
+  renameの中に全部書いていけばできれば数が多いと大変
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(year }\SpecialCharTok{==} \DecValTok{2007}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(bill\_length\_mm}\SpecialCharTok{:}\NormalTok{flipper\_length\_mm, year) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{rename}\NormalTok{(}\AttributeTok{bill\_length\_mm\_2007 =}\NormalTok{ bill\_length\_mm,}
+         \AttributeTok{bill\_depth\_mm\_2007  =}\NormalTok{ bill\_depth\_mm,}
+         \AttributeTok{flipper\_length\_mm\_2007 =}\NormalTok{ flipper\_length\_mm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 110 x 4
+##   bill_length_mm_2007 bill_depth_mm_2007 flipper_length_mm~  year
+##                 <dbl>              <dbl>              <int> <int>
+## 1                39.1               18.7                181  2007
+## 2                39.5               17.4                186  2007
+## 3                40.3               18                  195  2007
+## # ... with 107 more rows
+\end{verbatim}
+
+\hypertarget{rename-strc}{%
+\subsection{【効率化】str\_c()で一括指定}\label{rename-strc}}
+
+\begin{itemize}
+\tightlist
+\item
+  適用したい関数の中にある\texttt{.}の部分に，その後選ぶ変数が入っていく
+\item
+  \texttt{stringr::str\_c()}で指定した語をくっつける
+\item
+  ここでは変数year以外なので，\texttt{!}をつけることで変数を指定できる
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(year }\SpecialCharTok{==} \DecValTok{2007}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(bill\_length\_mm}\SpecialCharTok{:}\NormalTok{flipper\_length\_mm, year) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{rename\_with}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\FunctionTok{str\_c}\NormalTok{(., }\StringTok{"\_2007"}\NormalTok{),}
+               \SpecialCharTok{!}\NormalTok{year)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 110 x 4
+##   bill_length_mm_2007 bill_depth_mm_2007 flipper_length_mm~  year
+##                 <dbl>              <dbl>              <int> <int>
+## 1                39.1               18.7                181  2007
+## 2                39.5               17.4                186  2007
+## 3                40.3               18                  195  2007
+## # ... with 107 more rows
+\end{verbatim}
+
+\hypertarget{rename-strc-other}{%
+\subsubsection{【別解】}\label{rename-strc-other}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+\FunctionTok{filter}\NormalTok{(year }\SpecialCharTok{==} \DecValTok{2007}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{rename\_with}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\FunctionTok{str\_c}\NormalTok{(., }\StringTok{"\_2007"}\NormalTok{),}
+               \FunctionTok{matches}\NormalTok{(}\StringTok{"bill|flipper"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 110 x 8
+##   species island    bill_length_mm_2007 bill_depth_mm_2007
+##   <fct>   <fct>                   <dbl>              <dbl>
+## 1 Adelie  Torgersen                39.1               18.7
+## 2 Adelie  Torgersen                39.5               17.4
+## 3 Adelie  Torgersen                40.3               18  
+## # ... with 107 more rows, and 4 more variables:
+## #   flipper_length_mm_2007 <int>, body_mass_g <int>, sex <fct>,
+## #   year <int>
+\end{verbatim}
+
+\hypertarget{rename-samew-z}{%
+\section{同}\label{rename-samew-z}}
+
+\begin{itemize}
+\tightlist
+\item
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{rename}\NormalTok{(くちばし}\AttributeTok{\_length\_mm =}\NormalTok{ bill\_length\_mm,}
+\NormalTok{         くちばし}\AttributeTok{\_depth\_mm =}\NormalTok{ bill\_depth\_mm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 344 x 8
+##   species island    くちばし_length_mm くちばし_depth_mm
+##   <fct>   <fct>                  <dbl>             <dbl>
+## 1 Adelie  Torgersen               39.1              18.7
+## 2 Adelie  Torgersen               39.5              17.4
+## 3 Adelie  Torgersen               40.3              18  
+## # ... with 341 more rows, and 4 more variables:
+## #   flipper_length_mm <int>, body_mass_g <int>, sex <fct>,
+## #   year <int>
+\end{verbatim}
+
+\hypertarget{rename-z2}{%
+\subsection{【効率化】}\label{rename-z2}}
+
+\begin{itemize}
+\tightlist
+\item
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{rename\_with}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\FunctionTok{str\_replace}\NormalTok{(., }\StringTok{"bill"}\NormalTok{, }\StringTok{"くちばし"}\NormalTok{),}
+              \FunctionTok{starts\_with}\NormalTok{(}\StringTok{"bill"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 344 x 8
+##   species island    くちばし_length_mm くちばし_depth_mm
+##   <fct>   <fct>                  <dbl>             <dbl>
+## 1 Adelie  Torgersen               39.1              18.7
+## 2 Adelie  Torgersen               39.5              17.4
+## 3 Adelie  Torgersen               40.3              18  
+## # ... with 341 more rows, and 4 more variables:
+## #   flipper_length_mm <int>, body_mass_g <int>, sex <fct>,
+## #   year <int>
+\end{verbatim}
+
+\hypertarget{filter}{%
+\chapter{ケース（行）を選ぶ}\label{filter}}
+
+\begin{itemize}
+\tightlist
+\item
+  パッケージ\texttt{dplyr}の関数\texttt{filter()}
+\item
+  tidyな世界では「行 = ケース, 個人（wide形式の場合）」
+\item
+  ケースが多い時に関心あるケースに限定したデータにしたい
+\end{itemize}
+
+\hypertarget{filter1}{%
+\section{基本}\label{filter1}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{filter(\ )}の引数に論理式（TRUE or FALSEになるもの）を入れる
+
+  \begin{itemize}
+  \tightlist
+  \item
+    論理式の部分について，最初の内は\texttt{select(\ )}に入れるものと違って混乱するかもしれないが，慣れると段々分かってくると思う
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(species }\SpecialCharTok{==} \StringTok{"Adelie"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 152 x 8
 ##   species island    bill_length_mm bill_depth_mm flipper_length_~
-##   <chr>   <chr>              <dbl>         <dbl>            <dbl>
+##   <fct>   <fct>              <dbl>         <dbl>            <int>
 ## 1 Adelie  Torgersen           39.1          18.7              181
 ## 2 Adelie  Torgersen           39.5          17.4              186
 ## 3 Adelie  Torgersen           40.3          18                195
-## # ... with 341 more rows, and 4 more variables:
-## #   body_mass_g <dbl>, sex <chr>, year <dbl>, 種類 <chr>
+## # ... with 149 more rows, and 3 more variables:
+## #   body_mass_g <int>, sex <fct>, year <int>
 \end{verbatim}
 
-このように、ちゃんと読む込むことができました。
-
-\hypertarget{ux30bbux30ebux3092ux6307ux5b9aux3057ux3066ux8aadux307fux8fbcux3080}{%
-\subsection{セルを指定して読み込む}\label{ux30bbux30ebux3092ux6307ux5b9aux3057ux3066ux8aadux307fux8fbcux3080}}
-
-引数\texttt{range\ =}にセル範囲を指定すれば、そのセル範囲だけを読み込むこともできます。
+\begin{itemize}
+\tightlist
+\item
+  種（species）がAdelieのケースのみ選ばれた
+\end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{read\_xlsx}\NormalTok{(}\StringTok{"data/ペンギン.xlsx"}\NormalTok{, }\AttributeTok{range =} \StringTok{"A1:D5"}\NormalTok{)}
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(bill\_length\_mm }\SpecialCharTok{\textgreater{}=} \DecValTok{50}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 57 x 8
+##   species island bill_length_mm bill_depth_mm flipper_length_mm
+##   <fct>   <fct>           <dbl>         <dbl>             <int>
+## 1 Gentoo  Biscoe           50            16.3               230
+## 2 Gentoo  Biscoe           50            15.2               218
+## 3 Gentoo  Biscoe           50.2          14.3               218
+## # ... with 54 more rows, and 3 more variables:
+## #   body_mass_g <int>, sex <fct>, year <int>
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  くちばしの長さ（bill\_length\_mm）が50以上のケースのみ選ばれた
+\end{itemize}
+
+\hypertarget{mutate}{%
+\chapter{新しい変数（列）の作成：mutate( )}\label{mutate}}
+
+\begin{itemize}
+\tightlist
+\item
+  パッケージ\texttt{dplyr}の関数\texttt{mutate()}
+\item
+  新しい変数の列を作成する
+
+  \begin{itemize}
+  \tightlist
+  \item
+    既にある
+  \end{itemize}
+\item
+  mutateの機能解説
+\item
+  効率化のための\texttt{across()}
+\end{itemize}
+
+\hypertarget{mu-read}{%
+\section{データ読み込み}\label{mu-read}}
+
+\begin{itemize}
+\tightlist
+\item
+  国際パーソナリティ項目プールからの2800名分のデータ。
+\item
+  質問項目が25問あり，5つの構成概念（ここでは因子という）に対応する項目への回答を足し合わせたスコアを計算する
+\item
+  性，教育歴，年齢の変数もあり
+\item
+  項目に対し想定される因子（因子名の頭文字が変数名と対応）
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Agree A1からA5
+  \item
+    Conscientious　 C1からC5
+  \item
+    Extraversion E1からE5
+  \item
+    Neuroticism　 N1からN5
+  \item
+    Openness　　 O1からO5
+  \end{itemize}
+\item
+  回答選択肢
+
+  \begin{itemize}
+  \tightlist
+  \item
+    1 Very Inaccurate まったくあてはまらない
+  \item
+    2 Moderately Inaccurate あてはまらない
+  \item
+    3 Slightly Inaccurate ややあてはまらない
+  \item
+    4 Slightly Accurate ややあてはまる
+  \item
+    5 Moderately Accurate あてはまる
+  \item
+    6 Very Accurate 非常にあてはまる
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# パッケージが入ってなければ下記実行}
+\CommentTok{\# install.packages("psychTools")}
+
+\NormalTok{df\_bfi }\OtherTok{\textless{}{-}} 
+\NormalTok{  psychTools}\SpecialCharTok{::}\NormalTok{bfi }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{as\_tibble}\NormalTok{()         }\CommentTok{\# 表示に便利なtibble形式に}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{mu-standard}{%
+\section{基本}\label{mu-standard}}
+
+\begin{itemize}
+\tightlist
+\item
+  データフレームに新しい列を計算して追加する関数
+\item
+  \texttt{mutate(\ )}の中に新しく作成する変数名を入れ，\texttt{=}でつないで計算式を入れる
+\item
+  ここでは，まず変数A1の平均値（全ケース同じ値が入る）を計算し，個々の値の差分をする例を示す
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_bfi }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(A1) }\SpecialCharTok{\%\textgreater{}\%}                      \CommentTok{\# A1のみを残す}
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{mean\_a1 =} \FunctionTok{mean}\NormalTok{(A1, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{), }\CommentTok{\# A1の平均値を作成（NAは除外）}
+    \AttributeTok{dif\_a1\_mean =}\NormalTok{ A1 }\SpecialCharTok{{-}}\NormalTok{ mean\_a1)       }\CommentTok{\# 各個体のA1と平均値の差分を計算}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2,800 x 3
+##      A1 mean_a1 dif_a1_mean
+##   <int>   <dbl>       <dbl>
+## 1     2    2.41      -0.413
+## 2     2    2.41      -0.413
+## 3     5    2.41       2.59 
+## # ... with 2,797 more rows
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  mean\_a1列にはA1の平均値がすべて同じ値で入る（平均値だけの計算がしたければ\ref{summarise}を参照）
+\item
+  dif\_a1\_mean列は，A1列からmean\_a1列を引いた値が入る
+\end{itemize}
+
+\hypertarget{mu-kata}{%
+\section{変数の型の変換}\label{mu-kata}}
+
+\begin{itemize}
+\tightlist
+\item
+  変数には型の情報が伴い，統計解析やデータ加工の際に適切な型を求められることがあるため理解が必要
+
+  \begin{itemize}
+  \tightlist
+  \item
+    小数も扱う数値 \emph{\texttt{\textless{}dbl\textgreater{}}}
+  \item
+    整数 \emph{\texttt{\textless{}int\textgreater{}}}
+  \item
+    文字 \emph{\texttt{\textless{}chr\textgreater{}}}
+  \item
+    因子 \emph{\texttt{\textless{}fct\textgreater{}}}
+  \end{itemize}
+\item
+  変数の型の確認は色々方法があるが，tibble形式のデータフレームなら\texttt{select()}でOK
+
+  \begin{itemize}
+  \tightlist
+  \item
+    tibble形式でなくても，最後に\texttt{glimpse()}で確認可能
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_bfi }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(gender, education)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2,800 x 2
+##   gender education
+##    <int>     <int>
+## 1      1        NA
+## 2      2        NA
+## 3      2        NA
+## # ... with 2,797 more rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_bfi }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(gender, education) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{glimpse}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 2,800
+## Columns: 2
+## $ gender    <int> 1, 2, 2, 2, 1, 2, 1, 1, 1, 2, 1, 1, 2, 1, 1, ~
+## $ education <int> NA, NA, NA, NA, NA, 3, NA, 2, 1, NA, 1, NA, N~
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  gender, education列が \emph{\texttt{\textless{}int\textgreater{}}} になっているので整数型になっている
+\end{itemize}
+
+\hypertarget{mu-kata-trans}{%
+\subsection{型の変換}\label{mu-kata-trans}}
+
+\begin{itemize}
+\tightlist
+\item
+  ここでは，2つの数値型変数gender, educationを因子型に変換する例を示す
+\item
+  それぞれ\texttt{factor()}で因子型に変換
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_bfi }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(gender, education) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{gender =} \FunctionTok{factor}\NormalTok{(gender),}
+         \AttributeTok{education =} \FunctionTok{factor}\NormalTok{(education))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2,800 x 2
+##   gender education
+##   <fct>  <fct>    
+## 1 1      <NA>     
+## 2 2      <NA>     
+## 3 2      <NA>     
+## # ... with 2,797 more rows
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  gender, education列が \emph{\texttt{\textless{}fct\textgreater{}}} になっているので整数型になっている
+\end{itemize}
+
+\#\#\#【効率化】複数の変数に対し一度の指定で実行 \{\#mu-kata-across\}
+
+\begin{itemize}
+\tightlist
+\item
+  変換したい変数が大量にあるときは上記の方法では大変
+\item
+  \texttt{across()}を使うと，指定した変数に対して同じ内容の処理なら \textbf{1回} ですむようになる
+
+  \begin{itemize}
+  \tightlist
+  \item
+    かつての\texttt{mutate\_at()}, \texttt{mutate\_if()}など
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_bfi }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{c}\NormalTok{(gender, education),}
+\NormalTok{                factor)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(gender, education)   }\CommentTok{\# 結果表示のため冗長だが変わった変数だけselect}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2,800 x 2
+##   gender education
+##   <fct>  <fct>    
+## 1 1      <NA>     
+## 2 2      <NA>     
+## 3 2      <NA>     
+## # ... with 2,797 more rows
+\end{verbatim}
+
+\hypertarget{mu-across}{%
+\section{across( )の特徴}\label{mu-across}}
+
+\begin{itemize}
+\tightlist
+\item
+  変数の指定に\ref{select-helper}で解説したヘルパー関数が使える
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_bfi }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"n"}\NormalTok{),}
+\NormalTok{                factor)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"n"}\NormalTok{))   }\CommentTok{\# 結果表示のため}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2,800 x 5
+##   N1    N2    N3    N4    N5   
+##   <fct> <fct> <fct> <fct> <fct>
+## 1 3     4     2     2     3    
+## 2 3     3     3     5     5    
+## 3 4     5     4     2     3    
+## # ... with 2,797 more rows
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  \ref{select-cha} で解説した文字も使える
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vars }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"N1"}\NormalTok{, }\StringTok{"N2"}\NormalTok{, }\StringTok{"N3"}\NormalTok{, }\StringTok{"N4"}\NormalTok{, }\StringTok{"N5"}\NormalTok{)}
+
+\NormalTok{df\_bfi }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{all\_of}\NormalTok{(vars),}
+\NormalTok{                factor)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"n"}\NormalTok{))   }\CommentTok{\# 結果表示のため}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2,800 x 5
+##   N1    N2    N3    N4    N5   
+##   <fct> <fct> <fct> <fct> <fct>
+## 1 3     4     2     2     3    
+## 2 3     3     3     5     5    
+## 3 4     5     4     2     3    
+## # ... with 2,797 more rows
+\end{verbatim}
+
+\hypertarget{mu-across-list}{%
+\subsection{【重要知識！】新しい変数名にして追加}\label{mu-across-list}}
+
+\begin{itemize}
+\tightlist
+\item
+  ここはこの後色々なところで出てくる方法のため理解しておきたい
+\item
+  適用する関数をリストにする（\texttt{list()}に入れる）ことで，変数名を変更して追加できる
+\item
+  \texttt{list()}に入れるときはこれまでと異なる書き方が必要になる
+
+  \begin{itemize}
+  \tightlist
+  \item
+    関数名の前に\texttt{\textasciitilde{}}（チルダ）が必要
+  \item
+    list内の関数\texttt{()}内に\texttt{.x}が必要（この場合はxがなくても動く）。ここに\texttt{across()}の第一引数に指定した変数が入っていくという意味
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_bfi }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{c}\NormalTok{(gender, education),}
+                \FunctionTok{list}\NormalTok{(}\AttributeTok{f =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{factor}\NormalTok{(.x)))) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(}\FunctionTok{matches}\NormalTok{(}\StringTok{"gender|education"}\NormalTok{))   }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2,800 x 4
+##   gender education gender_f education_f
+##    <int>     <int> <fct>    <fct>      
+## 1      1        NA 1        <NA>       
+## 2      2        NA 2        <NA>       
+## 3      2        NA 2        <NA>       
+## # ... with 2,797 more rows
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  因子型に変換した変数の末尾に\_fがつく
+\end{itemize}
+
+\hypertarget{mu-total}{%
+\section{合計点の作成}\label{mu-total}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_bfi\_n }\OtherTok{\textless{}{-}} 
+\NormalTok{  df\_bfi }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(N1}\SpecialCharTok{:}\NormalTok{N5) }\SpecialCharTok{\%\textgreater{}\%}                       
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{neuroticism =}\NormalTok{ N1 }\SpecialCharTok{+}\NormalTok{ N2 }\SpecialCharTok{+}\NormalTok{ N3 }\SpecialCharTok{+}\NormalTok{ N4 }\SpecialCharTok{+}\NormalTok{ N5)}
+  
+\NormalTok{df\_bfi\_n}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2,800 x 6
+##      N1    N2    N3    N4    N5 neuroticism
+##   <int> <int> <int> <int> <int>       <int>
+## 1     3     4     2     2     3          14
+## 2     3     3     3     5     5          19
+## 3     4     5     4     2     3          18
+## # ... with 2,797 more rows
+\end{verbatim}
+
+\hypertarget{mu-total-na}{%
+\subsection{足し上げる変数に欠損があるとどうなるか}\label{mu-total-na}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_bfi\_n }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(neuroticism))     }\CommentTok{\# neuroticismがNAなケースに限定}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 106 x 6
+##      N1    N2    N3    N4    N5 neuroticism
+##   <int> <int> <int> <int> <int>       <int>
+## 1     4     5     3     2    NA          NA
+## 2    NA     2     1     2     2          NA
+## 3     1     2     1     2    NA          NA
+## # ... with 103 more rows
+\end{verbatim}
+
+\hypertarget{mu-seq}{%
+\section{連番からIDの作成}\label{mu-seq}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{dplyr::row\_number()}で行番号からIDを作成
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_bfi\_n }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{id =} \FunctionTok{row\_number}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2,800 x 7
+##      N1    N2    N3    N4    N5 neuroticism    id
+##   <int> <int> <int> <int> <int>       <int> <int>
+## 1     3     4     2     2     3          14     1
+## 2     3     3     3     5     5          19     2
+## 3     4     5     4     2     3          18     3
+## # ... with 2,797 more rows
+\end{verbatim}
+
+\hypertarget{mu-seq-other}{%
+\subsection{【別解】行の名前を直接変数化}\label{mu-seq-other}}
+
+\begin{itemize}
+\tightlist
+\item
+  実はmutateを使わなくてもできて，データの最初に持ってこれる便利関数がある
+\item
+  \texttt{tibble::rowid\_to\_column()}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{var\ =}で変数名を指定
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_bfi\_n }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{rowid\_to\_column}\NormalTok{(}\AttributeTok{var =} \StringTok{"id"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2,800 x 7
+##      id    N1    N2    N3    N4    N5 neuroticism
+##   <int> <int> <int> <int> <int> <int>       <int>
+## 1     1     3     4     2     2     3          14
+## 2     2     3     3     3     5     5          19
+## 3     3     4     5     4     2     3          18
+## # ... with 2,797 more rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# この先使わないのでデータフレーム削除}
+\FunctionTok{rm}\NormalTok{(df\_bfi\_n)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{mu-rev}{%
+\section{逆転項目を作る}\label{mu-rev}}
+
+\hypertarget{mu-rev-check}{%
+\subsection{逆転項目の確認}\label{mu-rev-check}}
+
+\begin{itemize}
+\tightlist
+\item
+  bfiデータの場合，どの項目を逆転する必要があるかを示す情報（\texttt{-変数名}で表現）がパッケージに含まれている
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{psychTools::bfi.keys} で確認可能
+  \end{itemize}
+\item
+  したがって，``-A1'', ``-C4'', ``-C5'', ``-E1'', ``-E2'', ``-O2'', ``-O5''が対象
+\end{itemize}
+
+\hypertarget{mu-rev-recode}{%
+\subsection{逆転（recode）}\label{mu-rev-recode}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{dplyr::recode()}を使用
+\item
+  入れ替えたい値をold = newで並べていく
+
+  \begin{itemize}
+  \tightlist
+  \item
+    この等式の順番が他(mutateなど)と逆になるため，\texttt{recode()}は将来引退する可能性あり
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_bfi }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{A1\_r =} \FunctionTok{recode}\NormalTok{(A1, }\StringTok{\textasciigrave{}}\AttributeTok{1}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 6L, }\StringTok{\textasciigrave{}}\AttributeTok{2}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 5L, }\StringTok{\textasciigrave{}}\AttributeTok{3}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 4L,      }\CommentTok{\# oldの数値は\textasciigrave{} \textasciigrave{}で囲む必要がある}
+                           \StringTok{\textasciigrave{}}\AttributeTok{4}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 3L, }\StringTok{\textasciigrave{}}\AttributeTok{5}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 2L, }\StringTok{\textasciigrave{}}\AttributeTok{6}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 1L)) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# newの数値にLがつくのは，型を整数のままにするため}
+  \FunctionTok{select}\NormalTok{(A1, A1\_r)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2,800 x 2
+##      A1  A1_r
+##   <int> <int>
+## 1     2     5
+## 2     2     5
+## 3     5     2
+## # ... with 2,797 more rows
+\end{verbatim}
+
+\hypertarget{mu-rev-recode1}{%
+\subsubsection{変数2つ以上を逆転}\label{mu-rev-recode1}}
+
+\begin{itemize}
+\tightlist
+\item
+  A1と同様に同じ形をくり返し変数名だけ変えていけばできるが，コードが長くなりミスも生じやすくなる
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_bfi }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{A1\_r =} \FunctionTok{recode}\NormalTok{(A1, }\StringTok{\textasciigrave{}}\AttributeTok{1}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 6L, }\StringTok{\textasciigrave{}}\AttributeTok{2}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 5L, }\StringTok{\textasciigrave{}}\AttributeTok{3}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 4L, }
+                           \StringTok{\textasciigrave{}}\AttributeTok{4}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 3L, }\StringTok{\textasciigrave{}}\AttributeTok{5}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 2L, }\StringTok{\textasciigrave{}}\AttributeTok{6}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 1L),}
+         \AttributeTok{C4\_r =} \FunctionTok{recode}\NormalTok{(C4, }\StringTok{\textasciigrave{}}\AttributeTok{1}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 6L, }\StringTok{\textasciigrave{}}\AttributeTok{2}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 5L, }\StringTok{\textasciigrave{}}\AttributeTok{3}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 4L, }
+                           \StringTok{\textasciigrave{}}\AttributeTok{4}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 3L, }\StringTok{\textasciigrave{}}\AttributeTok{5}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 2L, }\StringTok{\textasciigrave{}}\AttributeTok{6}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 1L)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(A1, A1\_r, C4, C4\_r)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2,800 x 4
+##      A1  A1_r    C4  C4_r
+##   <int> <int> <int> <int>
+## 1     2     5     4     3
+## 2     2     5     3     4
+## 3     5     2     2     5
+## # ... with 2,797 more rows
+\end{verbatim}
+
+\hypertarget{mu-rev-recode2}{%
+\subsubsection{【効率化】 変数2つ以上を逆転}\label{mu-rev-recode2}}
+
+\begin{itemize}
+\tightlist
+\item
+  \ref{mu-across-list} で解説したlistに関数を入れる方法
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_bfi }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{c}\NormalTok{(A1, C4, C5, E1, E2, O2, O5),}
+                \FunctionTok{list}\NormalTok{(}\AttributeTok{r =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{recode}\NormalTok{(.x, }\StringTok{\textasciigrave{}}\AttributeTok{1}\StringTok{\textasciigrave{}} \OtherTok{=} \DecValTok{6}\NormalTok{, }\StringTok{\textasciigrave{}}\AttributeTok{2}\StringTok{\textasciigrave{}} \OtherTok{=} \DecValTok{5}\NormalTok{, }\StringTok{\textasciigrave{}}\AttributeTok{3}\StringTok{\textasciigrave{}} \OtherTok{=} \DecValTok{4}\NormalTok{, }
+                                 \StringTok{\textasciigrave{}}\AttributeTok{4}\StringTok{\textasciigrave{}} \OtherTok{=} \DecValTok{3}\NormalTok{, }\StringTok{\textasciigrave{}}\AttributeTok{5}\StringTok{\textasciigrave{}} \OtherTok{=} \DecValTok{2}\NormalTok{, }\StringTok{\textasciigrave{}}\AttributeTok{6}\StringTok{\textasciigrave{}} \OtherTok{=} \DecValTok{1}\NormalTok{)))) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(A1, A1\_r, C4,  C4, C5, C5\_r, E1, E1\_r, E2, E2\_r, O2, O2\_r, O5, O5\_r)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2,800 x 13
+##      A1  A1_r    C4    C5  C5_r    E1  E1_r    E2  E2_r    O2
+##   <int> <dbl> <int> <int> <dbl> <int> <dbl> <int> <dbl> <int>
+## 1     2     5     4     4     3     3     4     3     4     6
+## 2     2     5     3     4     3     1     6     1     6     2
+## 3     5     2     2     5     2     2     5     4     3     2
+## # ... with 2,797 more rows, and 3 more variables: O2_r <dbl>,
+## #   O5 <int>, O5_r <dbl>
+\end{verbatim}
+
+\hypertarget{mu-rev-rule}{%
+\subsection{【別解】逆転（公式）}\label{mu-rev-rule}}
+
+\begin{itemize}
+\tightlist
+\item
+  項目を反転する公式が「(max + min) - 回答値」であることを利用
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{psych::reverse.code()}のhelp参照
+  \item
+    例：最小値1,最大値4の場合，max + min = 5となり，回答値が2の場合，5 - 2 = 3となり反転された結果となる
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{min }\OtherTok{\textless{}{-}} \DecValTok{1}
+\NormalTok{max }\OtherTok{\textless{}{-}} \DecValTok{6}
+
+\NormalTok{df\_bfi }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{A1\_r =}\NormalTok{ max }\SpecialCharTok{+}\NormalTok{ min }\SpecialCharTok{{-}}\NormalTok{ A1,}
+         \AttributeTok{C4\_r =}\NormalTok{ max }\SpecialCharTok{+}\NormalTok{ min }\SpecialCharTok{{-}}\NormalTok{ C4) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(A1, A1\_r, C4, C4\_r)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2,800 x 4
+##      A1  A1_r    C4  C4_r
+##   <int> <dbl> <int> <dbl>
+## 1     2     5     4     3
+## 2     2     5     3     4
+## 3     5     2     2     5
+## # ... with 2,797 more rows
+\end{verbatim}
+
+\hypertarget{mu-rev-rule1}{%
+\subsubsection{【効率化】 変数2つ以上を逆転}\label{mu-rev-rule1}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{\textasciitilde{}}の後に計算式がきても動く
+\item
+  ここでは，\texttt{max\ +\ min\ -\ .x} の\texttt{.x}にacross内に置かれた変数が入っていく
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_bfi }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{c}\NormalTok{(A1,C4),}
+                \FunctionTok{list}\NormalTok{(}\AttributeTok{r =} \SpecialCharTok{\textasciitilde{}}\NormalTok{ max }\SpecialCharTok{+}\NormalTok{ min }\SpecialCharTok{{-}}\NormalTok{ .x))) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(A1, A1\_r, C4, C4\_r)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2,800 x 4
+##      A1  A1_r    C4  C4_r
+##   <int> <dbl> <int> <dbl>
+## 1     2     5     4     3
+## 2     2     5     3     4
+## 3     5     2     2     5
+## # ... with 2,797 more rows
+\end{verbatim}
+
+\hypertarget{mu-rev-rule2}{%
+\subsubsection{逆転した変数を含むデータフレーム作成}\label{mu-rev-rule2}}
+
+\begin{itemize}
+\tightlist
+\item
+  これ以降で使用するため，項目を逆転した変数を格納しておく
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_bfi }\OtherTok{\textless{}{-}} 
+\NormalTok{  df\_bfi }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{c}\NormalTok{(A1, C4, C5, E1, E2, O2, O5),}
+                \FunctionTok{list}\NormalTok{(}\AttributeTok{r =} \SpecialCharTok{\textasciitilde{}}\NormalTok{ max }\SpecialCharTok{+}\NormalTok{ min }\SpecialCharTok{{-}}\NormalTok{ .x)))}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{ux533aux5206ux5909ux6570}{%
+\section{2区分変数}\label{ux533aux5206ux5909ux6570}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \CommentTok{\# bfi\_a \%\textgreater{}\% }
+  \CommentTok{\# mutate(gender = fct\_recode(gender, male   = "1", }
+  \CommentTok{\#                                    female = "2"),}
+  \CommentTok{\#        education = fct\_recode(education, "HS" = "1",}
+  \CommentTok{\#                                          "finished HS" = "2",}
+  \CommentTok{\#                                          "some college" = "3",}
+  \CommentTok{\#                                          "college graduate" = "4",}
+  \CommentTok{\#                                          "graduate degree" = "5"}
+  \CommentTok{\#                               )}
+  \CommentTok{\# )}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{summarise}{%
+\chapter{要約値を作る：summarise( )}\label{summarise}}
+
+\begin{itemize}
+\tightlist
+\item
+  パッケージ\texttt{dplyr}の関数\texttt{summarise()}
+\item
+  結果をデータフレームとして出力するため，扱いが便利
+\item
+  データの要約作業はデータを知るうえで頻繁に行うことが想定される
+
+  \begin{itemize}
+  \tightlist
+  \item
+    便利な要約パッケージが色々あるものの，\texttt{summarise()}を使いこなせると役に立つことが多い
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{su-st}{%
+\section{基本}\label{su-st}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{(\ )}の中に出力したい変数名を書き，\texttt{=}の後に関数を入れる
+\item
+  NAがある場合，引数\texttt{na.rm\ =\ TRUE}がないと結果が出ないので，ほとんどの場合つけて置いた方がよい
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(blm\_平均値 }\OtherTok{=} \FunctionTok{mean}\NormalTok{(bill\_length\_mm, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 1
+##   blm_平均値
+##        <dbl>
+## 1       43.9
+\end{verbatim}
+
+\hypertarget{su-st-multiple}{%
+\section{複数の計算}\label{su-st-multiple}}
+
+\begin{itemize}
+\tightlist
+\item
+  複数の変数について平均値とSDとnを出したいときは，基本知識では全部書くので長くなる
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{blm\_mean =} \FunctionTok{mean}\NormalTok{(bill\_length\_mm, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+            \AttributeTok{bdm\_mean =} \FunctionTok{mean}\NormalTok{(bill\_depth\_mm, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+            \AttributeTok{blm\_sd =} \FunctionTok{sd}\NormalTok{(bill\_length\_mm, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+            \AttributeTok{bdm\_sd =} \FunctionTok{sd}\NormalTok{(bill\_depth\_mm, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+            \AttributeTok{blm\_n  =} \FunctionTok{sum}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(bill\_length\_mm)),}
+            \AttributeTok{bdm\_n  =} \FunctionTok{sum}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(bill\_depth\_mm)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 6
+##   blm_mean bdm_mean blm_sd bdm_sd blm_n bdm_n
+##      <dbl>    <dbl>  <dbl>  <dbl> <int> <int>
+## 1     43.9     17.2   5.46   1.97   342   342
+\end{verbatim}
+
+\hypertarget{su-st-ef}{%
+\subsection{【効率化】}\label{su-st-ef}}
+
+\begin{itemize}
+\tightlist
+\item
+  \ref{mu-kata-across}で出てきた\texttt{across()}がここでも有用
+\item
+  \texttt{across()}の第一引数に指定したい変数名ベクトル，またはヘルパー関数を入れる
+\item
+  実行したい関数をlist内に名前（接尾辞）をつけて列挙し，関数の前に\texttt{\textasciitilde{}}をつける
+
+  \begin{itemize}
+  \tightlist
+  \item
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{c}\NormalTok{(bill\_length\_mm, bill\_depth\_mm),}
+                   \FunctionTok{list}\NormalTok{(}\AttributeTok{mean =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{mean}\NormalTok{(.x, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+                        \AttributeTok{sd =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{sd}\NormalTok{(.x, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+                        \AttributeTok{n =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{sum}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(.x)))))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 6
+##   bill_length_mm_mean bill_length_mm_sd bill_length_mm_n
+##                 <dbl>             <dbl>            <int>
+## 1                43.9              5.46              342
+## # ... with 3 more variables: bill_depth_mm_mean <dbl>,
+## #   bill_depth_mm_sd <dbl>, bill_depth_mm_n <int>
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{across()}ではヘルパー関数が使える！
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"bill"}\NormalTok{),}
+                   \FunctionTok{list}\NormalTok{(}\AttributeTok{mean =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{mean}\NormalTok{(.x, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+                        \AttributeTok{sd =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{sd}\NormalTok{(.x, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+                        \AttributeTok{n =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{sum}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(.x)))))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 6
+##   bill_length_mm_mean bill_length_mm_sd bill_length_mm_n
+##                 <dbl>             <dbl>            <int>
+## 1                43.9              5.46              342
+## # ... with 3 more variables: bill_depth_mm_mean <dbl>,
+## #   bill_depth_mm_sd <dbl>, bill_depth_mm_n <int>
+\end{verbatim}
+
+\hypertarget{su-st-reorder}{%
+\subsection{【並び替え】}\label{su-st-reorder}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{tidyr::pivot\_longer()}で，データフレームの行列入れ替えができる
+\item
+  引数を\texttt{names\_pattern}と\texttt{names\_to}を下記のように指定することで，変数の接尾辞を列名にできる
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\FunctionTok{across}\NormalTok{(bill\_length\_mm}\SpecialCharTok{:}\NormalTok{body\_mass\_g,}
+                   \FunctionTok{list}\NormalTok{(}\AttributeTok{mean =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{mean}\NormalTok{(.x, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+                        \AttributeTok{sd =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{sd}\NormalTok{(.x, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+                        \AttributeTok{n =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{sum}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(.x))))) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{pivot\_longer}\NormalTok{(}\FunctionTok{everything}\NormalTok{(),}
+               \AttributeTok{names\_to =} \FunctionTok{c}\NormalTok{(}\StringTok{"items"}\NormalTok{, }\StringTok{".value"}\NormalTok{), }\CommentTok{\# ".value"の部分を列名に}
+               \AttributeTok{names\_pattern =} \StringTok{"(.*)\_(.*)"}\NormalTok{) 　  }\CommentTok{\# 正規表現}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## # A tibble: 4 x 4
-##   species 種類     island    bill_length_mm
-##   <chr>   <chr>    <chr>              <dbl>
-## 1 Adelie  アデリー Torgersen           39.1
-## 2 Adelie  アデリー Torgersen           39.5
-## 3 Adelie  アデリー Torgersen           40.3
-## 4 Adelie  アデリー Torgersen           NA
+##   items               mean     sd     n
+##   <chr>              <dbl>  <dbl> <int>
+## 1 bill_length_mm      43.9   5.46   342
+## 2 bill_depth_mm       17.2   1.97   342
+## 3 flipper_length_mm  201.   14.1    342
+## 4 body_mass_g       4202.  802.     342
 \end{verbatim}
 
-他にも、\texttt{cell\_cols\ =}で読みたい列の指定、\texttt{cell\_rows\ =}で読みたい行の指定も行えます。
-
-詳細は、\texttt{?readxl}と打ち込んでヘルプを見るか、readxlの\href{https://readxl.tidyverse.org/}{webサイト} \footnote{\url{https://readxl.tidyverse.org/}}を参照してください。
-
-\hypertarget{ux30b7ux30fcux30c8ux3092ux6307ux5b9aux3057ux3066ux8aadux307fux8fbcux3080}{%
-\section{シートを指定して読み込む}\label{ux30b7ux30fcux30c8ux3092ux6307ux5b9aux3057ux3066ux8aadux307fux8fbcux3080}}
-
-\hypertarget{ux30b7ux30fcux30c8ux540dux306eux78baux8a8d}{%
-\subsection{シート名の確認}\label{ux30b7ux30fcux30c8ux540dux306eux78baux8a8d}}
-
-複雑なExcelファイルとなると、たくさんのシートが含まれていて、その全容を知るのも一苦労です。Rでは、\texttt{readxl}パッケージの\texttt{excel\_sheets()}関数でシート名の一覧を簡単に取得できます。
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{excel\_sheets}\NormalTok{(}\StringTok{"data/ペンギン（シート別）.xlsx"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] "アデリー"   "ジェンツー" "ヒゲ"
-\end{verbatim}
-
-\hypertarget{ux666eux901aux306eux8aadux307fux8fbcux307f}{%
-\subsection{普通の読み込み}\label{ux666eux901aux306eux8aadux307fux8fbcux307f}}
-
-シートが分かれているExcelファイルをそのまま読みこんでみます。
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{read\_xlsx}\NormalTok{(}\StringTok{"data/ペンギン（シート別）.xlsx"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## # A tibble: 152 x 9
-##   species 種類     island    bill_length_mm bill_depth_mm
-##   <chr>   <chr>    <chr>              <dbl>         <dbl>
-## 1 Adelie  アデリー Torgersen           39.1          18.7
-## 2 Adelie  アデリー Torgersen           39.5          17.4
-## 3 Adelie  アデリー Torgersen           40.3          18  
-## # ... with 149 more rows, and 4 more variables:
-## #   flipper_length_mm <dbl>, body_mass_g <dbl>, sex <chr>,
-## #   year <dbl>
-\end{verbatim}
-
-デフォルトでは一番最初のシートのデータが読みこまれます。ここでは、シート「アデリー」が読み込まれました。
-
-\hypertarget{ux30b7ux30fcux30c8ux3092ux6307ux5b9aux3057ux305fux8aadux307fux8fbcux307f}{%
-\subsection{シートを指定した読み込み}\label{ux30b7ux30fcux30c8ux3092ux6307ux5b9aux3057ux305fux8aadux307fux8fbcux307f}}
-
-引数の\texttt{sheet\ =}にシート名を指定することで読み込めます。
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{read\_excel}\NormalTok{(}\StringTok{"data/ペンギン（シート別）.xlsx"}\NormalTok{, }\AttributeTok{sheet =} \StringTok{"ジェンツー"}\NormalTok{ )}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## # A tibble: 124 x 9
-##   species 種類       island bill_length_mm bill_depth_mm
-##   <chr>   <chr>      <chr>           <dbl>         <dbl>
-## 1 Gentoo  ジェンツー Biscoe           46.1          13.2
-## 2 Gentoo  ジェンツー Biscoe           50            16.3
-## 3 Gentoo  ジェンツー Biscoe           48.7          14.1
-## # ... with 121 more rows, and 4 more variables:
-## #   flipper_length_mm <dbl>, body_mass_g <dbl>, sex <chr>,
-## #   year <dbl>
-\end{verbatim}
-
-\hypertarget{dflist}{%
-\subsection{すべてのシートから一気に読み込み}\label{dflist}}
-
-今まで身につけた知識を使うと、すべてのシートからデータを読みたいときは、単純に
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{df\_Adelie }\OtherTok{\textless{}{-}} 
-  \FunctionTok{read\_excel}\NormalTok{(}\StringTok{"data/ペンギン（シート別）.xlsx"}\NormalTok{, }\AttributeTok{sheet =} \StringTok{"アデリー"}\NormalTok{ )}
-\NormalTok{df\_Gentoo }\OtherTok{\textless{}{-}} 
-  \FunctionTok{read\_excel}\NormalTok{(}\StringTok{"data/ペンギン（シート別）.xlsx"}\NormalTok{, }\AttributeTok{sheet =} \StringTok{"ジェンツー"}\NormalTok{ )}
-\NormalTok{df\_Chinstrap }\OtherTok{\textless{}{-}} 
-  \FunctionTok{read\_excel}\NormalTok{(}\StringTok{"data/ペンギン（シート別）.xlsx"}\NormalTok{, }\AttributeTok{sheet =} \StringTok{"ヒゲ"}\NormalTok{ )}
-\end{Highlighting}
-\end{Shaded}
-
-と１つずつ読み込めばよいとわかります。しかし、これが100シート分あったら読むだけで多くの時間がかかり、うんざりしてしまうでしょう。また、疲労によりミスも起こるかもしれません。コードも長くて読みにくくなってしまいます。そんな時に\textbf{便利で正確で短くコードが書ける}素敵な方法があるのです。おそらくこれを知って使えるようになることが、初心者から中級者への第一歩になるのではないでしょうか。
-
-ここで\textbf{一気にレベルが上がり}ますが、これこそがRを使ってExcelファイルを読み込む便利な部分（その用途に限らず、コード書いてコンピュータに働いてもらうの最高！ってなる部分）なので、その魅力をみていきましょう。
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{path\_name }\OtherTok{\textless{}{-}} \StringTok{"data/ペンギン（シート別）.xlsx"} \CommentTok{\# データのパスを格納}
-
-\CommentTok{\# シート名を取得しそれぞれから読み込んでリストにまとめる}
-\NormalTok{df\_list }\OtherTok{\textless{}{-}}
-  \FunctionTok{excel\_sheets}\NormalTok{(path\_name) }\SpecialCharTok{\%\textgreater{}\%}                     
-  \FunctionTok{set\_names}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}           \CommentTok{\# 名前付きベクトルにする}
-  \FunctionTok{map}\NormalTok{(read\_excel, }\AttributeTok{path =}\NormalTok{  path\_name)}
-
-\NormalTok{df\_list }\CommentTok{\# 作成したリストの表示}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## $アデリー
-## # A tibble: 152 x 9
-##   species 種類     island    bill_length_mm bill_depth_mm
-##   <chr>   <chr>    <chr>              <dbl>         <dbl>
-## 1 Adelie  アデリー Torgersen           39.1          18.7
-## 2 Adelie  アデリー Torgersen           39.5          17.4
-## 3 Adelie  アデリー Torgersen           40.3          18  
-## # ... with 149 more rows, and 4 more variables:
-## #   flipper_length_mm <dbl>, body_mass_g <dbl>, sex <chr>,
-## #   year <dbl>
-## 
-## $ジェンツー
-## # A tibble: 124 x 9
-##   species 種類       island bill_length_mm bill_depth_mm
-##   <chr>   <chr>      <chr>           <dbl>         <dbl>
-## 1 Gentoo  ジェンツー Biscoe           46.1          13.2
-## 2 Gentoo  ジェンツー Biscoe           50            16.3
-## 3 Gentoo  ジェンツー Biscoe           48.7          14.1
-## # ... with 121 more rows, and 4 more variables:
-## #   flipper_length_mm <dbl>, body_mass_g <dbl>, sex <chr>,
-## #   year <dbl>
-## 
-## $ヒゲ
-## # A tibble: 68 x 9
-##   species   種類  island bill_length_mm bill_depth_mm
-##   <chr>     <chr> <chr>           <dbl>         <dbl>
-## 1 Chinstrap ヒゲ  Dream            46.5          17.9
-## 2 Chinstrap ヒゲ  Dream            50            19.5
-## 3 Chinstrap ヒゲ  Dream            51.3          19.2
-## # ... with 65 more rows, and 4 more variables:
-## #   flipper_length_mm <dbl>, body_mass_g <dbl>, sex <chr>,
-## #   year <dbl>
-\end{verbatim}
-
-それぞれのExcelシートから読みこまれた3つのデータ（アデリー、ジェンツー、ヒゲ）はデータフレームとして、\texttt{df\_list}にリストと呼ばれる形式にてまとめて格納されています。リストは最初は理解が難しいですが、慣れるとなんでもリストにしたくなるくらい便利なものです。リストの中身を個別に取り出してみてみましょう。
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{df\_list}\SpecialCharTok{$}\NormalTok{ジェンツー}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## # A tibble: 124 x 9
-##   species 種類       island bill_length_mm bill_depth_mm
-##   <chr>   <chr>      <chr>           <dbl>         <dbl>
-## 1 Gentoo  ジェンツー Biscoe           46.1          13.2
-## 2 Gentoo  ジェンツー Biscoe           50            16.3
-## 3 Gentoo  ジェンツー Biscoe           48.7          14.1
-## # ... with 121 more rows, and 4 more variables:
-## #   flipper_length_mm <dbl>, body_mass_g <dbl>, sex <chr>,
-## #   year <dbl>
-\end{verbatim}
-
-これは、\texttt{df\_list}というリストの中の、\texttt{ジェンツー}という要素（ここではデータフレーム）を取り出す、というコードです。\texttt{\$}が「（左側にくるオブジェクト）の中の」という意味を表しています。自分でコードを打つと、\texttt{df\_list\$}と打った時点で、中の要素の一覧が表示されるはずなので、そこからクリックして選ぶこともできます。
-
-それでは、先ほど実行した読み込みコードの解説をします。
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{path\_name }\OtherTok{\textless{}{-}} \StringTok{"data/ペンギン（シート別）.xlsx"}
-\end{Highlighting}
-\end{Shaded}
-
-これは、単にファイルの場所を\texttt{path\_name}に格納しただけです。自分のデータで試してみたいときは、基本的にここのパス名を変えるだけで実行できるはずです。
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{df\_list }\OtherTok{\textless{}{-}}
-  \FunctionTok{excel\_sheets}\NormalTok{(path\_name) }\SpecialCharTok{\%\textgreater{}\%}                    
-  \FunctionTok{set\_names}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}                           
-  \FunctionTok{map}\NormalTok{(read\_excel, }\AttributeTok{path =}\NormalTok{  path\_name) }
-\end{Highlighting}
-\end{Shaded}
-
-\texttt{excel\_sheets()}は上で実行したのと同じです。実行結果はベクトルとして保存されています。\texttt{set\_names()}は、ベクトルを名前付きベクトルにする働きをします。なので、ここでできるのは、
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{excel\_sheets}\NormalTok{(path\_name) }\SpecialCharTok{\%\textgreater{}\%}                    
-  \FunctionTok{set\_names}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##     アデリー   ジェンツー         ヒゲ 
-##   "アデリー" "ジェンツー"       "ヒゲ"
-\end{verbatim}
-
-です。
-
-それぞれについて\texttt{purrr}パッケージの\texttt{map()}関数を使って\texttt{read\_excel()}を1つ1つのシート（ここでは作成した名前付きベクトルの要素）に適用していき、データを読み込みデータフレームにし、1つのリストにまとめるという作業をします。繰り返し似たような作業をするときに、この\texttt{map()}関数が非常に便利です。
-
-\hypertarget{onedflist}{%
-\subsubsection{一つのデータフレームにする}\label{onedflist}}
-
-\texttt{bind\_rows()}は、データフレームを縦に連結します。データフレームがリストになったものが引数にくると、それらをすべて縦につなげてくれます。引数\texttt{.id\ =}で、リストの要素名を変数の値として入れることができるので、どのデータフレームから来たのか識別することが可能になります。ここでは\texttt{group}という名前にしています。
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{df\_all }\OtherTok{\textless{}{-}} 
-  \FunctionTok{bind\_rows}\NormalTok{(df\_list, }\AttributeTok{.id =} \StringTok{"group"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{ux4f5cux6210ux3057ux305fux30c7ux30fcux30bfux30d5ux30ecux30fcux30e0ux306eux78baux8a8d}{%
-\subsubsection{作成したデータフレームの確認}\label{ux4f5cux6210ux3057ux305fux30c7ux30fcux30bfux30d5ux30ecux30fcux30e0ux306eux78baux8a8d}}
-
-最初の3行と最後の3行だけを表示してどんなものができたか確認します。\texttt{dplyr}パッケージの\texttt{slice\_head()}, \texttt{slice\_tail()}関数を使って、引数\texttt{n\ =}に表示したい行数を指定することで、最初および最後の数行を取得できます。
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# 最初の3行}
-\NormalTok{df\_all }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{slice\_head}\NormalTok{(}\AttributeTok{n =} \DecValTok{3}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## # A tibble: 3 x 10
-##   group    species 種類     island   bill_length_mm bill_depth_mm
-##   <chr>    <chr>   <chr>    <chr>             <dbl>         <dbl>
-## 1 アデリー Adelie  アデリー Torgers~           39.1          18.7
-## 2 アデリー Adelie  アデリー Torgers~           39.5          17.4
-## 3 アデリー Adelie  アデリー Torgers~           40.3          18  
-## # ... with 4 more variables: flipper_length_mm <dbl>,
-## #   body_mass_g <dbl>, sex <chr>, year <dbl>
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# 最後の3行}
-\NormalTok{df\_all }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{slice\_tail}\NormalTok{(}\AttributeTok{n =} \DecValTok{3}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## # A tibble: 3 x 10
-##   group species   種類  island bill_length_mm bill_depth_mm
-##   <chr> <chr>     <chr> <chr>           <dbl>         <dbl>
-## 1 ヒゲ  Chinstrap ヒゲ  Dream            49.6          18.2
-## 2 ヒゲ  Chinstrap ヒゲ  Dream            50.8          19  
-## 3 ヒゲ  Chinstrap ヒゲ  Dream            50.2          18.7
-## # ... with 4 more variables: flipper_length_mm <dbl>,
-## #   body_mass_g <dbl>, sex <chr>, year <dbl>
-\end{verbatim}
-
-一気にやるには\texttt{slice()}関数が便利です。\texttt{1:3}は1行目から3行目、\texttt{(n()-2):n()}は、列数（ただし現在のgroup内）を表す\texttt{n()}とそれから-2行した\texttt{(n()-2)}で表されています。
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{df\_all }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{slice}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{, (}\FunctionTok{n}\NormalTok{()}\SpecialCharTok{{-}}\DecValTok{2}\NormalTok{)}\SpecialCharTok{:}\FunctionTok{n}\NormalTok{())}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## # A tibble: 6 x 10
-##   group    species   種類     island bill_length_mm bill_depth_mm
-##   <chr>    <chr>     <chr>    <chr>           <dbl>         <dbl>
-## 1 アデリー Adelie    アデリー Torge~           39.1          18.7
-## 2 アデリー Adelie    アデリー Torge~           39.5          17.4
-## 3 アデリー Adelie    アデリー Torge~           40.3          18  
-## 4 ヒゲ     Chinstrap ヒゲ     Dream            49.6          18.2
-## 5 ヒゲ     Chinstrap ヒゲ     Dream            50.8          19  
-## 6 ヒゲ     Chinstrap ヒゲ     Dream            50.2          18.7
-## # ... with 4 more variables: flipper_length_mm <dbl>,
-## #   body_mass_g <dbl>, sex <chr>, year <dbl>
-\end{verbatim}
-
-\newpage
-
-\hypertarget{readseveralexcel}{%
-\section{複数のExcelファイルを読み込む}\label{readseveralexcel}}
-
-それでは、さらにRの恩恵を深く実感できる部分に入ります。読みこみたいExcelファイルが大量にある場合です。これも実務上よく遭遇します。やり方としては、\ref{dflist}で使った方法とほぼ同じです。
-
-ただし、ここでは読み込むファイルの構造がすべて同様の場合に限ります。残念ながら、それがかなわない状況に、現実ではたくさん遭遇します。いつか本書の応用編を書くことがあったら、そちらで解説することとして、今回は構造が単純な場合に限って解説します。
-
-おそらく、単純に思いつく方法は、
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{df\_Adelie    }\OtherTok{\textless{}{-}} \FunctionTok{read\_xlsx}\NormalTok{(}\StringTok{"data/複数/アデリー.xlsx"}\NormalTok{)}
-\NormalTok{df\_Gentoo    }\OtherTok{\textless{}{-}} \FunctionTok{read\_xlsx}\NormalTok{(}\StringTok{"data/複数/ジェンツー.xlsx"}\NormalTok{)}
-\NormalTok{df\_Chinstrap }\OtherTok{\textless{}{-}} \FunctionTok{read\_xlsx}\NormalTok{(}\StringTok{"data/複数/ヒゲ.xlsx"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-と1つずつ読んでいく方法ですが、これも大量にあったら泣きたくなる作業です。1つ1つファイル名を入力やコピペする間にいくらでもミスが生じます。\ref{hokan}で紹介した自動補完を使っても、楽しいのは最初だけでしょう。そこで、ファイルを指定するところから極力人の手を介さず進めていく方法を次に解説していきます。
-
-\hypertarget{ux8aadux307fux8fbcux3080ux30d5ux30a1ux30a4ux30ebux540dux306eux4e00ux89a7ux306eux30aaux30d6ux30b8ux30a7ux30afux30c8ux4f5cux6210}{%
-\subsection{読み込むファイル名の一覧のオブジェクト作成}\label{ux8aadux307fux8fbcux3080ux30d5ux30a1ux30a4ux30ebux540dux306eux4e00ux89a7ux306eux30aaux30d6ux30b8ux30a7ux30afux30c8ux4f5cux6210}}
-
-まず、読み込みたいファイルが格納されているフォルダのファイル名、およびパス名の一覧を取得します。
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{files }\OtherTok{\textless{}{-}}
-    \FunctionTok{list.files}\NormalTok{(}\AttributeTok{path =} \StringTok{"data/複数/"}\NormalTok{, }\AttributeTok{full.names =} \ConstantTok{TRUE}\NormalTok{)}
-
-\NormalTok{files}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] "data/複数/アデリー.xlsx"   "data/複数/ジェンツー.xlsx"
-## [3] "data/複数/ヒゲ.xlsx"       "data/複数/フォルダ1"      
-## [5] "data/複数/フォルダ2"       "data/複数/フォルダ3"
-\end{verbatim}
-
-\texttt{list.files()}関数は、\texttt{path\ =}で指定したフォルダ内の情報を取得します。\texttt{full.names\ =\ TRUE}でパスも含めます。これをつけないと、ファイル名と拡張子だけの取得になります。
-
-このうち、使用するのはxlsxファイルだけなので、文字列で該当するデータを取得する\texttt{str\_subset()}を用い、以下のように限定します。
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{files }\OtherTok{\textless{}{-}} 
-\NormalTok{  files }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{str\_subset}\NormalTok{(}\StringTok{"xlsx"}\NormalTok{)}
-
-\NormalTok{files}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] "data/複数/アデリー.xlsx"   "data/複数/ジェンツー.xlsx"
-## [3] "data/複数/ヒゲ.xlsx"
-\end{verbatim}
-
-\hypertarget{ikkatsuread}{%
-\subsection{ファイルを一括で読み込む}\label{ikkatsuread}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{ldata }\OtherTok{\textless{}{-}}
-    \FunctionTok{map}\NormalTok{(files, }\SpecialCharTok{\textasciitilde{}}\FunctionTok{read\_xlsx}\NormalTok{(.))}
-
-\NormalTok{ldata}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [[1]]
-## # A tibble: 152 x 9
-##   species 種類     island    bill_length_mm bill_depth_mm
-##   <chr>   <chr>    <chr>              <dbl>         <dbl>
-## 1 Adelie  アデリー Torgersen           39.1          18.7
-## 2 Adelie  アデリー Torgersen           39.5          17.4
-## 3 Adelie  アデリー Torgersen           40.3          18  
-## # ... with 149 more rows, and 4 more variables:
-## #   flipper_length_mm <dbl>, body_mass_g <dbl>, sex <chr>,
-## #   year <dbl>
-## 
-## [[2]]
-## # A tibble: 124 x 9
-##   species 種類       island bill_length_mm bill_depth_mm
-##   <chr>   <chr>      <chr>           <dbl>         <dbl>
-## 1 Gentoo  ジェンツー Biscoe           46.1          13.2
-## 2 Gentoo  ジェンツー Biscoe           50            16.3
-## 3 Gentoo  ジェンツー Biscoe           48.7          14.1
-## # ... with 121 more rows, and 4 more variables:
-## #   flipper_length_mm <dbl>, body_mass_g <dbl>, sex <chr>,
-## #   year <dbl>
-## 
-## [[3]]
-## # A tibble: 68 x 9
-##   species   種類  island bill_length_mm bill_depth_mm
-##   <chr>     <chr> <chr>           <dbl>         <dbl>
-## 1 Chinstrap ヒゲ  Dream            46.5          17.9
-## 2 Chinstrap ヒゲ  Dream            50            19.5
-## 3 Chinstrap ヒゲ  Dream            51.3          19.2
-## # ... with 65 more rows, and 4 more variables:
-## #   flipper_length_mm <dbl>, body_mass_g <dbl>, sex <chr>,
-## #   year <dbl>
-\end{verbatim}
-
-ここでできた\texttt{ldata}は、\ref{dflist}で作成した\texttt{df\_list}と同じ構造です。違いはそれぞれのデータフレームの要素名（アデリー、ジェンツー、ヒゲ）が入っていない点です。各要素の上の部分にある名前が\texttt{{[}{[}1{]}{]},\ {[}{[}3{]}{]},\ {[}{[}3{]}{]}}と表示されています（つまり、1, 2, 3の数値が割り当てられている）。要素名が入っていないのは不便なので、以下で要素名を改めてつけます。
-
-\hypertarget{ux30d5ux30a1ux30a4ux30ebux540dux62bdux51fa}{%
-\subsubsection{ファイル名抽出}\label{ux30d5ux30a1ux30a4ux30ebux540dux62bdux51fa}}
-
-先ほど作成した\texttt{files}から、ファイル名部分だけに加工します。\texttt{str\_replace()}は、\texttt{stringr}パッケージの、文字の置換をする関数です。ここでは、拡張子とパス名をそれぞれ\texttt{""}、つまり空白に置換しています。
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{file\_name }\OtherTok{\textless{}{-}} 
-  \FunctionTok{str\_replace}\NormalTok{(files, }\StringTok{".xlsx"}\NormalTok{, }\StringTok{""}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{str\_replace}\NormalTok{(}\StringTok{"data/複数/"}\NormalTok{, }\StringTok{""}\NormalTok{)}
-
-\NormalTok{file\_name}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] "アデリー"   "ジェンツー" "ヒゲ"
-\end{verbatim}
-
-\hypertarget{ux30eaux30b9ux30c8ux306eux8981ux7d20ux540dux306bux30d5ux30a1ux30a4ux30ebux540dux3092ux4ed8ux4e0e}{%
-\subsubsection{リストの要素名にファイル名を付与}\label{ux30eaux30b9ux30c8ux306eux8981ux7d20ux540dux306bux30d5ux30a1ux30a4ux30ebux540dux3092ux4ed8ux4e0e}}
-
-\ref{dflist}で使った\texttt{set\_names()}関数は、リストの要素名を付ける時にも使えます。リスト\texttt{ldata}の3つの要素に、\texttt{file\_name}の中身を割り当てます。
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{ldata }\OtherTok{\textless{}{-}}
-    \FunctionTok{set\_names}\NormalTok{(ldata, file\_name)}
-
-\NormalTok{ldata}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## $アデリー
-## # A tibble: 152 x 9
-##   species 種類     island    bill_length_mm bill_depth_mm
-##   <chr>   <chr>    <chr>              <dbl>         <dbl>
-## 1 Adelie  アデリー Torgersen           39.1          18.7
-## 2 Adelie  アデリー Torgersen           39.5          17.4
-## 3 Adelie  アデリー Torgersen           40.3          18  
-## # ... with 149 more rows, and 4 more variables:
-## #   flipper_length_mm <dbl>, body_mass_g <dbl>, sex <chr>,
-## #   year <dbl>
-## 
-## $ジェンツー
-## # A tibble: 124 x 9
-##   species 種類       island bill_length_mm bill_depth_mm
-##   <chr>   <chr>      <chr>           <dbl>         <dbl>
-## 1 Gentoo  ジェンツー Biscoe           46.1          13.2
-## 2 Gentoo  ジェンツー Biscoe           50            16.3
-## 3 Gentoo  ジェンツー Biscoe           48.7          14.1
-## # ... with 121 more rows, and 4 more variables:
-## #   flipper_length_mm <dbl>, body_mass_g <dbl>, sex <chr>,
-## #   year <dbl>
-## 
-## $ヒゲ
-## # A tibble: 68 x 9
-##   species   種類  island bill_length_mm bill_depth_mm
-##   <chr>     <chr> <chr>           <dbl>         <dbl>
-## 1 Chinstrap ヒゲ  Dream            46.5          17.9
-## 2 Chinstrap ヒゲ  Dream            50            19.5
-## 3 Chinstrap ヒゲ  Dream            51.3          19.2
-## # ... with 65 more rows, and 4 more variables:
-## #   flipper_length_mm <dbl>, body_mass_g <dbl>, sex <chr>,
-## #   year <dbl>
-\end{verbatim}
-
-このように、ちゃんと要素に名前が付きました。これらを1つのデータフレームにまとめるには、 \ref{onedflist}と同じ手順でできます。
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{bind\_rows}\NormalTok{(ldata, }\AttributeTok{.id =} \StringTok{"group"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{ux8aadux307fux8fbcux3080ux30d5ux30a1ux30a4ux30ebux304cux8907ux6570ux30d5ux30a9ux30ebux30c0ux306bux3042ux308bux5834ux5408}{%
-\subsection{読み込むファイルが複数フォルダにある場合}\label{ux8aadux307fux8fbcux3080ux30d5ux30a1ux30a4ux30ebux304cux8907ux6570ux30d5ux30a9ux30ebux30c0ux306bux3042ux308bux5834ux5408}}
-
-\texttt{data/複数}フォルダの中に、さらにフォルダ1～フォルダ3がありました。この中にもそれぞれxlsxファイルが入っていて、それぞれ読み込みたいとします。その場合は、先ほど使った\texttt{list.files()}関数の引数、\texttt{recursive\ =\ TRUE}を追加します。これによって、フォルダの深い階層までもすべて読み込むことが可能になります。
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{files }\OtherTok{\textless{}{-}}
-    \FunctionTok{list.files}\NormalTok{(}\AttributeTok{path =} \StringTok{"data/複数/"}\NormalTok{, }\AttributeTok{full.names =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{recursive =} \ConstantTok{TRUE}\NormalTok{)}
-
-\NormalTok{files}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] "data/複数//フォルダ1/アデリー.xlsx"  
-## [2] "data/複数//フォルダ2/ジェンツー.xlsx"
-## [3] "data/複数//フォルダ3/ヒゲ.xlsx"      
-## [4] "data/複数/アデリー.xlsx"             
-## [5] "data/複数/ジェンツー.xlsx"           
-## [6] "data/複数/ヒゲ.xlsx"
-\end{verbatim}
-
-このうち、使用するのはフォルダ1～3に入っているxlsxファイルだけなので、\texttt{str\_subset()}関数で以下のように絞り込みます。ここの\texttt{""}の中に入る文字列がどうなるかが難しいところかもしれませんが、ここは正規表現という本書の範囲を超える世界なので、深入りはしません。
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{files }\OtherTok{\textless{}{-}} 
-\NormalTok{  files }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{str\_subset}\NormalTok{(}\StringTok{"フォルダ"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-あとは\ref{ikkatsuread}と同じ手順で読み込めます。
-
-\hypertarget{writeexcel}{%
-\chapter{Excelファイルの保存}\label{writeexcel}}
-
-\hypertarget{writeoneexcel}{%
-\section{一つのExcelファイルを保存する}\label{writeoneexcel}}
-
-\texttt{writexl}パッケージの\texttt{write\_xlsx()}関数で、直接Excelファイルとして出力ができます。ここでは、新しく作成したデータフレームをExcelファイルとして保存してみます。
-
-\hypertarget{groupbymean}{%
-\subsection{カテゴリ別平均値の作成}\label{groupbymean}}
-
-クチバシの長さと大きさを表す変数である、\texttt{bill\_length\_mm}、\texttt{bill\_depth\_mm}について、平均値と欠損を抜いたn（ペンギン数）を種類別に計算します。\texttt{group\_by()}でカテゴリ別にしたい変数を指定し、\texttt{summarise()}で平均値とnを計算するコードが以下になります。
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{df\_group\_mean }\OtherTok{\textless{}{-}} 
-\NormalTok{  df }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{group\_by}\NormalTok{(種類) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{summarise}\NormalTok{(}\FunctionTok{across}\NormalTok{(}
-                   \FunctionTok{c}\NormalTok{(bill\_length\_mm, bill\_depth\_mm), }\CommentTok{\# ここに変数}
-                   \FunctionTok{list}\NormalTok{(}\AttributeTok{m =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{mean}\NormalTok{(., }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),  }\CommentTok{\# 平均値計算}
-                        \AttributeTok{n =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{sum}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(.))))        }\CommentTok{\# 欠損のない人数計算}
-\NormalTok{           )}
-
-\CommentTok{\# ここは結果の整形部分}
-\NormalTok{df\_group\_mean }\OtherTok{\textless{}{-}} 
-\NormalTok{  df\_group\_mean }\SpecialCharTok{\%\textgreater{}\%}  
-  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{bill\_depth\_mm\_n) }\SpecialCharTok{\%\textgreater{}\%}  \CommentTok{\# nが同じなので列削除}
-  \FunctionTok{rename}\NormalTok{(}\AttributeTok{n =}\NormalTok{ bill\_length\_mm\_n)  }\CommentTok{\# 列名をnにリネーム}
-
-
-\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(df\_group\_mean) }\CommentTok{\# きれいな出力にするコード}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{tabular}{l|r|r|r}
-\hline
-種類 & bill\_length\_mm\_m & n & bill\_depth\_mm\_m\\
-\hline
-アデリー & 38.79139 & 151 & 18.34636\\
-\hline
-ジェンツー & 47.50488 & 123 & 14.98211\\
-\hline
-ヒゲ & 48.83382 & 68 & 18.42059\\
-\hline
-\end{tabular}
-
-なお、ここで\texttt{knitr::kable()}という書き方が出てきますが、これは\texttt{knitr}パッケージの\texttt{kable()}関数という意味です。関数を1回しか使わない場合などに\texttt{library()}で呼び出すのは無駄が多かったりするので、時々こういった記述が出てきます。
-
-\hypertarget{excelux30d5ux30a1ux30a4ux30ebux306eux4fddux5b58}{%
-\subsection{Excelファイルの保存}\label{excelux30d5ux30a1ux30a4ux30ebux306eux4fddux5b58}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(writexl)}
-\end{Highlighting}
-\end{Shaded}
-
-前節で作成したカテゴリ別平均値のデータフレーム\texttt{df\_group\_mean}をExcelファイルとして保存します。保存は\texttt{write\_xlsx()}関数の中に、データフレームのオブジェクトと出力先のパスと保存ファイル名を入れるだけです。
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{write\_xlsx}\NormalTok{(df\_group\_mean, }\StringTok{"out/種類別平均値.xlsx"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\texttt{out/}の部分が出力先のフォルダを示しています。
-
-\hypertarget{ux5fdcux7528ux30d5ux30a1ux30a4ux30ebux540dux306bux81eaux52d5ux3067ux672cux65e5ux306eux65e5ux4ed8ux3092ux5165ux308cux308b}{%
-\subsubsection{【応用】ファイル名に自動で本日の日付を入れる}\label{ux5fdcux7528ux30d5ux30a1ux30a4ux30ebux540dux306bux81eaux52d5ux3067ux672cux65e5ux306eux65e5ux4ed8ux3092ux5165ux308cux308b}}
-
-これはちょっと応用技ですが、便利なので紹介しておきます。\texttt{lubridate}パッケージの\texttt{today()}関数で、今日の日付を表示できるので、それを保存名を入れる時に組み込む（文字列なので区切って\texttt{str\_c()}でくっつける）と、日付入りファイル名が作成できます。
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{write\_xlsx}\NormalTok{(df\_group\_mean, }
-         \FunctionTok{str\_c}\NormalTok{(}\StringTok{"out/df\_group\_mean"}\NormalTok{, }\StringTok{"\_"}\NormalTok{, lubridate}\SpecialCharTok{::}\FunctionTok{today}\NormalTok{(), }\StringTok{".xlsx"}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{writeseveralexcel}{%
-\section{複数のファイルを一度に保存する}\label{writeseveralexcel}}
-
-これが活躍する場面としては、たとえばカテゴリ別（例：ペンギンの種類別、会社の部署別など）に集計した要約値をそのカテゴリ別に個々のExcelファイルにするといった状況が思いつきますので、それをやってみます。
-
-\hypertarget{splitdf}{%
-\subsection{データフレームをカテゴリ別に分割してリストにする}\label{splitdf}}
-
-\texttt{split()}関数を使うことで、カテゴリ別にデータフレームを分割し、リストにまとめた結果を作成できます。データは\ref{groupbymean}で作成した\texttt{df\_group\_mean}を使います。
-
-分割に使う変数は、\texttt{df\_group\_mean\$species}のように、データフレーム名の後に\texttt{\$}をつけてその後に指定します。この変数の中身が、そのままリストの要素名になるので、後の処理がとても楽になります。
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{df\_gmean\_list }\OtherTok{\textless{}{-}} 
-  \FunctionTok{split}\NormalTok{(df\_group\_mean, df\_group\_mean}\SpecialCharTok{$}\NormalTok{種類)}
-
-\NormalTok{df\_gmean\_list}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## $アデリー
-## # A tibble: 1 x 4
-##   種類     bill_length_mm_m     n bill_depth_mm_m
-##   <chr>               <dbl> <int>           <dbl>
-## 1 アデリー             38.8   151            18.3
-## 
-## $ジェンツー
-## # A tibble: 1 x 4
-##   種類       bill_length_mm_m     n bill_depth_mm_m
-##   <chr>                 <dbl> <int>           <dbl>
-## 1 ジェンツー             47.5   123            15.0
-## 
-## $ヒゲ
-## # A tibble: 1 x 4
-##   種類  bill_length_mm_m     n bill_depth_mm_m
-##   <chr>            <dbl> <int>           <dbl>
-## 1 ヒゲ              48.8    68            18.4
-\end{verbatim}
-
-\hypertarget{ux30eaux30b9ux30c8ux306eux5404ux8981ux7d20ux3092ux500bux5225ux3067excelux30d5ux30a1ux30a4ux30ebux306bux4fddux5b58ux3059ux308b}{%
-\subsection{リストの各要素を個別でExcelファイルに保存する}\label{ux30eaux30b9ux30c8ux306eux5404ux8981ux7d20ux3092ux500bux5225ux3067excelux30d5ux30a1ux30a4ux30ebux306bux4fddux5b58ux3059ux308b}}
-
-\texttt{purrr}パッケージの\texttt{imap()}関数を使って、リスト内の各データフレームに、それぞれの要素名をファイル名として、Excelファイルに出力します。
-
-ここでは、リスト内の各要素を示すのが\texttt{.x}、要素名（位置）に当たるのは\texttt{.y}です。次々に代わるファイル名を作るのに、\texttt{str\_c()}関数で文字列を結合しています。
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{imap}\NormalTok{(df\_gmean\_list, }\SpecialCharTok{\textasciitilde{}}\FunctionTok{write\_xlsx}\NormalTok{(.x, }\AttributeTok{path =} \FunctionTok{str\_c}\NormalTok{(}\StringTok{"out/"}\NormalTok{, .y , }\StringTok{".xlsx"}\NormalTok{)))}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{ux30b5ux30f3ux30d7ux30ebux30c7ux30fcux30bfux30bbux30c3ux30c8ux4f5cux6210ux30b3ux30fcux30c9}{%
-\subsubsection{サンプルデータセット作成コード}\label{ux30b5ux30f3ux30d7ux30ebux30c7ux30fcux30bfux30bbux30c3ux30c8ux4f5cux6210ux30b3ux30fcux30c9}}
-
-ちなみに\texttt{data/複数/}フォルダにあるサンプルデータセットは以下のコードで作りました。
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{imap}\NormalTok{(df\_list, }\SpecialCharTok{\textasciitilde{}}\FunctionTok{write\_xlsx}\NormalTok{(.x, }\AttributeTok{path =} \FunctionTok{str\_c}\NormalTok{(}\StringTok{"data/複数/"}\NormalTok{,.y , }\StringTok{".xlsx"}\NormalTok{)))}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{ux4e00ux3064ux306eux30d5ux30a1ux30a4ux30ebux306eux8907ux6570ux30b7ux30fcux30c8ux306bux4fddux5b58ux3059ux308b}{%
-\subsection{一つのファイルの複数シートに保存する}\label{ux4e00ux3064ux306eux30d5ux30a1ux30a4ux30ebux306eux8907ux6570ux30b7ux30fcux30c8ux306bux4fddux5b58ux3059ux308b}}
-
-\ref{splitdf}で作成した、ペンギンの種類別クチバシの長さと大きさ平均値のデータを、個別のファイルでなく、一ファイルの複数シートに保存したいときは、とてもシンプルなコードで可能になります。
-
-要素名のついたデータフレームのリストが作成されていれば、それを単純に\texttt{write\_xlsx()}で出力するだけで完成します。
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{write\_xlsx}\NormalTok{(df\_gmean\_list, }\StringTok{"data/平均値（複数シート）.xlsx"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{readsavecsv}{%
-\chapter{csvファイルの読み込みと保存}\label{readsavecsv}}
-
-windows環境で過ごしていて日本語を使うRユーザーにおいては、csvファイルを扱う際に文字コードの違いというつらみ（いわゆる文字化け）に遭遇することが少なくありません。
-
-出会う可能性が高い文字コードには、大きく\texttt{cp932（Shift-JIS）}と\texttt{UTF-8}という形式があり、一般的に業務で読みこもうとするファイルは前者であることが多いことを知っておくと役に立ちます。
-
-\hypertarget{ux4e00ux3064ux306ecsvux30d5ux30a1ux30a4ux30ebux3092ux8aadux307fux8fbcux3080}{%
-\section{一つのcsvファイルを読み込む}\label{ux4e00ux3064ux306ecsvux30d5ux30a1ux30a4ux30ebux3092ux8aadux307fux8fbcux3080}}
-
-csvファイルを読みこむには、\texttt{readr}パッケージの\texttt{read\_csv()}関数を使います。\texttt{tidyverse}を読み込んだら一緒に読み込まれます。\texttt{readr}では基本的に\texttt{utf8}の読み書きが想定されています。RStudioのメニューで以下の部分をUTF-8に変えておかないと、色々つらい思いをします。
+\hypertarget{su-group}{%
+\section{層別（グループ別）集計}\label{su-group}}
 
 \begin{itemize}
 \tightlist
 \item
-  \texttt{Tools\ \textgreater{}\ Global\ Options\ \textgreater{}\ Code\ \textgreater{}\ Saving\ \textgreater{}\ Default\ text\ encoding:}
-\item
-  \texttt{Tools\ \textgreater{}\ Project\ Options\ \textgreater{}\ Code\ Editing\ \textgreater{}\ text\ encoding:}
+  \texttt{group\_by(\ )}にグループを表す変数を指定するとできる
 \end{itemize}
 
-\texttt{data\ \textgreater{}\ csv}フォルダ（ここでは\texttt{\textgreater{}}は階層関係を示し、コードでは\texttt{data/csv/}で表現）に入っている「ペンギン（ひどい列名）ver\_utf8.csv」を開きます。\texttt{㊛㊚}列のみ、環境依存文字のため、csvにする時点で文字化けています\ldots{}
-
-\hypertarget{utf-8ux3067ux30a8ux30f3ux30b3ux30fcux30c9ux3055ux308cux305fcsvux30d5ux30a1ux30a4ux30eb}{%
-\subsection{UTF-8でエンコードされたcsvファイル}\label{utf-8ux3067ux30a8ux30f3ux30b3ux30fcux30c9ux3055ux308cux305fcsvux30d5ux30a1ux30a4ux30eb}}
-
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df\_csv }\OtherTok{\textless{}{-}} 
- \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"data/csv/ペンギン（ひどい列名）ver\_utf8.csv"}\NormalTok{)}
-
-\NormalTok{df\_csv}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## # A tibble: 344 x 9
-##   Sｐｅｃｉｅｓ `種　類` `※島の名前` `①クチバシ　長さ（ｍｍ）`
-##   <chr>         <chr>    <chr>                           <dbl>
-## 1 Adelie        アデリー Torgersen                        39.1
-## 2 Adelie        アデリー Torgersen                        39.5
-## 3 Adelie        アデリー Torgersen                        40.3
-## # ... with 341 more rows, and 5 more variables:
-## #   ②ｸﾁﾊﾞｼ＿大きさ（ｍｍ） <dbl>, 翼：長さ(mm) <dbl>,
-## #   ■体重　単位はｇ <dbl>, <U+329B><U+329A> <chr>, ２００７～２００９ <dbl>
-\end{verbatim}
-
-\hypertarget{ux6587ux5b57ux5316ux3051ux306eux4f8bshift-jisux3067ux30a8ux30f3ux30b3ux30fcux30c9ux3055ux308cux305fcsvux30d5ux30a1ux30a4ux30eb}{%
-\subsection{【文字化けの例】Shift-JISでエンコードされたcsvファイル}\label{ux6587ux5b57ux5316ux3051ux306eux4f8bshift-jisux3067ux30a8ux30f3ux30b3ux30fcux30c9ux3055ux308cux305fcsvux30d5ux30a1ux30a4ux30eb}}
-
-正確にはShift-JISの拡張版であるcp932でエンコードされたファイルです。変数名も文字化けして読みこみ自体できなくなるので、\texttt{clean\_names()}で読める形式に変換しています。
-
-日本語の変数名と、2列目の日本語の値が文字化けします。
-
-\hypertarget{shift-jisux3067ux30a8ux30f3ux30b3ux30fcux30c9ux3055ux308cux305fcsvux30d5ux30a1ux30a4ux30eb}{%
-\subsection{Shift-JISでエンコードされたcsvファイル}\label{shift-jisux3067ux30a8ux30f3ux30b3ux30fcux30c9ux3055ux308cux305fcsvux30d5ux30a1ux30a4ux30eb}}
-
-これを読むためには，引数\texttt{locale\ =\ locale(encoding\ =\ )}でShift-JISのファイルであることを指定する必要があります。
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{read\_csv}\NormalTok{(}\StringTok{"data/csv/ペンギン（ひどい列名）ver\_cp932.csv"}
-\NormalTok{         , }\AttributeTok{locale =} \FunctionTok{locale}\NormalTok{(}\AttributeTok{encoding =} \StringTok{"cp932"}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## # A tibble: 344 x 9
-##   Sｐｅｃｉｅｓ `種　類` `※島の名前` `①クチバシ　長さ（ｍｍ）`
-##   <chr>         <chr>    <chr>                           <dbl>
-## 1 Adelie        アデリー Torgersen                        39.1
-## 2 Adelie        アデリー Torgersen                        39.5
-## 3 Adelie        アデリー Torgersen                        40.3
-## # ... with 341 more rows, and 5 more variables:
-## #   ②ｸﾁﾊﾞｼ＿大きさ（ｍｍ） <dbl>, 翼：長さ(mm) <dbl>,
-## #   ■体重　単位はｇ <dbl>, ?? <chr>, ２００７～２００９ <dbl>
-\end{verbatim}
-
-\newpage
-
-\hypertarget{read.csvux3092ux4f7fux3046ux5834ux5408}{%
-\subsection{read.csv()を使う場合}\label{read.csvux3092ux4f7fux3046ux5834ux5408}}
-
-従来のcsvを読む関数\texttt{read.csv()}を使えば，デフォルトでShift-JISのファイルは読めます。
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{read.csv}\NormalTok{(}\StringTok{"data/csv/ペンギン（ひどい列名）ver\_cp932.csv"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-    \FunctionTok{as\_tibble}\NormalTok{()  }\CommentTok{\# データフレームをtibble型にし見やすい出力に}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## # A tibble: 344 x 9
-##   Sｐｅｃｉｅｓ 種.類    X.島の名前 X.クチバシ.長さ.ｍｍ.
-##   <chr>         <chr>    <chr>                      <dbl>
-## 1 Adelie        アデリー Torgersen                   39.1
-## 2 Adelie        アデリー Torgersen                   39.5
-## 3 Adelie        アデリー Torgersen                   40.3
-## # ... with 341 more rows, and 5 more variables:
-## #   X.ｸﾁﾊﾞｼ.大きさ.ｍｍ. <dbl>, 翼.長さ.mm. <int>,
-## #   X.体重.単位はｇ <int>, X.. <chr>, ２００７.２００９ <int>
-\end{verbatim}
-
-UTF-8を読む場合は引数\texttt{encoding\ =}で指定します。が、列名がひどすぎたせいかちゃんと読めないので出力はスキップします\ldots{}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{read.csv}\NormalTok{(}\StringTok{"data/csv/ペンギン（ひどい列名）ver\_utf8.csv"}\NormalTok{, }
-         \AttributeTok{encoding =} \StringTok{"UTF{-}8"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
-    \FunctionTok{as\_tibble}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{ux5927ux304dux3044ux30c7ux30fcux30bfux306aux3089fread}{%
-\subsection{大きいデータならfread()}\label{ux5927ux304dux3044ux30c7ux30fcux30bfux306aux3089fread}}
-
-これまで紹介したcsvファイルを読みこむための関数は、小規模なデータならそんなに時間はかかりませんが、データが数万行×数百列と大きくなってくると、時間がかかるようになります。
-
-そこで大きく時間を短縮できるのが、\texttt{data.table}パッケージの\texttt{fread()}関数です。実は筆者が一番使ってるのはこの関数です。
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{data.table}\SpecialCharTok{::}\FunctionTok{fread}\NormalTok{(}\StringTok{"data/csv/ペンギン（ひどい列名）ver\_cp932.csv"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{as\_tibble}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## # A tibble: 344 x 9
-##   Sｐｅｃｉｅｓ `種　類` `※島の名前` `①クチバシ　長さ（ｍｍ）`
-##   <chr>         <chr>    <chr>                           <dbl>
-## 1 Adelie        アデリー Torgersen                        39.1
-## 2 Adelie        アデリー Torgersen                        39.5
-## 3 Adelie        アデリー Torgersen                        40.3
-## # ... with 341 more rows, and 5 more variables:
-## #   ②ｸﾁﾊﾞｼ＿大きさ（ｍｍ） <dbl>, 翼：長さ(mm) <int>,
-## #   ■体重　単位はｇ <int>, ?? <chr>, ２００７～２００９ <int>
-\end{verbatim}
-
-なお、UTF-8でエンコーディングされたcsvファイルの場合は、引数に\texttt{encoding\ =\ "UTF-8"}を加えることで読み込めます。
-
-\hypertarget{writeonecsv}{%
-\section{csvファイルの保存}\label{writeonecsv}}
-
-csvファイルを保存するには、\texttt{readr}パッケージの\texttt{write\_csv()}関数を使います。ただし、出力されたcsvファイルをExcelで開くとたぶん文字化けします。LibreOfficeのCalcであれば、最初にダイアログボックスが開いて読む文字コードを選べます。
-
-\hypertarget{write_csvux3092ux4f7fux3046}{%
-\subsection{write\_csv()を使う}\label{write_csvux3092ux4f7fux3046}}
-
-先ほど読みこんだ\texttt{df\_csv}と、保存先を\texttt{""}中に指定します。
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{write\_csv}\NormalTok{(df\_csv, }\StringTok{"out/df\_csv\_utf8.csv"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\newpage
-
-\hypertarget{excelux3067ux958bux3044ux3066ux3082ux8aadux3081ux308bux3088ux3046ux306b}{%
-\subsubsection{Excelで開いても読めるように}\label{excelux3067ux958bux3044ux3066ux3082ux8aadux3081ux308bux3088ux3046ux306b}}
-
-Excelで開いても読める、BOM（byte order mark, バイトオーダーマーク）付きファイルとして出力する関数です。
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{write\_excel\_csv}\NormalTok{(df\_csv, }\StringTok{"out/df\_csv\_utf8\_forxl.csv"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{write.csvux3092ux4f7fux3046}{%
-\subsection{write.csv()を使う}\label{write.csvux3092ux4f7fux3046}}
-
-書き込みが遅いですが、文字化け回避の最終手段として、なぜかうまくいく時があるので、\texttt{write.csv()}も役に立ちます。Rでデフォルトの文字エンコードがcp932で、そちらを採用するからと思われます。
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{write.csv}\NormalTok{(df\_csv, }\StringTok{"out/df\_csv\_cp932.csv"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{dataanal}{%
-\chapter{データ解析に向けて}\label{dataanal}}
-
-ここまでの解説で、Excelファイルとcsvファイルの読み込みについて一通り解説してきました。この段階では、まだデータがきれいでなくて、解析に入れないことも多いと思います。
-
-\hypertarget{ux8981ux7d04ux5024ux3084ux6b20ux640dux30c7ux30fcux30bfux306eux78baux8a8d}{%
-\section{要約値や欠損データの確認}\label{ux8981ux7d04ux5024ux3084ux6b20ux640dux30c7ux30fcux30bfux306eux78baux8a8d}}
-
-まずどんなデータがどのように入っているか、欠損値（NA）はどれくらい発生しているか確認することは重要なプロセスです。変数の一覧を要約して確認することが簡単にできる\texttt{skim}パッケージの\texttt{skimr()}関数を使って確認してみましょう。データは\ref{junbiyomikomi}で読み込んだ\texttt{df}を使います。
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(skimr) }\CommentTok{\# version 2.1.2}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{skim}\NormalTok{(df)}
-\end{Highlighting}
-\end{Shaded}
-
-
-
-データの型が数値である変数（ここでは\texttt{Variable\ type:numeric}）については、\texttt{hist}列に簡単なヒストグラムが表示されます（図\ref{fig:skim}）。しかしデータが大量な場合、動作が遅くなります。その場合は、ヒストグラムを描かない以下の関数が使えます。
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{skim\_without\_charts}\NormalTok{(df)}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{ux7d50ux679cux3092excelux30d5ux30a1ux30a4ux30ebux306bux51faux529bux3059ux308b}{%
-\subsection{結果をExcelファイルに出力する}\label{ux7d50ux679cux3092excelux30d5ux30a1ux30a4ux30ebux306bux51faux529bux3059ux308b}}
-
-\texttt{as\_tibble()}関数を使うことで、結果を一つのデータフレームにまとめることができます。
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{res\_skim\_df }\OtherTok{\textless{}{-}} 
-\FunctionTok{skim}\NormalTok{(df) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{as\_tibble}\NormalTok{()}
-
-\NormalTok{res\_skim\_df }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{head}\NormalTok{()        }\CommentTok{\# 最初の6行を表示}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## # A tibble: 6 x 17
-##   skim_type skim_variable  n_missing complete_rate character.min
-##   <chr>     <chr>              <int>         <dbl>         <int>
-## 1 character species                0         1                 6
-## 2 character 種類                   0         1                 2
-## 3 character island                 0         1                 5
-## 4 character sex                   11         0.968             4
-## 5 numeric   bill_length_mm         2         0.994            NA
-## 6 numeric   bill_depth_mm          2         0.994            NA
-## # ... with 12 more variables: character.max <int>,
-## #   character.empty <int>, character.n_unique <int>,
-## #   character.whitespace <int>, numeric.mean <dbl>,
-## #   numeric.sd <dbl>, numeric.p0 <dbl>, numeric.p25 <dbl>,
-## #   numeric.p50 <dbl>, numeric.p75 <dbl>, numeric.p100 <dbl>,
-## #   numeric.hist <chr>
-\end{verbatim}
-
-これで好きなように加工してExcelファイルとして出力することが可能になります。例えば、数値変数だけに絞る場合は
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{res\_skim\_df }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{filter}\NormalTok{(skim\_type  }\SpecialCharTok{==} \StringTok{"numeric"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{select}\NormalTok{(skim\_type, skim\_variable,}
-\NormalTok{         n\_missing, numeric.mean, numeric.sd)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## # A tibble: 5 x 5
-##   skim_type skim_variable     n_missing numeric.mean numeric.sd
-##   <chr>     <chr>                 <int>        <dbl>      <dbl>
-## 1 numeric   bill_length_mm            2         43.9      5.46 
-## 2 numeric   bill_depth_mm             2         17.2      1.97 
-## 3 numeric   flipper_length_mm         2        201.      14.1  
-## 4 numeric   body_mass_g               2       4202.     802.   
-## 5 numeric   year                      0       2008.       0.818
-\end{verbatim}
-
-また、\texttt{group\_by()}を使ってグループ別に上記結果を出すことも可能です。
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{res\_df\_num\_g }\OtherTok{\textless{}{-}} 
 \NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{group\_by}\NormalTok{(種類) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{skim}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{as\_tibble}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{filter}\NormalTok{(skim\_type  }\SpecialCharTok{==} \StringTok{"numeric"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{select}\NormalTok{(skim\_type, skim\_variable, 種類,}
-\NormalTok{         n\_missing, numeric.mean, numeric.sd)}
-
-\NormalTok{res\_df\_num\_g}
+  \FunctionTok{group\_by}\NormalTok{(species) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{c}\NormalTok{(bill\_length\_mm, bill\_depth\_mm),}
+                   \FunctionTok{list}\NormalTok{(}\AttributeTok{mean =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{mean}\NormalTok{(.x, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+                        \AttributeTok{sd =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{sd}\NormalTok{(.x, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{))))}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 15 x 6
-##    skim_type skim_variable     種類       n_missing numeric.mean
-##    <chr>     <chr>             <chr>          <int>        <dbl>
-##  1 numeric   bill_length_mm    アデリー           1         38.8
-##  2 numeric   bill_length_mm    ジェンツー         1         47.5
-##  3 numeric   bill_length_mm    ヒゲ               0         48.8
-##  4 numeric   bill_depth_mm     アデリー           1         18.3
-##  5 numeric   bill_depth_mm     ジェンツー         1         15.0
-##  6 numeric   bill_depth_mm     ヒゲ               0         18.4
-##  7 numeric   flipper_length_mm アデリー           1        190. 
-##  8 numeric   flipper_length_mm ジェンツー         1        217. 
-##  9 numeric   flipper_length_mm ヒゲ               0        196. 
-## 10 numeric   body_mass_g       アデリー           1       3701. 
-## 11 numeric   body_mass_g       ジェンツー         1       5076. 
-## 12 numeric   body_mass_g       ヒゲ               0       3733. 
-## 13 numeric   year              アデリー           0       2008. 
-## 14 numeric   year              ジェンツー         0       2008. 
-## 15 numeric   year              ヒゲ               0       2008. 
-## # ... with 1 more variable: numeric.sd <dbl>
+## # A tibble: 3 x 5
+##   species   bill_length_mm_mean bill_length_mm_~ bill_depth_mm_m~
+##   <fct>                   <dbl>            <dbl>            <dbl>
+## 1 Adelie                   38.8             2.66             18.3
+## 2 Chinstrap                48.8             3.34             18.4
+## 3 Gentoo                   47.5             3.08             15.0
+## # ... with 1 more variable: bill_depth_mm_sd <dbl>
 \end{verbatim}
 
-あとは、以下のように出力するだけです。
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{write\_xlsx}\NormalTok{(res\_df\_num\_g, }\StringTok{"out/種類別平均値（全数値型変数）.xlsx"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{ux53efux8996ux5316}{%
-\subsection{可視化}\label{ux53efux8996ux5316}}
-
-さらに\texttt{ggplot2}を使って可視化することも可能になります。
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{res\_df\_num\_g }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{filter}\NormalTok{(skim\_variable }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"bill\_length\_mm"}\NormalTok{, }\StringTok{"bill\_depth\_mm"}\NormalTok{,}
-                             \StringTok{"flipper\_length\_mm"}\NormalTok{, }\StringTok{"body\_mass\_g"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ 種類, }\AttributeTok{y =}\NormalTok{ numeric.mean, }\AttributeTok{fill =}\NormalTok{ 種類)) }\SpecialCharTok{+}
-   \FunctionTok{geom\_col}\NormalTok{() }\SpecialCharTok{+}
-    \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{5}\NormalTok{)) }\SpecialCharTok{+}
-   \FunctionTok{facet\_wrap}\NormalTok{(}\FunctionTok{vars}\NormalTok{(skim\_variable), }\AttributeTok{scale =} \StringTok{"free"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{gisho12_files/figure-latex/unnamed-chunk-61-1.pdf}
-
-ただし、ここの場合もっと潤沢な可視化グラフは元データから作成できます。例えば
+\begin{itemize}
+\tightlist
+\item
+  グループを重ねることも可能
+\end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{select}\NormalTok{(種類, bill\_length\_mm, bill\_depth\_mm, flipper\_length\_mm,}
-\NormalTok{         body\_mass\_g) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{pivot\_longer}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{種類,                  }\CommentTok{\# wideデータからlongデータに変換}
-               \AttributeTok{names\_to =} \StringTok{"variables"}\NormalTok{,}
-               \AttributeTok{values\_to =} \StringTok{"scores"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ 種類, }\AttributeTok{y =}\NormalTok{ scores, }\AttributeTok{fill =}\NormalTok{ 種類)) }\SpecialCharTok{+}
-   \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.3}\NormalTok{, }\AttributeTok{width =} \FloatTok{0.3}\NormalTok{) }\SpecialCharTok{+} \CommentTok{\# 箱ひげ図}
-   \FunctionTok{geom\_violin}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.3}\NormalTok{) }\SpecialCharTok{+}               \CommentTok{\# バイオリンプロット}
-    \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{5}\NormalTok{)) }\SpecialCharTok{+}
-   \FunctionTok{facet\_wrap}\NormalTok{(}\FunctionTok{vars}\NormalTok{(variables), }\AttributeTok{scales =} \StringTok{"free"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{gisho12_files/figure-latex/unnamed-chunk-62-1.pdf}
-
-詳しくは特別付録の\href{https://izunyan.github.io/practice_ggplot2/}{ggplot2の辞書}を参照ください。
-
-\hypertarget{ux76f8ux95a2ux306eux78baux8a8d}{%
-\section{相関の確認}\label{ux76f8ux95a2ux306eux78baux8a8d}}
-
-変数同士の相関関係を見たいという要望はビジネス、アカデミックを問わず多く発生すると思います。簡単な相関行列の出し方やその可視化について解説します。ここで便利なパッケージが\texttt{corrr}です。
-
-\hypertarget{ux76f8ux95a2ux884cux5217ux3092ux51faux3059}{%
-\subsection{相関行列を出す}\label{ux76f8ux95a2ux884cux5217ux3092ux51faux3059}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(corrr)}
-\end{Highlighting}
-\end{Shaded}
-
-まずペンギンデータの中の数値変数だけにしぼります。そして、yearはここでは不要なので落とします。そうして作ったデータフレーム\texttt{cor\_df}を、\texttt{correlate()}関数に入れるだけです。
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{cor\_df }\OtherTok{\textless{}{-}} 
-\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{select}\NormalTok{(}\FunctionTok{where}\NormalTok{(is.numeric)) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# 数値変数だけにしぼる}
-  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{year)                 }\CommentTok{\# 不要なので落とす  }
-
-
-\FunctionTok{correlate}\NormalTok{(cor\_df)}
+  \FunctionTok{group\_by}\NormalTok{(species, sex) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{c}\NormalTok{(bill\_length\_mm, bill\_depth\_mm),}
+                   \FunctionTok{list}\NormalTok{(}\AttributeTok{mean =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{mean}\NormalTok{(.x, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+                        \AttributeTok{sd =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{sd}\NormalTok{(.x, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{))))}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 4 x 5
-##   term  bill_length_mm bill_depth_mm flipper_length_~ body_mass_g
-##   <chr>          <dbl>         <dbl>            <dbl>       <dbl>
-## 1 bill~         NA            -0.235            0.656       0.595
-## 2 bill~         -0.235        NA               -0.584      -0.472
-## 3 flip~          0.656        -0.584           NA           0.871
-## 4 body~          0.595        -0.472            0.871      NA
+## # A tibble: 8 x 6
+## # Groups:   species [3]
+##   species   sex    bill_length_mm_mean bill_length_mm_sd
+##   <fct>     <fct>                <dbl>             <dbl>
+## 1 Adelie    female                37.3              2.03
+## 2 Adelie    male                  40.4              2.28
+## 3 Adelie    <NA>                  37.8              2.80
+## 4 Chinstrap female                46.6              3.11
+## 5 Chinstrap male                  51.1              1.56
+## 6 Gentoo    female                45.6              2.05
+## 7 Gentoo    male                  49.5              2.72
+## 8 Gentoo    <NA>                  45.6              1.37
+## # ... with 2 more variables: bill_depth_mm_mean <dbl>,
+## #   bill_depth_mm_sd <dbl>
 \end{verbatim}
 
-上側と下型で相関係数が重複しているので、片側だけを残したい場合があります。その際は\texttt{shave()}関数で簡単に重複部分をなくせます。引数に\texttt{upper\ =\ FALSE}と入れれば、上側だけにすることもできます。
+\hypertarget{su-fun}{%
+\section{【効率化】関数にする}\label{su-fun}}
 
-相関係数の表示したい桁の指定は、\texttt{fashion()}関数で、引数に\texttt{decimals\ =}で桁数を指定することで可能になります。
+\hypertarget{su-fun-st}{%
+\subsection{基本}\label{su-fun-st}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{関数名\ \textless{}-\ function(引数)\{\ 計算式やコード\ \}} で関数を定義できる
+\end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{cormat }\OtherTok{\textless{}{-}} 
-\FunctionTok{correlate}\NormalTok{(cor\_df) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{shave}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{fashion}\NormalTok{(}\AttributeTok{decimals =} \DecValTok{1}\NormalTok{)}
+\NormalTok{add\_one }\OtherTok{\textless{}{-}} 
+  \ControlFlowTok{function}\NormalTok{(x)\{}
+\NormalTok{    x }\SpecialCharTok{+} \DecValTok{1}
+\NormalTok{  \}}
 
-\NormalTok{cormat}
+\FunctionTok{add\_one}\NormalTok{(}\DecValTok{2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##                term bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
-## 1    bill_length_mm                                                           
-## 2     bill_depth_mm            -.2                                            
-## 3 flipper_length_mm             .7           -.6                              
-## 4       body_mass_g             .6           -.5                .9
+## [1] 3
 \end{verbatim}
 
-あとは、以下のように出力するだけです。
+\hypertarget{su-fun-meansdn}{%
+\subsection{複数変数の平均値とSDとnを計算する関数}\label{su-fun-meansdn}}
+
+\begin{itemize}
+\tightlist
+\item
+  引数にデータフレーム（data）と変数（vars）を入れる
+\end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{write\_xlsx}\NormalTok{(cormat, }\StringTok{"out/相関行列.xlsx"}\NormalTok{)}
+\NormalTok{mean\_sd\_n }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(data, vars)\{}
+\NormalTok{data }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\FunctionTok{across}\NormalTok{(\{\{vars\}\},}
+                   \FunctionTok{list}\NormalTok{(}\AttributeTok{mean =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{mean}\NormalTok{(.x, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+                        \AttributeTok{sd =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{sd}\NormalTok{(.x, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+                        \AttributeTok{n =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{sum}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(.x)))))}
+\NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{ux76f8ux95a2ux884cux5217ux306eux53efux8996ux5316}{%
-\subsection{相関行列の可視化}\label{ux76f8ux95a2ux884cux5217ux306eux53efux8996ux5316}}
-
-\texttt{corrr}パッケージの関数で相関行列の可視化も簡単にできます。
+\begin{itemize}
+\tightlist
+\item
+  ここで定義した関数\texttt{mean\_sd\_n(\ )}にデータフレームと変数を入れると結果が表示される
+\end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{correlate}\NormalTok{(cor\_df) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{rplot}\NormalTok{()}
+\FunctionTok{mean\_sd\_n}\NormalTok{(df, bill\_length\_mm)}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{gisho12_files/figure-latex/unnamed-chunk-67-1.pdf}
+\begin{verbatim}
+## # A tibble: 1 x 3
+##   bill_length_mm_mean bill_length_mm_sd bill_length_mm_n
+##                 <dbl>             <dbl>            <int>
+## 1                43.9              5.46              342
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  vasの部分は\texttt{across(\ )}の第一引数に入れるものと同じ指定ができるため，変数ベクトルやヘルパー関数が入る
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 変数ベクトル}
+\FunctionTok{mean\_sd\_n}\NormalTok{(df, }\FunctionTok{c}\NormalTok{(flipper\_length\_mm, body\_mass\_g))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 6
+##   flipper_length_mm_mean flipper_length_mm_sd flipper_length_mm_n
+##                    <dbl>                <dbl>               <int>
+## 1                   201.                 14.1                 342
+## # ... with 3 more variables: body_mass_g_mean <dbl>,
+## #   body_mass_g_sd <dbl>, body_mass_g_n <int>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 文字でも可能}
+\CommentTok{\# mean\_sd\_n(df, c("flipper\_length\_mm", "body\_mass\_g"))}
+
+\CommentTok{\# ヘルパー関数}
+\FunctionTok{mean\_sd\_n}\NormalTok{(df, }\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"bill"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 6
+##   bill_length_mm_mean bill_length_mm_sd bill_length_mm_n
+##                 <dbl>             <dbl>            <int>
+## 1                43.9              5.46              342
+## # ... with 3 more variables: bill_depth_mm_mean <dbl>,
+## #   bill_depth_mm_sd <dbl>, bill_depth_mm_n <int>
+\end{verbatim}
 
 \hypertarget{ux3042ux3068ux304cux304d}{%
 \chapter*{あとがき}\label{ux3042ux3068ux304cux304d}}
 \addcontentsline{toc}{chapter}{あとがき}
 
-初めての同人誌執筆が終わろうとしています。執筆に用いたBookdownについて前より理解が深まったと同時に、全然わからないことも増えました。。執筆途中で、メインで使っていたノートPCの充電ができなくなるというアクシデントにも見舞われました。こうした様々な学びを活かして、次回作につなげられればと思います。
+あとがき
 
 本書の執筆にあたり、同人誌制作の先輩である\texttt{天川榎@EnokiAmakawa}氏から背中押し＆多くの助言をいただきました。この場を借りてお礼申し上げます。
-
-この本の内容が、なるべく多くの方に届いて、みんなの仕事の効率化につながればうれしいです。そして、Rの可能性がさらに多くの方に認識され、Rを使ってお仕事できる環境が一層整っていくことを願ってやみません。
 
 \clearpage
 \vspace*{\stretch{1}}
