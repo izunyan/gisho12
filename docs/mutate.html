@@ -1,83 +1,306 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="" xml:lang="">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>5 新しい変数（列）の作成：mutate( ) | がんばらないデータ加工：Rによる繰り返し作業入門（前編）</title>
-<meta name="author" content="やわらかクジラ">
-<meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="5 新しい変数（列）の作成：mutate( ) | がんばらないデータ加工：Rによる繰り返し作業入門（前編）">
-<meta property="og:type" content="book">
-<meta property="og:image" content="/images/cover.png">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="5 新しい変数（列）の作成：mutate( ) | がんばらないデータ加工：Rによる繰り返し作業入門（前編）">
-<meta name="twitter:image" content="/images/cover.png">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="bs4_style.css">
-<meta name="description" content="パッケージdplyrの関数mutate() 新しい変数の列を作成する 既にある mutateの機能解説 効率化のためのacross()  5.1 データ読み込み 国際パーソナリティ項目プールからの2800名分のデータ。 質問項目が25問あり，5つの構成概念（ここでは因子という）に対応する項目への回答を足し合わせたスコアを計算する 性，教育歴，年齢の変数もあり...">
-<meta property="og:description" content="パッケージdplyrの関数mutate() 新しい変数の列を作成する 既にある mutateの機能解説 効率化のためのacross()  5.1 データ読み込み 国際パーソナリティ項目プールからの2800名分のデータ。 質問項目が25問あり，5つの構成概念（ここでは因子という）に対応する項目への回答を足し合わせたスコアを計算する 性，教育歴，年齢の変数もあり...">
-<meta name="twitter:description" content="パッケージdplyrの関数mutate() 新しい変数の列を作成する 既にある mutateの機能解説 効率化のためのacross()  5.1 データ読み込み 国際パーソナリティ項目プールからの2800名分のデータ。 質問項目が25問あり，5つの構成概念（ここでは因子という）に対応する項目への回答を足し合わせたスコアを計算する 性，教育歴，年齢の変数もあり...">
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>5 新しい変数（列）の作成：mutate( ) | がんばらないデータ加工：Rによる繰り返し作業入門（前編）</title>
+  <meta name="description" content="5 新しい変数（列）の作成：mutate( ) | がんばらないデータ加工：Rによる繰り返し作業入門（前編）" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="5 新しい変数（列）の作成：mutate( ) | がんばらないデータ加工：Rによる繰り返し作業入門（前編）" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="/images/cover.png" />
+  
+  <meta name="github-repo" content="https://github.com/izunyan/gisho12.git" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="5 新しい変数（列）の作成：mutate( ) | がんばらないデータ加工：Rによる繰り返し作業入門（前編）" />
+  
+  
+  <meta name="twitter:image" content="/images/cover.png" />
+
+<meta name="author" content="やわらかクジラ" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="filter.html"/>
+<link rel="next" href="summarise.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
 </head>
-<body data-spy="scroll" data-target="#toc">
 
-<div class="container-fluid">
-<div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+<body>
 
-    <div class="d-flex align-items-start justify-content-between">
-      <h1>
-        <a href="index.html" title="">がんばらないデータ加工：Rによる繰り返し作業入門（前編）</a>
-      </h1>
-      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>はじめに</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#本書の特徴"><i class="fa fa-check"></i>本書の特徴</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#想定読者"><i class="fa fa-check"></i>想定読者</a></li>
+<li class="chapter" data-level="0.0.1" data-path="index.html"><a href="index.html#前提"><i class="fa fa-check"></i><b>0.0.1</b> 前提</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#執筆環境"><i class="fa fa-check"></i>執筆環境</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#注意事項など"><i class="fa fa-check"></i>注意事項など</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#huroku"><i class="fa fa-check"></i>特別付録について</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="premise.html"><a href="premise.html"><i class="fa fa-check"></i><b>1</b> 前提知識</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="premise.html"><a href="premise.html#p-howtoread"><i class="fa fa-check"></i><b>1.1</b> 本書に出てくるコード部分の見方</a></li>
+<li class="chapter" data-level="1.2" data-path="premise.html"><a href="premise.html#p-project"><i class="fa fa-check"></i><b>1.2</b> プロジェクト</a></li>
+<li class="chapter" data-level="1.3" data-path="premise.html"><a href="premise.html#p-package"><i class="fa fa-check"></i><b>1.3</b> パッケージ</a></li>
+<li class="chapter" data-level="1.4" data-path="premise.html"><a href="premise.html#p-function"><i class="fa fa-check"></i><b>1.4</b> 関数</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="premise.html"><a href="premise.html#p-function-ex"><i class="fa fa-check"></i><b>1.4.1</b> 例</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="premise.html"><a href="premise.html#p-object"><i class="fa fa-check"></i><b>1.5</b> オブジェクト</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="premise.html"><a href="premise.html#p-object-ex"><i class="fa fa-check"></i><b>1.5.1</b> 例</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="premise.html"><a href="premise.html#p-df"><i class="fa fa-check"></i><b>1.6</b> データフレーム</a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="premise.html"><a href="premise.html#本書で使う主なデータ"><i class="fa fa-check"></i><b>1.6.1</b> 本書で使う主なデータ</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="premise.html"><a href="premise.html#p-pipe"><i class="fa fa-check"></i><b>1.7</b> %&gt;% （パイプ演算子）</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="select.html"><a href="select.html"><i class="fa fa-check"></i><b>2</b> 変数（列）を選ぶ：select( )</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="select.html"><a href="select.html#select-read"><i class="fa fa-check"></i><b>2.1</b> データ読み込み</a></li>
+<li class="chapter" data-level="2.2" data-path="select.html"><a href="select.html#select-standard"><i class="fa fa-check"></i><b>2.2</b> 基本</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="select.html"><a href="select.html#select-range"><i class="fa fa-check"></i><b>2.2.1</b> 範囲指定</a></li>
+<li class="chapter" data-level="2.2.2" data-path="select.html"><a href="select.html#select_cha"><i class="fa fa-check"></i><b>2.2.2</b> 中身が文字でも動く</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="select.html"><a href="select.html#select-helper"><i class="fa fa-check"></i><b>2.3</b> 変数の指定に便利なヘルパー関数</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="select.html"><a href="select.html#select_helper1"><i class="fa fa-check"></i><b>2.3.1</b> 変数名の最初の文字列</a></li>
+<li class="chapter" data-level="2.3.2" data-path="select.html"><a href="select.html#select-helper2"><i class="fa fa-check"></i><b>2.3.2</b> 変数名の最後の文字列</a></li>
+<li class="chapter" data-level="2.3.3" data-path="select.html"><a href="select.html#select-helper3"><i class="fa fa-check"></i><b>2.3.3</b> 変数名のどこかに含まれる文字列</a></li>
+<li class="chapter" data-level="2.3.4" data-path="select.html"><a href="select.html#select-helper5"><i class="fa fa-check"></i><b>2.3.4</b> 上記の組み合わせ</a></li>
+<li class="chapter" data-level="2.3.5" data-path="select.html"><a href="select.html#select-helper6"><i class="fa fa-check"></i><b>2.3.5</b> 数値範囲</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="select.html"><a href="select.html#select-drop"><i class="fa fa-check"></i><b>2.4</b> 特定の変数を選ばない（落とす）</a></li>
+<li class="chapter" data-level="2.5" data-path="select.html"><a href="select.html#変数を並び変える"><i class="fa fa-check"></i><b>2.5</b> 変数を並び変える</a></li>
+<li class="chapter" data-level="2.6" data-path="select.html"><a href="select.html#変数名を変更する"><i class="fa fa-check"></i><b>2.6</b> 変数名を変更する</a></li>
+<li class="chapter" data-level="2.7" data-path="select.html"><a href="select.html#関心のある変数名を取得する"><i class="fa fa-check"></i><b>2.7</b> 関心のある変数名を取得する</a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="select.html"><a href="select.html#全ての変数名"><i class="fa fa-check"></i><b>2.7.1</b> 全ての変数名</a></li>
+<li class="chapter" data-level="2.7.2" data-path="select.html"><a href="select.html#選択した変数名を取得"><i class="fa fa-check"></i><b>2.7.2</b> 選択した変数名を取得</a></li>
+<li class="chapter" data-level="2.7.3" data-path="select.html"><a href="select.html#コピペに便利な形式に出力"><i class="fa fa-check"></i><b>2.7.3</b> コピペに便利な形式に出力</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="select.html"><a href="select.html#応用編複数データフレームで同時にselect"><i class="fa fa-check"></i><b>2.8</b> 【応用編】複数データフレームで同時にselect</a>
+<ul>
+<li class="chapter" data-level="2.8.1" data-path="select.html"><a href="select.html#複数データフレームで同じようにselect"><i class="fa fa-check"></i><b>2.8.1</b> 複数データフレームで同じようにselect</a></li>
+<li class="chapter" data-level="2.8.2" data-path="select.html"><a href="select.html#複数データフレームで別々にselect"><i class="fa fa-check"></i><b>2.8.2</b> 複数データフレームで別々にselect</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="rename.html"><a href="rename.html"><i class="fa fa-check"></i><b>3</b> 変数名を変更する：rename( )</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="rename.html"><a href="rename.html#rename-standard"><i class="fa fa-check"></i><b>3.1</b> 基本</a></li>
+<li class="chapter" data-level="3.2" data-path="rename.html"><a href="rename.html#rename-samew"><i class="fa fa-check"></i><b>3.2</b> 同じ語を共通の語で置き換える</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="rename.html"><a href="rename.html#rename-strreplace1"><i class="fa fa-check"></i><b>3.2.1</b> 【効率化】str_replace()で一括変換(1)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="rename.html"><a href="rename.html#rename-remove"><i class="fa fa-check"></i><b>3.3</b> 同じ語を削除する</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="rename.html"><a href="rename.html#rename-strreplace2"><i class="fa fa-check"></i><b>3.3.1</b> 【効率化】str_replace()で一括変換（2）</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="rename.html"><a href="rename.html#rename-add"><i class="fa fa-check"></i><b>3.4</b> 同じ接尾辞をつける</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="rename.html"><a href="rename.html#rename-strc"><i class="fa fa-check"></i><b>3.4.1</b> 【効率化】str_c()で一括指定</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="rename.html"><a href="rename.html#rename-samew-z"><i class="fa fa-check"></i><b>3.5</b> 同</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="rename.html"><a href="rename.html#rename-z2"><i class="fa fa-check"></i><b>3.5.1</b> 【効率化】</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="filter.html"><a href="filter.html"><i class="fa fa-check"></i><b>4</b> ケース（行）を選ぶ</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="filter.html"><a href="filter.html#filter1"><i class="fa fa-check"></i><b>4.1</b> 基本</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="mutate.html"><a href="mutate.html"><i class="fa fa-check"></i><b>5</b> 新しい変数（列）の作成：mutate( )</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="mutate.html"><a href="mutate.html#mu-read"><i class="fa fa-check"></i><b>5.1</b> データ読み込み</a></li>
+<li class="chapter" data-level="5.2" data-path="mutate.html"><a href="mutate.html#mu-standard"><i class="fa fa-check"></i><b>5.2</b> 基本</a></li>
+<li class="chapter" data-level="5.3" data-path="mutate.html"><a href="mutate.html#mu-kata"><i class="fa fa-check"></i><b>5.3</b> 変数の型の変換</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="mutate.html"><a href="mutate.html#mu-kata-trans"><i class="fa fa-check"></i><b>5.3.1</b> 型の変換</a></li>
+<li class="chapter" data-level="5.3.2" data-path="mutate.html"><a href="mutate.html#mu-kata-across"><i class="fa fa-check"></i><b>5.3.2</b> 【効率化】複数の変数に対し一度の指定で実行</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="mutate.html"><a href="mutate.html#mu-across"><i class="fa fa-check"></i><b>5.4</b> across( )の特徴</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="mutate.html"><a href="mutate.html#mu-across-list"><i class="fa fa-check"></i><b>5.4.1</b> 【重要知識！】新しい変数名にして追加</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="mutate.html"><a href="mutate.html#mu-total"><i class="fa fa-check"></i><b>5.5</b> 合計点の作成</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="mutate.html"><a href="mutate.html#mu-total-na"><i class="fa fa-check"></i><b>5.5.1</b> 足し上げる変数に欠損があるとどうなるか</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="mutate.html"><a href="mutate.html#変数の値を数値から文字列に変える"><i class="fa fa-check"></i><b>5.6</b> 変数の値を数値から文字列に変える</a></li>
+<li class="chapter" data-level="5.7" data-path="mutate.html"><a href="mutate.html#mu-seq"><i class="fa fa-check"></i><b>5.7</b> 連番からIDの作成</a>
+<ul>
+<li class="chapter" data-level="5.7.1" data-path="mutate.html"><a href="mutate.html#mu-seq-other"><i class="fa fa-check"></i><b>5.7.1</b> 【別解】行の名前を直接変数化</a></li>
+</ul></li>
+<li class="chapter" data-level="5.8" data-path="mutate.html"><a href="mutate.html#mu-rev"><i class="fa fa-check"></i><b>5.8</b> 逆転項目を作る</a>
+<ul>
+<li class="chapter" data-level="5.8.1" data-path="mutate.html"><a href="mutate.html#mu-rev-check"><i class="fa fa-check"></i><b>5.8.1</b> 逆転項目の確認</a></li>
+<li class="chapter" data-level="5.8.2" data-path="mutate.html"><a href="mutate.html#mu-rev-recode"><i class="fa fa-check"></i><b>5.8.2</b> 逆転（recode）</a></li>
+<li class="chapter" data-level="5.8.3" data-path="mutate.html"><a href="mutate.html#mu-rev-rule"><i class="fa fa-check"></i><b>5.8.3</b> 【別解】逆転（公式）</a></li>
+</ul></li>
+<li class="chapter" data-level="5.9" data-path="mutate.html"><a href="mutate.html#mu-total-ef"><i class="fa fa-check"></i><b>5.9</b> 【別解】合計点の作成</a>
+<ul>
+<li class="chapter" data-level="5.9.1" data-path="mutate.html"><a href="mutate.html#確認"><i class="fa fa-check"></i><b>5.9.1</b> 【確認】</a></li>
+</ul></li>
+<li class="chapter" data-level="5.10" data-path="mutate.html"><a href="mutate.html#連続変数をカテゴリに区分する"><i class="fa fa-check"></i><b>5.10</b> 連続変数をカテゴリに区分する</a>
+<ul>
+<li class="chapter" data-level="5.10.1" data-path="mutate.html"><a href="mutate.html#分布の把握"><i class="fa fa-check"></i><b>5.10.1</b> 分布の把握</a></li>
+<li class="chapter" data-level="5.10.2" data-path="mutate.html"><a href="mutate.html#区分"><i class="fa fa-check"></i><b>5.10.2</b> 2区分</a></li>
+<li class="chapter" data-level="5.10.3" data-path="mutate.html"><a href="mutate.html#区分以上"><i class="fa fa-check"></i><b>5.10.3</b> 3区分以上</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="summarise.html"><a href="summarise.html"><i class="fa fa-check"></i><b>6</b> 要約値を作る：summarise( )</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="summarise.html"><a href="summarise.html#su-st"><i class="fa fa-check"></i><b>6.1</b> 基本</a></li>
+<li class="chapter" data-level="6.2" data-path="summarise.html"><a href="summarise.html#su-st-multiple"><i class="fa fa-check"></i><b>6.2</b> 複数の計算</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="summarise.html"><a href="summarise.html#su-st-ef"><i class="fa fa-check"></i><b>6.2.1</b> 【効率化】</a></li>
+<li class="chapter" data-level="6.2.2" data-path="summarise.html"><a href="summarise.html#su-st-reorder"><i class="fa fa-check"></i><b>6.2.2</b> 【並び替え】</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="summarise.html"><a href="summarise.html#su-group"><i class="fa fa-check"></i><b>6.3</b> 層別（グループ別）集計</a></li>
+<li class="chapter" data-level="6.4" data-path="summarise.html"><a href="summarise.html#su-fun"><i class="fa fa-check"></i><b>6.4</b> 【効率化】関数にする</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="summarise.html"><a href="summarise.html#su-fun-st"><i class="fa fa-check"></i><b>6.4.1</b> 基本</a></li>
+<li class="chapter" data-level="6.4.2" data-path="summarise.html"><a href="summarise.html#su-fun-meansdn"><i class="fa fa-check"></i><b>6.4.2</b> 複数変数の平均値とSDとnを計算する関数</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="あとがき.html"><a href="あとがき.html"><i class="fa fa-check"></i>あとがき</a></li>
+</ul>
+
+      </nav>
     </div>
 
-    <div id="main-nav" class="collapse-lg">
-      <form role="search">
-        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
-</form>
-
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html">はじめに</a></li>
-<li><a class="" href="premise.html"><span class="header-section-number">1</span> 前提知識</a></li>
-<li><a class="" href="select.html"><span class="header-section-number">2</span> 変数（列）を選ぶ：select( )</a></li>
-<li><a class="" href="rename.html"><span class="header-section-number">3</span> 変数名を変更する：rename( )</a></li>
-<li><a class="" href="filter.html"><span class="header-section-number">4</span> ケース（行）を選ぶ</a></li>
-<li><a class="active" href="mutate.html"><span class="header-section-number">5</span> 新しい変数（列）の作成：mutate( )</a></li>
-<li><a class="" href="summarise.html"><span class="header-section-number">6</span> 要約値を作る：summarise( )</a></li>
-<li><a class="" href="%E3%81%82%E3%81%A8%E3%81%8C%E3%81%8D.html">あとがき</a></li>
-</ul>
-
-        <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/izunyan/gisho12.git">View book source <i class="fab fa-github"></i></a></p>
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">がんばらないデータ加工：Rによる繰り返し作業入門（前編）</a>
+          </h1>
         </div>
-      </nav>
-</div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="mutate" class="section level1" number="5">
-<h1>
-<span class="header-section-number">5</span> 新しい変数（列）の作成：mutate( )<a class="anchor" aria-label="anchor" href="#mutate"><i class="fas fa-link"></i></a>
-</h1>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="mutate" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> 新しい変数（列）の作成：mutate( )</h1>
 <ul>
-<li>パッケージ<code>dplyr</code>の関数<code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code>
-</li>
-<li>新しい変数の列を作成する
-<ul>
-<li>既にある</li>
-</ul>
-</li>
+<li>パッケージ<code>dplyr</code>の関数<code>mutate()</code></li>
+<li>新しい変数の列を作成する</li>
 <li>mutateの機能解説</li>
-<li>効率化のための<code><a href="https://dplyr.tidyverse.org/reference/across.html">across()</a></code>
-</li>
+<li>効率化のための<code>across()</code></li>
 </ul>
 <div id="mu-read" class="section level2" number="5.1">
-<h2>
-<span class="header-section-number">5.1</span> データ読み込み<a class="anchor" aria-label="anchor" href="#mu-read"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">5.1</span> データ読み込み</h2>
 <ul>
-<li>国際パーソナリティ項目プールからの2800名分のデータ。</li>
+<li><code>psychTools</code>パッケージに入っている国際パーソナリティ項目プールからの2800名分のデータ</li>
 <li>質問項目が25問あり，5つの構成概念（ここでは因子という）に対応する項目への回答を足し合わせたスコアを計算する</li>
 <li>性，教育歴，年齢の変数もあり</li>
 <li>項目に対し想定される因子（因子名の頭文字が変数名と対応）
@@ -87,8 +310,7 @@
 <li>Extraversion E1からE5</li>
 <li>Neuroticism　 N1からN5</li>
 <li>Openness　　 O1からO5</li>
-</ul>
-</li>
+</ul></li>
 <li>回答選択肢
 <ul>
 <li>1 Very Inaccurate まったくあてはまらない</li>
@@ -97,30 +319,27 @@
 <li>4 Slightly Accurate ややあてはまる</li>
 <li>5 Moderately Accurate あてはまる</li>
 <li>6 Very Accurate 非常にあてはまる</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># 繝代ャ繧ｱ繝ｼ繧ｸ縺悟&lt;85&gt;･縺｣縺ｦ縺ｪ縺代ｌ縺ｰ荳玖ｨ伜ｮ溯｡&lt;8c&gt;</span>NA<span class="co"># install.packages("psychTools")</span>
-
-<span class="va">df_bfi</span> <span class="op">&lt;-</span> 
-  <span class="fu">psychTools</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/psychTools/man/bfi.html">bfi</a></span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span>         <span class="co"># 陦ｨ遉ｺ縺ｫ萓ｿ蛻ｩ縺ｪtibble蠖｢蠑上↓</span>NA</code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="mutate.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="co"># パッケージが入ってなければ下記実行</span></span>
+<span id="cb96-2"><a href="mutate.html#cb96-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;psychTools&quot;)</span></span>
+<span id="cb96-3"><a href="mutate.html#cb96-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-4"><a href="mutate.html#cb96-4" aria-hidden="true" tabindex="-1"></a>df_bfi <span class="ot">&lt;-</span> </span>
+<span id="cb96-5"><a href="mutate.html#cb96-5" aria-hidden="true" tabindex="-1"></a>  psychTools<span class="sc">::</span>bfi <span class="sc">%&gt;%</span> </span>
+<span id="cb96-6"><a href="mutate.html#cb96-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>()         <span class="co"># 表示に便利なtibble形式に</span></span></code></pre></div>
 </div>
 <div id="mu-standard" class="section level2" number="5.2">
-<h2>
-<span class="header-section-number">5.2</span> 基本<a class="anchor" aria-label="anchor" href="#mu-standard"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">5.2</span> 基本</h2>
 <ul>
-<li>データフレームに新しい列を計算して追加する関数</li>
-<li>
-<code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate( )</a></code>の中に新しく作成する変数名を入れ，<code>=</code>でつないで計算式を入れる</li>
+<li>データフレームに新しい列を計算して追加するまたは置き換える関数</li>
+<li><code>mutate( )</code>の中に新しく作成する変数名を入れ，<code>=</code>でつないで計算式を入れる</li>
 <li>ここでは，まず変数A1の平均値（全ケース同じ値が入る）を計算し，個々の値の差分をする例を示す</li>
 </ul>
-<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_bfi</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">A1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>                      <span class="co"># A1縺ｮ縺ｿ繧呈ｮ九☆</span>NA<span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>
-    mean_a1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">A1</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="co"># A1縺ｮ蟷ｳ蝮&lt;87&gt;蛟､繧剃ｽ懈&lt;88&gt;撰ｼ&lt;88&gt;NA縺ｯ髯､螟厄ｼ&lt;89&gt;</span>NA<span class="op">=</span> <span class="va">A1</span> <span class="op">-</span> <span class="va">mean_a1</span><span class="op">)</span>       <span class="co"># 蜷&lt;84&gt;蛟倶ｽ薙&lt;81&gt;ｮA1縺ｨ蟷ｳ蝮&lt;87&gt;蛟､縺ｮ蟾ｮ蛻&lt;86&gt;繧定ｨ育ｮ&lt;97&gt;</span>NA</code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="mutate.html#cb97-1" aria-hidden="true" tabindex="-1"></a>df_bfi <span class="sc">%&gt;%</span> </span>
+<span id="cb97-2"><a href="mutate.html#cb97-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(A1) <span class="sc">%&gt;%</span>                      <span class="co"># A1のみを残す</span></span>
+<span id="cb97-3"><a href="mutate.html#cb97-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb97-4"><a href="mutate.html#cb97-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_a1 =</span> <span class="fu">mean</span>(A1, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="co"># A1の平均値を作成（NAは除外）</span></span>
+<span id="cb97-5"><a href="mutate.html#cb97-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">dif_a1_mean =</span> A1 <span class="sc">-</span> mean_a1)       <span class="co"># 各個体のA1と平均値の差分を計算</span></span></code></pre></div>
 <pre><code>## # A tibble: 2,800 x 3
 ##      A1 mean_a1 dif_a1_mean
 ##   &lt;int&gt;   &lt;dbl&gt;       &lt;dbl&gt;
@@ -134,31 +353,22 @@
 </ul>
 </div>
 <div id="mu-kata" class="section level2" number="5.3">
-<h2>
-<span class="header-section-number">5.3</span> 変数の型の変換<a class="anchor" aria-label="anchor" href="#mu-kata"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">5.3</span> 変数の型の変換</h2>
 <ul>
 <li>変数には型の情報が伴い，統計解析やデータ加工の際に適切な型を求められることがあるため理解が必要
 <ul>
-<li>小数も扱う数値 <em><code>&lt;dbl&gt;</code></em>
-</li>
-<li>整数 <em><code>&lt;int&gt;</code></em>
-</li>
-<li>文字 <em><code>&lt;chr&gt;</code></em>
-</li>
-<li>因子 <em><code>&lt;fct&gt;</code></em>
-</li>
-</ul>
-</li>
-<li>変数の型の確認は色々方法があるが，tibble形式のデータフレームなら<code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code>でOK
+<li>小数も扱う数値 <em><code>&lt;dbl&gt;</code></em></li>
+<li>整数 <em><code>&lt;int&gt;</code></em></li>
+<li>文字 <em><code>&lt;chr&gt;</code></em></li>
+<li>因子 <em><code>&lt;fct&gt;</code></em></li>
+</ul></li>
+<li>変数の型の確認は色々方法があるが，tibble形式のデータフレームなら<code>select()</code>でOK
 <ul>
-<li>tibble形式でなくても，最後に<code><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse()</a></code>で確認可能</li>
+<li>tibble形式でなくても，最後に<code>glimpse()</code>で確認可能</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_bfi</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">gender</span>, <span class="va">education</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="mutate.html#cb99-1" aria-hidden="true" tabindex="-1"></a>df_bfi <span class="sc">%&gt;%</span> </span>
+<span id="cb99-2"><a href="mutate.html#cb99-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(gender, education)</span></code></pre></div>
 <pre><code>## # A tibble: 2,800 x 2
 ##   gender education
 ##    &lt;int&gt;     &lt;int&gt;
@@ -166,10 +376,9 @@
 ## 2      2        NA
 ## 3      2        NA
 ## # ... with 2,797 more rows</code></pre>
-<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_bfi</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">gender</span>, <span class="va">education</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="mutate.html#cb101-1" aria-hidden="true" tabindex="-1"></a>df_bfi <span class="sc">%&gt;%</span></span>
+<span id="cb101-2"><a href="mutate.html#cb101-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(gender, education) <span class="sc">%&gt;%</span></span>
+<span id="cb101-3"><a href="mutate.html#cb101-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code></pre></div>
 <pre><code>## Rows: 2,800
 ## Columns: 2
 ## $ gender    &lt;int&gt; 1, 2, 2, 2, 1, 2, 1, 1, 1, 2, 1, 1, 2, 1, 1, ~
@@ -178,18 +387,15 @@
 <li>gender, education列が <em><code>&lt;int&gt;</code></em> になっているので整数型になっている</li>
 </ul>
 <div id="mu-kata-trans" class="section level3" number="5.3.1">
-<h3>
-<span class="header-section-number">5.3.1</span> 型の変換<a class="anchor" aria-label="anchor" href="#mu-kata-trans"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">5.3.1</span> 型の変換</h3>
 <ul>
 <li>ここでは，2つの数値型変数gender, educationを因子型に変換する例を示す</li>
-<li>それぞれ<code><a href="https://rdrr.io/r/base/factor.html">factor()</a></code>で因子型に変換</li>
+<li>それぞれ<code>factor()</code>で因子型に変換</li>
 </ul>
-<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_bfi</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">gender</span>, <span class="va">education</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>gender <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">gender</span><span class="op">)</span>,
-         education <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">education</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="mutate.html#cb103-1" aria-hidden="true" tabindex="-1"></a>df_bfi <span class="sc">%&gt;%</span></span>
+<span id="cb103-2"><a href="mutate.html#cb103-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(gender, education) <span class="sc">%&gt;%</span> </span>
+<span id="cb103-3"><a href="mutate.html#cb103-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gender =</span> <span class="fu">factor</span>(gender),</span>
+<span id="cb103-4"><a href="mutate.html#cb103-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">education =</span> <span class="fu">factor</span>(education))</span></code></pre></div>
 <pre><code>## # A tibble: 2,800 x 2
 ##   gender education
 ##   &lt;fct&gt;  &lt;fct&gt;    
@@ -202,23 +408,18 @@
 </ul>
 </div>
 <div id="mu-kata-across" class="section level3" number="5.3.2">
-<h3>
-<span class="header-section-number">5.3.2</span> 【効率化】複数の変数に対し一度の指定で実行<a class="anchor" aria-label="anchor" href="#mu-kata-across"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">5.3.2</span> 【効率化】複数の変数に対し一度の指定で実行</h3>
 <ul>
 <li>変換したい変数が大量にあるときは上記の方法では大変</li>
-<li>
-<code><a href="https://dplyr.tidyverse.org/reference/across.html">across()</a></code>を使うと，指定した変数に対して同じ内容の処理なら <strong>1回</strong> ですむようになる
+<li><code>across()</code>を使うと，指定した変数に対して同じ内容の処理なら <strong>1回</strong> ですむようになる
 <ul>
-<li>かつての<code><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_at()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_if()</a></code>など</li>
+<li>かつての<code>mutate_at()</code>, <code>mutate_if()</code>など</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_bfi</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">gender</span>, <span class="va">education</span><span class="op">)</span>,
-                <span class="va">factor</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">gender</span>, <span class="va">education</span><span class="op">)</span>   <span class="co"># 邨先棡陦ｨ遉ｺ縺ｮ縺溘ａ蜀鈴聞縺<a0>縺悟､峨ｏ縺｣縺溷､画焚縺<a0>縺壮elect</a0></a0></span>NA</code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="mutate.html#cb105-1" aria-hidden="true" tabindex="-1"></a>df_bfi <span class="sc">%&gt;%</span></span>
+<span id="cb105-2"><a href="mutate.html#cb105-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(gender, education),</span>
+<span id="cb105-3"><a href="mutate.html#cb105-3" aria-hidden="true" tabindex="-1"></a>                factor)) <span class="sc">%&gt;%</span> </span>
+<span id="cb105-4"><a href="mutate.html#cb105-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(gender, education)   <span class="co"># 結果表示のため冗長だが変わった変数だけselect</span></span></code></pre></div>
 <pre><code>## # A tibble: 2,800 x 2
 ##   gender education
 ##   &lt;fct&gt;  &lt;fct&gt;    
@@ -229,17 +430,14 @@
 </div>
 </div>
 <div id="mu-across" class="section level2" number="5.4">
-<h2>
-<span class="header-section-number">5.4</span> across( )の特徴<a class="anchor" aria-label="anchor" href="#mu-across"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">5.4</span> across( )の特徴</h2>
 <ul>
 <li>変数の指定に<a href="select.html#select-helper">2.3</a>で解説したヘルパー関数が使える</li>
 </ul>
-<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_bfi</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"n"</span><span class="op">)</span>,
-                <span class="va">factor</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"n"</span><span class="op">)</span><span class="op">)</span>   <span class="co"># 邨先棡陦ｨ遉ｺ縺ｮ縺溘ａ</span>NA</code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="mutate.html#cb107-1" aria-hidden="true" tabindex="-1"></a>df_bfi <span class="sc">%&gt;%</span></span>
+<span id="cb107-2"><a href="mutate.html#cb107-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">starts_with</span>(<span class="st">&quot;n&quot;</span>),</span>
+<span id="cb107-3"><a href="mutate.html#cb107-3" aria-hidden="true" tabindex="-1"></a>                factor)) <span class="sc">%&gt;%</span> </span>
+<span id="cb107-4"><a href="mutate.html#cb107-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">&quot;n&quot;</span>))   <span class="co"># 結果表示のため</span></span></code></pre></div>
 <pre><code>## # A tibble: 2,800 x 5
 ##   N1    N2    N3    N4    N5   
 ##   &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;
@@ -248,16 +446,14 @@
 ## 3 4     5     4     2     3    
 ## # ... with 2,797 more rows</code></pre>
 <ul>
-<li>
-<a href="#select-cha"><strong>??</strong></a>で解説した文字も使える</li>
+<li><a href="#select-cha"><strong>??</strong></a>で解説した文字も使える</li>
 </ul>
-<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"N1"</span>, <span class="st">"N2"</span>, <span class="st">"N3"</span>, <span class="st">"N4"</span>, <span class="st">"N5"</span><span class="op">)</span>
-
-<span class="va">df_bfi</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html">all_of</a></span><span class="op">(</span><span class="va">vars</span><span class="op">)</span>,
-                <span class="va">factor</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"n"</span><span class="op">)</span><span class="op">)</span>   <span class="co"># 邨先棡陦ｨ遉ｺ縺ｮ縺溘ａ</span>NA</code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="mutate.html#cb109-1" aria-hidden="true" tabindex="-1"></a>vars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;N1&quot;</span>, <span class="st">&quot;N2&quot;</span>, <span class="st">&quot;N3&quot;</span>, <span class="st">&quot;N4&quot;</span>, <span class="st">&quot;N5&quot;</span>)</span>
+<span id="cb109-2"><a href="mutate.html#cb109-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb109-3"><a href="mutate.html#cb109-3" aria-hidden="true" tabindex="-1"></a>df_bfi <span class="sc">%&gt;%</span></span>
+<span id="cb109-4"><a href="mutate.html#cb109-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(vars),</span>
+<span id="cb109-5"><a href="mutate.html#cb109-5" aria-hidden="true" tabindex="-1"></a>                factor)) <span class="sc">%&gt;%</span> </span>
+<span id="cb109-6"><a href="mutate.html#cb109-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">&quot;n&quot;</span>))   <span class="co"># 結果表示のため</span></span></code></pre></div>
 <pre><code>## # A tibble: 2,800 x 5
 ##   N1    N2    N3    N4    N5   
 ##   &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;
@@ -266,25 +462,20 @@
 ## 3 4     5     4     2     3    
 ## # ... with 2,797 more rows</code></pre>
 <div id="mu-across-list" class="section level3" number="5.4.1">
-<h3>
-<span class="header-section-number">5.4.1</span> 【重要知識！】新しい変数名にして追加<a class="anchor" aria-label="anchor" href="#mu-across-list"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">5.4.1</span> 【重要知識！】新しい変数名にして追加</h3>
 <ul>
 <li>ここはこの後色々なところで出てくる方法のため理解しておきたい</li>
-<li>適用する関数をリストにする（<code><a href="https://rdrr.io/r/base/list.html">list()</a></code>に入れる）ことで，変数名を変更して追加できる</li>
-<li>
-<code><a href="https://rdrr.io/r/base/list.html">list()</a></code>に入れるときはこれまでと異なる書き方が必要になる
+<li>適用する関数をリストにする（<code>list()</code>に入れる）ことで，変数名を変更して追加できる</li>
+<li><code>list()</code>に入れるときはこれまでと異なる書き方が必要になる
 <ul>
 <li>関数名の前に<code>~</code>（チルダ）が必要</li>
-<li>list内の関数<code>()</code>内に<code>.x</code>が必要（この場合はxがなくても動く）。ここに<code><a href="https://dplyr.tidyverse.org/reference/across.html">across()</a></code>の第一引数に指定した変数が入っていくという意味</li>
+<li>list内の関数<code>()</code>内に<code>.x</code>が必要（この場合はxがなくてピリオドのみでも動く）。ここに<code>across()</code>の第一引数に指定した変数が入っていくという意味</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_bfi</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">gender</span>, <span class="va">education</span><span class="op">)</span>,
-                <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>f <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">matches</a></span><span class="op">(</span><span class="st">"gender|education"</span><span class="op">)</span><span class="op">)</span>   </code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="mutate.html#cb111-1" aria-hidden="true" tabindex="-1"></a>df_bfi <span class="sc">%&gt;%</span></span>
+<span id="cb111-2"><a href="mutate.html#cb111-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(gender, education),</span>
+<span id="cb111-3"><a href="mutate.html#cb111-3" aria-hidden="true" tabindex="-1"></a>                <span class="fu">list</span>(<span class="at">f =</span> <span class="sc">~</span><span class="fu">factor</span>(.x)))) <span class="sc">%&gt;%</span> </span>
+<span id="cb111-4"><a href="mutate.html#cb111-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">matches</span>(<span class="st">&quot;gender|education&quot;</span>))   </span></code></pre></div>
 <pre><code>## # A tibble: 2,800 x 4
 ##   gender education gender_f education_f
 ##    &lt;int&gt;     &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;      
@@ -298,16 +489,20 @@
 </div>
 </div>
 <div id="mu-total" class="section level2" number="5.5">
-<h2>
-<span class="header-section-number">5.5</span> 合計点の作成<a class="anchor" aria-label="anchor" href="#mu-total"><i class="fas fa-link"></i></a>
-</h2>
-<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_bfi_n</span> <span class="op">&lt;-</span> 
-  <span class="va">df_bfi</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">N1</span><span class="op">:</span><span class="va">N5</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>                       
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>neuroticism <span class="op">=</span> <span class="va">N1</span> <span class="op">+</span> <span class="va">N2</span> <span class="op">+</span> <span class="va">N3</span> <span class="op">+</span> <span class="va">N4</span> <span class="op">+</span> <span class="va">N5</span><span class="op">)</span>
-  
-<span class="va">df_bfi_n</span></code></pre></div>
+<h2><span class="header-section-number">5.5</span> 合計点の作成</h2>
+<ul>
+<li>変数の四則演算の式を入れれば合計得点として計算された列をデータフレーム追加できる</li>
+<li>別解で合計した例を，変数の逆転項目を反映させた後に <a href="mutate.html#mu-total-ef">5.9</a> で解説する
+<ul>
+<li>項目数が多い場合などはこちらの方が効率化できる場合も</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="mutate.html#cb113-1" aria-hidden="true" tabindex="-1"></a>df_bfi_n <span class="ot">&lt;-</span> </span>
+<span id="cb113-2"><a href="mutate.html#cb113-2" aria-hidden="true" tabindex="-1"></a>  df_bfi <span class="sc">%&gt;%</span></span>
+<span id="cb113-3"><a href="mutate.html#cb113-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(N1<span class="sc">:</span>N5) <span class="sc">%&gt;%</span>                       </span>
+<span id="cb113-4"><a href="mutate.html#cb113-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">neuroticism =</span> N1 <span class="sc">+</span> N2 <span class="sc">+</span> N3 <span class="sc">+</span> N4 <span class="sc">+</span> N5)</span>
+<span id="cb113-5"><a href="mutate.html#cb113-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb113-6"><a href="mutate.html#cb113-6" aria-hidden="true" tabindex="-1"></a>df_bfi_n</span></code></pre></div>
 <pre><code>## # A tibble: 2,800 x 6
 ##      N1    N2    N3    N4    N5 neuroticism
 ##   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;       &lt;int&gt;
@@ -316,12 +511,12 @@
 ## 3     4     5     4     2     3          18
 ## # ... with 2,797 more rows</code></pre>
 <div id="mu-total-na" class="section level3" number="5.5.1">
-<h3>
-<span class="header-section-number">5.5.1</span> 足し上げる変数に欠損があるとどうなるか<a class="anchor" aria-label="anchor" href="#mu-total-na"><i class="fas fa-link"></i></a>
-</h3>
-<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_bfi_n</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">neuroticism</span><span class="op">)</span><span class="op">)</span>     <span class="co"># neuroticism縺君A縺ｪ繧ｱ繝ｼ繧ｹ縺ｫ髯仙ｮ&lt;9a&gt;</span>NA</code></pre></div>
+<h3><span class="header-section-number">5.5.1</span> 足し上げる変数に欠損があるとどうなるか</h3>
+<ul>
+<li>合計得点の計算の場合，対象となる変数の内1つでもNAがあれば合計点もNAとなる</li>
+</ul>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="mutate.html#cb115-1" aria-hidden="true" tabindex="-1"></a>df_bfi_n <span class="sc">%&gt;%</span> </span>
+<span id="cb115-2"><a href="mutate.html#cb115-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(neuroticism))     <span class="co"># neuroticismがNAなケースに限定</span></span></code></pre></div>
 <pre><code>## # A tibble: 106 x 6
 ##      N1    N2    N3    N4    N5 neuroticism
 ##   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;       &lt;int&gt;
@@ -331,17 +526,35 @@
 ## # ... with 103 more rows</code></pre>
 </div>
 </div>
-<div id="mu-seq" class="section level2" number="5.6">
-<h2>
-<span class="header-section-number">5.6</span> 連番からIDの作成<a class="anchor" aria-label="anchor" href="#mu-seq"><i class="fas fa-link"></i></a>
-</h2>
+<div id="変数の値を数値から文字列に変える" class="section level2" number="5.6">
+<h2><span class="header-section-number">5.6</span> 変数の値を数値から文字列に変える</h2>
 <ul>
-<li>
-<code><a href="https://dplyr.tidyverse.org/reference/ranking.html">dplyr::row_number()</a></code>で行番号からIDを作成</li>
+<li>一度因子型に変換してから<code>forcats</code>パッケージの<code>fct_recode( )</code>関数を使うと簡単</li>
+<li>ちゃんと変換の対応がついているかどうかを<code>dplyr</code>パッケージの<code>count( )</code>関数で確認
+<ul>
+<li>適切に変換されていなければ，1 = male, 2 = female以外の組み合わせも発生するため</li>
+<li><code>count( )</code>の強みは，出力がデータフレームで出てくる点なので，結果が扱いやすい</li>
+</ul></li>
 </ul>
-<div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_bfi_n</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>id <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/ranking.html">row_number</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="mutate.html#cb117-1" aria-hidden="true" tabindex="-1"></a>df_bfi <span class="sc">%&gt;%</span></span>
+<span id="cb117-2"><a href="mutate.html#cb117-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gender =</span> <span class="fu">factor</span>(gender),</span>
+<span id="cb117-3"><a href="mutate.html#cb117-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">gender_c =</span> <span class="fu">fct_recode</span>(gender, </span>
+<span id="cb117-4"><a href="mutate.html#cb117-4" aria-hidden="true" tabindex="-1"></a>                               <span class="at">male   =</span> <span class="st">&quot;1&quot;</span>,</span>
+<span id="cb117-5"><a href="mutate.html#cb117-5" aria-hidden="true" tabindex="-1"></a>                               <span class="at">female =</span> <span class="st">&quot;2&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb117-6"><a href="mutate.html#cb117-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(gender, gender_c)</span></code></pre></div>
+<pre><code>## # A tibble: 2 x 3
+##   gender gender_c     n
+##   &lt;fct&gt;  &lt;fct&gt;    &lt;int&gt;
+## 1 1      male       919
+## 2 2      female    1881</code></pre>
+</div>
+<div id="mu-seq" class="section level2" number="5.7">
+<h2><span class="header-section-number">5.7</span> 連番からIDの作成</h2>
+<ul>
+<li><code>dplyr::row_number()</code>で行番号からIDを作成</li>
+</ul>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="mutate.html#cb119-1" aria-hidden="true" tabindex="-1"></a>df_bfi_n <span class="sc">%&gt;%</span> </span>
+<span id="cb119-2"><a href="mutate.html#cb119-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">row_number</span>())</span></code></pre></div>
 <pre><code>## # A tibble: 2,800 x 7
 ##      N1    N2    N3    N4    N5 neuroticism    id
 ##   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;       &lt;int&gt; &lt;int&gt;
@@ -349,23 +562,17 @@
 ## 2     3     3     3     5     5          19     2
 ## 3     4     5     4     2     3          18     3
 ## # ... with 2,797 more rows</code></pre>
-<div id="mu-seq-other" class="section level3" number="5.6.1">
-<h3>
-<span class="header-section-number">5.6.1</span> 【別解】行の名前を直接変数化<a class="anchor" aria-label="anchor" href="#mu-seq-other"><i class="fas fa-link"></i></a>
-</h3>
+<div id="mu-seq-other" class="section level3" number="5.7.1">
+<h3><span class="header-section-number">5.7.1</span> 【別解】行の名前を直接変数化</h3>
 <ul>
 <li>実はmutateを使わなくてもできて，データの最初に持ってこれる便利関数がある</li>
-<li>
-<code><a href="https://tibble.tidyverse.org/reference/rownames.html">tibble::rowid_to_column()</a></code>
+<li><code>tibble::rowid_to_column()</code>
 <ul>
-<li>
-<code>var =</code>で変数名を指定</li>
+<li><code>var =</code>で変数名を指定</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_bfi_n</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rowid_to_column</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"id"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="mutate.html#cb121-1" aria-hidden="true" tabindex="-1"></a>df_bfi_n <span class="sc">%&gt;%</span> </span>
+<span id="cb121-2"><a href="mutate.html#cb121-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowid_to_column</span>(<span class="at">var =</span> <span class="st">&quot;id&quot;</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 2,800 x 7
 ##      id    N1    N2    N3    N4    N5 neuroticism
 ##   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;       &lt;int&gt;
@@ -373,44 +580,35 @@
 ## 2     2     3     3     3     5     5          19
 ## 3     3     4     5     4     2     3          18
 ## # ... with 2,797 more rows</code></pre>
-<div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># 縺薙&lt;81&gt;ｮ蜈井ｽｿ繧上↑縺&lt;84&gt;縺ｮ縺ｧ繝&lt;87&gt;繝ｼ繧ｿ繝輔Ξ繝ｼ繝<a0>蜑企勁</a0></span>NA<span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span><span class="va">df_bfi_n</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="mutate.html#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="co"># この先使わないのでデータフレーム削除</span></span>
+<span id="cb123-2"><a href="mutate.html#cb123-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(df_bfi_n)</span></code></pre></div>
 </div>
 </div>
-<div id="mu-rev" class="section level2" number="5.7">
-<h2>
-<span class="header-section-number">5.7</span> 逆転項目を作る<a class="anchor" aria-label="anchor" href="#mu-rev"><i class="fas fa-link"></i></a>
-</h2>
-<div id="mu-rev-check" class="section level3" number="5.7.1">
-<h3>
-<span class="header-section-number">5.7.1</span> 逆転項目の確認<a class="anchor" aria-label="anchor" href="#mu-rev-check"><i class="fas fa-link"></i></a>
-</h3>
+<div id="mu-rev" class="section level2" number="5.8">
+<h2><span class="header-section-number">5.8</span> 逆転項目を作る</h2>
+<div id="mu-rev-check" class="section level3" number="5.8.1">
+<h3><span class="header-section-number">5.8.1</span> 逆転項目の確認</h3>
 <ul>
 <li>bfiデータの場合，どの項目を逆転する必要があるかを示す情報（<code>-変数名</code>で表現）がパッケージに含まれている
 <ul>
-<li>
-<code><a href="https://rdrr.io/pkg/psychTools/man/bfi.html">psychTools::bfi.keys</a></code> で確認可能</li>
-</ul>
-</li>
+<li><code>psychTools::bfi.keys</code> で確認可能</li>
+</ul></li>
 <li>したがって，“-A1”, “-C4”, “-C5”, “-E1”, “-E2”, “-O2”, “-O5”が対象</li>
 </ul>
 </div>
-<div id="mu-rev-recode" class="section level3" number="5.7.2">
-<h3>
-<span class="header-section-number">5.7.2</span> 逆転（recode）<a class="anchor" aria-label="anchor" href="#mu-rev-recode"><i class="fas fa-link"></i></a>
-</h3>
+<div id="mu-rev-recode" class="section level3" number="5.8.2">
+<h3><span class="header-section-number">5.8.2</span> 逆転（recode）</h3>
 <ul>
-<li>
-<code><a href="https://dplyr.tidyverse.org/reference/recode.html">dplyr::recode()</a></code>を使用</li>
+<li><code>dplyr::recode()</code>を使用</li>
 <li>入れ替えたい値をold = newで並べていく
 <ul>
-<li>この等式の順番が他(mutateなど)と逆になるため，<code><a href="https://dplyr.tidyverse.org/reference/recode.html">recode()</a></code>は将来引退する可能性あり</li>
+<li>この等式の順番が他(mutateなど)と逆になるため，<code>recode()</code>は将来引退する可能性あり</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_bfi</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>A1_r <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/recode.html">recode</a></span><span class="op">(</span><span class="va">A1</span>, `1` <span class="op">=</span> <span class="fl">6L</span>, `2` <span class="op">=</span> <span class="fl">5L</span>, `3` <span class="op">=</span> <span class="fl">4L</span>,      <span class="co"># old縺ｮ謨ｰ蛟､縺ｯ` `縺ｧ蝗ｲ繧蠢&lt;85&gt;隕√′縺ゅｋ</span>NA<span class="op">=</span> <span class="fl">3L</span>, `5` <span class="op">=</span> <span class="fl">2L</span>, `6` <span class="op">=</span> <span class="fl">1L</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co"># new縺ｮ謨ｰ蛟､縺ｫL縺後▽縺上&lt;81&gt;ｮ縺ｯ<ef>ｼ悟梛繧呈紛謨ｰ縺ｮ縺ｾ縺ｾ縺ｫ縺吶ｋ縺溘ａ</ef></span>NA<span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">A1</span>, <span class="va">A1_r</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="mutate.html#cb124-1" aria-hidden="true" tabindex="-1"></a>df_bfi <span class="sc">%&gt;%</span> </span>
+<span id="cb124-2"><a href="mutate.html#cb124-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">A1_r =</span> <span class="fu">recode</span>(A1, <span class="st">`</span><span class="at">1</span><span class="st">`</span> <span class="ot">=</span> 6L, <span class="st">`</span><span class="at">2</span><span class="st">`</span> <span class="ot">=</span> 5L, <span class="st">`</span><span class="at">3</span><span class="st">`</span> <span class="ot">=</span> 4L,      <span class="co"># oldの数値は` `で囲む必要がある</span></span>
+<span id="cb124-3"><a href="mutate.html#cb124-3" aria-hidden="true" tabindex="-1"></a>                           <span class="st">`</span><span class="at">4</span><span class="st">`</span> <span class="ot">=</span> 3L, <span class="st">`</span><span class="at">5</span><span class="st">`</span> <span class="ot">=</span> 2L, <span class="st">`</span><span class="at">6</span><span class="st">`</span> <span class="ot">=</span> 1L)) <span class="sc">%&gt;%</span> <span class="co"># newの数値にLがつくのは，型を整数のままにするため</span></span>
+<span id="cb124-4"><a href="mutate.html#cb124-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(A1, A1_r)</span></code></pre></div>
 <pre><code>## # A tibble: 2,800 x 2
 ##      A1  A1_r
 ##   &lt;int&gt; &lt;int&gt;
@@ -418,20 +616,17 @@
 ## 2     2     5
 ## 3     5     2
 ## # ... with 2,797 more rows</code></pre>
-<div id="mu-rev-recode1" class="section level4" number="5.7.2.1">
-<h4>
-<span class="header-section-number">5.7.2.1</span> 変数2つ以上を逆転<a class="anchor" aria-label="anchor" href="#mu-rev-recode1"><i class="fas fa-link"></i></a>
-</h4>
+<div id="mu-rev-recode1" class="section level4" number="5.8.2.1">
+<h4><span class="header-section-number">5.8.2.1</span> 変数2つ以上を逆転</h4>
 <ul>
 <li>A1と同様に同じ形をくり返し変数名だけ変えていけばできるが，コードが長くなりミスも生じやすくなる</li>
 </ul>
-<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_bfi</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>A1_r <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/recode.html">recode</a></span><span class="op">(</span><span class="va">A1</span>, `1` <span class="op">=</span> <span class="fl">6L</span>, `2` <span class="op">=</span> <span class="fl">5L</span>, `3` <span class="op">=</span> <span class="fl">4L</span>, 
-                           `4` <span class="op">=</span> <span class="fl">3L</span>, `5` <span class="op">=</span> <span class="fl">2L</span>, `6` <span class="op">=</span> <span class="fl">1L</span><span class="op">)</span>,
-         C4_r <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/recode.html">recode</a></span><span class="op">(</span><span class="va">C4</span>, `1` <span class="op">=</span> <span class="fl">6L</span>, `2` <span class="op">=</span> <span class="fl">5L</span>, `3` <span class="op">=</span> <span class="fl">4L</span>, 
-                           `4` <span class="op">=</span> <span class="fl">3L</span>, `5` <span class="op">=</span> <span class="fl">2L</span>, `6` <span class="op">=</span> <span class="fl">1L</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">A1</span>, <span class="va">A1_r</span>, <span class="va">C4</span>, <span class="va">C4_r</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="mutate.html#cb126-1" aria-hidden="true" tabindex="-1"></a>df_bfi <span class="sc">%&gt;%</span> </span>
+<span id="cb126-2"><a href="mutate.html#cb126-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">A1_r =</span> <span class="fu">recode</span>(A1, <span class="st">`</span><span class="at">1</span><span class="st">`</span> <span class="ot">=</span> 6L, <span class="st">`</span><span class="at">2</span><span class="st">`</span> <span class="ot">=</span> 5L, <span class="st">`</span><span class="at">3</span><span class="st">`</span> <span class="ot">=</span> 4L, </span>
+<span id="cb126-3"><a href="mutate.html#cb126-3" aria-hidden="true" tabindex="-1"></a>                           <span class="st">`</span><span class="at">4</span><span class="st">`</span> <span class="ot">=</span> 3L, <span class="st">`</span><span class="at">5</span><span class="st">`</span> <span class="ot">=</span> 2L, <span class="st">`</span><span class="at">6</span><span class="st">`</span> <span class="ot">=</span> 1L),</span>
+<span id="cb126-4"><a href="mutate.html#cb126-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">C4_r =</span> <span class="fu">recode</span>(C4, <span class="st">`</span><span class="at">1</span><span class="st">`</span> <span class="ot">=</span> 6L, <span class="st">`</span><span class="at">2</span><span class="st">`</span> <span class="ot">=</span> 5L, <span class="st">`</span><span class="at">3</span><span class="st">`</span> <span class="ot">=</span> 4L, </span>
+<span id="cb126-5"><a href="mutate.html#cb126-5" aria-hidden="true" tabindex="-1"></a>                           <span class="st">`</span><span class="at">4</span><span class="st">`</span> <span class="ot">=</span> 3L, <span class="st">`</span><span class="at">5</span><span class="st">`</span> <span class="ot">=</span> 2L, <span class="st">`</span><span class="at">6</span><span class="st">`</span> <span class="ot">=</span> 1L)) <span class="sc">%&gt;%</span> </span>
+<span id="cb126-6"><a href="mutate.html#cb126-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(A1, A1_r, C4, C4_r)</span></code></pre></div>
 <pre><code>## # A tibble: 2,800 x 4
 ##      A1  A1_r    C4  C4_r
 ##   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
@@ -440,20 +635,16 @@
 ## 3     5     2     2     5
 ## # ... with 2,797 more rows</code></pre>
 </div>
-<div id="mu-rev-recode2" class="section level4" number="5.7.2.2">
-<h4>
-<span class="header-section-number">5.7.2.2</span> 【効率化】 変数2つ以上を逆転<a class="anchor" aria-label="anchor" href="#mu-rev-recode2"><i class="fas fa-link"></i></a>
-</h4>
+<div id="mu-rev-recode2" class="section level4" number="5.8.2.2">
+<h4><span class="header-section-number">5.8.2.2</span> 【効率化】 変数2つ以上を逆転</h4>
 <ul>
-<li>
-<a href="mutate.html#mu-across-list">5.4.1</a> で解説したlistに関数を入れる方法</li>
+<li><a href="mutate.html#mu-across-list">5.4.1</a> で解説したlistに関数を入れる方法</li>
 </ul>
-<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_bfi</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">A1</span>, <span class="va">C4</span>, <span class="va">C5</span>, <span class="va">E1</span>, <span class="va">E2</span>, <span class="va">O2</span>, <span class="va">O5</span><span class="op">)</span>,
-                <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>r <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/recode.html">recode</a></span><span class="op">(</span><span class="va">.x</span>, `1` <span class="op">=</span> <span class="fl">6</span>, `2` <span class="op">=</span> <span class="fl">5</span>, `3` <span class="op">=</span> <span class="fl">4</span>, 
-                                 `4` <span class="op">=</span> <span class="fl">3</span>, `5` <span class="op">=</span> <span class="fl">2</span>, `6` <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">A1</span>, <span class="va">A1_r</span>, <span class="va">C4</span>,  <span class="va">C4</span>, <span class="va">C5</span>, <span class="va">C5_r</span>, <span class="va">E1</span>, <span class="va">E1_r</span>, <span class="va">E2</span>, <span class="va">E2_r</span>, <span class="va">O2</span>, <span class="va">O2_r</span>, <span class="va">O5</span>, <span class="va">O5_r</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="mutate.html#cb128-1" aria-hidden="true" tabindex="-1"></a>df_bfi <span class="sc">%&gt;%</span> </span>
+<span id="cb128-2"><a href="mutate.html#cb128-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(A1, C4, C5, E1, E2, O2, O5),</span>
+<span id="cb128-3"><a href="mutate.html#cb128-3" aria-hidden="true" tabindex="-1"></a>                <span class="fu">list</span>(<span class="at">r =</span> <span class="sc">~</span><span class="fu">recode</span>(.x, <span class="st">`</span><span class="at">1</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">6</span>, <span class="st">`</span><span class="at">2</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">5</span>, <span class="st">`</span><span class="at">3</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">4</span>, </span>
+<span id="cb128-4"><a href="mutate.html#cb128-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="st">`</span><span class="at">4</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">3</span>, <span class="st">`</span><span class="at">5</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">2</span>, <span class="st">`</span><span class="at">6</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">1</span>)))) <span class="sc">%&gt;%</span> </span>
+<span id="cb128-5"><a href="mutate.html#cb128-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(A1, A1_r, C4,  C4, C5, C5_r, E1, E1_r, E2, E2_r, O2, O2_r, O5, O5_r)</span></code></pre></div>
 <pre><code>## # A tibble: 2,800 x 13
 ##      A1  A1_r    C4    C5  C5_r    E1  E1_r    E2  E2_r    O2
 ##   &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;int&gt;
@@ -464,27 +655,22 @@
 ## #   O5 &lt;int&gt;, O5_r &lt;dbl&gt;</code></pre>
 </div>
 </div>
-<div id="mu-rev-rule" class="section level3" number="5.7.3">
-<h3>
-<span class="header-section-number">5.7.3</span> 【別解】逆転（公式）<a class="anchor" aria-label="anchor" href="#mu-rev-rule"><i class="fas fa-link"></i></a>
-</h3>
+<div id="mu-rev-rule" class="section level3" number="5.8.3">
+<h3><span class="header-section-number">5.8.3</span> 【別解】逆転（公式）</h3>
 <ul>
 <li>項目を反転する公式が「(max + min) - 回答値」であることを利用
 <ul>
-<li>
-<code><a href="https://rdrr.io/pkg/psych/man/reverse.code.html">psych::reverse.code()</a></code>のhelp参照</li>
+<li><code>psych::reverse.code()</code>のhelp参照</li>
 <li>例：最小値1,最大値4の場合，max + min = 5となり，回答値が2の場合，5 - 2 = 3となり反転された結果となる</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">min</span> <span class="op">&lt;-</span> <span class="fl">1</span>
-<span class="va">max</span> <span class="op">&lt;-</span> <span class="fl">6</span>
-
-<span class="va">df_bfi</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>A1_r <span class="op">=</span> <span class="va">max</span> <span class="op">+</span> <span class="va">min</span> <span class="op">-</span> <span class="va">A1</span>,
-         C4_r <span class="op">=</span> <span class="va">max</span> <span class="op">+</span> <span class="va">min</span> <span class="op">-</span> <span class="va">C4</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">A1</span>, <span class="va">A1_r</span>, <span class="va">C4</span>, <span class="va">C4_r</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="mutate.html#cb130-1" aria-hidden="true" tabindex="-1"></a>min <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb130-2"><a href="mutate.html#cb130-2" aria-hidden="true" tabindex="-1"></a>max <span class="ot">&lt;-</span> <span class="dv">6</span></span>
+<span id="cb130-3"><a href="mutate.html#cb130-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb130-4"><a href="mutate.html#cb130-4" aria-hidden="true" tabindex="-1"></a>df_bfi <span class="sc">%&gt;%</span> </span>
+<span id="cb130-5"><a href="mutate.html#cb130-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">A1_r =</span> max <span class="sc">+</span> min <span class="sc">-</span> A1,</span>
+<span id="cb130-6"><a href="mutate.html#cb130-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">C4_r =</span> max <span class="sc">+</span> min <span class="sc">-</span> C4) <span class="sc">%&gt;%</span> </span>
+<span id="cb130-7"><a href="mutate.html#cb130-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(A1, A1_r, C4, C4_r)</span></code></pre></div>
 <pre><code>## # A tibble: 2,800 x 4
 ##      A1  A1_r    C4  C4_r
 ##   &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;
@@ -492,20 +678,16 @@
 ## 2     2     5     3     4
 ## 3     5     2     2     5
 ## # ... with 2,797 more rows</code></pre>
-<div id="mu-rev-rule1" class="section level4" number="5.7.3.1">
-<h4>
-<span class="header-section-number">5.7.3.1</span> 【効率化】 変数2つ以上を逆転<a class="anchor" aria-label="anchor" href="#mu-rev-rule1"><i class="fas fa-link"></i></a>
-</h4>
+<div id="mu-rev-rule1" class="section level4" number="5.8.3.1">
+<h4><span class="header-section-number">5.8.3.1</span> 【効率化】 変数2つ以上を逆転</h4>
 <ul>
-<li>
-<code>~</code>の後に計算式がきても動く</li>
+<li><code>~</code>の後に計算式がきても動く</li>
 <li>ここでは，<code>max + min - .x</code> の<code>.x</code>にacross内に置かれた変数が入っていく</li>
 </ul>
-<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_bfi</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">A1</span>,<span class="va">C4</span><span class="op">)</span>,
-                <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>r <span class="op">=</span> <span class="op">~</span> <span class="va">max</span> <span class="op">+</span> <span class="va">min</span> <span class="op">-</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">A1</span>, <span class="va">A1_r</span>, <span class="va">C4</span>, <span class="va">C4_r</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="mutate.html#cb132-1" aria-hidden="true" tabindex="-1"></a>df_bfi <span class="sc">%&gt;%</span> </span>
+<span id="cb132-2"><a href="mutate.html#cb132-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(A1,C4),</span>
+<span id="cb132-3"><a href="mutate.html#cb132-3" aria-hidden="true" tabindex="-1"></a>                <span class="fu">list</span>(<span class="at">r =</span> <span class="sc">~</span> max <span class="sc">+</span> min <span class="sc">-</span> .x))) <span class="sc">%&gt;%</span> </span>
+<span id="cb132-4"><a href="mutate.html#cb132-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(A1, A1_r, C4, C4_r)</span></code></pre></div>
 <pre><code>## # A tibble: 2,800 x 4
 ##      A1  A1_r    C4  C4_r
 ##   &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;
@@ -514,96 +696,254 @@
 ## 3     5     2     2     5
 ## # ... with 2,797 more rows</code></pre>
 </div>
-<div id="mu-rev-rule2" class="section level4" number="5.7.3.2">
-<h4>
-<span class="header-section-number">5.7.3.2</span> 逆転した変数を含むデータフレーム作成<a class="anchor" aria-label="anchor" href="#mu-rev-rule2"><i class="fas fa-link"></i></a>
-</h4>
+<div id="mu-rev-rule2" class="section level4" number="5.8.3.2">
+<h4><span class="header-section-number">5.8.3.2</span> 逆転した変数を含むデータフレーム作成</h4>
 <ul>
 <li>これ以降で使用するため，項目を逆転した変数を格納しておく</li>
 </ul>
-<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_bfi</span> <span class="op">&lt;-</span> 
-  <span class="va">df_bfi</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">A1</span>, <span class="va">C4</span>, <span class="va">C5</span>, <span class="va">E1</span>, <span class="va">E2</span>, <span class="va">O2</span>, <span class="va">O5</span><span class="op">)</span>,
-                <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>r <span class="op">=</span> <span class="op">~</span> <span class="va">max</span> <span class="op">+</span> <span class="va">min</span> <span class="op">-</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="mutate.html#cb134-1" aria-hidden="true" tabindex="-1"></a>df_bfi <span class="ot">&lt;-</span> </span>
+<span id="cb134-2"><a href="mutate.html#cb134-2" aria-hidden="true" tabindex="-1"></a>  df_bfi <span class="sc">%&gt;%</span> </span>
+<span id="cb134-3"><a href="mutate.html#cb134-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(A1, C4, C5, E1, E2, O2, O5),</span>
+<span id="cb134-4"><a href="mutate.html#cb134-4" aria-hidden="true" tabindex="-1"></a>                <span class="fu">list</span>(<span class="at">r =</span> <span class="sc">~</span> max <span class="sc">+</span> min <span class="sc">-</span> .x)))</span></code></pre></div>
 </div>
 </div>
 </div>
-<div id="区分変数" class="section level2" number="5.8">
-<h2>
-<span class="header-section-number">5.8</span> 2区分変数<a class="anchor" aria-label="anchor" href="#%E5%8C%BA%E5%88%86%E5%A4%89%E6%95%B0"><i class="fas fa-link"></i></a>
-</h2>
-<div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
-<code class="sourceCode R">  <span class="co"># bfi_a %&gt;% </span>
-  <span class="co"># mutate(gender = fct_recode(gender, male   = "1", </span>
-  <span class="co">#                                    female = "2"),</span>
-  <span class="co">#        education = fct_recode(education, "HS" = "1",</span>
-  <span class="co">#                                          "finished HS" = "2",</span>
-  <span class="co">#                                          "some college" = "3",</span>
-  <span class="co">#                                          "college graduate" = "4",</span>
-  <span class="co">#                                          "graduate degree" = "5"</span>
-  <span class="co">#                               )</span>
-  <span class="co"># )</span></code></pre></div>
-
+<div id="mu-total-ef" class="section level2" number="5.9">
+<h2><span class="header-section-number">5.9</span> 【別解】合計点の作成</h2>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="mutate.html#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 合計する項目の定義</span></span>
+<span id="cb135-2"><a href="mutate.html#cb135-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb135-3"><a href="mutate.html#cb135-3" aria-hidden="true" tabindex="-1"></a>Ag <span class="ot">&lt;-</span> </span>
+<span id="cb135-4"><a href="mutate.html#cb135-4" aria-hidden="true" tabindex="-1"></a>df_bfi <span class="sc">%&gt;%</span> </span>
+<span id="cb135-5"><a href="mutate.html#cb135-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(A1_r, A2<span class="sc">:</span>A5) <span class="sc">%&gt;%</span> </span>
+<span id="cb135-6"><a href="mutate.html#cb135-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>()</span>
+<span id="cb135-7"><a href="mutate.html#cb135-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb135-8"><a href="mutate.html#cb135-8" aria-hidden="true" tabindex="-1"></a>Co <span class="ot">&lt;-</span> </span>
+<span id="cb135-9"><a href="mutate.html#cb135-9" aria-hidden="true" tabindex="-1"></a>df_bfi <span class="sc">%&gt;%</span> </span>
+<span id="cb135-10"><a href="mutate.html#cb135-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(C1<span class="sc">:</span>C3, C4_r, C5_r) <span class="sc">%&gt;%</span> </span>
+<span id="cb135-11"><a href="mutate.html#cb135-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>()</span>
+<span id="cb135-12"><a href="mutate.html#cb135-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb135-13"><a href="mutate.html#cb135-13" aria-hidden="true" tabindex="-1"></a>Ex <span class="ot">&lt;-</span> </span>
+<span id="cb135-14"><a href="mutate.html#cb135-14" aria-hidden="true" tabindex="-1"></a>  df_bfi <span class="sc">%&gt;%</span> </span>
+<span id="cb135-15"><a href="mutate.html#cb135-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(E1_r, E2_r, E3<span class="sc">:</span>E5) <span class="sc">%&gt;%</span> </span>
+<span id="cb135-16"><a href="mutate.html#cb135-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>()</span>
+<span id="cb135-17"><a href="mutate.html#cb135-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb135-18"><a href="mutate.html#cb135-18" aria-hidden="true" tabindex="-1"></a>Ne <span class="ot">&lt;-</span> </span>
+<span id="cb135-19"><a href="mutate.html#cb135-19" aria-hidden="true" tabindex="-1"></a>df_bfi <span class="sc">%&gt;%</span> </span>
+<span id="cb135-20"><a href="mutate.html#cb135-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(N1<span class="sc">:</span>N5) <span class="sc">%&gt;%</span> </span>
+<span id="cb135-21"><a href="mutate.html#cb135-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>()</span>
+<span id="cb135-22"><a href="mutate.html#cb135-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb135-23"><a href="mutate.html#cb135-23" aria-hidden="true" tabindex="-1"></a>Op <span class="ot">&lt;-</span> </span>
+<span id="cb135-24"><a href="mutate.html#cb135-24" aria-hidden="true" tabindex="-1"></a>df_bfi <span class="sc">%&gt;%</span> </span>
+<span id="cb135-25"><a href="mutate.html#cb135-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(O1, O2_r, O3, O4, O5_r) <span class="sc">%&gt;%</span> </span>
+<span id="cb135-26"><a href="mutate.html#cb135-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>()</span>
+<span id="cb135-27"><a href="mutate.html#cb135-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb135-28"><a href="mutate.html#cb135-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb135-29"><a href="mutate.html#cb135-29" aria-hidden="true" tabindex="-1"></a>df_bfi <span class="ot">&lt;-</span> </span>
+<span id="cb135-30"><a href="mutate.html#cb135-30" aria-hidden="true" tabindex="-1"></a>  df_bfi <span class="sc">%&gt;%</span> </span>
+<span id="cb135-31"><a href="mutate.html#cb135-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb135-32"><a href="mutate.html#cb135-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">Agree =</span> <span class="fu">rowSums</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(Ag))),</span>
+<span id="cb135-33"><a href="mutate.html#cb135-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">Conscientious =</span> <span class="fu">rowSums</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(Co))),</span>
+<span id="cb135-34"><a href="mutate.html#cb135-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">Extraversion =</span> <span class="fu">rowSums</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(Ex))),</span>
+<span id="cb135-35"><a href="mutate.html#cb135-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">Neuroticism =</span> <span class="fu">rowSums</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(Ne))),</span>
+<span id="cb135-36"><a href="mutate.html#cb135-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">Openness =</span> <span class="fu">rowSums</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(Op)))</span>
+<span id="cb135-37"><a href="mutate.html#cb135-37" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div>
+<div id="確認" class="section level3" number="5.9.1">
+<h3><span class="header-section-number">5.9.1</span> 【確認】</h3>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="mutate.html#cb136-1" aria-hidden="true" tabindex="-1"></a>df_bfi <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">all_of</span>(Ag), Agree)</span></code></pre></div>
+<pre><code>## # A tibble: 2,800 x 6
+##    A1_r    A2    A3    A4    A5 Agree
+##   &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt;
+## 1     5     4     3     4     4    20
+## 2     5     4     5     2     5    21
+## 3     2     4     5     4     4    19
+## # ... with 2,797 more rows</code></pre>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="mutate.html#cb138-1" aria-hidden="true" tabindex="-1"></a>df_bfi <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">all_of</span>(Ex), Extraversion) <span class="sc">%&gt;%</span> </span>
+<span id="cb138-2"><a href="mutate.html#cb138-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(Extraversion))</span></code></pre></div>
+<pre><code>## # A tibble: 87 x 6
+##    E1_r  E2_r    E3    E4    E5 Extraversion
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;        &lt;dbl&gt;
+## 1     2     4    NA     4     3           NA
+## 2     6     6     4     4    NA           NA
+## 3     2    NA     3     2     3           NA
+## # ... with 84 more rows</code></pre>
 </div>
 </div>
-  <div class="chapter-nav">
-<div class="prev"><a href="filter.html"><span class="header-section-number">4</span> ケース（行）を選ぶ</a></div>
-<div class="next"><a href="summarise.html"><span class="header-section-number">6</span> 要約値を作る：summarise( )</a></div>
-</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#mutate"><span class="header-section-number">5</span> 新しい変数（列）の作成：mutate( )</a></li>
-<li><a class="nav-link" href="#mu-read"><span class="header-section-number">5.1</span> データ読み込み</a></li>
-<li><a class="nav-link" href="#mu-standard"><span class="header-section-number">5.2</span> 基本</a></li>
-<li>
-<a class="nav-link" href="#mu-kata"><span class="header-section-number">5.3</span> 変数の型の変換</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#mu-kata-trans"><span class="header-section-number">5.3.1</span> 型の変換</a></li>
-<li><a class="nav-link" href="#mu-kata-across"><span class="header-section-number">5.3.2</span> 【効率化】複数の変数に対し一度の指定で実行</a></li>
+<div id="連続変数をカテゴリに区分する" class="section level2" number="5.10">
+<h2><span class="header-section-number">5.10</span> 連続変数をカテゴリに区分する</h2>
+<div id="分布の把握" class="section level3" number="5.10.1">
+<h3><span class="header-section-number">5.10.1</span> 分布の把握</h3>
+<ul>
+<li>変数ageのヒストグラムを描き，中央値を確認する</li>
+<li>単純に確認したいだけなら，従来のRでの書き方が楽</li>
 </ul>
-</li>
-<li>
-<a class="nav-link" href="#mu-across"><span class="header-section-number">5.4</span> across( )の特徴</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#mu-across-list"><span class="header-section-number">5.4.1</span> 【重要知識！】新しい変数名にして追加</a></li></ul>
-</li>
-<li>
-<a class="nav-link" href="#mu-total"><span class="header-section-number">5.5</span> 合計点の作成</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#mu-total-na"><span class="header-section-number">5.5.1</span> 足し上げる変数に欠損があるとどうなるか</a></li></ul>
-</li>
-<li>
-<a class="nav-link" href="#mu-seq"><span class="header-section-number">5.6</span> 連番からIDの作成</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#mu-seq-other"><span class="header-section-number">5.6.1</span> 【別解】行の名前を直接変数化</a></li></ul>
-</li>
-<li>
-<a class="nav-link" href="#mu-rev"><span class="header-section-number">5.7</span> 逆転項目を作る</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#mu-rev-check"><span class="header-section-number">5.7.1</span> 逆転項目の確認</a></li>
-<li><a class="nav-link" href="#mu-rev-recode"><span class="header-section-number">5.7.2</span> 逆転（recode）</a></li>
-<li><a class="nav-link" href="#mu-rev-rule"><span class="header-section-number">5.7.3</span> 【別解】逆転（公式）</a></li>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="mutate.html#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒストグラム描画</span></span>
+<span id="cb140-2"><a href="mutate.html#cb140-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df_bfi<span class="sc">$</span>age)</span></code></pre></div>
+<embed src="gisho12_files/figure-html/unnamed-chunk-61-1.pdf" width="672" type="application/pdf" />
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="mutate.html#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 中央値</span></span>
+<span id="cb141-2"><a href="mutate.html#cb141-2" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(df_bfi<span class="sc">$</span>age)</span></code></pre></div>
+<pre><code>## [1] 26</code></pre>
+</div>
+<div id="区分" class="section level3" number="5.10.2">
+<h3><span class="header-section-number">5.10.2</span> 2区分</h3>
+<ul>
+<li><code>dplyr</code>パッケージの<code>if_else( )</code>関数で条件式（TRUEまたはFALSEを返すもの）によって値を2区分する</li>
+<li>構造：<code>if_else(条件式, TRUEの場合の値, FALSEの場合の値)</code>
+<ul>
+<li>TRUEの場合の値, FALSEの場合の値はそれぞれ文字型を入れることもできる（例:“27歳以上”, “27歳未満”）</li>
+</ul></li>
 </ul>
-</li>
-<li><a class="nav-link" href="#%E5%8C%BA%E5%88%86%E5%A4%89%E6%95%B0"><span class="header-section-number">5.8</span> 2区分変数</a></li>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="mutate.html#cb143-1" aria-hidden="true" tabindex="-1"></a>res_age2 <span class="ot">&lt;-</span> </span>
+<span id="cb143-2"><a href="mutate.html#cb143-2" aria-hidden="true" tabindex="-1"></a>  df_bfi <span class="sc">%&gt;%</span> </span>
+<span id="cb143-3"><a href="mutate.html#cb143-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">age2 =</span> <span class="fu">if_else</span>(age <span class="sc">&gt;=</span> <span class="dv">27</span>, <span class="dv">1</span>, <span class="dv">0</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb143-4"><a href="mutate.html#cb143-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(age, age2)</span>
+<span id="cb143-5"><a href="mutate.html#cb143-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb143-6"><a href="mutate.html#cb143-6" aria-hidden="true" tabindex="-1"></a>res_age2 <span class="sc">%&gt;%</span> <span class="fu">count</span>(age2) </span></code></pre></div>
+<pre><code>## # A tibble: 2 x 2
+##    age2     n
+##   &lt;dbl&gt; &lt;int&gt;
+## 1     0  1495
+## 2     1  1305</code></pre>
+<div id="確認-1" class="section level4" number="5.10.2.1">
+<h4><span class="header-section-number">5.10.2.1</span> 確認</h4>
+<ul>
+<li><code>age &gt;= 27</code>が1，27未満が0にコーディングされているかfilterで限定して確認</li>
 </ul>
-
-      <div class="book-extra">
-        <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/izunyan/gisho12.git/blob/master/mutate.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/izunyan/gisho12.git/edit/master/mutate.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
-        </ul>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="mutate.html#cb145-1" aria-hidden="true" tabindex="-1"></a>res_age2 <span class="sc">%&gt;%</span> </span>
+<span id="cb145-2"><a href="mutate.html#cb145-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(age <span class="sc">&gt;=</span> <span class="dv">20</span> <span class="sc">&amp;</span> age <span class="sc">&lt;=</span> <span class="dv">30</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb145-3"><a href="mutate.html#cb145-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(age, age2) <span class="sc">%&gt;%</span> </span>
+<span id="cb145-4"><a href="mutate.html#cb145-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="at">n =</span> <span class="dv">11</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 11 x 3
+##      age  age2     n
+##    &lt;int&gt; &lt;dbl&gt; &lt;int&gt;
+##  1    20     0   212
+##  2    21     0   144
+##  3    22     0   122
+##  4    23     0   138
+##  5    24     0   105
+##  6    25     0   113
+##  7    26     0    99
+##  8    27     1    97
+##  9    28     1    86
+## 10    29     1    78
+## 11    30     1    65</code></pre>
+<ul>
+<li>念のため最初3行（1-3行目）と最後3行（n-2行目からn行目）も確認</li>
+<li><code>dplyr( )::slice( )</code>で1:3行目と最後の3行を表示させる</li>
+</ul>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="mutate.html#cb147-1" aria-hidden="true" tabindex="-1"></a>res_age2 <span class="sc">%&gt;%</span> </span>
+<span id="cb147-2"><a href="mutate.html#cb147-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(age, age2) <span class="sc">%&gt;%</span> </span>
+<span id="cb147-3"><a href="mutate.html#cb147-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, (<span class="fu">n</span>()<span class="sc">-</span><span class="dv">2</span>)<span class="sc">:</span><span class="fu">n</span>())</span></code></pre></div>
+<pre><code>## # A tibble: 6 x 3
+##     age  age2     n
+##   &lt;int&gt; &lt;dbl&gt; &lt;int&gt;
+## 1     3     0     1
+## 2     9     0     1
+## 3    11     0     3
+## 4    72     1     1
+## 5    74     1     1
+## 6    86     1     1</code></pre>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="mutate.html#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(res_age2)</span></code></pre></div>
 </div>
-    </nav>
 </div>
+<div id="区分以上" class="section level3" number="5.10.3">
+<h3><span class="header-section-number">5.10.3</span> 3区分以上</h3>
+<ul>
+<li>年齢層を10歳区切りでカテゴリ化</li>
+</ul>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="mutate.html#cb150-1" aria-hidden="true" tabindex="-1"></a>res_age6 <span class="ot">&lt;-</span> </span>
+<span id="cb150-2"><a href="mutate.html#cb150-2" aria-hidden="true" tabindex="-1"></a>  df_bfi <span class="sc">%&gt;%</span> </span>
+<span id="cb150-3"><a href="mutate.html#cb150-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">age6 =</span> <span class="fu">case_when</span>(</span>
+<span id="cb150-4"><a href="mutate.html#cb150-4" aria-hidden="true" tabindex="-1"></a>    age <span class="sc">&lt;</span> <span class="dv">20</span>              <span class="sc">~</span> <span class="st">&quot;20歳未満&quot;</span>, </span>
+<span id="cb150-5"><a href="mutate.html#cb150-5" aria-hidden="true" tabindex="-1"></a>    age <span class="sc">&gt;=</span> <span class="dv">20</span>  <span class="sc">&amp;</span> age <span class="sc">&lt;</span> <span class="dv">30</span> <span class="sc">~</span> <span class="st">&quot;20-29歳&quot;</span>, </span>
+<span id="cb150-6"><a href="mutate.html#cb150-6" aria-hidden="true" tabindex="-1"></a>    age <span class="sc">&gt;=</span> <span class="dv">30</span>  <span class="sc">&amp;</span> age <span class="sc">&lt;</span> <span class="dv">40</span> <span class="sc">~</span> <span class="st">&quot;30-39歳&quot;</span>,</span>
+<span id="cb150-7"><a href="mutate.html#cb150-7" aria-hidden="true" tabindex="-1"></a>    age <span class="sc">&gt;=</span> <span class="dv">40</span>  <span class="sc">&amp;</span> age <span class="sc">&lt;</span> <span class="dv">50</span> <span class="sc">~</span> <span class="st">&quot;40-49歳&quot;</span>,</span>
+<span id="cb150-8"><a href="mutate.html#cb150-8" aria-hidden="true" tabindex="-1"></a>    age <span class="sc">&gt;=</span> <span class="dv">50</span>  <span class="sc">&amp;</span> age <span class="sc">&lt;</span> <span class="dv">60</span> <span class="sc">~</span> <span class="st">&quot;50-59歳&quot;</span>,</span>
+<span id="cb150-9"><a href="mutate.html#cb150-9" aria-hidden="true" tabindex="-1"></a>    age <span class="sc">&gt;=</span> <span class="dv">60</span>             <span class="sc">~</span> <span class="st">&quot;60歳以上&quot;</span>  </span>
+<span id="cb150-10"><a href="mutate.html#cb150-10" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb150-11"><a href="mutate.html#cb150-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb150-12"><a href="mutate.html#cb150-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 確認するには以下のコードの最初の2行だけでよいが，出力が長いためランダムに10件抽出しageの昇順にしてある</span></span>
+<span id="cb150-13"><a href="mutate.html#cb150-13" aria-hidden="true" tabindex="-1"></a>res_age6 <span class="sc">%&gt;%</span> </span>
+<span id="cb150-14"><a href="mutate.html#cb150-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(age, age6) <span class="sc">%&gt;%</span> </span>
+<span id="cb150-15"><a href="mutate.html#cb150-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb150-16"><a href="mutate.html#cb150-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(age)</span></code></pre></div>
+<pre><code>## # A tibble: 10 x 3
+##      age age6         n
+##    &lt;int&gt; &lt;chr&gt;    &lt;int&gt;
+##  1    12 20歳未満    28
+##  2    16 20歳未満    61
+##  3    17 20歳未満   100
+##  4    20 20-29歳    212
+##  5    36 30-39歳     50
+##  6    37 30-39歳     36
+##  7    50 50-59歳     34
+##  8    52 50-59歳     26
+##  9    64 60歳以上     1
+## 10    72 60歳以上     1</code></pre>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="mutate.html#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(res_age6)</span></code></pre></div>
 
 </div>
-</div> <!-- .container -->
+</div>
+</div>
+            </section>
 
-<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>がんばらないデータ加工：Rによる繰り返し作業入門（前編）</strong>" was written by やわらかクジラ. </p>
+          </div>
+        </div>
+      </div>
+<a href="filter.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="summarise.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
   </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["gisho12.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
 
-  <div class="col-12 col-md-6 mt-3">
-    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
-  </div>
-
-</div></div>
-</footer>
 </body>
+
 </html>

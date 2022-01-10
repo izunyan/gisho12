@@ -2,14 +2,12 @@
 
 * パッケージ`dplyr`の関数`mutate()`
 * 新しい変数の列を作成する
-  + 既にある
-
 * mutateの機能解説
 * 効率化のための`across()`
 
 ## データ読み込み {#mu-read}
 
-* 国際パーソナリティ項目プールからの2800名分のデータ。
+* `psychTools`パッケージに入っている国際パーソナリティ項目プールからの2800名分のデータ
 * 質問項目が25問あり，5つの構成概念（ここでは因子という）に対応する項目への回答を足し合わせたスコアを計算する
 * 性，教育歴，年齢の変数もあり
 * 項目に対し想定される因子（因子名の頭文字が変数名と対応）
@@ -39,7 +37,7 @@ df_bfi <-
 
 ## 基本 {#mu-standard}
 
-* データフレームに新しい列を計算して追加する関数
+* データフレームに新しい列を計算して追加するまたは置き換える関数
 * `mutate( )`の中に新しく作成する変数名を入れ，`=`でつないで計算式を入れる
 * ここでは，まず変数A1の平均値（全ケース同じ値が入る）を計算し，個々の値の差分をする例を示す
 
@@ -84,6 +82,7 @@ df_bfi %>%
 * それぞれ`factor()`で因子型に変換
 
 ```{r}
+
 df_bfi %>%
   select(gender, education) %>% 
   mutate(gender = factor(gender),
@@ -137,7 +136,7 @@ df_bfi %>%
 * 適用する関数をリストにする（`list()`に入れる）ことで，変数名を変更して追加できる
 * `list()`に入れるときはこれまでと異なる書き方が必要になる
   + 関数名の前に`~`（チルダ）が必要
-  + list内の関数`()`内に`.x`が必要（この場合はxがなくても動く）。ここに`across()`の第一引数に指定した変数が入っていくという意味
+  + list内の関数`()`内に`.x`が必要（この場合はxがなくてピリオドのみでも動く）。ここに`across()`の第一引数に指定した変数が入っていくという意味
 
 ```{r}
 df_bfi %>%
@@ -149,6 +148,11 @@ df_bfi %>%
 * 因子型に変換した変数の末尾に_fがつく
 
 ## 合計点の作成 {#mu-total}
+
+* 変数の四則演算の式を入れれば合計得点として計算された列をデータフレーム追加できる
+* 別解で合計した例を，変数の逆転項目を反映させた後に \@ref(mu-total-ef) で解説する
+  + 項目数が多い場合などはこちらの方が効率化できる場合も
+
 ```{r}
 df_bfi_n <- 
   df_bfi %>%
@@ -159,9 +163,29 @@ df_bfi_n
 ```
 
 ### 足し上げる変数に欠損があるとどうなるか{#mu-total-na}
+
+* 合計得点の計算の場合，対象となる変数の内1つでもNAがあれば合計点もNAとなる
+
 ```{r}
 df_bfi_n %>% 
   filter(is.na(neuroticism))     # neuroticismがNAなケースに限定
+
+```
+
+## 変数の値を数値から文字列に変える
+
+* 一度因子型に変換してから`forcats`パッケージの`fct_recode( )`関数を使うと簡単
+* ちゃんと変換の対応がついているかどうかを`dplyr`パッケージの`count( )`関数で確認
+  + 適切に変換されていなければ，1 = male, 2 = female以外の組み合わせも発生するため
+  + `count( )`の強みは，出力がデータフレームで出てくる点なので，結果が扱いやすい
+
+```{r}
+df_bfi %>%
+  mutate(gender = factor(gender),
+         gender_c = fct_recode(gender, 
+                               male   = "1",
+                               female = "2")) %>% 
+  count(gender, gender_c)
 
 ```
 
@@ -278,20 +302,138 @@ df_bfi <-
                 list(r = ~ max + min - .x)))
 ```
 
-
-## 2区分変数
-
+## 【別解】合計点の作成 {#mu-total-ef}
 ```{r}
+# 合計する項目の定義
 
-  # bfi_a %>% 
-  # mutate(gender = fct_recode(gender, male   = "1", 
-  #                                    female = "2"),
-  #        education = fct_recode(education, "HS" = "1",
-  #                                          "finished HS" = "2",
-  #                                          "some college" = "3",
-  #                                          "college graduate" = "4",
-  #                                          "graduate degree" = "5"
-  #                               )
-  # )
+Ag <- 
+df_bfi %>% 
+  select(A1_r, A2:A5) %>% 
+  names()
+
+Co <- 
+df_bfi %>% 
+  select(C1:C3, C4_r, C5_r) %>% 
+  names()
+
+Ex <- 
+  df_bfi %>% 
+  select(E1_r, E2_r, E3:E5) %>% 
+  names()
+
+Ne <- 
+df_bfi %>% 
+  select(N1:N5) %>% 
+  names()
+
+Op <- 
+df_bfi %>% 
+  select(O1, O2_r, O3, O4, O5_r) %>% 
+  names()
+
+
+df_bfi <- 
+  df_bfi %>% 
+  mutate(
+    Agree = rowSums(across(all_of(Ag))),
+    Conscientious = rowSums(across(all_of(Co))),
+    Extraversion = rowSums(across(all_of(Ex))),
+    Neuroticism = rowSums(across(all_of(Ne))),
+    Openness = rowSums(across(all_of(Op)))
+    )
 
 ```
+
+### 【確認】
+
+```{r}
+df_bfi %>% select(all_of(Ag), Agree)
+df_bfi %>% select(all_of(Ex), Extraversion) %>% 
+  filter(is.na(Extraversion))
+
+```
+
+
+## 連続変数をカテゴリに区分する
+
+### 分布の把握
+
+* 変数ageのヒストグラムを描き，中央値を確認する
+* 単純に確認したいだけなら，従来のRでの書き方が楽
+
+```{r}
+# ヒストグラム描画
+hist(df_bfi$age)
+
+# 中央値
+median(df_bfi$age)
+```
+
+
+### 2区分
+
+* `dplyr`パッケージの`if_else( )`関数で条件式（TRUEまたはFALSEを返すもの）によって値を2区分する
+* 構造：`if_else(条件式, TRUEの場合の値, FALSEの場合の値)`
+  + TRUEの場合の値, FALSEの場合の値はそれぞれ文字型を入れることもできる（例:"27歳以上", "27歳未満"）
+
+```{r}
+res_age2 <- 
+  df_bfi %>% 
+  mutate(age2 = if_else(age >= 27, 1, 0)) %>% 
+  select(age, age2)
+
+res_age2 %>% count(age2) 
+```
+
+#### 確認
+
+* `age >= 27`が1，27未満が0にコーディングされているかfilterで限定して確認
+
+```{r}
+res_age2 %>% 
+  filter(age >= 20 & age <= 30) %>% 
+  count(age, age2) %>% 
+  print(n = 11)
+
+```
+
+* 念のため最初3行（1-3行目）と最後3行（n-2行目からn行目）も確認
+* `dplyr( )::slice( )`で1:3行目と最後の3行を表示させる
+
+```{r}
+res_age2 %>% 
+  count(age, age2) %>% 
+  slice(1:3, (n()-2):n())
+  
+
+rm(res_age2)
+```
+
+
+
+### 3区分以上
+
+* 年齢層を10歳区切りでカテゴリ化
+
+```{r}
+res_age6 <- 
+  df_bfi %>% 
+  mutate(age6 = case_when(
+    age < 20              ~ "20歳未満", 
+    age >= 20  & age < 30 ~ "20-29歳", 
+    age >= 30  & age < 40 ~ "30-39歳",
+    age >= 40  & age < 50 ~ "40-49歳",
+    age >= 50  & age < 60 ~ "50-59歳",
+    age >= 60             ~ "60歳以上"  
+  ))
+
+# 確認するには以下のコードの最初の2行だけでよいが，出力が長いためランダムに10件抽出しageの昇順にしてある
+res_age6 %>% 
+  count(age, age6) %>% 
+  slice_sample(n = 10) %>% 
+  arrange(age)
+
+rm(res_age6)
+```
+
+

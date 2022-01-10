@@ -62,6 +62,7 @@ mu-across
 mu-across-list
 mu-total
 mu-total-na
+変数の値を数値から文字列に変える
 mu-seq
 mu-seq-other
 mu-rev
@@ -72,7 +73,13 @@ mu-rev-recode2
 mu-rev-rule
 mu-rev-rule1
 mu-rev-rule2
-区分変数
+mu-total-ef
+確認
+連続変数をカテゴリに区分する
+分布の把握
+区分
+確認-1
+区分以上
 summarise
 su-st
 su-st-multiple

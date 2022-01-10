@@ -1,89 +1,317 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="" xml:lang="">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>2 変数（列）を選ぶ：select( ) | がんばらないデータ加工：Rによる繰り返し作業入門（前編）</title>
-<meta name="author" content="やわらかクジラ">
-<meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="2 変数（列）を選ぶ：select( ) | がんばらないデータ加工：Rによる繰り返し作業入門（前編）">
-<meta property="og:type" content="book">
-<meta property="og:image" content="/images/cover.png">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="2 変数（列）を選ぶ：select( ) | がんばらないデータ加工：Rによる繰り返し作業入門（前編）">
-<meta name="twitter:image" content="/images/cover.png">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="bs4_style.css">
-<meta name="description" content="パッケージdplyrの関数select() tidyな世界では「列名 = 変数名」 変数が多い時に関心ある変数に限定したデータにしたい 関心ある変数の名前を取得したい 後々出てくる繰り返し作業で便利なヘルパー関数  2.1 データ読み込み データの指定を簡単にするために，penguinsデータをdfと読み込む library(tidyverse) # パッケージが入ってなければ下記実行 #...">
-<meta property="og:description" content="パッケージdplyrの関数select() tidyな世界では「列名 = 変数名」 変数が多い時に関心ある変数に限定したデータにしたい 関心ある変数の名前を取得したい 後々出てくる繰り返し作業で便利なヘルパー関数  2.1 データ読み込み データの指定を簡単にするために，penguinsデータをdfと読み込む library(tidyverse) # パッケージが入ってなければ下記実行 #...">
-<meta name="twitter:description" content="パッケージdplyrの関数select() tidyな世界では「列名 = 変数名」 変数が多い時に関心ある変数に限定したデータにしたい 関心ある変数の名前を取得したい 後々出てくる繰り返し作業で便利なヘルパー関数  2.1 データ読み込み データの指定を簡単にするために，penguinsデータをdfと読み込む library(tidyverse) # パッケージが入ってなければ下記実行 #...">
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 変数（列）を選ぶ：select( ) | がんばらないデータ加工：Rによる繰り返し作業入門（前編）</title>
+  <meta name="description" content="2 変数（列）を選ぶ：select( ) | がんばらないデータ加工：Rによる繰り返し作業入門（前編）" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 変数（列）を選ぶ：select( ) | がんばらないデータ加工：Rによる繰り返し作業入門（前編）" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="/images/cover.png" />
+  
+  <meta name="github-repo" content="https://github.com/izunyan/gisho12.git" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 変数（列）を選ぶ：select( ) | がんばらないデータ加工：Rによる繰り返し作業入門（前編）" />
+  
+  
+  <meta name="twitter:image" content="/images/cover.png" />
+
+<meta name="author" content="やわらかクジラ" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="premise.html"/>
+<link rel="next" href="rename.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
 </head>
-<body data-spy="scroll" data-target="#toc">
 
-<div class="container-fluid">
-<div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+<body>
 
-    <div class="d-flex align-items-start justify-content-between">
-      <h1>
-        <a href="index.html" title="">がんばらないデータ加工：Rによる繰り返し作業入門（前編）</a>
-      </h1>
-      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
-    </div>
 
-    <div id="main-nav" class="collapse-lg">
-      <form role="search">
-        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
-</form>
 
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html">はじめに</a></li>
-<li><a class="" href="premise.html"><span class="header-section-number">1</span> 前提知識</a></li>
-<li><a class="active" href="select.html"><span class="header-section-number">2</span> 変数（列）を選ぶ：select( )</a></li>
-<li><a class="" href="rename.html"><span class="header-section-number">3</span> 変数名を変更する：rename( )</a></li>
-<li><a class="" href="filter.html"><span class="header-section-number">4</span> ケース（行）を選ぶ</a></li>
-<li><a class="" href="mutate.html"><span class="header-section-number">5</span> 新しい変数（列）の作成：mutate( )</a></li>
-<li><a class="" href="summarise.html"><span class="header-section-number">6</span> 要約値を作る：summarise( )</a></li>
-<li><a class="" href="%E3%81%82%E3%81%A8%E3%81%8C%E3%81%8D.html">あとがき</a></li>
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>はじめに</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#本書の特徴"><i class="fa fa-check"></i>本書の特徴</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#想定読者"><i class="fa fa-check"></i>想定読者</a></li>
+<li class="chapter" data-level="0.0.1" data-path="index.html"><a href="index.html#前提"><i class="fa fa-check"></i><b>0.0.1</b> 前提</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#執筆環境"><i class="fa fa-check"></i>執筆環境</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#注意事項など"><i class="fa fa-check"></i>注意事項など</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#huroku"><i class="fa fa-check"></i>特別付録について</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="premise.html"><a href="premise.html"><i class="fa fa-check"></i><b>1</b> 前提知識</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="premise.html"><a href="premise.html#p-howtoread"><i class="fa fa-check"></i><b>1.1</b> 本書に出てくるコード部分の見方</a></li>
+<li class="chapter" data-level="1.2" data-path="premise.html"><a href="premise.html#p-project"><i class="fa fa-check"></i><b>1.2</b> プロジェクト</a></li>
+<li class="chapter" data-level="1.3" data-path="premise.html"><a href="premise.html#p-package"><i class="fa fa-check"></i><b>1.3</b> パッケージ</a></li>
+<li class="chapter" data-level="1.4" data-path="premise.html"><a href="premise.html#p-function"><i class="fa fa-check"></i><b>1.4</b> 関数</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="premise.html"><a href="premise.html#p-function-ex"><i class="fa fa-check"></i><b>1.4.1</b> 例</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="premise.html"><a href="premise.html#p-object"><i class="fa fa-check"></i><b>1.5</b> オブジェクト</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="premise.html"><a href="premise.html#p-object-ex"><i class="fa fa-check"></i><b>1.5.1</b> 例</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="premise.html"><a href="premise.html#p-df"><i class="fa fa-check"></i><b>1.6</b> データフレーム</a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="premise.html"><a href="premise.html#本書で使う主なデータ"><i class="fa fa-check"></i><b>1.6.1</b> 本書で使う主なデータ</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="premise.html"><a href="premise.html#p-pipe"><i class="fa fa-check"></i><b>1.7</b> %&gt;% （パイプ演算子）</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="select.html"><a href="select.html"><i class="fa fa-check"></i><b>2</b> 変数（列）を選ぶ：select( )</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="select.html"><a href="select.html#select-read"><i class="fa fa-check"></i><b>2.1</b> データ読み込み</a></li>
+<li class="chapter" data-level="2.2" data-path="select.html"><a href="select.html#select-standard"><i class="fa fa-check"></i><b>2.2</b> 基本</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="select.html"><a href="select.html#select-range"><i class="fa fa-check"></i><b>2.2.1</b> 範囲指定</a></li>
+<li class="chapter" data-level="2.2.2" data-path="select.html"><a href="select.html#select_cha"><i class="fa fa-check"></i><b>2.2.2</b> 中身が文字でも動く</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="select.html"><a href="select.html#select-helper"><i class="fa fa-check"></i><b>2.3</b> 変数の指定に便利なヘルパー関数</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="select.html"><a href="select.html#select_helper1"><i class="fa fa-check"></i><b>2.3.1</b> 変数名の最初の文字列</a></li>
+<li class="chapter" data-level="2.3.2" data-path="select.html"><a href="select.html#select-helper2"><i class="fa fa-check"></i><b>2.3.2</b> 変数名の最後の文字列</a></li>
+<li class="chapter" data-level="2.3.3" data-path="select.html"><a href="select.html#select-helper3"><i class="fa fa-check"></i><b>2.3.3</b> 変数名のどこかに含まれる文字列</a></li>
+<li class="chapter" data-level="2.3.4" data-path="select.html"><a href="select.html#select-helper5"><i class="fa fa-check"></i><b>2.3.4</b> 上記の組み合わせ</a></li>
+<li class="chapter" data-level="2.3.5" data-path="select.html"><a href="select.html#select-helper6"><i class="fa fa-check"></i><b>2.3.5</b> 数値範囲</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="select.html"><a href="select.html#select-drop"><i class="fa fa-check"></i><b>2.4</b> 特定の変数を選ばない（落とす）</a></li>
+<li class="chapter" data-level="2.5" data-path="select.html"><a href="select.html#変数を並び変える"><i class="fa fa-check"></i><b>2.5</b> 変数を並び変える</a></li>
+<li class="chapter" data-level="2.6" data-path="select.html"><a href="select.html#変数名を変更する"><i class="fa fa-check"></i><b>2.6</b> 変数名を変更する</a></li>
+<li class="chapter" data-level="2.7" data-path="select.html"><a href="select.html#関心のある変数名を取得する"><i class="fa fa-check"></i><b>2.7</b> 関心のある変数名を取得する</a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="select.html"><a href="select.html#全ての変数名"><i class="fa fa-check"></i><b>2.7.1</b> 全ての変数名</a></li>
+<li class="chapter" data-level="2.7.2" data-path="select.html"><a href="select.html#選択した変数名を取得"><i class="fa fa-check"></i><b>2.7.2</b> 選択した変数名を取得</a></li>
+<li class="chapter" data-level="2.7.3" data-path="select.html"><a href="select.html#コピペに便利な形式に出力"><i class="fa fa-check"></i><b>2.7.3</b> コピペに便利な形式に出力</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="select.html"><a href="select.html#応用編複数データフレームで同時にselect"><i class="fa fa-check"></i><b>2.8</b> 【応用編】複数データフレームで同時にselect</a>
+<ul>
+<li class="chapter" data-level="2.8.1" data-path="select.html"><a href="select.html#複数データフレームで同じようにselect"><i class="fa fa-check"></i><b>2.8.1</b> 複数データフレームで同じようにselect</a></li>
+<li class="chapter" data-level="2.8.2" data-path="select.html"><a href="select.html#複数データフレームで別々にselect"><i class="fa fa-check"></i><b>2.8.2</b> 複数データフレームで別々にselect</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="rename.html"><a href="rename.html"><i class="fa fa-check"></i><b>3</b> 変数名を変更する：rename( )</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="rename.html"><a href="rename.html#rename-standard"><i class="fa fa-check"></i><b>3.1</b> 基本</a></li>
+<li class="chapter" data-level="3.2" data-path="rename.html"><a href="rename.html#rename-samew"><i class="fa fa-check"></i><b>3.2</b> 同じ語を共通の語で置き換える</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="rename.html"><a href="rename.html#rename-strreplace1"><i class="fa fa-check"></i><b>3.2.1</b> 【効率化】str_replace()で一括変換(1)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="rename.html"><a href="rename.html#rename-remove"><i class="fa fa-check"></i><b>3.3</b> 同じ語を削除する</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="rename.html"><a href="rename.html#rename-strreplace2"><i class="fa fa-check"></i><b>3.3.1</b> 【効率化】str_replace()で一括変換（2）</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="rename.html"><a href="rename.html#rename-add"><i class="fa fa-check"></i><b>3.4</b> 同じ接尾辞をつける</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="rename.html"><a href="rename.html#rename-strc"><i class="fa fa-check"></i><b>3.4.1</b> 【効率化】str_c()で一括指定</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="rename.html"><a href="rename.html#rename-samew-z"><i class="fa fa-check"></i><b>3.5</b> 同</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="rename.html"><a href="rename.html#rename-z2"><i class="fa fa-check"></i><b>3.5.1</b> 【効率化】</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="filter.html"><a href="filter.html"><i class="fa fa-check"></i><b>4</b> ケース（行）を選ぶ</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="filter.html"><a href="filter.html#filter1"><i class="fa fa-check"></i><b>4.1</b> 基本</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="mutate.html"><a href="mutate.html"><i class="fa fa-check"></i><b>5</b> 新しい変数（列）の作成：mutate( )</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="mutate.html"><a href="mutate.html#mu-read"><i class="fa fa-check"></i><b>5.1</b> データ読み込み</a></li>
+<li class="chapter" data-level="5.2" data-path="mutate.html"><a href="mutate.html#mu-standard"><i class="fa fa-check"></i><b>5.2</b> 基本</a></li>
+<li class="chapter" data-level="5.3" data-path="mutate.html"><a href="mutate.html#mu-kata"><i class="fa fa-check"></i><b>5.3</b> 変数の型の変換</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="mutate.html"><a href="mutate.html#mu-kata-trans"><i class="fa fa-check"></i><b>5.3.1</b> 型の変換</a></li>
+<li class="chapter" data-level="5.3.2" data-path="mutate.html"><a href="mutate.html#mu-kata-across"><i class="fa fa-check"></i><b>5.3.2</b> 【効率化】複数の変数に対し一度の指定で実行</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="mutate.html"><a href="mutate.html#mu-across"><i class="fa fa-check"></i><b>5.4</b> across( )の特徴</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="mutate.html"><a href="mutate.html#mu-across-list"><i class="fa fa-check"></i><b>5.4.1</b> 【重要知識！】新しい変数名にして追加</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="mutate.html"><a href="mutate.html#mu-total"><i class="fa fa-check"></i><b>5.5</b> 合計点の作成</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="mutate.html"><a href="mutate.html#mu-total-na"><i class="fa fa-check"></i><b>5.5.1</b> 足し上げる変数に欠損があるとどうなるか</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="mutate.html"><a href="mutate.html#変数の値を数値から文字列に変える"><i class="fa fa-check"></i><b>5.6</b> 変数の値を数値から文字列に変える</a></li>
+<li class="chapter" data-level="5.7" data-path="mutate.html"><a href="mutate.html#mu-seq"><i class="fa fa-check"></i><b>5.7</b> 連番からIDの作成</a>
+<ul>
+<li class="chapter" data-level="5.7.1" data-path="mutate.html"><a href="mutate.html#mu-seq-other"><i class="fa fa-check"></i><b>5.7.1</b> 【別解】行の名前を直接変数化</a></li>
+</ul></li>
+<li class="chapter" data-level="5.8" data-path="mutate.html"><a href="mutate.html#mu-rev"><i class="fa fa-check"></i><b>5.8</b> 逆転項目を作る</a>
+<ul>
+<li class="chapter" data-level="5.8.1" data-path="mutate.html"><a href="mutate.html#mu-rev-check"><i class="fa fa-check"></i><b>5.8.1</b> 逆転項目の確認</a></li>
+<li class="chapter" data-level="5.8.2" data-path="mutate.html"><a href="mutate.html#mu-rev-recode"><i class="fa fa-check"></i><b>5.8.2</b> 逆転（recode）</a></li>
+<li class="chapter" data-level="5.8.3" data-path="mutate.html"><a href="mutate.html#mu-rev-rule"><i class="fa fa-check"></i><b>5.8.3</b> 【別解】逆転（公式）</a></li>
+</ul></li>
+<li class="chapter" data-level="5.9" data-path="mutate.html"><a href="mutate.html#mu-total-ef"><i class="fa fa-check"></i><b>5.9</b> 【別解】合計点の作成</a>
+<ul>
+<li class="chapter" data-level="5.9.1" data-path="mutate.html"><a href="mutate.html#確認"><i class="fa fa-check"></i><b>5.9.1</b> 【確認】</a></li>
+</ul></li>
+<li class="chapter" data-level="5.10" data-path="mutate.html"><a href="mutate.html#連続変数をカテゴリに区分する"><i class="fa fa-check"></i><b>5.10</b> 連続変数をカテゴリに区分する</a>
+<ul>
+<li class="chapter" data-level="5.10.1" data-path="mutate.html"><a href="mutate.html#分布の把握"><i class="fa fa-check"></i><b>5.10.1</b> 分布の把握</a></li>
+<li class="chapter" data-level="5.10.2" data-path="mutate.html"><a href="mutate.html#区分"><i class="fa fa-check"></i><b>5.10.2</b> 2区分</a></li>
+<li class="chapter" data-level="5.10.3" data-path="mutate.html"><a href="mutate.html#区分以上"><i class="fa fa-check"></i><b>5.10.3</b> 3区分以上</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="summarise.html"><a href="summarise.html"><i class="fa fa-check"></i><b>6</b> 要約値を作る：summarise( )</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="summarise.html"><a href="summarise.html#su-st"><i class="fa fa-check"></i><b>6.1</b> 基本</a></li>
+<li class="chapter" data-level="6.2" data-path="summarise.html"><a href="summarise.html#su-st-multiple"><i class="fa fa-check"></i><b>6.2</b> 複数の計算</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="summarise.html"><a href="summarise.html#su-st-ef"><i class="fa fa-check"></i><b>6.2.1</b> 【効率化】</a></li>
+<li class="chapter" data-level="6.2.2" data-path="summarise.html"><a href="summarise.html#su-st-reorder"><i class="fa fa-check"></i><b>6.2.2</b> 【並び替え】</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="summarise.html"><a href="summarise.html#su-group"><i class="fa fa-check"></i><b>6.3</b> 層別（グループ別）集計</a></li>
+<li class="chapter" data-level="6.4" data-path="summarise.html"><a href="summarise.html#su-fun"><i class="fa fa-check"></i><b>6.4</b> 【効率化】関数にする</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="summarise.html"><a href="summarise.html#su-fun-st"><i class="fa fa-check"></i><b>6.4.1</b> 基本</a></li>
+<li class="chapter" data-level="6.4.2" data-path="summarise.html"><a href="summarise.html#su-fun-meansdn"><i class="fa fa-check"></i><b>6.4.2</b> 複数変数の平均値とSDとnを計算する関数</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="あとがき.html"><a href="あとがき.html"><i class="fa fa-check"></i>あとがき</a></li>
 </ul>
 
-        <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/izunyan/gisho12.git">View book source <i class="fab fa-github"></i></a></p>
-        </div>
       </nav>
-</div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="select" class="section level1" number="2">
-<h1>
-<span class="header-section-number">2</span> 変数（列）を選ぶ：select( )<a class="anchor" aria-label="anchor" href="#select"><i class="fas fa-link"></i></a>
-</h1>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">がんばらないデータ加工：Rによる繰り返し作業入門（前編）</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="select" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> 変数（列）を選ぶ：select( )</h1>
 <ul>
-<li>パッケージ<code>dplyr</code>の関数<code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code>
-</li>
+<li>パッケージ<code>dplyr</code>の関数<code>select()</code></li>
 <li>tidyな世界では「列名 = 変数名」</li>
 <li>変数が多い時に関心ある変数に限定したデータにしたい</li>
 <li>関心ある変数の名前を取得したい</li>
 <li>後々出てくる繰り返し作業で便利なヘルパー関数</li>
 </ul>
 <div id="select-read" class="section level2" number="2.1">
-<h2>
-<span class="header-section-number">2.1</span> データ読み込み<a class="anchor" aria-label="anchor" href="#select-read"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">2.1</span> データ読み込み</h2>
 <ul>
 <li>データの指定を簡単にするために，penguinsデータを<code>df</code>と読み込む</li>
 </ul>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
-
-<span class="co"># 繝代ャ繧ｱ繝ｼ繧ｸ縺悟&lt;85&gt;･縺｣縺ｦ縺ｪ縺代ｌ縺ｰ荳玖ｨ伜ｮ溯｡&lt;8c&gt;</span>NA<span class="co"># install.packages("palmerpenguins")</span>
-
-<span class="va">df</span> <span class="op">&lt;-</span> 
-  <span class="fu">palmerpenguins</span><span class="fu">::</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/reference/penguins.html">penguins</a></span>
-  
-<span class="va">df</span> <span class="co"># 繝&lt;87&gt;繝ｼ繧ｿ縺ｮ陦ｨ遉ｺ </span>NA</code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="select.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb26-2"><a href="select.html#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="select.html#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co"># パッケージが入ってなければ下記実行</span></span>
+<span id="cb26-4"><a href="select.html#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;palmerpenguins&quot;)</span></span>
+<span id="cb26-5"><a href="select.html#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-6"><a href="select.html#cb26-6" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> </span>
+<span id="cb26-7"><a href="select.html#cb26-7" aria-hidden="true" tabindex="-1"></a>  palmerpenguins<span class="sc">::</span>penguins</span>
+<span id="cb26-8"><a href="select.html#cb26-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb26-9"><a href="select.html#cb26-9" aria-hidden="true" tabindex="-1"></a>df <span class="co"># データの表示 </span></span></code></pre></div>
 <pre><code>## # A tibble: 344 x 8
 ##   species island    bill_length_mm bill_depth_mm flipper_length_~
 ##   &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;            &lt;int&gt;
@@ -97,20 +325,15 @@
 </ul>
 </div>
 <div id="select-standard" class="section level2" number="2.2">
-<h2>
-<span class="header-section-number">2.2</span> 基本<a class="anchor" aria-label="anchor" href="#select-standard"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">2.2</span> 基本</h2>
 <ul>
-<li>
-<code><a href="https://dplyr.tidyverse.org/reference/select.html">select( )</a></code>の中に関心のある変数名を<code>,</code>をつけて並べる
+<li><code>select( )</code>の中に関心のある変数名を<code>,</code>をつけて並べる
 <ul>
 <li>変数は1つからOK</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">bill_length_mm</span>, <span class="va">bill_depth_mm</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="select.html#cb28-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb28-2"><a href="select.html#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(bill_length_mm, bill_depth_mm)</span></code></pre></div>
 <pre><code>## # A tibble: 344 x 2
 ##   bill_length_mm bill_depth_mm
 ##            &lt;dbl&gt;         &lt;dbl&gt;
@@ -121,11 +344,10 @@
 <ul>
 <li>新しいデータフレームを作りたい場合は<code>&lt;-</code>を使って新しいオブジェクトに格納する</li>
 </ul>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df2</span> <span class="op">&lt;-</span> 
-  <span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">bill_length_mm</span><span class="op">)</span>
-
-<span class="va">df2</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="select.html#cb30-1" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> </span>
+<span id="cb30-2"><a href="select.html#cb30-2" aria-hidden="true" tabindex="-1"></a>  df <span class="sc">%&gt;%</span> <span class="fu">select</span>(bill_length_mm)</span>
+<span id="cb30-3"><a href="select.html#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="select.html#cb30-4" aria-hidden="true" tabindex="-1"></a>df2</span></code></pre></div>
 <pre><code>## # A tibble: 344 x 1
 ##   bill_length_mm
 ##            &lt;dbl&gt;
@@ -134,19 +356,15 @@
 ## 3           40.3
 ## # ... with 341 more rows</code></pre>
 <div id="select-range" class="section level3" number="2.2.1">
-<h3>
-<span class="header-section-number">2.2.1</span> 範囲指定<a class="anchor" aria-label="anchor" href="#select-range"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">2.2.1</span> 範囲指定</h3>
 <ul>
 <li>関心ある変数が指定された範囲に含まれていれば<code>:</code>でつなげて取得できる
 <ul>
 <li>変数の連番をまとめて指定する時などに便利（例 <code>変数1:変数100</code>）</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">bill_length_mm</span><span class="op">:</span><span class="va">flipper_length_mm</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="select.html#cb32-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb32-2"><a href="select.html#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(bill_length_mm<span class="sc">:</span>flipper_length_mm)</span></code></pre></div>
 <pre><code>## # A tibble: 344 x 3
 ##   bill_length_mm bill_depth_mm flipper_length_mm
 ##            &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;
@@ -158,12 +376,10 @@
 <li>範囲に加えて追加の変数を追加できる
 <ul>
 <li>飛び飛びの変数群を選びたいときに有用</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">bill_length_mm</span><span class="op">:</span><span class="va">flipper_length_mm</span>, <span class="va">sex</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="select.html#cb34-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb34-2"><a href="select.html#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(bill_length_mm<span class="sc">:</span>flipper_length_mm, sex)</span></code></pre></div>
 <pre><code>## # A tibble: 344 x 4
 ##   bill_length_mm bill_depth_mm flipper_length_mm sex   
 ##            &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt; &lt;fct&gt; 
@@ -173,15 +389,12 @@
 ## # ... with 341 more rows</code></pre>
 </div>
 <div id="select_cha" class="section level3" number="2.2.2">
-<h3>
-<span class="header-section-number">2.2.2</span> 中身が文字でも動く<a class="anchor" aria-label="anchor" href="#select_cha"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">2.2.2</span> 中身が文字でも動く</h3>
 <ul>
 <li>変数名が<code>" "</code>で囲われていると，Rでは文字(character)だと認識される</li>
 </ul>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="st">"bill_length_mm"</span>, <span class="st">"bill_depth_mm"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="select.html#cb36-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb36-2"><a href="select.html#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">&quot;bill_length_mm&quot;</span>, <span class="st">&quot;bill_depth_mm&quot;</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 344 x 2
 ##   bill_length_mm bill_depth_mm
 ##            &lt;dbl&gt;         &lt;dbl&gt;
@@ -191,18 +404,17 @@
 ## # ... with 341 more rows</code></pre>
 <ul>
 <li>これは効率化を図りたいときに重要な特徴</li>
-<li>
-<code><a href="https://dplyr.tidyverse.org/reference/select.html">select( )</a></code>の中にたくさんの変数名を並べるより，事前に指定しておき代入した方が読みやすい
+<li><code>select( )</code>の中にたくさんの変数名を並べるより，事前に指定しておきベクトルとして代入した方が読みやすい
 <ul>
+<li>あらかじめ作成したベクトルとして代入するときは，<code>all_of( )</code>で囲む必要がある</li>
 <li>様々なコード例でこの事前指定が多用されるので慣れるとよい</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># 縺ゅｉ縺九§繧√が繝悶ず繧ｧ繧ｯ繝茨ｼ医％縺薙〒縺ｯvars<ef>ｼ峨↓蠑墓焚繧呈<a0>ｼ邏阪＠縺ｦ蠕後〒菴ｿ縺医ｋ</a0></ef></span>NA<span class="va">vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"bill_length_mm"</span>, <span class="st">"bill_depth_mm"</span><span class="op">)</span>
-
-<span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html">all_of</a></span><span class="op">(</span><span class="va">vars</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="select.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># あらかじめオブジェクト（ここではvars）に引数を格納して後で使える</span></span>
+<span id="cb38-2"><a href="select.html#cb38-2" aria-hidden="true" tabindex="-1"></a>vars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;bill_length_mm&quot;</span>, <span class="st">&quot;bill_depth_mm&quot;</span>)</span>
+<span id="cb38-3"><a href="select.html#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="select.html#cb38-4" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb38-5"><a href="select.html#cb38-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">all_of</span>(vars))</span></code></pre></div>
 <pre><code>## # A tibble: 344 x 2
 ##   bill_length_mm bill_depth_mm
 ##            &lt;dbl&gt;         &lt;dbl&gt;
@@ -212,34 +424,26 @@
 ## # ... with 341 more rows</code></pre>
 <ul>
 <li>ここで<code>vars</code>は文字ベクトル（vector）のオブジェクトとなっている</li>
-<li>
-<code><a href="https://tidyselect.r-lib.org/reference/all_of.html">all_of( )</a></code>の中に文字ベクトルを指定することで，それぞれの中身を変数名として認識する
+<li><code>all_of( )</code>の中に文字ベクトルを指定することで，それぞれの中身を変数名として認識する
 <ul>
 <li>以前使われていた<code>one_of</code>は現在は非推奨</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 </div>
 </div>
 <div id="select-helper" class="section level2" number="2.3">
-<h2>
-<span class="header-section-number">2.3</span> 変数の指定に便利なヘルパー関数<a class="anchor" aria-label="anchor" href="#select-helper"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">2.3</span> 変数の指定に便利なヘルパー関数</h2>
 <ul>
 <li>selection helperと呼ばれる<code>tidyselect</code>パッケージの関数群</li>
-<li>selectの所で解説されることが多いが，後から出てくる<code><a href="https://dplyr.tidyverse.org/reference/across.html">across()</a></code>と併せた活用場面が多いため，なじんでおくと後から楽になる</li>
+<li>selectの所で解説されることが多いが，後から出てくる<code>across()</code>と併せた活用場面が多いため，なじんでおくと後から楽になる</li>
 </ul>
 <div id="select_helper1" class="section level3" number="2.3.1">
-<h3>
-<span class="header-section-number">2.3.1</span> 変数名の最初の文字列<a class="anchor" aria-label="anchor" href="#select_helper1"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">2.3.1</span> 変数名の最初の文字列</h3>
 <ul>
-<li>
-<code>bill</code>から始まる変数を選ぶ</li>
+<li><code>bill</code>から始まる変数を選ぶ</li>
 </ul>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"bill"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="select.html#cb40-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb40-2"><a href="select.html#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">&quot;bill&quot;</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 344 x 2
 ##   bill_length_mm bill_depth_mm
 ##            &lt;dbl&gt;         &lt;dbl&gt;
@@ -249,21 +453,15 @@
 ## # ... with 341 more rows</code></pre>
 </div>
 <div id="select-helper2" class="section level3" number="2.3.2">
-<h3>
-<span class="header-section-number">2.3.2</span> 変数名の最後の文字列<a class="anchor" aria-label="anchor" href="#select-helper2"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">2.3.2</span> 変数名の最後の文字列</h3>
 <ul>
-<li>
-<code>_mm</code>で終わる変数を選ぶ
+<li><code>_mm</code>で終わる変数を選ぶ
 <ul>
-<li>
-<code>mm</code>だけだと他にも含まれる場合が出てくるので，<code>_</code>も含めた方が安全</li>
+<li><code>mm</code>だけだと他にも含まれる場合が出てくるので，<code>_</code>も含めた方が安全</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">ends_with</a></span><span class="op">(</span><span class="st">"_mm"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="select.html#cb42-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb42-2"><a href="select.html#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">ends_with</span>(<span class="st">&quot;_mm&quot;</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 344 x 3
 ##   bill_length_mm bill_depth_mm flipper_length_mm
 ##            &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;
@@ -273,15 +471,12 @@
 ## # ... with 341 more rows</code></pre>
 </div>
 <div id="select-helper3" class="section level3" number="2.3.3">
-<h3>
-<span class="header-section-number">2.3.3</span> 変数名のどこかに含まれる文字列<a class="anchor" aria-label="anchor" href="#select-helper3"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">2.3.3</span> 変数名のどこかに含まれる文字列</h3>
 <ul>
 <li>指定した文字列を含んだ変数名を対象とする</li>
 </ul>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains</a></span><span class="op">(</span><span class="st">"length"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="select.html#cb44-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb44-2"><a href="select.html#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">contains</span>(<span class="st">&quot;length&quot;</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 344 x 2
 ##   bill_length_mm flipper_length_mm
 ##            &lt;dbl&gt;             &lt;int&gt;
@@ -290,21 +485,16 @@
 ## 3           40.3               195
 ## # ... with 341 more rows</code></pre>
 <div id="select-helper4" class="section level4" number="2.3.3.1">
-<h4>
-<span class="header-section-number">2.3.3.1</span> 変数名のどこかに含まれる文字列：その2<a class="anchor" aria-label="anchor" href="#select-helper4"><i class="fas fa-link"></i></a>
-</h4>
+<h4><span class="header-section-number">2.3.3.1</span> 変数名のどこかに含まれる文字列：その2</h4>
 <ul>
 <li>文字列で <strong>正規表現</strong> が使えるため柔軟な指定が可能</li>
 <li>ここでは，“length”または”depth”を含む変数名を対象
 <ul>
-<li>
-<code>|</code>が「または」を意味する</li>
+<li><code>|</code>が「または」を意味する</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">matches</a></span><span class="op">(</span><span class="st">"length|depth"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="select.html#cb46-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb46-2"><a href="select.html#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">matches</span>(<span class="st">&quot;length|depth&quot;</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 344 x 3
 ##   bill_length_mm bill_depth_mm flipper_length_mm
 ##            &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;
@@ -315,19 +505,14 @@
 </div>
 </div>
 <div id="select-helper5" class="section level3" number="2.3.4">
-<h3>
-<span class="header-section-number">2.3.4</span> 上記の組み合わせ<a class="anchor" aria-label="anchor" href="#select-helper5"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">2.3.4</span> 上記の組み合わせ</h3>
 <div id="select-helper5-1" class="section level4" number="2.3.4.1">
-<h4>
-<span class="header-section-number">2.3.4.1</span> かつ<a class="anchor" aria-label="anchor" href="#select-helper5-1"><i class="fas fa-link"></i></a>
-</h4>
+<h4><span class="header-section-number">2.3.4.1</span> かつ</h4>
 <ul>
 <li>それぞれの条件を両方満たす</li>
 </ul>
-<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"bill"</span><span class="op">)</span> <span class="op">&amp;</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains</a></span><span class="op">(</span><span class="st">"length"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="select.html#cb48-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb48-2"><a href="select.html#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">&quot;bill&quot;</span>) <span class="sc">&amp;</span> <span class="fu">contains</span>(<span class="st">&quot;length&quot;</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 344 x 1
 ##   bill_length_mm
 ##            &lt;dbl&gt;
@@ -337,15 +522,12 @@
 ## # ... with 341 more rows</code></pre>
 </div>
 <div id="select-helper5-2" class="section level4" number="2.3.4.2">
-<h4>
-<span class="header-section-number">2.3.4.2</span> または<a class="anchor" aria-label="anchor" href="#select-helper5-2"><i class="fas fa-link"></i></a>
-</h4>
+<h4><span class="header-section-number">2.3.4.2</span> または</h4>
 <ul>
 <li>それぞれの条件をいずれか満たす</li>
 </ul>
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"bill"</span><span class="op">)</span> <span class="op">|</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains</a></span><span class="op">(</span><span class="st">"length"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="select.html#cb50-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb50-2"><a href="select.html#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">&quot;bill&quot;</span>) <span class="sc">|</span> <span class="fu">contains</span>(<span class="st">&quot;length&quot;</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 344 x 3
 ##   bill_length_mm bill_depth_mm flipper_length_mm
 ##            &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;
@@ -356,33 +538,27 @@
 </div>
 </div>
 <div id="select-helper6" class="section level3" number="2.3.5">
-<h3>
-<span class="header-section-number">2.3.5</span> 数値範囲<a class="anchor" aria-label="anchor" href="#select-helper6"><i class="fas fa-link"></i></a>
-</h3>
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">num_range</span></code></pre></div>
+<h3><span class="header-section-number">2.3.5</span> 数値範囲</h3>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="select.html#cb52-1" aria-hidden="true" tabindex="-1"></a>num_range</span></code></pre></div>
 <pre><code>## function (prefix, range, width = NULL, vars = NULL) 
 ## {
-##     vars &lt;- vars %||% peek_vars(fn = "num_range")
+##     vars &lt;- vars %||% peek_vars(fn = &quot;num_range&quot;)
 ##     if (!is_null(width)) {
-##         range &lt;- sprintf(paste0("%0", width, "d"), range)
+##         range &lt;- sprintf(paste0(&quot;%0&quot;, width, &quot;d&quot;), range)
 ##     }
 ##     match_vars(paste0(prefix, range), vars)
 ## }
-## &lt;bytecode: 0x000000002770b358&gt;
+## &lt;bytecode: 0x000000001c8a0a18&gt;
 ## &lt;environment: namespace:tidyselect&gt;</code></pre>
 </div>
 </div>
 <div id="select-drop" class="section level2" number="2.4">
-<h2>
-<span class="header-section-number">2.4</span> 特定の変数を選ばない（落とす）<a class="anchor" aria-label="anchor" href="#select-drop"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">2.4</span> 特定の変数を選ばない（落とす）</h2>
 <ul>
 <li>変数名の前に<code>!</code>をつける</li>
 </ul>
-<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">!</span><span class="va">species</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="select.html#cb54-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb54-2"><a href="select.html#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>species)</span></code></pre></div>
 <pre><code>## # A tibble: 344 x 7
 ##   island    bill_length_mm bill_depth_mm flipper_length_mm
 ##   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;
@@ -394,9 +570,8 @@
 <ul>
 <li>複数列を落としたい場合は，<code>!c( )</code>の中に対象の列名を含める</li>
 </ul>
-<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">bill_length_mm</span><span class="op">:</span><span class="va">flipper_length_mm</span>, <span class="va">sex</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="select.html#cb56-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb56-2"><a href="select.html#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span><span class="fu">c</span>(bill_length_mm<span class="sc">:</span>flipper_length_mm, sex))</span></code></pre></div>
 <pre><code>## # A tibble: 344 x 4
 ##   species island    body_mass_g  year
 ##   &lt;fct&gt;   &lt;fct&gt;           &lt;int&gt; &lt;int&gt;
@@ -406,151 +581,124 @@
 ## # ... with 341 more rows</code></pre>
 </div>
 <div id="変数を並び変える" class="section level2" number="2.5">
-<h2>
-<span class="header-section-number">2.5</span> 変数を並び変える<a class="anchor" aria-label="anchor" href="#%E5%A4%89%E6%95%B0%E3%82%92%E4%B8%A6%E3%81%B3%E5%A4%89%E3%81%88%E3%82%8B"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">2.5</span> 変数を並び変える</h2>
 </div>
 <div id="変数名を変更する" class="section level2" number="2.6">
-<h2>
-<span class="header-section-number">2.6</span> 変数名を変更する<a class="anchor" aria-label="anchor" href="#%E5%A4%89%E6%95%B0%E5%90%8D%E3%82%92%E5%A4%89%E6%9B%B4%E3%81%99%E3%82%8B"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">2.6</span> 変数名を変更する</h2>
 </div>
 <div id="関心のある変数名を取得する" class="section level2" number="2.7">
-<h2>
-<span class="header-section-number">2.7</span> 関心のある変数名を取得する<a class="anchor" aria-label="anchor" href="#%E9%96%A2%E5%BF%83%E3%81%AE%E3%81%82%E3%82%8B%E5%A4%89%E6%95%B0%E5%90%8D%E3%82%92%E5%8F%96%E5%BE%97%E3%81%99%E3%82%8B"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">2.7</span> 関心のある変数名を取得する</h2>
 <ul>
 <li>データ分析の段階では，関心のある変数名を選択して，それらを代入する作業が頻出</li>
 <li>変数名手打ちだと時間もかかるしミスもあるので，効率化のために必ずおさえておきたい技術</li>
 </ul>
 <div id="全ての変数名" class="section level3" number="2.7.1">
-<h3>
-<span class="header-section-number">2.7.1</span> 全ての変数名<a class="anchor" aria-label="anchor" href="#%E5%85%A8%E3%81%A6%E3%81%AE%E5%A4%89%E6%95%B0%E5%90%8D"><i class="fas fa-link"></i></a>
-</h3>
-<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] "species"           "island"            "bill_length_mm"   
-## [4] "bill_depth_mm"     "flipper_length_mm" "body_mass_g"      
-## [7] "sex"               "year"</code></pre>
+<h3><span class="header-section-number">2.7.1</span> 全ての変数名</h3>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="select.html#cb58-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">names</span>()</span></code></pre></div>
+<pre><code>## [1] &quot;species&quot;           &quot;island&quot;            &quot;bill_length_mm&quot;   
+## [4] &quot;bill_depth_mm&quot;     &quot;flipper_length_mm&quot; &quot;body_mass_g&quot;      
+## [7] &quot;sex&quot;               &quot;year&quot;</code></pre>
 </div>
 <div id="選択した変数名を取得" class="section level3" number="2.7.2">
-<h3>
-<span class="header-section-number">2.7.2</span> 選択した変数名を取得<a class="anchor" aria-label="anchor" href="#%E9%81%B8%E6%8A%9E%E3%81%97%E3%81%9F%E5%A4%89%E6%95%B0%E5%90%8D%E3%82%92%E5%8F%96%E5%BE%97"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">2.7.2</span> 選択した変数名を取得</h3>
 <ul>
 <li>ベクトル</li>
 </ul>
-<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">bill_vars</span> <span class="op">&lt;-</span> 
-  <span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"bill"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="op">)</span>
-
-<span class="va">bill_vars</span></code></pre></div>
-<pre><code>## [1] "bill_length_mm" "bill_depth_mm"</code></pre>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="select.html#cb60-1" aria-hidden="true" tabindex="-1"></a>bill_vars <span class="ot">&lt;-</span> </span>
+<span id="cb60-2"><a href="select.html#cb60-2" aria-hidden="true" tabindex="-1"></a>  df <span class="sc">%&gt;%</span> </span>
+<span id="cb60-3"><a href="select.html#cb60-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">&quot;bill&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb60-4"><a href="select.html#cb60-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>()</span>
+<span id="cb60-5"><a href="select.html#cb60-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-6"><a href="select.html#cb60-6" aria-hidden="true" tabindex="-1"></a>bill_vars</span></code></pre></div>
+<pre><code>## [1] &quot;bill_length_mm&quot; &quot;bill_depth_mm&quot;</code></pre>
 </div>
 <div id="コピペに便利な形式に出力" class="section level3" number="2.7.3">
-<h3>
-<span class="header-section-number">2.7.3</span> コピペに便利な形式に出力<a class="anchor" aria-label="anchor" href="#%E3%82%B3%E3%83%94%E3%83%9A%E3%81%AB%E4%BE%BF%E5%88%A9%E3%81%AA%E5%BD%A2%E5%BC%8F%E3%81%AB%E5%87%BA%E5%8A%9B"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">2.7.3</span> コピペに便利な形式に出力</h3>
 <ul>
-<li>
-<code>,</code>で区切られた形式で出てくればそのまま<code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code>に入れられるのに…と思った方のための便利関数<code><a href="https://rdrr.io/r/base/dput.html">dput()</a></code>
-</li>
+<li><code>,</code>で区切られた形式で出てくればそのまま<code>select()</code>に入れられるのに…と思った方のための便利関数<code>dput()</code></li>
 </ul>
-<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"b"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co"># b縺九ｉ蟋九∪繧句､画焚蜷&lt;8d&gt;</span>NA<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rdrr.io/r/base/dput.html">dput</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code>## c("bill_length_mm", "bill_depth_mm", "body_mass_g")</code></pre>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="select.html#cb62-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb62-2"><a href="select.html#cb62-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">&quot;b&quot;</span>)) <span class="sc">%&gt;%</span> <span class="co"># bから始まる変数名</span></span>
+<span id="cb62-3"><a href="select.html#cb62-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb62-4"><a href="select.html#cb62-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dput</span>()</span></code></pre></div>
+<pre><code>## c(&quot;bill_length_mm&quot;, &quot;bill_depth_mm&quot;, &quot;body_mass_g&quot;)</code></pre>
 <ul>
-<li>
-<code>" "</code>すらもいらない，という時は，新しくr script(アイコンNew Fileまたは<code>ctrl + shift + n</code>)開いて，<code><a href="https://rdrr.io/r/base/dput.html">dput()</a></code>の出力を貼り付けてすべて置換する方法も</li>
+<li><code>" "</code>すらもいらない，という時は，新しくr script(アイコンNew Fileまたは<code>ctrl + shift + n</code>)開いて，<code>dput()</code>の出力を貼り付けてすべて置換する方法も</li>
 </ul>
 </div>
 </div>
 <div id="応用編複数データフレームで同時にselect" class="section level2" number="2.8">
-<h2>
-<span class="header-section-number">2.8</span> 【応用編】複数データフレームで同時にselect<a class="anchor" aria-label="anchor" href="#%E5%BF%9C%E7%94%A8%E7%B7%A8%E8%A4%87%E6%95%B0%E3%83%87%E3%83%BC%E3%82%BF%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%81%A7%E5%90%8C%E6%99%82%E3%81%ABselect"><i class="fas fa-link"></i></a>
-</h2>
+<h2><span class="header-section-number">2.8</span> 【応用編】複数データフレームで同時にselect</h2>
 <div id="複数データフレームで同じようにselect" class="section level3" number="2.8.1">
-<h3>
-<span class="header-section-number">2.8.1</span> 複数データフレームで同じようにselect<a class="anchor" aria-label="anchor" href="#%E8%A4%87%E6%95%B0%E3%83%87%E3%83%BC%E3%82%BF%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%81%A7%E5%90%8C%E3%81%98%E3%82%88%E3%81%86%E3%81%ABselect"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">2.8.1</span> 複数データフレームで同じようにselect</h3>
 </div>
 <div id="複数データフレームで別々にselect" class="section level3" number="2.8.2">
-<h3>
-<span class="header-section-number">2.8.2</span> 複数データフレームで別々にselect<a class="anchor" aria-label="anchor" href="#%E8%A4%87%E6%95%B0%E3%83%87%E3%83%BC%E3%82%BF%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%81%A7%E5%88%A5%E3%80%85%E3%81%ABselect"><i class="fas fa-link"></i></a>
-</h3>
+<h3><span class="header-section-number">2.8.2</span> 複数データフレームで別々にselect</h3>
 <p><a href="https://izunyan.github.io/practice_bfi/#13_%E3%82%AF%E3%83%AD%E3%83%B3%E3%83%90%E3%83%83%E3%82%AF%E3%81%AE%E3%82%A2%E3%83%AB%E3%83%95%E3%82%A1" class="uri">https://izunyan.github.io/practice_bfi/#13_%E3%82%AF%E3%83%AD%E3%83%B3%E3%83%90%E3%83%83%E3%82%AF%E3%81%AE%E3%82%A2%E3%83%AB%E3%83%95%E3%82%A1</a></p>
 
 </div>
 </div>
 </div>
-  <div class="chapter-nav">
-<div class="prev"><a href="premise.html"><span class="header-section-number">1</span> 前提知識</a></div>
-<div class="next"><a href="rename.html"><span class="header-section-number">3</span> 変数名を変更する：rename( )</a></div>
-</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#select"><span class="header-section-number">2</span> 変数（列）を選ぶ：select( )</a></li>
-<li><a class="nav-link" href="#select-read"><span class="header-section-number">2.1</span> データ読み込み</a></li>
-<li>
-<a class="nav-link" href="#select-standard"><span class="header-section-number">2.2</span> 基本</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#select-range"><span class="header-section-number">2.2.1</span> 範囲指定</a></li>
-<li><a class="nav-link" href="#select_cha"><span class="header-section-number">2.2.2</span> 中身が文字でも動く</a></li>
-</ul>
-</li>
-<li>
-<a class="nav-link" href="#select-helper"><span class="header-section-number">2.3</span> 変数の指定に便利なヘルパー関数</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#select_helper1"><span class="header-section-number">2.3.1</span> 変数名の最初の文字列</a></li>
-<li><a class="nav-link" href="#select-helper2"><span class="header-section-number">2.3.2</span> 変数名の最後の文字列</a></li>
-<li><a class="nav-link" href="#select-helper3"><span class="header-section-number">2.3.3</span> 変数名のどこかに含まれる文字列</a></li>
-<li><a class="nav-link" href="#select-helper5"><span class="header-section-number">2.3.4</span> 上記の組み合わせ</a></li>
-<li><a class="nav-link" href="#select-helper6"><span class="header-section-number">2.3.5</span> 数値範囲</a></li>
-</ul>
-</li>
-<li><a class="nav-link" href="#select-drop"><span class="header-section-number">2.4</span> 特定の変数を選ばない（落とす）</a></li>
-<li><a class="nav-link" href="#%E5%A4%89%E6%95%B0%E3%82%92%E4%B8%A6%E3%81%B3%E5%A4%89%E3%81%88%E3%82%8B"><span class="header-section-number">2.5</span> 変数を並び変える</a></li>
-<li><a class="nav-link" href="#%E5%A4%89%E6%95%B0%E5%90%8D%E3%82%92%E5%A4%89%E6%9B%B4%E3%81%99%E3%82%8B"><span class="header-section-number">2.6</span> 変数名を変更する</a></li>
-<li>
-<a class="nav-link" href="#%E9%96%A2%E5%BF%83%E3%81%AE%E3%81%82%E3%82%8B%E5%A4%89%E6%95%B0%E5%90%8D%E3%82%92%E5%8F%96%E5%BE%97%E3%81%99%E3%82%8B"><span class="header-section-number">2.7</span> 関心のある変数名を取得する</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#%E5%85%A8%E3%81%A6%E3%81%AE%E5%A4%89%E6%95%B0%E5%90%8D"><span class="header-section-number">2.7.1</span> 全ての変数名</a></li>
-<li><a class="nav-link" href="#%E9%81%B8%E6%8A%9E%E3%81%97%E3%81%9F%E5%A4%89%E6%95%B0%E5%90%8D%E3%82%92%E5%8F%96%E5%BE%97"><span class="header-section-number">2.7.2</span> 選択した変数名を取得</a></li>
-<li><a class="nav-link" href="#%E3%82%B3%E3%83%94%E3%83%9A%E3%81%AB%E4%BE%BF%E5%88%A9%E3%81%AA%E5%BD%A2%E5%BC%8F%E3%81%AB%E5%87%BA%E5%8A%9B"><span class="header-section-number">2.7.3</span> コピペに便利な形式に出力</a></li>
-</ul>
-</li>
-<li>
-<a class="nav-link" href="#%E5%BF%9C%E7%94%A8%E7%B7%A8%E8%A4%87%E6%95%B0%E3%83%87%E3%83%BC%E3%82%BF%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%81%A7%E5%90%8C%E6%99%82%E3%81%ABselect"><span class="header-section-number">2.8</span> 【応用編】複数データフレームで同時にselect</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#%E8%A4%87%E6%95%B0%E3%83%87%E3%83%BC%E3%82%BF%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%81%A7%E5%90%8C%E3%81%98%E3%82%88%E3%81%86%E3%81%ABselect"><span class="header-section-number">2.8.1</span> 複数データフレームで同じようにselect</a></li>
-<li><a class="nav-link" href="#%E8%A4%87%E6%95%B0%E3%83%87%E3%83%BC%E3%82%BF%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%81%A7%E5%88%A5%E3%80%85%E3%81%ABselect"><span class="header-section-number">2.8.2</span> 複数データフレームで別々にselect</a></li>
-</ul>
-</li>
-</ul>
+            </section>
 
-      <div class="book-extra">
-        <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/izunyan/gisho12.git/blob/master/select.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/izunyan/gisho12.git/edit/master/select.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
-        </ul>
-</div>
-    </nav>
-</div>
-
-</div>
-</div> <!-- .container -->
-
-<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>がんばらないデータ加工：Rによる繰り返し作業入門（前編）</strong>" was written by やわらかクジラ. </p>
+          </div>
+        </div>
+      </div>
+<a href="premise.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="rename.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
   </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["gisho12.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
 
-  <div class="col-12 col-md-6 mt-3">
-    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
-  </div>
-
-</div></div>
-</footer>
 </body>
+
 </html>
