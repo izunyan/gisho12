@@ -18,8 +18,9 @@ library(tidyverse)
 
 df <- 
   palmerpenguins::penguins
-  
-df # データの表示 
+
+# データの表示  
+df 
 ``` 
 
 * 読み込みの様々な方法については拙書[『Rで読むExcelファイル』](https://izunyan.github.io/excel_r/)参照
@@ -44,6 +45,12 @@ df2 <-
 
 df2
 ```
+
+### 【補足】%>% の意味
+```{r}
+
+```
+
 
 
 ### 範囲指定 {#select-range}
