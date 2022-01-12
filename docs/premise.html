@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1 前提知識 | がんばらないデータ加工：Rによる繰り返し作業入門（前編）</title>
-  <meta name="description" content="1 前提知識 | がんばらないデータ加工：Rによる繰り返し作業入門（前編）" />
+  <title>1 前提知識 | がんばらないデータ加工　ーRによる繰り返し作業入門ー　前編</title>
+  <meta name="description" content="1 前提知識 | がんばらないデータ加工　ーRによる繰り返し作業入門ー　前編" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1 前提知識 | がんばらないデータ加工：Rによる繰り返し作業入門（前編）" />
+  <meta property="og:title" content="1 前提知識 | がんばらないデータ加工　ーRによる繰り返し作業入門ー　前編" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/cover.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="https://github.com/izunyan/gisho12.git" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1 前提知識 | がんばらないデータ加工：Rによる繰り返し作業入門（前編）" />
+  <meta name="twitter:title" content="1 前提知識 | がんばらないデータ加工　ーRによる繰り返し作業入門ー　前編" />
   
   
   <meta name="twitter:image" content="/images/cover.png" />
@@ -137,7 +137,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#本書の特徴"><i class="fa fa-check"></i>本書の特徴</a>
 <ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#想定読者"><i class="fa fa-check"></i>想定読者</a></li>
-<li class="chapter" data-level="0.0.1" data-path="index.html"><a href="index.html#前提"><i class="fa fa-check"></i><b>0.0.1</b> 前提</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#各セクションの概要"><i class="fa fa-check"></i>各セクションの概要</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#執筆環境"><i class="fa fa-check"></i>執筆環境</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#注意事項など"><i class="fa fa-check"></i>注意事項など</a></li>
@@ -167,8 +167,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1" data-path="select.html"><a href="select.html#select-read"><i class="fa fa-check"></i><b>2.1</b> データ読み込み</a></li>
 <li class="chapter" data-level="2.2" data-path="select.html"><a href="select.html#select-standard"><i class="fa fa-check"></i><b>2.2</b> 基本</a>
 <ul>
-<li class="chapter" data-level="2.2.1" data-path="select.html"><a href="select.html#select-range"><i class="fa fa-check"></i><b>2.2.1</b> 範囲指定</a></li>
-<li class="chapter" data-level="2.2.2" data-path="select.html"><a href="select.html#select_cha"><i class="fa fa-check"></i><b>2.2.2</b> 中身が文字でも動く</a></li>
+<li class="chapter" data-level="2.2.1" data-path="select.html"><a href="select.html#補足-の意味"><i class="fa fa-check"></i><b>2.2.1</b> 【補足】%&gt;% の意味</a></li>
+<li class="chapter" data-level="2.2.2" data-path="select.html"><a href="select.html#select-range"><i class="fa fa-check"></i><b>2.2.2</b> 範囲指定</a></li>
+<li class="chapter" data-level="2.2.3" data-path="select.html"><a href="select.html#select_cha"><i class="fa fa-check"></i><b>2.2.3</b> 中身が文字でも動く</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="select.html"><a href="select.html#select-helper"><i class="fa fa-check"></i><b>2.3</b> 変数の指定に便利なヘルパー関数</a>
 <ul>
@@ -281,7 +282,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">がんばらないデータ加工：Rによる繰り返し作業入門（前編）</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">がんばらないデータ加工　ーRによる繰り返し作業入門ー　前編</a>
           </h1>
         </div>
 
@@ -292,15 +293,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="premise" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> 前提知識</h1>
 <ul>
-<li></li>
+<li>ここに出てくる用語は初学者にとってなじみがないものばかりかもしれないが，Rでデータ加工をらくらくできるようになるためには避けて通れない</li>
 </ul>
 <div id="p-howtoread" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> 本書に出てくるコード部分の見方</h2>
 <ul>
-<li>グレーの背景部分はRのコードが書いてあり，その下の<code>##</code>で始まる部分は出力結果を表す
-<ul>
-<li></li>
-</ul></li>
+<li>グレーの背景部分はRのコードが書いてあり，その下の<code>##</code>で始まる部分は出力結果を表す</li>
 </ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="premise.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
@@ -330,6 +328,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>これにより、ファイルの読み書きの際の場所指定をいちいち意識しないで作業できるようになる</li>
 <li>詳しくは<a href="https://izunyan.github.io/excel_r/project.html#project">拙書の解説</a>参照</li>
 </ul>
+<p><img src="images/project.png" /></p>
 </div>
 <div id="p-package" class="section level2" number="1.3">
 <h2><span class="header-section-number">1.3</span> パッケージ</h2>
@@ -339,16 +338,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>逆にいえば読み込まないと便利な作業ができないことが多い</li>
 </ul></li>
 <li>例：<code>library(tidyverse)</code>または<code>require(tidyverse)</code> のように書くことで読み込める</li>
-<li>パッケージを読み込まなくても，<code>パッケージ名::関数名()</code>でパッケージ内の関数が使える
+<li>パッケージを読み込まなくても，<code>パッケージ名::関数名( )</code>でパッケージ内の関数が使える
 <ul>
 <li>どのパッケージの関数か明示するのにも便利なので，本書では多用する</li>
+<li>以下，例えば「パッケージ<code>dplyr</code>の関数<code>select( )</code>」は<code>dplyr::select( )</code>と表現する</li>
 </ul></li>
 </ul>
 </div>
 <div id="p-function" class="section level2" number="1.4">
 <h2><span class="header-section-number">1.4</span> 関数</h2>
 <ul>
-<li>適切な値や変数などを指定すれば，データの処理や計算，統計解析など様々な処理を簡単に実行してくれる</li>
+<li>適切な値や変数などを指定すれば，データの処理や計算，統計解析など様々な処理を簡単に実行してくれる
+<ul>
+<li>データ加工の技術は，色々な便利関数をどの場面でどうやって使うかにつきる</li>
+</ul></li>
 <li>例えば<code>mean( )</code>などのように<code>関数名( )</code>で出てくるので，<code>( )</code>で囲まれてる所を見たらほぼ関数だと思えばよさそう</li>
 <li><code>( )</code>の中に入る値を <strong>引数</strong> （ひきすう）と呼ぶ</li>
 <li>引数は<code>,</code>でつないで追加していき，これによって実行したい処理のカスタマイズが可能
@@ -359,8 +362,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="p-function-ex-c" class="section level4" number="1.4.1.1">
 <h4><span class="header-section-number">1.4.1.1</span> 複数のものを1つにする: c( )</h4>
 <ul>
-<li><strong>ベクトル</strong> を作る（複数のものを1つにする）ための関数。</li>
-<li>慣れてる人は当たり前に使っているので，初学者にとって理解しとくとよい最重要関数と思われる</li>
+<li><strong>ベクトル</strong> を作る（複数のものを1つにする）ための関数</li>
+<li>ベクトルと聞くと数学苦手だった人はいやな記憶を思い出すかもしれないが，Rではとにかく「<strong>複数のものを１つにしたもの</strong>」と理解しておけば何となると思う</li>
+<li><code>c()</code>は慣れてる人は当たり前に使っているので，初学者にとって理解しとくとよい最重要関数と思われる</li>
 <li>ベクトルは，後に解説するデータフレームでの列単位のデータを扱う際にも有用</li>
 </ul>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="premise.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span></code></pre></div>
@@ -391,7 +395,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">1.5</span> オブジェクト</h2>
 <ul>
 <li>計算の結果や，複数の数値や文字など（他にも色々）を1つの文字列に格納することができ，その後のコードで活用できる</li>
-<li><code>&lt;-</code>RStudioではショートカット<code>alt + -</code>で出せる(Macは<code>Option + -</code>)</li>
+<li><code>&lt;-</code>の矢印の先にあるのがオブジェクト。RStudioではショートカット<code>alt + -</code>で出せる(Macは<code>Option + -</code>)</li>
 <li>この後説明するデータフレームもオブジェクトに入れられる
 <ul>
 <li>データの少ないミニデータを作る時や，計算結果を格納するときに多用</li>
@@ -414,21 +418,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="p-df" class="section level2" number="1.6">
 <h2><span class="header-section-number">1.6</span> データフレーム</h2>
 <ul>
+<li>変数（列）とケースまたはオブザベーション（行）が碁盤の目のようになった集まりの形のデータ。Excelで表現するのであれば通常1行目に列名が入り、2行目以降が個別のデータを表す形
+<ul>
+<li>データ解析において便利で分かりやすいため、本書ではデータフレームの形で説明していく</li>
+<li>Rのモダンな方法では，データの加工や統計処理のプロセスをデータフレームの形で返すことが多い</li>
+</ul></li>
+</ul>
+<p><img src="images/df.png" /></p>
+<ul>
 <li>オブジェクトに格納することで，別のデータフレームを作れる</li>
 <li>列単位で取り出すとベクトルになる</li>
-<li>本書では，tibble</li>
+<li>本書では，データフレームの中でも表示に便利なtibble形式を使う</li>
 <li>本書では紙面の都合上，表示行数をしぼっているが，任意の行数を見たいときは<code>print( )</code>関数で出力ごとに設定</li>
 </ul>
 <div id="本書で使う主なデータ" class="section level3" number="1.6.1">
 <h3><span class="header-section-number">1.6.1</span> 本書で使う主なデータ</h3>
 <div id="ペンギンデータ" class="section level4" number="1.6.1.1">
 <h4><span class="header-section-number">1.6.1.1</span> ペンギンデータ</h4>
-<ul>
-<li>CC0</li>
-</ul>
 <p><img src="images/penguins_logo.png" /></p>
 <ul>
-<li><code>palmerpenguins</code>パッケージのpenguinsデータ</li>
+<li><code>palmerpenguins</code>パッケージのpenguinsデータ（CC0）</li>
 </ul>
 </div>
 </div>
@@ -436,11 +445,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="p-pipe" class="section level2" number="1.7">
 <h2><span class="header-section-number">1.7</span> %&gt;% （パイプ演算子）</h2>
 <ul>
-<li>RStudioのショートカットは<code>Ctrl + Shift + M</code>(Macは<code>Cmd + Shift + M</code>)</li>
+<li>コードを読みやすくするための便利な機能を持つ演算子。初めてみた人は全然わからないと思うが，この本を読んでコードを書きはじめてみたらこれなしではいられなくなるくらいお世話になると思う。
+<ul>
+<li>主に使用が想定される場面でざっくりいうと，「このデータフレームに対して%&gt;%の後にある関数を適用する」という機能</li>
+<li>具体的な使用法は<a href="#select-standard-pipe"><strong>??</strong></a>で解説</li>
+</ul></li>
+<li>RStudioのショートカットは<code>Ctrl + Shift + M</code>(Macは<code>Cmd + Shift + M</code>)。たぶん，RStudio以外でもこのショートカット押してしまうぐらい中毒性がある</li>
 <li>R version 4.1からは<code>|&gt;</code>が大体同じ機能を持つ演算子して実装されたので，特にパッケージの読み込みをせずに使えるようになった。こちらを使う説明も今後増えていくと思われる
 <ul>
-<li>ショートカットで出るパイプを切り替えたい場合は，RStudioの<code>Tools &gt; Global Options &gt; Code &gt; Editing &gt; use native pipe operator</code>にチェックを入れる</li>
-<li>現時点ではデータフレームを第一引数へ渡す形式でない関数の場合（<code>lm( )</code>など），工夫が必要な場合があるようなので，本書では<code>%&gt;%</code>を使用</li>
+<li>ショートカットで出るパイプを<code>|&gt;</code>に切り替えたい場合は，RStudioの<code>Tools &gt; Global Options &gt; Code &gt; Editing &gt; use native pipe operator</code>にチェックを入れる</li>
+<li>現時点ではデータフレームを第一引数へ渡す形式でない関数の場合（回帰分析の<code>lm( )</code>など），工夫が必要な場合があるようなので，本書では<code>%&gt;%</code>を使用</li>
 </ul></li>
 </ul>
 

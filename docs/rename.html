@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3 変数名を変更する：rename( ) | がんばらないデータ加工：Rによる繰り返し作業入門（前編）</title>
-  <meta name="description" content="3 変数名を変更する：rename( ) | がんばらないデータ加工：Rによる繰り返し作業入門（前編）" />
+  <title>3 変数名を変更する：rename( ) | がんばらないデータ加工　ーRによる繰り返し作業入門ー　前編</title>
+  <meta name="description" content="3 変数名を変更する：rename( ) | がんばらないデータ加工　ーRによる繰り返し作業入門ー　前編" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3 変数名を変更する：rename( ) | がんばらないデータ加工：Rによる繰り返し作業入門（前編）" />
+  <meta property="og:title" content="3 変数名を変更する：rename( ) | がんばらないデータ加工　ーRによる繰り返し作業入門ー　前編" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/cover.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="https://github.com/izunyan/gisho12.git" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3 変数名を変更する：rename( ) | がんばらないデータ加工：Rによる繰り返し作業入門（前編）" />
+  <meta name="twitter:title" content="3 変数名を変更する：rename( ) | がんばらないデータ加工　ーRによる繰り返し作業入門ー　前編" />
   
   
   <meta name="twitter:image" content="/images/cover.png" />
@@ -137,7 +137,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#本書の特徴"><i class="fa fa-check"></i>本書の特徴</a>
 <ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#想定読者"><i class="fa fa-check"></i>想定読者</a></li>
-<li class="chapter" data-level="0.0.1" data-path="index.html"><a href="index.html#前提"><i class="fa fa-check"></i><b>0.0.1</b> 前提</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#各セクションの概要"><i class="fa fa-check"></i>各セクションの概要</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#執筆環境"><i class="fa fa-check"></i>執筆環境</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#注意事項など"><i class="fa fa-check"></i>注意事項など</a></li>
@@ -167,8 +167,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1" data-path="select.html"><a href="select.html#select-read"><i class="fa fa-check"></i><b>2.1</b> データ読み込み</a></li>
 <li class="chapter" data-level="2.2" data-path="select.html"><a href="select.html#select-standard"><i class="fa fa-check"></i><b>2.2</b> 基本</a>
 <ul>
-<li class="chapter" data-level="2.2.1" data-path="select.html"><a href="select.html#select-range"><i class="fa fa-check"></i><b>2.2.1</b> 範囲指定</a></li>
-<li class="chapter" data-level="2.2.2" data-path="select.html"><a href="select.html#select_cha"><i class="fa fa-check"></i><b>2.2.2</b> 中身が文字でも動く</a></li>
+<li class="chapter" data-level="2.2.1" data-path="select.html"><a href="select.html#補足-の意味"><i class="fa fa-check"></i><b>2.2.1</b> 【補足】%&gt;% の意味</a></li>
+<li class="chapter" data-level="2.2.2" data-path="select.html"><a href="select.html#select-range"><i class="fa fa-check"></i><b>2.2.2</b> 範囲指定</a></li>
+<li class="chapter" data-level="2.2.3" data-path="select.html"><a href="select.html#select_cha"><i class="fa fa-check"></i><b>2.2.3</b> 中身が文字でも動く</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="select.html"><a href="select.html#select-helper"><i class="fa fa-check"></i><b>2.3</b> 変数の指定に便利なヘルパー関数</a>
 <ul>
@@ -281,7 +282,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">がんばらないデータ加工：Rによる繰り返し作業入門（前編）</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">がんばらないデータ加工　ーRによる繰り返し作業入門ー　前編</a>
           </h1>
         </div>
 
@@ -359,7 +360,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="rename-strreplace1" class="section level3" number="3.2.1">
 <h3><span class="header-section-number">3.2.1</span> 【効率化】str_replace()で一括変換(1)</h3>
 <ul>
-<li>`rename_with``は，まず適用したい関数を示し，そのあとに該当する変数を選ぶ</li>
+<li><code>rename_with( )</code>は，まず適用したい関数を示し，そのあとに該当する変数を選ぶ</li>
 <li>適用したい関数の中にある<code>.</code>の部分に，その後選ぶ変数が入っていく</li>
 <li>語の置き換えは<code>stringr::str_replace()</code>を使う</li>
 </ul>

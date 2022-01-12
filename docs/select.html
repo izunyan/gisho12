@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2 変数（列）を選ぶ：select( ) | がんばらないデータ加工：Rによる繰り返し作業入門（前編）</title>
-  <meta name="description" content="2 変数（列）を選ぶ：select( ) | がんばらないデータ加工：Rによる繰り返し作業入門（前編）" />
+  <title>2 変数（列）を選ぶ：select( ) | がんばらないデータ加工　ーRによる繰り返し作業入門ー　前編</title>
+  <meta name="description" content="2 変数（列）を選ぶ：select( ) | がんばらないデータ加工　ーRによる繰り返し作業入門ー　前編" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2 変数（列）を選ぶ：select( ) | がんばらないデータ加工：Rによる繰り返し作業入門（前編）" />
+  <meta property="og:title" content="2 変数（列）を選ぶ：select( ) | がんばらないデータ加工　ーRによる繰り返し作業入門ー　前編" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/cover.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="https://github.com/izunyan/gisho12.git" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2 変数（列）を選ぶ：select( ) | がんばらないデータ加工：Rによる繰り返し作業入門（前編）" />
+  <meta name="twitter:title" content="2 変数（列）を選ぶ：select( ) | がんばらないデータ加工　ーRによる繰り返し作業入門ー　前編" />
   
   
   <meta name="twitter:image" content="/images/cover.png" />
@@ -137,7 +137,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#本書の特徴"><i class="fa fa-check"></i>本書の特徴</a>
 <ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#想定読者"><i class="fa fa-check"></i>想定読者</a></li>
-<li class="chapter" data-level="0.0.1" data-path="index.html"><a href="index.html#前提"><i class="fa fa-check"></i><b>0.0.1</b> 前提</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#各セクションの概要"><i class="fa fa-check"></i>各セクションの概要</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#執筆環境"><i class="fa fa-check"></i>執筆環境</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#注意事項など"><i class="fa fa-check"></i>注意事項など</a></li>
@@ -167,8 +167,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1" data-path="select.html"><a href="select.html#select-read"><i class="fa fa-check"></i><b>2.1</b> データ読み込み</a></li>
 <li class="chapter" data-level="2.2" data-path="select.html"><a href="select.html#select-standard"><i class="fa fa-check"></i><b>2.2</b> 基本</a>
 <ul>
-<li class="chapter" data-level="2.2.1" data-path="select.html"><a href="select.html#select-range"><i class="fa fa-check"></i><b>2.2.1</b> 範囲指定</a></li>
-<li class="chapter" data-level="2.2.2" data-path="select.html"><a href="select.html#select_cha"><i class="fa fa-check"></i><b>2.2.2</b> 中身が文字でも動く</a></li>
+<li class="chapter" data-level="2.2.1" data-path="select.html"><a href="select.html#補足-の意味"><i class="fa fa-check"></i><b>2.2.1</b> 【補足】%&gt;% の意味</a></li>
+<li class="chapter" data-level="2.2.2" data-path="select.html"><a href="select.html#select-range"><i class="fa fa-check"></i><b>2.2.2</b> 範囲指定</a></li>
+<li class="chapter" data-level="2.2.3" data-path="select.html"><a href="select.html#select_cha"><i class="fa fa-check"></i><b>2.2.3</b> 中身が文字でも動く</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="select.html"><a href="select.html#select-helper"><i class="fa fa-check"></i><b>2.3</b> 変数の指定に便利なヘルパー関数</a>
 <ul>
@@ -281,7 +282,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">がんばらないデータ加工：Rによる繰り返し作業入門（前編）</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">がんばらないデータ加工　ーRによる繰り返し作業入門ー　前編</a>
           </h1>
         </div>
 
@@ -292,7 +293,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="select" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> 変数（列）を選ぶ：select( )</h1>
 <ul>
-<li>パッケージ<code>dplyr</code>の関数<code>select()</code></li>
+<li><code>dplyr:select( )</code></li>
 <li>tidyな世界では「列名 = 変数名」</li>
 <li>変数が多い時に関心ある変数に限定したデータにしたい</li>
 <li>関心ある変数の名前を取得したい</li>
@@ -310,8 +311,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb26-5"><a href="select.html#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-6"><a href="select.html#cb26-6" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> </span>
 <span id="cb26-7"><a href="select.html#cb26-7" aria-hidden="true" tabindex="-1"></a>  palmerpenguins<span class="sc">::</span>penguins</span>
-<span id="cb26-8"><a href="select.html#cb26-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb26-9"><a href="select.html#cb26-9" aria-hidden="true" tabindex="-1"></a>df <span class="co"># データの表示 </span></span></code></pre></div>
+<span id="cb26-8"><a href="select.html#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-9"><a href="select.html#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="co"># データの表示  </span></span>
+<span id="cb26-10"><a href="select.html#cb26-10" aria-hidden="true" tabindex="-1"></a>df </span></code></pre></div>
 <pre><code>## # A tibble: 344 x 8
 ##   species island    bill_length_mm bill_depth_mm flipper_length_~
 ##   &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;            &lt;int&gt;
@@ -355,8 +357,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 2           39.5
 ## 3           40.3
 ## # ... with 341 more rows</code></pre>
-<div id="select-range" class="section level3" number="2.2.1">
-<h3><span class="header-section-number">2.2.1</span> 範囲指定</h3>
+<div id="補足-の意味" class="section level3" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> 【補足】%&gt;% の意味</h3>
+<ul>
+<li><a href="premise.html#p-pipe">1.7</a>で説明したパイプ演算子の実例を解説する</li>
+</ul>
+</div>
+<div id="select-range" class="section level3" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> 範囲指定</h3>
 <ul>
 <li>関心ある変数が指定された範囲に含まれていれば<code>:</code>でつなげて取得できる
 <ul>
@@ -388,8 +396,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 3           40.3          18                 195 female
 ## # ... with 341 more rows</code></pre>
 </div>
-<div id="select_cha" class="section level3" number="2.2.2">
-<h3><span class="header-section-number">2.2.2</span> 中身が文字でも動く</h3>
+<div id="select_cha" class="section level3" number="2.2.3">
+<h3><span class="header-section-number">2.2.3</span> 中身が文字でも動く</h3>
 <ul>
 <li>変数名が<code>" "</code>で囲われていると，Rでは文字(character)だと認識される</li>
 </ul>
@@ -410,7 +418,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>様々なコード例でこの事前指定が多用されるので慣れるとよい</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="select.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># あらかじめオブジェクト（ここではvars）に引数を格納して後で使える</span></span>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="select.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># あらかじめオブジェクト（ここではvars）に引数を格納して後で使えるようにする</span></span>
 <span id="cb38-2"><a href="select.html#cb38-2" aria-hidden="true" tabindex="-1"></a>vars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;bill_length_mm&quot;</span>, <span class="st">&quot;bill_depth_mm&quot;</span>)</span>
 <span id="cb38-3"><a href="select.html#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb38-4"><a href="select.html#cb38-4" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
@@ -548,7 +556,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##     }
 ##     match_vars(paste0(prefix, range), vars)
 ## }
-## &lt;bytecode: 0x000000001c8a0a18&gt;
+## &lt;bytecode: 0x000000001c8c1170&gt;
 ## &lt;environment: namespace:tidyselect&gt;</code></pre>
 </div>
 </div>

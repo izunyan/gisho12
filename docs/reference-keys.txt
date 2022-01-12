@@ -1,4 +1,3 @@
-前提
 premise
 p-howtoread
 p-project
@@ -16,6 +15,7 @@ p-pipe
 select
 select-read
 select-standard
+補足-の意味
 select-range
 select_cha
 select-helper

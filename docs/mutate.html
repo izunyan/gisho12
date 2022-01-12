@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>5 新しい変数（列）の作成：mutate( ) | がんばらないデータ加工：Rによる繰り返し作業入門（前編）</title>
-  <meta name="description" content="5 新しい変数（列）の作成：mutate( ) | がんばらないデータ加工：Rによる繰り返し作業入門（前編）" />
+  <title>5 新しい変数（列）の作成：mutate( ) | がんばらないデータ加工　ーRによる繰り返し作業入門ー　前編</title>
+  <meta name="description" content="5 新しい変数（列）の作成：mutate( ) | がんばらないデータ加工　ーRによる繰り返し作業入門ー　前編" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="5 新しい変数（列）の作成：mutate( ) | がんばらないデータ加工：Rによる繰り返し作業入門（前編）" />
+  <meta property="og:title" content="5 新しい変数（列）の作成：mutate( ) | がんばらないデータ加工　ーRによる繰り返し作業入門ー　前編" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/cover.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="https://github.com/izunyan/gisho12.git" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="5 新しい変数（列）の作成：mutate( ) | がんばらないデータ加工：Rによる繰り返し作業入門（前編）" />
+  <meta name="twitter:title" content="5 新しい変数（列）の作成：mutate( ) | がんばらないデータ加工　ーRによる繰り返し作業入門ー　前編" />
   
   
   <meta name="twitter:image" content="/images/cover.png" />
@@ -137,7 +137,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#本書の特徴"><i class="fa fa-check"></i>本書の特徴</a>
 <ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#想定読者"><i class="fa fa-check"></i>想定読者</a></li>
-<li class="chapter" data-level="0.0.1" data-path="index.html"><a href="index.html#前提"><i class="fa fa-check"></i><b>0.0.1</b> 前提</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#各セクションの概要"><i class="fa fa-check"></i>各セクションの概要</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#執筆環境"><i class="fa fa-check"></i>執筆環境</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#注意事項など"><i class="fa fa-check"></i>注意事項など</a></li>
@@ -167,8 +167,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1" data-path="select.html"><a href="select.html#select-read"><i class="fa fa-check"></i><b>2.1</b> データ読み込み</a></li>
 <li class="chapter" data-level="2.2" data-path="select.html"><a href="select.html#select-standard"><i class="fa fa-check"></i><b>2.2</b> 基本</a>
 <ul>
-<li class="chapter" data-level="2.2.1" data-path="select.html"><a href="select.html#select-range"><i class="fa fa-check"></i><b>2.2.1</b> 範囲指定</a></li>
-<li class="chapter" data-level="2.2.2" data-path="select.html"><a href="select.html#select_cha"><i class="fa fa-check"></i><b>2.2.2</b> 中身が文字でも動く</a></li>
+<li class="chapter" data-level="2.2.1" data-path="select.html"><a href="select.html#補足-の意味"><i class="fa fa-check"></i><b>2.2.1</b> 【補足】%&gt;% の意味</a></li>
+<li class="chapter" data-level="2.2.2" data-path="select.html"><a href="select.html#select-range"><i class="fa fa-check"></i><b>2.2.2</b> 範囲指定</a></li>
+<li class="chapter" data-level="2.2.3" data-path="select.html"><a href="select.html#select_cha"><i class="fa fa-check"></i><b>2.2.3</b> 中身が文字でも動く</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="select.html"><a href="select.html#select-helper"><i class="fa fa-check"></i><b>2.3</b> 変数の指定に便利なヘルパー関数</a>
 <ul>
@@ -281,7 +282,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">がんばらないデータ加工：Rによる繰り返し作業入門（前編）</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">がんばらないデータ加工　ーRによる繰り返し作業入門ー　前編</a>
           </h1>
         </div>
 
@@ -710,6 +711,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="mu-total-ef" class="section level2" number="5.9">
 <h2><span class="header-section-number">5.9</span> 【別解】合計点の作成</h2>
+<ul>
+<li><code>base::rowSums( )</code></li>
+</ul>
 <div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="mutate.html#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 合計する項目の定義</span></span>
 <span id="cb135-2"><a href="mutate.html#cb135-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb135-3"><a href="mutate.html#cb135-3" aria-hidden="true" tabindex="-1"></a>Ag <span class="ot">&lt;-</span> </span>
@@ -778,7 +782,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="mutate.html#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒストグラム描画</span></span>
 <span id="cb140-2"><a href="mutate.html#cb140-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df_bfi<span class="sc">$</span>age)</span></code></pre></div>
-<embed src="gisho12_files/figure-html/unnamed-chunk-61-1.pdf" width="672" type="application/pdf" />
+<embed src="gisho12_files/figure-html/unnamed-chunk-62-1.pdf" width="672" type="application/pdf" />
 <div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="mutate.html#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 中央値</span></span>
 <span id="cb141-2"><a href="mutate.html#cb141-2" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(df_bfi<span class="sc">$</span>age)</span></code></pre></div>
 <pre><code>## [1] 26</code></pre>
@@ -870,15 +874,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##      age age6         n
 ##    &lt;int&gt; &lt;chr&gt;    &lt;int&gt;
 ##  1    12 20歳未満    28
-##  2    16 20歳未満    61
-##  3    17 20歳未満   100
-##  4    20 20-29歳    212
-##  5    36 30-39歳     50
-##  6    37 30-39歳     36
-##  7    50 50-59歳     34
-##  8    52 50-59歳     26
-##  9    64 60歳以上     1
-## 10    72 60歳以上     1</code></pre>
+##  2    19 20歳未満   190
+##  3    28 20-29歳     86
+##  4    40 40-49歳     56
+##  5    49 40-49歳     16
+##  6    51 50-59歳     24
+##  7    61 60歳以上     4
+##  8    65 60歳以上     1
+##  9    67 60歳以上     3
+## 10    70 60歳以上     1</code></pre>
 <div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="mutate.html#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(res_age6)</span></code></pre></div>
 
 </div>
