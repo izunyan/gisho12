@@ -1,26 +1,143 @@
-# ケース（行）を選ぶ {#filter}
+# 行（ケース）を選ぶ：filter( ) {#filter}
 
 * パッケージ`dplyr`の関数`filter()`
 * tidyな世界では「行 = ケース, 個人（wide形式の場合）」
 * ケースが多い時に関心あるケースに限定したデータにしたい
 * データフレームとして出力した結果を限定して見るときに使うことが多い気がする
 
+## 使用データ
+
+* `dplyr::starwars`データを使用
+  + スターウォーズのキャラクターのデータ。`filter`のヘルプでも例に使用されている
+  + 身長や質量(mass)の連続量データに加え，色や種(species)など豊富なカテゴリを持つ変数がある
+
+
+```{r}
+starwars
+```
+
+* 例示しやすくするためspecies変数を先頭にしたデータを作成
+
+```{r}
+df_st <- 
+  starwars %>% 
+  select(species, name:homeworld)
+```
+
 
 ## 基本 {#filter1}
 
 * `filter( )`の引数に論理式（TRUE or FALSEになるもの）を入れる
-  + 論理式の部分について，最初の内は`select( )`に入れるものと違って混乱するかもしれないが，慣れると段々分かってくると思う
+  + 論理式の部分について，最初の内は`select( )`に入れるものと違って混乱するかもしれない
+* イコールを表すときは`=`を2つつなげる
+
+* 例：種（species）が"Droid"のケースのみ選ぶ
 
 ```{r}
-df %>% 
-  filter(species == "Adelie")
+df_st %>% 
+  filter(species == "Droid")
 ```
 
-* 種（species）がAdelieのケースのみ選ばれた
+* 例：身長（height）が200以上のケースのみ選ぶ
 
 ```{r}
-df %>% 
-  filter(bill_length_mm >= 50)
+df_st %>% 
+  filter(height >= 200)
 ```
 
-* くちばしの長さ（bill_length_mm）が50以上のケースのみ選ばれた
+* ～以外を表すときは`!`をつけ，この場合は`=`は1つでよい
+
+* 例：種がHumanのケース __以外__ を選ぶ
+
+```{r}
+df_st %>% 
+  filter(species != "Human")
+```
+
+
+
+## 複数条件
+
+* `|`は「または」を表す
+
+* 例：種がDroidまたはHumanのケースを選ぶ
+
+```{r}
+df_st %>% 
+  filter(species == "Droid" | species == "Human")
+```
+
+
+* `&`は「かつ」を表す
+
+* 種がDroidかつ身長が100未満のケースのみ選ぶ
+
+```{r}
+df_st %>% 
+  filter(species == "Droid" & height < 100)
+```
+
+
+### 【効率化】
+
+* 選びたいものが多くなると，書くのが大変。"species =="とかをいちいち書きたくない
+* 例: 変数speciesで"Aleena"または "Dug"または "Yoda's species"を選びたいとき
+
+```{r}
+df_st %>% 
+  filter(species == "Aleena" | species == "Dug" | species == "Yoda's species")
+```
+
+* `%in%`で解決
+
+```{r}
+df_st %>% 
+  filter(species %in% c("Aleena", "Dug", "Yoda's species"))
+```
+
+* 例: 変数speciesで"Droid", "Human"以外を選びたいとき
+  + この場合，`&`が必須
+
+```{r}
+df_st %>% 
+  filter(species != "Droid" & species != "Human")
+```
+
+* 変数の前に`!`をつけるだけで省略できる
+
+```{r}
+df_st %>% 
+  filter(!species %in% c("Droid", "Human"))
+```
+
+
+## キーワードによる検索
+
+* 手元で特定の名前の行のデータを見たいときに便利
+* キーワード検索には，正規表現の結果をTRUE or FALSEで返す関数`stringr::str_detect( )`を使う
+
+* 例：変数nameに"Luke"を含む行を見たい
+
+```{r}
+df_st %>%
+  filter(str_detect(name, "Luke"))
+```
+
+* 例：変数nameが"R"で始まる行を見たい
+  + 正規表現で`^`はその次の文字から始まる文字列という意味
+
+```{r}
+df_st %>%
+  filter(str_detect(name, "^R"))
+
+```
+
+
+* 例：変数nameが"Y"または"L"で始まる行を見たい
+  + 正規表現で「または」は`" "`の中に入れる
+
+```{r}
+df_st %>%
+  filter(str_detect(name, "^Y|^L"))
+
+```

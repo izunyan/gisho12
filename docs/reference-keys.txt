@@ -1,3 +1,7 @@
+fig:project
+fig:pinst
+fig:dfr
+fig:dfxl
 premise
 p-howtoread
 p-project
@@ -34,9 +38,6 @@ select-drop
 全ての変数名
 選択した変数名を取得
 コピペに便利な形式に出力
-応用編複数データフレームで同時にselect
-複数データフレームで同じようにselect
-複数データフレームで別々にselect
 rename
 rename-standard
 rename-samew
@@ -51,7 +52,11 @@ rename-strc-other
 rename-samew-z
 rename-z2
 filter
+使用データ
 filter1
+複数条件
+効率化
+キーワードによる検索
 mutate
 mu-read
 mu-standard

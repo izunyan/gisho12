@@ -50,6 +50,12 @@
 
 -   select, filter, mutateを深堀
 
+-   pivot_longer, pivot_wider
+
+-   join
+
+-   count, janitor::tabyl
+
 # 参考URL
 
 ## くり返し

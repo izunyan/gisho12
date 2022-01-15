@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4 ケース（行）を選ぶ | がんばらないデータ加工　ーRによる繰り返し作業入門ー　前編</title>
-  <meta name="description" content="4 ケース（行）を選ぶ | がんばらないデータ加工　ーRによる繰り返し作業入門ー　前編" />
+  <title>4 行（ケース）を選ぶ：filter( ) | がんばらないデータ加工　ーRによる繰り返し作業入門ー　前編</title>
+  <meta name="description" content="4 行（ケース）を選ぶ：filter( ) | がんばらないデータ加工　ーRによる繰り返し作業入門ー　前編" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4 ケース（行）を選ぶ | がんばらないデータ加工　ーRによる繰り返し作業入門ー　前編" />
+  <meta property="og:title" content="4 行（ケース）を選ぶ：filter( ) | がんばらないデータ加工　ーRによる繰り返し作業入門ー　前編" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/cover.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="https://github.com/izunyan/gisho12.git" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4 ケース（行）を選ぶ | がんばらないデータ加工　ーRによる繰り返し作業入門ー　前編" />
+  <meta name="twitter:title" content="4 行（ケース）を選ぶ：filter( ) | がんばらないデータ加工　ーRによる繰り返し作業入門ー　前編" />
   
   
   <meta name="twitter:image" content="/images/cover.png" />
@@ -141,7 +141,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#執筆環境"><i class="fa fa-check"></i>執筆環境</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#注意事項など"><i class="fa fa-check"></i>注意事項など</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#huroku"><i class="fa fa-check"></i>特別付録について</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#ライセンス"><i class="fa fa-check"></i>ライセンス</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#association"><i class="fa fa-check"></i>関連情報</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="premise.html"><a href="premise.html"><i class="fa fa-check"></i><b>1</b> 前提知識</a>
 <ul>
@@ -162,7 +163,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="1.7" data-path="premise.html"><a href="premise.html#p-pipe"><i class="fa fa-check"></i><b>1.7</b> %&gt;% （パイプ演算子）</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="select.html"><a href="select.html"><i class="fa fa-check"></i><b>2</b> 変数（列）を選ぶ：select( )</a>
+<li class="chapter" data-level="2" data-path="select.html"><a href="select.html"><i class="fa fa-check"></i><b>2</b> 列（変数）を選ぶ：select( )</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="select.html"><a href="select.html#select-read"><i class="fa fa-check"></i><b>2.1</b> データ読み込み</a></li>
 <li class="chapter" data-level="2.2" data-path="select.html"><a href="select.html#select-standard"><i class="fa fa-check"></i><b>2.2</b> 基本</a>
@@ -188,11 +189,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.7.2" data-path="select.html"><a href="select.html#選択した変数名を取得"><i class="fa fa-check"></i><b>2.7.2</b> 選択した変数名を取得</a></li>
 <li class="chapter" data-level="2.7.3" data-path="select.html"><a href="select.html#コピペに便利な形式に出力"><i class="fa fa-check"></i><b>2.7.3</b> コピペに便利な形式に出力</a></li>
 </ul></li>
-<li class="chapter" data-level="2.8" data-path="select.html"><a href="select.html#応用編複数データフレームで同時にselect"><i class="fa fa-check"></i><b>2.8</b> 【応用編】複数データフレームで同時にselect</a>
-<ul>
-<li class="chapter" data-level="2.8.1" data-path="select.html"><a href="select.html#複数データフレームで同じようにselect"><i class="fa fa-check"></i><b>2.8.1</b> 複数データフレームで同じようにselect</a></li>
-<li class="chapter" data-level="2.8.2" data-path="select.html"><a href="select.html#複数データフレームで別々にselect"><i class="fa fa-check"></i><b>2.8.2</b> 複数データフレームで別々にselect</a></li>
-</ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="rename.html"><a href="rename.html"><i class="fa fa-check"></i><b>3</b> 変数名を変更する：rename( )</a>
 <ul>
@@ -214,9 +210,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.5.1" data-path="rename.html"><a href="rename.html#rename-z2"><i class="fa fa-check"></i><b>3.5.1</b> 【効率化】</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="filter.html"><a href="filter.html"><i class="fa fa-check"></i><b>4</b> ケース（行）を選ぶ</a>
+<li class="chapter" data-level="4" data-path="filter.html"><a href="filter.html"><i class="fa fa-check"></i><b>4</b> 行（ケース）を選ぶ：filter( )</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="filter.html"><a href="filter.html#filter1"><i class="fa fa-check"></i><b>4.1</b> 基本</a></li>
+<li class="chapter" data-level="4.1" data-path="filter.html"><a href="filter.html#使用データ"><i class="fa fa-check"></i><b>4.1</b> 使用データ</a></li>
+<li class="chapter" data-level="4.2" data-path="filter.html"><a href="filter.html#filter1"><i class="fa fa-check"></i><b>4.2</b> 基本</a></li>
+<li class="chapter" data-level="4.3" data-path="filter.html"><a href="filter.html#複数条件"><i class="fa fa-check"></i><b>4.3</b> 複数条件</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="filter.html"><a href="filter.html#効率化"><i class="fa fa-check"></i><b>4.3.1</b> 【効率化】</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="filter.html"><a href="filter.html#キーワードによる検索"><i class="fa fa-check"></i><b>4.4</b> キーワードによる検索</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="mutate.html"><a href="mutate.html"><i class="fa fa-check"></i><b>5</b> 新しい変数（列）の作成：mutate( )</a>
 <ul>
@@ -291,47 +293,246 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="filter" class="section level1" number="4">
-<h1><span class="header-section-number">4</span> ケース（行）を選ぶ</h1>
+<h1><span class="header-section-number">4</span> 行（ケース）を選ぶ：filter( )</h1>
 <ul>
 <li>パッケージ<code>dplyr</code>の関数<code>filter()</code></li>
 <li>tidyな世界では「行 = ケース, 個人（wide形式の場合）」</li>
 <li>ケースが多い時に関心あるケースに限定したデータにしたい</li>
 <li>データフレームとして出力した結果を限定して見るときに使うことが多い気がする</li>
 </ul>
-<div id="filter1" class="section level2" number="4.1">
-<h2><span class="header-section-number">4.1</span> 基本</h2>
+<div id="使用データ" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> 使用データ</h2>
 <ul>
-<li><code>filter( )</code>の引数に論理式（TRUE or FALSEになるもの）を入れる
+<li><code>dplyr::starwars</code>データを使用
 <ul>
-<li>論理式の部分について，最初の内は<code>select( )</code>に入れるものと違って混乱するかもしれないが，慣れると段々分かってくると思う</li>
+<li>スターウォーズのキャラクターのデータ。<code>filter</code>のヘルプでも例に使用されている</li>
+<li>身長や質量(mass)の連続量データに加え，色や種(species)など豊富なカテゴリを持つ変数がある</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="filter.html#cb92-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
-<span id="cb92-2"><a href="filter.html#cb92-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">&quot;Adelie&quot;</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 152 x 8
-##   species island    bill_length_mm bill_depth_mm flipper_length_~
-##   &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;            &lt;int&gt;
-## 1 Adelie  Torgersen           39.1          18.7              181
-## 2 Adelie  Torgersen           39.5          17.4              186
-## 3 Adelie  Torgersen           40.3          18                195
-## # ... with 149 more rows, and 3 more variables:
-## #   body_mass_g &lt;int&gt;, sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="filter.html#cb99-1" aria-hidden="true" tabindex="-1"></a>starwars</span></code></pre></div>
+<pre><code>## # A tibble: 87 x 14
+##   name    height  mass hair_color skin_color eye_color birth_year
+##   &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt;
+## 1 Luke S~    172    77 blond      fair       blue              19
+## 2 C-3PO      167    75 &lt;NA&gt;       gold       yellow           112
+## 3 R2-D2       96    32 &lt;NA&gt;       white, bl~ red               33
+## # ... with 84 more rows, and 7 more variables: sex &lt;chr&gt;,
+## #   gender &lt;chr&gt;, homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
+## #   vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
 <ul>
-<li>種（species）がAdelieのケースのみ選ばれた</li>
+<li>例示しやすくするためspecies変数を先頭にしたデータを作成</li>
 </ul>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="filter.html#cb94-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
-<span id="cb94-2"><a href="filter.html#cb94-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(bill_length_mm <span class="sc">&gt;=</span> <span class="dv">50</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 57 x 8
-##   species island bill_length_mm bill_depth_mm flipper_length_mm
-##   &lt;fct&gt;   &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;
-## 1 Gentoo  Biscoe           50            16.3               230
-## 2 Gentoo  Biscoe           50            15.2               218
-## 3 Gentoo  Biscoe           50.2          14.3               218
-## # ... with 54 more rows, and 3 more variables:
-## #   body_mass_g &lt;int&gt;, sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="filter.html#cb101-1" aria-hidden="true" tabindex="-1"></a>df_st <span class="ot">&lt;-</span> </span>
+<span id="cb101-2"><a href="filter.html#cb101-2" aria-hidden="true" tabindex="-1"></a>  starwars <span class="sc">%&gt;%</span> </span>
+<span id="cb101-3"><a href="filter.html#cb101-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(species, name<span class="sc">:</span>homeworld)</span></code></pre></div>
+</div>
+<div id="filter1" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> 基本</h2>
 <ul>
-<li>くちばしの長さ（bill_length_mm）が50以上のケースのみ選ばれた</li>
+<li><p><code>filter( )</code>の引数に論理式（TRUE or FALSEになるもの）を入れる</p>
+<ul>
+<li>論理式の部分について，最初の内は<code>select( )</code>に入れるものと違って混乱するかもしれない</li>
+</ul></li>
+<li><p>イコールを表すときは<code>=</code>を2つつなげる</p></li>
+<li><p>例：種（species）が”Droid”のケースのみ選ぶ</p></li>
 </ul>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="filter.html#cb102-1" aria-hidden="true" tabindex="-1"></a>df_st <span class="sc">%&gt;%</span> </span>
+<span id="cb102-2"><a href="filter.html#cb102-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">&quot;Droid&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 6 x 11
+##   species name   height  mass hair_color skin_color  eye_color
+##   &lt;chr&gt;   &lt;chr&gt;   &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;    
+## 1 Droid   C-3PO     167    75 &lt;NA&gt;       gold        yellow   
+## 2 Droid   R2-D2      96    32 &lt;NA&gt;       white, blue red      
+## 3 Droid   R5-D4      97    32 &lt;NA&gt;       white, red  red      
+## 4 Droid   IG-88     200   140 none       metal       red      
+## 5 Droid   R4-P17     96    NA none       silver, red red, blue
+## 6 Droid   BB8        NA    NA none       none        black    
+## # ... with 4 more variables: birth_year &lt;dbl&gt;, sex &lt;chr&gt;,
+## #   gender &lt;chr&gt;, homeworld &lt;chr&gt;</code></pre>
+<ul>
+<li>例：身長（height）が200以上のケースのみ選ぶ</li>
+</ul>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="filter.html#cb104-1" aria-hidden="true" tabindex="-1"></a>df_st <span class="sc">%&gt;%</span> </span>
+<span id="cb104-2"><a href="filter.html#cb104-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(height <span class="sc">&gt;=</span> <span class="dv">200</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 11 x 11
+##    species  name    height  mass hair_color skin_color  eye_color
+##    &lt;chr&gt;    &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;    
+##  1 Human    Darth ~    202   136 none       white       yellow   
+##  2 Wookiee  Chewba~    228   112 brown      unknown     blue     
+##  3 Droid    IG-88      200   140 none       metal       red      
+##  4 Gungan   Roos T~    224    82 none       grey        orange   
+##  5 Gungan   Rugor ~    206    NA none       green       orange   
+##  6 Quermian Yarael~    264    NA none       white       yellow   
+##  7 Kaminoan Lama Su    229    88 none       grey        black    
+##  8 Kaminoan Taun We    213    NA none       grey        black    
+##  9 Kaleesh  Grievo~    216   159 none       brown, whi~ green, y~
+## 10 Wookiee  Tarfful    234   136 brown      brown       blue     
+## 11 Pau&#39;an   Tion M~    206    80 none       grey        black    
+## # ... with 4 more variables: birth_year &lt;dbl&gt;, sex &lt;chr&gt;,
+## #   gender &lt;chr&gt;, homeworld &lt;chr&gt;</code></pre>
+<ul>
+<li><p>～以外を表すときは<code>!</code>をつけ，この場合は<code>=</code>は1つでよい</p></li>
+<li><p>例：種がHumanのケース <strong>以外</strong> を選ぶ</p></li>
+</ul>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="filter.html#cb106-1" aria-hidden="true" tabindex="-1"></a>df_st <span class="sc">%&gt;%</span> </span>
+<span id="cb106-2"><a href="filter.html#cb106-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">!=</span> <span class="st">&quot;Human&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 48 x 11
+##   species name  height  mass hair_color skin_color  eye_color
+##   &lt;chr&gt;   &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;    
+## 1 Droid   C-3PO    167    75 &lt;NA&gt;       gold        yellow   
+## 2 Droid   R2-D2     96    32 &lt;NA&gt;       white, blue red      
+## 3 Droid   R5-D4     97    32 &lt;NA&gt;       white, red  red      
+## # ... with 45 more rows, and 4 more variables: birth_year &lt;dbl&gt;,
+## #   sex &lt;chr&gt;, gender &lt;chr&gt;, homeworld &lt;chr&gt;</code></pre>
+</div>
+<div id="複数条件" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> 複数条件</h2>
+<ul>
+<li><p><code>|</code>は「または」を表す</p></li>
+<li><p>例：種がDroidまたはHumanのケースを選ぶ</p></li>
+</ul>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="filter.html#cb108-1" aria-hidden="true" tabindex="-1"></a>df_st <span class="sc">%&gt;%</span> </span>
+<span id="cb108-2"><a href="filter.html#cb108-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">&quot;Droid&quot;</span> <span class="sc">|</span> species <span class="sc">==</span> <span class="st">&quot;Human&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 41 x 11
+##   species name       height  mass hair_color skin_color eye_color
+##   &lt;chr&gt;   &lt;chr&gt;       &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;    
+## 1 Human   Luke Skyw~    172    77 blond      fair       blue     
+## 2 Droid   C-3PO         167    75 &lt;NA&gt;       gold       yellow   
+## 3 Droid   R2-D2          96    32 &lt;NA&gt;       white, bl~ red      
+## # ... with 38 more rows, and 4 more variables: birth_year &lt;dbl&gt;,
+## #   sex &lt;chr&gt;, gender &lt;chr&gt;, homeworld &lt;chr&gt;</code></pre>
+<ul>
+<li><p><code>&amp;</code>は「かつ」を表す</p></li>
+<li><p>種がDroidかつ身長が100未満のケースのみ選ぶ</p></li>
+</ul>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="filter.html#cb110-1" aria-hidden="true" tabindex="-1"></a>df_st <span class="sc">%&gt;%</span> </span>
+<span id="cb110-2"><a href="filter.html#cb110-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">&quot;Droid&quot;</span> <span class="sc">&amp;</span> height <span class="sc">&lt;</span> <span class="dv">100</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 3 x 11
+##   species name   height  mass hair_color skin_color  eye_color
+##   &lt;chr&gt;   &lt;chr&gt;   &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;    
+## 1 Droid   R2-D2      96    32 &lt;NA&gt;       white, blue red      
+## 2 Droid   R5-D4      97    32 &lt;NA&gt;       white, red  red      
+## 3 Droid   R4-P17     96    NA none       silver, red red, blue
+## # ... with 4 more variables: birth_year &lt;dbl&gt;, sex &lt;chr&gt;,
+## #   gender &lt;chr&gt;, homeworld &lt;chr&gt;</code></pre>
+<div id="効率化" class="section level3" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> 【効率化】</h3>
+<ul>
+<li>選びたいものが多くなると，書くのが大変。“species ==”とかをいちいち書きたくない</li>
+<li>例: 変数speciesで”Aleena”または “Dug”または “Yoda’s species”を選びたいとき</li>
+</ul>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="filter.html#cb112-1" aria-hidden="true" tabindex="-1"></a>df_st <span class="sc">%&gt;%</span> </span>
+<span id="cb112-2"><a href="filter.html#cb112-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">&quot;Aleena&quot;</span> <span class="sc">|</span> species <span class="sc">==</span> <span class="st">&quot;Dug&quot;</span> <span class="sc">|</span> species <span class="sc">==</span> <span class="st">&quot;Yoda&#39;s species&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 3 x 11
+##   species    name    height  mass hair_color skin_color eye_color
+##   &lt;chr&gt;      &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;    
+## 1 Yoda&#39;s sp~ Yoda        66    17 white      green      brown    
+## 2 Dug        Sebulba    112    40 none       grey, red  orange   
+## 3 Aleena     Ratts ~     79    15 none       grey, blue unknown  
+## # ... with 4 more variables: birth_year &lt;dbl&gt;, sex &lt;chr&gt;,
+## #   gender &lt;chr&gt;, homeworld &lt;chr&gt;</code></pre>
+<ul>
+<li><code>%in%</code>で解決</li>
+</ul>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="filter.html#cb114-1" aria-hidden="true" tabindex="-1"></a>df_st <span class="sc">%&gt;%</span> </span>
+<span id="cb114-2"><a href="filter.html#cb114-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Aleena&quot;</span>, <span class="st">&quot;Dug&quot;</span>, <span class="st">&quot;Yoda&#39;s species&quot;</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 3 x 11
+##   species    name    height  mass hair_color skin_color eye_color
+##   &lt;chr&gt;      &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;    
+## 1 Yoda&#39;s sp~ Yoda        66    17 white      green      brown    
+## 2 Dug        Sebulba    112    40 none       grey, red  orange   
+## 3 Aleena     Ratts ~     79    15 none       grey, blue unknown  
+## # ... with 4 more variables: birth_year &lt;dbl&gt;, sex &lt;chr&gt;,
+## #   gender &lt;chr&gt;, homeworld &lt;chr&gt;</code></pre>
+<ul>
+<li>例: 変数speciesで”Droid”, “Human”以外を選びたいとき
+<ul>
+<li>この場合，<code>&amp;</code>が必須</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="filter.html#cb116-1" aria-hidden="true" tabindex="-1"></a>df_st <span class="sc">%&gt;%</span> </span>
+<span id="cb116-2"><a href="filter.html#cb116-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">!=</span> <span class="st">&quot;Droid&quot;</span> <span class="sc">&amp;</span> species <span class="sc">!=</span> <span class="st">&quot;Human&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 42 x 11
+##   species name      height  mass hair_color skin_color  eye_color
+##   &lt;chr&gt;   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;    
+## 1 Wookiee Chewbacca    228   112 brown      unknown     blue     
+## 2 Rodian  Greedo       173    74 &lt;NA&gt;       green       black    
+## 3 Hutt    Jabba De~    175  1358 &lt;NA&gt;       green-tan,~ orange   
+## # ... with 39 more rows, and 4 more variables: birth_year &lt;dbl&gt;,
+## #   sex &lt;chr&gt;, gender &lt;chr&gt;, homeworld &lt;chr&gt;</code></pre>
+<ul>
+<li>変数の前に<code>!</code>をつけるだけで省略できる</li>
+</ul>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="filter.html#cb118-1" aria-hidden="true" tabindex="-1"></a>df_st <span class="sc">%&gt;%</span> </span>
+<span id="cb118-2"><a href="filter.html#cb118-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>species <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Droid&quot;</span>, <span class="st">&quot;Human&quot;</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 46 x 11
+##   species name      height  mass hair_color skin_color  eye_color
+##   &lt;chr&gt;   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;    
+## 1 Wookiee Chewbacca    228   112 brown      unknown     blue     
+## 2 Rodian  Greedo       173    74 &lt;NA&gt;       green       black    
+## 3 Hutt    Jabba De~    175  1358 &lt;NA&gt;       green-tan,~ orange   
+## # ... with 43 more rows, and 4 more variables: birth_year &lt;dbl&gt;,
+## #   sex &lt;chr&gt;, gender &lt;chr&gt;, homeworld &lt;chr&gt;</code></pre>
+</div>
+</div>
+<div id="キーワードによる検索" class="section level2" number="4.4">
+<h2><span class="header-section-number">4.4</span> キーワードによる検索</h2>
+<ul>
+<li><p>手元で特定の名前の行のデータを見たいときに便利</p></li>
+<li><p>キーワード検索には，正規表現の結果をTRUE or FALSEで返す関数<code>stringr::str_detect( )</code>を使う</p></li>
+<li><p>例：変数nameに”Luke”を含む行を見たい</p></li>
+</ul>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="filter.html#cb120-1" aria-hidden="true" tabindex="-1"></a>df_st <span class="sc">%&gt;%</span></span>
+<span id="cb120-2"><a href="filter.html#cb120-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(name, <span class="st">&quot;Luke&quot;</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 1 x 11
+##   species name       height  mass hair_color skin_color eye_color
+##   &lt;chr&gt;   &lt;chr&gt;       &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;    
+## 1 Human   Luke Skyw~    172    77 blond      fair       blue     
+## # ... with 4 more variables: birth_year &lt;dbl&gt;, sex &lt;chr&gt;,
+## #   gender &lt;chr&gt;, homeworld &lt;chr&gt;</code></pre>
+<ul>
+<li>例：変数nameが”R”で始まる行を見たい
+<ul>
+<li>正規表現で<code>^</code>はその次の文字から始まる文字列という意味</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="filter.html#cb122-1" aria-hidden="true" tabindex="-1"></a>df_st <span class="sc">%&gt;%</span></span>
+<span id="cb122-2"><a href="filter.html#cb122-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(name, <span class="st">&quot;^R&quot;</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 9 x 11
+##   species name       height  mass hair_color skin_color eye_color
+##   &lt;chr&gt;   &lt;chr&gt;       &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;    
+## 1 Droid   R2-D2          96    32 &lt;NA&gt;       white, bl~ red      
+## 2 Droid   R5-D4          97    32 &lt;NA&gt;       white, red red      
+## 3 Gungan  Roos Tarp~    224    82 none       grey       orange   
+## 4 Gungan  Rugor Nass    206    NA none       green      orange   
+## 5 &lt;NA&gt;    Ric Olie      183    NA brown      fair       blue     
+## 6 Aleena  Ratts Tye~     79    15 none       grey, blue unknown  
+## 7 Droid   R4-P17         96    NA none       silver, r~ red, blue
+## 8 Human   Raymus An~    188    79 brown      light      brown    
+## 9 Human   Rey            NA    NA brown      light      hazel    
+## # ... with 4 more variables: birth_year &lt;dbl&gt;, sex &lt;chr&gt;,
+## #   gender &lt;chr&gt;, homeworld &lt;chr&gt;</code></pre>
+<ul>
+<li>例：変数nameが”Y”または”L”で始まる行を見たい
+<ul>
+<li>正規表現で「または」は<code>" "</code>の中に入れる</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="filter.html#cb124-1" aria-hidden="true" tabindex="-1"></a>df_st <span class="sc">%&gt;%</span></span>
+<span id="cb124-2"><a href="filter.html#cb124-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(name, <span class="st">&quot;^Y|^L&quot;</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 8 x 11
+##   species   name     height  mass hair_color skin_color eye_color
+##   &lt;chr&gt;     &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;    
+## 1 Human     Luke Sk~    172  77   blond      fair       blue     
+## 2 Human     Leia Or~    150  49   brown      light      brown    
+## 3 Yoda&#39;s s~ Yoda         66  17   white      green      brown    
+## 4 Human     Lando C~    177  79   black      dark       brown    
+## 5 Human     Lobot       175  79   none       light      blue     
+## 6 Quermian  Yarael ~    264  NA   none       white      yellow   
+## 7 Mirialan  Luminar~    170  56.2 black      yellow     blue     
+## 8 Kaminoan  Lama Su     229  88   none       grey       black    
+## # ... with 4 more variables: birth_year &lt;dbl&gt;, sex &lt;chr&gt;,
+## #   gender &lt;chr&gt;, homeworld &lt;chr&gt;</code></pre>
 
 </div>
 </div>

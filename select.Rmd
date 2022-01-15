@@ -1,4 +1,4 @@
-# 変数（列）を選ぶ：select( ) {#select}
+# 列（変数）を選ぶ：select( ) {#select}
 
 * `dplyr:select( )`
 * tidyな世界では「列名 = 変数名」
@@ -9,12 +9,10 @@
 ## データ読み込み {#select-read}
 
 * データの指定を簡単にするために，penguinsデータを`df`と読み込む
+* `palmerpenguins::penguins`というのは，「palmerpenguinsパッケージの::penguinsデータ」という意味
 
 ```{r}
 library(tidyverse)
-
-# パッケージが入ってなければ下記実行
-# install.packages("palmerpenguins")
 
 df <- 
   palmerpenguins::penguins
@@ -44,16 +42,26 @@ df2 <-
   df %>% select(bill_length_mm)
 
 df2
+
+rm(df2)
 ```
 
-### 【補足】%>% の意味 
+### 【補足】%>% の意味 {#select-standard-pipe}
 
 * \@ref(p-pipe)で説明したパイプ演算子の実例を解説する
+* 基本的に`select( )`を始めとしたモダンなRの処理は，以下のように第一引数にデータフレームを指定する
 
 ```{r}
-
+select(df, bill_length_mm)
 ```
 
+* `%>%`の役割は，その左側にあるものを右側の関数の第一引数に入れる，ということなので，第一引数にデータフレームが来ることが決まっていれば，常に次のようにかける
+* このようにすると複雑な処理を重ねていく場合も，コードの可読性が高まるので，データラングリングの過程で有用
+
+```{r}
+df %>% 
+  select(bill_length_mm)
+```
 
 
 ### 範囲指定 {#select-range}
@@ -74,7 +82,7 @@ df %>%
   select(bill_length_mm:flipper_length_mm, sex)
 ```
 
-### 中身が文字でも動く {#select_cha}
+### 中身が文字でも動く {#select-cha}
 
 * 変数名が`" "`で囲われていると，Rでは文字(character)だと認識される
 
@@ -106,7 +114,7 @@ df %>%
 * selection helperと呼ばれる`tidyselect`パッケージの関数群
 * selectの所で解説されることが多いが，後から出てくる`across()`と併せた活用場面が多いため，なじんでおくと後から楽になる
 
-### 変数名の最初の文字列 {#select_helper1}
+### 変数名の最初の文字列 {#select-helper1}
 
 * `bill`から始まる変数を選ぶ
 
@@ -208,7 +216,7 @@ df %>% names()
 
 ### 選択した変数名を取得
 
-* ベクトル
+* ベクトルとしてオブジェクトに格納
 
 ```{r}
 bill_vars <- 
@@ -221,7 +229,7 @@ bill_vars
 
 ### コピペに便利な形式に出力
 
-* `,`で区切られた形式で出てくればそのまま`select()`に入れられるのに…と思った方のための便利関数`dput()`
+* `,`で区切られた形式で出てくれば必要なものを選んでそのまま`select()`に入れられるのに…と思った方のための便利関数`dput()`
 ```{r}
 df %>% 
   select(starts_with("b")) %>% # bから始まる変数名
@@ -229,13 +237,6 @@ df %>%
   dput()
 ```
 
-* `" "`すらもいらない，という時は，新しくr script(アイコンNew Fileまたは`ctrl + shift + n`)開いて，`dput()`の出力を貼り付けてすべて置換する方法も
+* この出力から必要な変数を選んでコピペができる
+* `" "`すらもいらない，という時は，新しくr script(アイコンNew Fileまたは`ctrl + shift + n`)開いて，`dput()`の出力を貼り付けてすべて置換する力技も
 
-
-## 【応用編】複数データフレームで同時にselect
-
-### 複数データフレームで同じようにselect
-
-### 複数データフレームで別々にselect
-
-https://izunyan.github.io/practice_bfi/#13_%E3%82%AF%E3%83%AD%E3%83%B3%E3%83%90%E3%83%83%E3%82%AF%E3%81%AE%E3%82%A2%E3%83%AB%E3%83%95%E3%82%A1
