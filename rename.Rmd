@@ -48,7 +48,7 @@ df %>%
          くちばし_depth_mm = bill_depth_mm)
 ```
 
-### 【効率化】str_replace()で一括変換(1){#rename-strreplace1}
+### 【効率化】str_replace( )で一括変換(1){#rename-strreplace1}
 
 * `rename_with( )`は，まず適用したい関数を示し，そのあとに該当する変数を選ぶ
 * 語の置き換えに`stringr::str_replace()`を使う
@@ -88,9 +88,9 @@ df %>%
          flipper_length = flipper_length_mm)
 ```
 
-### 【効率化】str_replace()で一括変換（2）{#rename-strreplace2}
+### 【効率化】str_replace( )で一括変換（2）{#rename-strreplace2}
 
-* `str_replace()`で変換先に空白`""`を指定すると削除できる
+* `str_replace( )`で変換先に空白`""`を指定すると削除できる
 
 ```{r}
 df %>% 
@@ -100,7 +100,7 @@ df %>%
 
 #### 【別解】 
 
-* `stringr::str_remove()`の方が直接的
+* `stringr::str_remove( )`の方が直接的
   + 第一引数についてその次に来る文字列を取り除く
 
 ```{r}
@@ -126,7 +126,7 @@ df %>%
          flipper_length_mm_2007 = flipper_length_mm)
 ```
 
-### 【効率化】str_c()で一括指定{#rename-strc}
+### 【効率化】str_c( )で一括指定{#rename-strc}
 
 * 適用したい関数の中にある`.`の部分に，その後選ぶ変数が入っていく
 * `stringr::str_c()`で指定した語をくっつける

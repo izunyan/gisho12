@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021/W32TeX) (preloaded format=xelatex 2022.1.15)  15 JAN 2022 15:19
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021/W32TeX) (preloaded format=xelatex 2022.1.15)  16 JAN 2022 23:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -928,41 +928,29 @@ LaTeX Font Info:    Font shape `TU/HaranoAjiGothic-Medium.otf(0)/m/n' will be
 [5] [6
 
 ]
-LaTeX Font Info:    Font shape `TU/HaranoAjiMincho-Regular.otf(0)/b/n' will be
-(Font)              scaled to size 9.24713pt on input line 155.
 LaTeX Font Info:    Font shape `TU/HaranoAjiGothic-Medium.otf(0)/m/n' will be
-(Font)              scaled to size 13.31586pt on input line 167.
+(Font)              scaled to size 13.31586pt on input line 188.
+LaTeX Font Info:    Font shape `TU/HaranoAjiMincho-Regular.otf(0)/b/n' will be
+(Font)              scaled to size 9.24713pt on input line 194.
 [7]
-
-Package hyperref Warning: Suppressing empty link on input line 198.
-
+LaTeX Font Info:    Font shape `TU/HaranoAjiGothic-Medium.otf(0)/m/n' will be
+(Font)              scaled to size 11.09656pt on input line 226.
 
 Package xeCJK Warning: Unknown CJK family `\CJKttdefault' is being ignored.
 (xeCJK)                
 (xeCJK)                Try to use `\setCJKmonofont[...]{...}' to define it.
 
-
-Package hyperref Warning: Suppressing link with empty target on input line 203.
-
-LaTeX Font Info:    Font shape `TU/HaranoAjiGothic-Medium.otf(0)/m/n' will be
-(Font)              scaled to size 11.09656pt on input line 207.
-LaTeX Font Info:    Font shape `TU/HaranoAjiMincho-Regular.otf(0)/m/n' will be
-(Font)              scaled to size 7.3977pt on input line 232.
-[8]
-
-Package hyperref Warning: Suppressing empty link on input line 293.
-
-[9] [10]
+[8] [9] [10]
 第1章
 LaTeX Font Info:    Font shape `TU/HaranoAjiGothic-Medium.otf(0)/m/n' will be
-(Font)              scaled to size 19.17854pt on input line 308.
+(Font)              scaled to size 19.17854pt on input line 368.
 
-Overfull \hbox (60.61475pt too wide) in paragraph at lines 360--360
+Overfull \hbox (60.61475pt too wide) in paragraph at lines 420--420
 []\TU/lmtt/m/n/10 ##  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25[] 
  []
 
 
-Overfull \hbox (60.61475pt too wide) in paragraph at lines 360--360
+Overfull \hbox (60.61475pt too wide) in paragraph at lines 420--420
 []\TU/lmtt/m/n/10 ## [26] 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50[] 
  []
 
@@ -971,103 +959,84 @@ Overfull \hbox (60.61475pt too wide) in paragraph at lines 360--360
 ]
 
 LaTeX Font Warning: Font shape `TU/HaranoAjiMincho-Regular.otf(0)/m/it' undefined
-(Font)              using `TU/HaranoAjiMincho-Regular.otf(0)/m/n' instead on input line 370.
+(Font)              using `TU/HaranoAjiMincho-Regular.otf(0)/m/n' instead on input line 430.
 
 File: images/project.png Graphic file (type bmp)
 <images/project.png>
 LaTeX Font Info:    Font shape `TU/HaranoAjiMincho-Regular.otf(0)/m/n' will be
-(Font)              scaled to size 8.32242pt on input line 409.
+(Font)              scaled to size 8.32242pt on input line 469.
 [12]
 File: images/package_install.png Graphic file (type bmp)
 <images/package_install.png>
-
-Overfull \hbox (490.73686pt too wide) in paragraph at lines 441--442
- [][] 
- []
-
-[13] [14] [15] [16]
+[13] [14] [15]
 File: images/dfr.png Graphic file (type bmp)
 <images/dfr.png>
-
-Overfull \hbox (309.50993pt too wide) in paragraph at lines 660--661
- [][] 
- []
-
 File: images/df_xl.pdf Graphic file (type pdf)
 <use images/df_xl.pdf>
-
-Overfull \hbox (426.79pt too wide) in paragraph at lines 669--670
- [][] 
- []
-
-[17] [18]
+[16]
 File: images/penguins_logo.png Graphic file (type bmp)
 <images/penguins_logo.png>
-[19]
-
-LaTeX Warning: Reference `select-standard-pipe' on page 20 undefined on input line 737.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 747--749
+[17]
+LaTeX Font Info:    Font shape `TU/HaranoAjiMincho-Regular.otf(0)/m/n' will be
+(Font)              scaled to size 6.47299pt on input line 802.
+[18]
+Underfull \hbox (badness 10000) in paragraph at lines 869--871
 \TU/lmtt/m/n/10 > Global Options > Code > Editing > use native pipe operator
  []
 
-[20]
+[19] [20
+
+]
 第2章
 
-Underfull \hbox (badness 1383) in paragraph at lines 778--779
+Underfull \hbox (badness 1383) in paragraph at lines 900--901
 []\TU/lmtt/m/n/10 palmerpenguins::penguins \TU/HaranoAjiMincho-Regular.otf(0)/m/n/10 と い う の は，| |「\TU/lmr/m/n/10 palmerpenguins \TU/HaranoAjiMincho-Regular.otf(0)/m/n/10 パ ッ ケ ー ジ
  []
 
-[21
-
-] [22] [23] [24] [25] [26] [27] [28] [29] [30] [31] [32
+[21] [22] [23] [24] [25] [26] [27] [28] [29] [30] [31] [32
 
 ]
 第3章
-[33] [34] [35] [36] [37] [38] [39] [40]
-第4章
-[41
+[33] [34] [35] [36] [37] [38] [39] [40
 
-] [42] [43] [44] [45] [46] [47] [48]
+]
+第4章
+[41] [42] [43] [44] [45] [46] [47] [48]
 第5章
 [49
 
-] [50] [51] [52]
+] [50] [51]
+Overfull \vbox (1.83492pt too high) detected at line 2612
+ []
 
-LaTeX Warning: Reference `select-cha' on page 53 undefined on input line 2523.
-
-[53] [54] [55] [56] [57] [58] [59] [60] [61] [62]
-File: gisho12_files/figure-latex/unnamed-chunk-76-1.pdf Graphic file (type pdf)
-<use gisho12_files/figure-latex/unnamed-chunk-76-1.pdf>
-[63] [64] [65] [66]
+[52] [53] [54] [55] [56] [57] [58] [59] [60] [61] [62] [63]
+File: gisho12_files/figure-latex/unnamed-chunk-79-1.pdf Graphic file (type pdf)
+<use gisho12_files/figure-latex/unnamed-chunk-79-1.pdf>
+[64] [65] [66] [67] [68]
 第6章
-[67
+[69
 
-] [68] [69] [70]
+] [70] [71] [72]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 3488.
-[71] [72] [73] [74
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 3717.
+[73] [74] [75] [76
 
-] [75] [76
+] [77] [78
 
 ] (./gisho12.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-
-LaTeX Warning: There were undefined references.
-
 Package rerunfilecheck Info: File `gisho12.out' has not changed.
-(rerunfilecheck)             Checksum: 51B3D80EDF6FCFFB9B090181021D6B0D;5782.
+(rerunfilecheck)             Checksum: 16314672C879EF2BED6005ABA674E0B1;5424.
  ) 
 Here is how much of TeX's memory you used:
- 20790 strings out of 478189
- 433196 string characters out of 5853131
- 844619 words of memory out of 5000000
- 41084 multiletter control sequences out of 15000+600000
- 476444 words of font info for 105 fonts, out of 8000000 for 9000
+ 20747 strings out of 478189
+ 430103 string characters out of 5853131
+ 844519 words of memory out of 5000000
+ 41045 multiletter control sequences out of 15000+600000
+ 476428 words of font info for 103 fonts, out of 8000000 for 9000
  19 hyphenation exceptions out of 8191
- 105i,11n,140p,537b,946s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 105i,10n,140p,524b,946s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on gisho12.pdf (76 pages).
+Output written on gisho12.pdf (78 pages).

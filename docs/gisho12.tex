@@ -4,7 +4,7 @@
 %
 \documentclass[
   xelatex,ja=standard, b5paper]{bxjsbook}
-\title{がんばらないデータ加工　ーRによる繰り返し作業入門ー　前編}
+\title{がんばらないデータ加工ーRによる繰り返し作業入門ー　前編}
 \author{やわらかクジラ}
 \date{}
 
@@ -40,7 +40,7 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
-  pdftitle={がんばらないデータ加工　ーRによる繰り返し作業入門ー　前編},
+  pdftitle={がんばらないデータ加工ーRによる繰り返し作業入門ー　前編},
   pdfauthor={やわらかクジラ},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
@@ -144,30 +144,54 @@
 \chapter*{はじめに}\label{hajimeni}}
 \addcontentsline{toc}{chapter}{はじめに}
 
-本書はデータ加工での面倒な作業をRでらくらく実行できるようになるための基礎知識を紹介する目的で執筆しました。が，本書は核心の部分に入る前の準備段階まででとどまっています。タイトルに「前編」とあるのはその理由によります。
+\begin{itemize}
+\tightlist
+\item
+  本書の目的
 
-本当は，複数データセットの複数変数をいっぺんに加工，集計，視覚化！みたいなのをまとめたかったのです。今後の「後編」（もしかしたら「中編」も）をお楽しみにということで・・・
+  \begin{itemize}
+  \tightlist
+  \item
+    データ加工での面倒な作業をRでらくらく実行できるようになるための基礎知識を紹介
+  \end{itemize}
+\item
+  本書の内容
 
-タイトルから手に取っていただいた方，ごめんなさい。
-本当は
-最初から
+  \begin{itemize}
+  \tightlist
+  \item
+    実際は核心の部分に入る前の準備段階までにとどまる。タイトルに「前編」とあるのはその理由による
+  \item
+    本当は，複数データセットの複数変数をいっぺんに加工，集計，視覚化！みたいなのをまとめたかったが，そこに入るための事前知識が思っていたより多かったため，まずはそれらを解説することに徹した
+  \item
+    既刊書では省いたRのモダンな方法を使ったデータ加工の過程（例：前処理、データクリーニング、データクレンジング、データラングリングなど）で用いる基本関数の紹介
+  \end{itemize}
+\item
+  執筆動機
 
-本書『\textbf{がんばらないデータ加工　ーRによる繰り返し作業入門ー}』を書こうと思ったのは拙既刊書\href{https://izunyan.github.io/excel_r/}{『Rで読むExcelファイル』}と同じく，「RとRStudioを使いたい！と思う人がもっと増えればいいのに」という願いから
+  \begin{itemize}
+  \tightlist
+  \item
+    本書を書こうと思ったのは拙既刊書\href{https://techbookfest.org/product/4794168259903488?productVariantID=5913872206659584}{『Rで読むExcelファイル』}と同じく，「RとRStudioを使いたい！と思う人がもっと増えればいいのに」という願いから
+  \end{itemize}
+\item
+  今後の展望
 
-既刊書では省いたRのモダンな方法を使ったデータ加工の基本関数の紹介と，自身の使用経験から実務的な使い方を紹介する入門書
-データをきれいにする過程（例：前処理、データクリーニング、データクレンジング、データラングリングなど）
-
-ヘルプに書いてある例では分かりにくいことが時々あるので，
-
-初学者に
-
-では，巷に多く出ている入門的な解説と何が違うのか？
+  \begin{itemize}
+  \tightlist
+  \item
+    よりタイトルの内容に沿った次回作の「後編」（もしかしたら「中編」も）をお楽しみに！
+  \end{itemize}
+\end{itemize}
 
 \hypertarget{ux672cux66f8ux306eux7279ux5fb4}{%
 \section*{本書の特徴}\label{ux672cux66f8ux306eux7279ux5fb4}}
 \addcontentsline{toc}{section}{本書の特徴}
 
 \begin{itemize}
+\tightlist
+\item
+  タイトルの「がんばらない」とは，\textbf{単純作業のくり返しに無駄なエネルギーを注がなくてよいように}すること
 \item
   扱う内容は自分が学び始めの時に教えてもらいたかったこと
 \item
@@ -178,29 +202,24 @@
   \item
     便利な関数や基本的な使い方の解説は多いが，データ加工の実務上知りたいコード例が豊富なわけではない
   \item
-    同じ作業を大量の変数についてくり返し実行したい時のやり方の解説は少ない
+    \textbf{同じ作業を大量の変数についてくり返し実行}したい時のやり方の解説は少ない
   \end{itemize}
 \item
-  まずはよくあるモダンなRのデータラングリング解説
+  本書の強み
+
+  \begin{itemize}
+  \tightlist
+  \item
+    くり返し同じ作業する部分を効率化したコードを併せて解説する点
+  \item
+    自分の学習経験から，そのコード例が知りたかったんだ！という実用的な方法を整理
+  \end{itemize}
 \item
-  本書の強みは，くり返し同じ作業する部分を効率化したコードを併せて解説する点
+  まずモダンなRのデータ加工法での基本の書き方を解説した後に，\textbf{【効率化】}でより効率的にコードを書く解説を行う
 \item
-  自分の学習経験から，そのコード例が知りたかったんだ！という実用的な方法を収集
-\item
-  「がんばらない」とは，単純作業のくり返しに無駄なエネルギーを注がなくてよいようにすること
-\item
-  まず基本の書き方を解説した後に，\_\_【効率化】\_\_でより効率的にコードを書く解説を行う
-  *【効率化】のタグが本書の核心になる。手作業の繰り返しをなるべく避けることが目指すべき点だからである。
+  \textbf{【効率化】}のタグが本書の核心になる。手作業の繰り返しをなるべく避けることが目指すべき点
 \item
   冗長だが【別解】を示すことで様々な関数の働きを理解でき，手持ちの武器が増えデータ加工の幅が広がる
-\end{itemize}
-
-本書の内容は、githubレポジトリの \href{https://github.com/izunyan}{} ですべて公開しています。コードやサンプルデータはこちらのレポジトリをダウンロードしてお試しください。pdf版が読みたい方は、以下のページで無料で入手可能です。自力でできる方は、\texttt{Build\ Book}でも作成できます。
-
-\begin{itemize}
-\tightlist
-\item
-  \href{}{技術書典マーケットの販売ページ}
 \end{itemize}
 
 \hypertarget{ux60f3ux5b9aux8aadux8005}{%
@@ -221,54 +240,82 @@
   初学者から始めてちょっと背伸びできるくらいまでが到達目標
 \end{itemize}
 
-なお、「前篇」とつけたのは，効率化を目指すコードにさらに踏み入っていく場合，リストの理解や\texttt{purrr}パッケージの使い方などを丁寧に説明する必要があるため，
-
 \hypertarget{ux5404ux30bbux30afux30b7ux30e7ux30f3ux306eux6982ux8981}{%
 \subsection*{各セクションの概要}\label{ux5404ux30bbux30afux30b7ux30e7ux30f3ux306eux6982ux8981}}
 \addcontentsline{toc}{subsection}{各セクションの概要}
 
-まず\ref{select}章では、RStudioでファイルを読み書きする際に、最低限知っておいた方がよい知識について解説しておきます。とっつきにくいかもしれませんが、知っておいてよかったと後になって実感する類のものなので、使って慣れていきましょう。
+まず\ref{premise}章では、RとRStudioに初めて触れる方，初学者を対象とした前提知識を解説する。ゆくゆく楽をするためには避けて通れない知識なので，用語になじんでおきたい
 
-\ref{filter}章は本書のメインであるExcelファイルの読み込みについて解説します。一つのファイルの読み込みから、複数シート、複数ファイルの読み込みまで、様々なシーンに対応しました。また、読みこんだファイルを一つのデータフレーム\footnote{変数（列）とオブザベーション（行）が碁盤の目のようになった集まりの形のデータ。Excelであれば通常1行目に列名が入り、2行目以降が個別のデータを表す。データ解析において便利で分かりやすいため、本書ではデータフレームの形で説明していく}にまとめる方法についても触れています。
+\ref{select}章はデータの列（変数）を選ぶ方法を解説する。データをコンパクトにしたり，後のデータ解析等で必要な変数を取得したりするなど，データ加工プロセス全体で必要な基本知識もあるので最初に学んでおきたい
 
-@ref()章は
+\ref{rename}章はデータの列名（変数名）を変える方法について解説する。単純に見えるがデータ加工の際になくてはならない技術である。効率化させるためには初心者から少し脱する必要があり，奥が深い
 
-@ref()章は
+\ref{filter}章はデータの行（ケースまたはオブザベーション）を選ぶ方法を解説する。データや加工した結果，分析した結果をコンパクトにするのに役立つ。
 
-@ref()章は
+\ref{mutate}章はデータに新しい列を追加する方法について解説する。例えば合計点の作成や，年齢層カテゴリや2区分変数（いわゆるダミー変数）の作成など，変数を計算して新しい変数を作る作業はよく発生する。効率化のために避けて通れない\texttt{across(\ )}についてもここで解説する
+
+\ref{summarise}章は要約値の計算について解説する。実務では大量の変数を一気に処理する必要がある場面が多いので，効率化を意識した説明を多く入れている
 
 \hypertarget{ux57f7ux7b46ux74b0ux5883}{%
 \subsection*{執筆環境}\label{ux57f7ux7b46ux74b0ux5883}}
 \addcontentsline{toc}{subsection}{執筆環境}
 
 \begin{itemize}
+\tightlist
 \item
-  本書は\href{https://bookdown.org/}{bookdown}にて執筆しました \footnote{\url{https://bookdown.org/}}
+  本書は\href{https://bookdown.org/}{bookdown}にて執筆
+\end{itemize}
+
+\hypertarget{rux304aux3088ux3073rstudioux30d1ux30c3ux30b1ux30fcux30b8ux306eux30d0ux30fcux30b8ux30e7ux30f3}{%
+\subsubsection*{RおよびRStudio、パッケージのバージョン}\label{rux304aux3088ux3073rstudioux30d1ux30c3ux30b1ux30fcux30b8ux306eux30d0ux30fcux30b8ux30e7ux30f3}}
+\addcontentsline{toc}{subsubsection}{RおよびRStudio、パッケージのバージョン}
+
+\begin{itemize}
+\tightlist
 \item
-  RおよびRStudio、パッケージのバージョン
+  rstudioだけなぜか表示されないので手動で\ldots{}
 
   \begin{itemize}
   \tightlist
   \item
-    R version 3.6.1
-  \item
-    RStudio version 1.3.1073
-  \item
-    readxl version 1.3.1
-  \item
-    tidyverse version 1.3.0
+    バージョン 2021.09.1+372 Ghost Orchid (desktop)
   \end{itemize}
 \end{itemize}
+
+\begin{tabular}{l|l}
+\hline
+ind & values\\
+\hline
+version & R version 4.1.0 (2021-05-18)\\
+\hline
+os & Windows 10 x64 (build 19043)\\
+\hline
+system & x86\_64, mingw32\\
+\hline
+date & 2022-01-16\\
+\hline
+\end{tabular}
+
+\begin{tabular}{l|l}
+\hline
+package & loadedversion\\
+\hline
+bookdown & 0.24\\
+\hline
+tidyverse & 1.3.1\\
+\hline
+\end{tabular}
 
 \hypertarget{ux6ce8ux610fux4e8bux9805ux306aux3069}{%
 \section*{注意事項など}\label{ux6ce8ux610fux4e8bux9805ux306aux3069}}
 \addcontentsline{toc}{section}{注意事項など}
 
 \begin{itemize}
+\tightlist
 \item
-  本書の内容はすべてwindows環境を想定しています。
+  本書の内容はすべてwindows環境を想定
 \item
-  この本に書いてある内容は、筆者が学習したことをまとめているものにすぎないため、正常な動作の保証はできません。使用する際は、自己責任でお願いします。
+  この本に書いてある内容は、筆者が学習したことをまとめているものにすぎないため、正常な動作の保証はできない。使用する際は、自己責任で
 \end{itemize}
 
 \hypertarget{ux30e9ux30a4ux30bbux30f3ux30b9}{%
@@ -278,7 +325,17 @@
 \begin{itemize}
 \tightlist
 \item
-  \url{https://creativecommons.org/licenses/by-sa/4.0/}
+  \href{https://creativecommons.org/licenses/by-sa/4.0/}{CC BY-SA 4.0}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    引用例：やわらかクジラ（2021）『がんばらないデータ加工ーRによる繰り返し作業入門ー　前編』. （サークル名：ヤサイゼリー）, 技術書展12にて頒布
+  \item
+    ただし，ライセンスの適用は本書での著作部分のみとなり，用いているデータやパッケージや画像などはそれぞれのライセンスに準じる
+  \end{itemize}
+\item
+  本書の内容は、\href{https://github.com/izunyan/gisho12}{githubレポジトリ}ですべて公開
 \end{itemize}
 
 \hypertarget{association}{%
@@ -286,23 +343,26 @@
 \addcontentsline{toc}{section}{関連情報}
 
 \begin{itemize}
+\tightlist
 \item
-  \begin{itemize}
-  \tightlist
-  \item
-    \href{}{}
-  \end{itemize}
-\item
-  視覚化のための\texttt{ggplot2}パッケージの辞書的メモ
+  \href{https://techbookfest.org/product/4794168259903488?productVariantID=5913872206659584}{『Rで読むExcelファイル』}
 
   \begin{itemize}
   \tightlist
   \item
-    \href{https://izunyan.github.io/practice_ggplot2/}{ggplot2の辞書}
+    技術書典9で頒布したRでのExcelおよびcsvファイル読み込み解説本
+  \item
+    \href{https://izunyan.github.io/excel_r/}{github}
+  \end{itemize}
+\item
+  \href{https://izunyan.github.io/practice_ggplot2/}{ggplot2の辞書}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    視覚化のための\texttt{ggplot2}パッケージの辞書的メモ
   \end{itemize}
 \end{itemize}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{premise}{%
 \chapter{前提知識}\label{premise}}
@@ -383,7 +443,7 @@
 \begin{itemize}
 \tightlist
 \item
-  データを加工して解析する際に、1つのフォルダ（サブフォルダも含む）の中に関連するデータやコードなどをまとめておき、そのフォルダを \textbf{プロジェクト} と設定する
+  データを加工して解析する際に、1つのフォルダ（サブフォルダも含む）の中に関連するデータやコードなどをまとめておき、そのフォルダを\textbf{プロジェクト}と設定する
 
   \begin{itemize}
   \tightlist
@@ -438,7 +498,7 @@
 
 \begin{figure}
 
-{\centering \includegraphics[width=15.88in]{images/package_install} 
+{\centering \includegraphics[width=0.6\linewidth]{images/package_install} 
 
 }
 
@@ -477,10 +537,15 @@
 \item
   例えば\texttt{mean(\ )}などのように\texttt{関数名(\ )}で出てくるので，\texttt{(\ )}で囲まれてる所を見たらほぼ関数だと思えばよさそう
 \item
-  \texttt{(\ )}の中に入る値を \textbf{引数} （ひきすう）と呼ぶ
+  \texttt{(\ )}の中に入る値を\textbf{引数}（ひきすう）と呼ぶ
 \item
   引数は\texttt{,}でつないで追加していき，これによって実行したい処理のカスタマイズが可能
-  　 + 関数の\texttt{(\ )}の最初の位置に来るものを \textbf{第一引数} という
+
+  \begin{itemize}
+  \tightlist
+  \item
+    関数の\texttt{(\ )}の最初の位置に来るものを\textbf{第一引数}という
+  \end{itemize}
 \end{itemize}
 
 \hypertarget{p-function-ex}{%
@@ -492,9 +557,13 @@
 \begin{itemize}
 \tightlist
 \item
-  \textbf{ベクトル} を作る（複数のものを1つにする）ための関数
-\item
-  ベクトルと聞くと数学苦手だった人はいやな記憶を思い出すかもしれないが，Rではとにかく「\textbf{複数のものを１つにしたもの}」と理解しておけば何となると思う
+  \textbf{ベクトル}を作る（複数のものを1つにする）ための関数
+
+  \begin{itemize}
+  \tightlist
+  \item
+    ベクトルと聞くと数学苦手だった人はいやな記憶を思い出すかもしれないが，Rではとにかく「\textbf{複数のものを１つにしたもの}」と理解しておけば何となると思う
+  \end{itemize}
 \item
   \texttt{c()}は慣れてる人は当たり前に使っているので，初学者にとって理解しとくとよい最重要関数と思われる
 \item
@@ -564,7 +633,8 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# 引数にna.rm = TRUEを追加すると結果が出る。基本的に実務上は常につけておいたほうがよい}
+\CommentTok{\# 引数にna.rm = TRUEを追加すると結果が出る}
+\CommentTok{\# 基本的に実務上は常につけておいたほうがよい}
 \FunctionTok{mean}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\ConstantTok{NA}\NormalTok{, }\DecValTok{3}\NormalTok{), }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -651,13 +721,13 @@
   \item
     Rのモダンな方法では，データの加工や統計処理のプロセスをデータフレームの形で返すことが多い
   \item
-    上記のような状態を \textbf{tidy} (読み：タイディー，意味：整然)と呼び，データ加工において理想的な形とされている
+    上記のような状態を\textbf{tidy}(読み：タイディー，意味：整然)と呼び，データ加工において理想的な形とされている
   \end{itemize}
 \end{itemize}
 
 \begin{figure}
 
-{\centering \includegraphics[width=15.67in]{images/dfr} 
+{\centering \includegraphics[width=0.6\linewidth]{images/dfr} 
 
 }
 
@@ -666,7 +736,7 @@
 
 \begin{figure}
 
-{\centering \includegraphics[width=13.76in]{images/df_xl} 
+{\centering \includegraphics[width=0.6\linewidth]{images/df_xl} 
 
 }
 
@@ -685,11 +755,11 @@
   本書では紙面の都合上，表示行数をしぼっているが，任意の行数を見たいときは\texttt{print(\ )}関数で出力ごとに設定
 \end{itemize}
 
-\hypertarget{ux672cux66f8ux3067ux4f7fux3046ux4e3bux306aux30c7ux30fcux30bf}{%
-\subsection{本書で使う主なデータ}\label{ux672cux66f8ux3067ux4f7fux3046ux4e3bux306aux30c7ux30fcux30bf}}
+\hypertarget{p-df-main}{%
+\subsection{本書で使う主なデータ}\label{p-df-main}}
 
-\hypertarget{ux30daux30f3ux30aeux30f3ux30c7ux30fcux30bf}{%
-\subsubsection{ペンギンデータ}\label{ux30daux30f3ux30aeux30f3ux30c7ux30fcux30bf}}
+\hypertarget{p-df-main-p}{%
+\subsubsection{ペンギンデータ}\label{p-df-main-p}}
 
 \includegraphics{images/penguins_logo.png}
 
@@ -719,20 +789,72 @@
 ## #   body_mass_g <int>, sex <fct>, year <int>
 \end{verbatim}
 
+\begin{itemize}
+\tightlist
+\item
+  tibble形式のデータフレームの出力の見方
+
+  \begin{itemize}
+  \tightlist
+  \item
+    出力の最上段にある\texttt{A\ tibble:\ 344\ x\ 8}で，tibble形式のデータフレーム，344行 × 8列という情報が分かる
+  \item
+    flipper\_length\_\textsubscript{のように，長い変数名は}で省略して表示される
+  \item
+    変数名の下の行にある\texttt{\textless{}fct\textgreater{}}, \texttt{\textless{}dbl\textgreater{}}, \texttt{\textless{}int\textgreater{}}は変数の型を示し，それぞれ因子型，数値型，整数型であることを示している。詳しくは\ref{mu-kata}で説明する
+  \item
+    下から2行目にある\texttt{...\ with\ 341\ more\ rows,\ and\ 3\ more\ variables:}で，さらに341行と3列が非表示であることが分かる
+  \item
+    非表示になった変数名は最下部に表示される
+  \end{itemize}
+\item
+  tibble型のデフォルトは最初の10行のみ表示され，本書では最初の3行のみに絞っているが，10行を越えて表示させたい場合は，\texttt{print(\ )}関数を使う
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{palmerpenguins}\SpecialCharTok{::}\NormalTok{penguins }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{print}\NormalTok{(}\AttributeTok{n =} \DecValTok{15}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 344 x 8
+##    species island   bill_length_mm bill_depth_mm flipper_length_~
+##    <fct>   <fct>             <dbl>         <dbl>            <int>
+##  1 Adelie  Torgers~           39.1          18.7              181
+##  2 Adelie  Torgers~           39.5          17.4              186
+##  3 Adelie  Torgers~           40.3          18                195
+##  4 Adelie  Torgers~           NA            NA                 NA
+##  5 Adelie  Torgers~           36.7          19.3              193
+##  6 Adelie  Torgers~           39.3          20.6              190
+##  7 Adelie  Torgers~           38.9          17.8              181
+##  8 Adelie  Torgers~           39.2          19.6              195
+##  9 Adelie  Torgers~           34.1          18.1              193
+## 10 Adelie  Torgers~           42            20.2              190
+## 11 Adelie  Torgers~           37.8          17.1              186
+## 12 Adelie  Torgers~           37.8          17.3              180
+## 13 Adelie  Torgers~           41.1          17.6              182
+## 14 Adelie  Torgers~           38.6          21.2              191
+## 15 Adelie  Torgers~           34.6          21.1              198
+## # ... with 329 more rows, and 3 more variables:
+## #   body_mass_g <int>, sex <fct>, year <int>
+\end{verbatim}
+
 \hypertarget{p-pipe}{%
 \section{\%\textgreater\% （パイプ演算子）}\label{p-pipe}}
 
 \begin{itemize}
 \tightlist
 \item
-  名前は \textbf{パイプ} で発音は'' \emph{and then} '' (参照){[}\url{https://adv-r.hadley.nz/functions.html\#function-composition}{]}
+  名前は\textbf{パイプ}で発音は''\emph{and then}'' （\href{https://adv-r.hadley.nz/functions.html\#function-composition}{参照}）
 \item
   コードを読みやすくするための便利な機能を持つ演算子。初めてみた人は全然わからないと思うが，この本を読んでコードを書きはじめてみたらこれなしではいられなくなるくらいお世話になると思う
 
   \begin{itemize}
   \tightlist
   \item
-    主に使用が想定される場面でざっくりいうと，「このデータフレームに対して\%\textgreater\%の後にある関数を適用する」という機能
+    主に使用が想定される場面でざっくりいうと，「このデータフレームに対して\texttt{\%\textgreater{}\%}の後にある関数を適用する」という機能
   \item
     具体的な使用法は\ref{select-standard-pipe}で解説
   \end{itemize}
@@ -751,7 +873,7 @@
 \end{itemize}
 
 \hypertarget{select}{%
-\chapter{変数（列）を選ぶ：select( )}\label{select}}
+\chapter{列（変数）を選ぶ：select}\label{select}}
 
 \begin{itemize}
 \tightlist
@@ -870,8 +992,8 @@
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{ux88dcux8db3-ux306eux610fux5473}{%
-\subsection{【補足】\%\textgreater\% の意味}\label{ux88dcux8db3-ux306eux610fux5473}}
+\hypertarget{select-standard-pipe}{%
+\subsection{【補足】\%\textgreater\% の意味}\label{select-standard-pipe}}
 
 \begin{itemize}
 \tightlist
@@ -983,13 +1105,15 @@
 ## # ... with 341 more rows
 \end{verbatim}
 
-\hypertarget{select_cha}{%
-\subsection{中身が文字でも動く}\label{select_cha}}
+\hypertarget{select-cha}{%
+\subsection{中身が文字でも動く}\label{select-cha}}
 
 \begin{itemize}
 \tightlist
 \item
   変数名が\texttt{"\ "}で囲われていると，Rでは文字(character)だと認識される
+\item
+  \texttt{select(\ )}は文字の変数名を与えても動く
 \end{itemize}
 
 \begin{Shaded}
@@ -1067,11 +1191,11 @@
 \item
   selection helperと呼ばれる\texttt{tidyselect}パッケージの関数群
 \item
-  selectの所で解説されることが多いが，後から出てくる\texttt{across()}と併せた活用場面が多いため，なじんでおくと後から楽になる
+  \texttt{select(\ )}の所で解説されることが多いが，後から出てくる\texttt{across()}と併せた活用場面が多いため，なじんでおくと後から楽になる
 \end{itemize}
 
-\hypertarget{select_helper1}{%
-\subsection{変数名の最初の文字列}\label{select_helper1}}
+\hypertarget{select-helper1}{%
+\subsection{変数名の最初の文字列}\label{select-helper1}}
 
 \begin{itemize}
 \tightlist
@@ -1243,28 +1367,6 @@
 ## # ... with 341 more rows
 \end{verbatim}
 
-\hypertarget{select-helper6}{%
-\subsection{数値範囲}\label{select-helper6}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{num\_range}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## function (prefix, range, width = NULL, vars = NULL) 
-## {
-##     vars <- vars %||% peek_vars(fn = "num_range")
-##     if (!is_null(width)) {
-##         range <- sprintf(paste0("%0", width, "d"), range)
-##     }
-##     match_vars(paste0(prefix, range), vars)
-## }
-## <bytecode: 0x000000001f9fb010>
-## <environment: namespace:tidyselect>
-\end{verbatim}
-
 \hypertarget{select-drop}{%
 \section{特定の変数を選ばない（落とす）}\label{select-drop}}
 
@@ -1315,14 +1417,8 @@
 ## # ... with 341 more rows
 \end{verbatim}
 
-\hypertarget{ux5909ux6570ux3092ux4e26ux3073ux5909ux3048ux308b}{%
-\section{変数を並び変える}\label{ux5909ux6570ux3092ux4e26ux3073ux5909ux3048ux308b}}
-
-\hypertarget{ux5909ux6570ux540dux3092ux5909ux66f4ux3059ux308b}{%
-\section{変数名を変更する}\label{ux5909ux6570ux540dux3092ux5909ux66f4ux3059ux308b}}
-
-\hypertarget{ux95a2ux5fc3ux306eux3042ux308bux5909ux6570ux540dux3092ux53d6ux5f97ux3059ux308b}{%
-\section{関心のある変数名を取得する}\label{ux95a2ux5fc3ux306eux3042ux308bux5909ux6570ux540dux3092ux53d6ux5f97ux3059ux308b}}
+\hypertarget{select-get}{%
+\section{関心のある変数名を取得する}\label{select-get}}
 
 \begin{itemize}
 \tightlist
@@ -1332,8 +1428,8 @@
   変数名手打ちだと時間もかかるしミスもあるので，効率化のために必ずおさえておきたい技術
 \end{itemize}
 
-\hypertarget{ux5168ux3066ux306eux5909ux6570ux540d}{%
-\subsection{全ての変数名}\label{ux5168ux3066ux306eux5909ux6570ux540d}}
+\hypertarget{select-get-name}{%
+\subsection{全ての変数名}\label{select-get-name}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1347,8 +1443,8 @@
 ## [7] "sex"               "year"
 \end{verbatim}
 
-\hypertarget{ux9078ux629eux3057ux305fux5909ux6570ux540dux3092ux53d6ux5f97}{%
-\subsection{選択した変数名を取得}\label{ux9078ux629eux3057ux305fux5909ux6570ux540dux3092ux53d6ux5f97}}
+\hypertarget{select-get-obj}{%
+\subsection{選択した変数名を取得}\label{select-get-obj}}
 
 \begin{itemize}
 \tightlist
@@ -1371,8 +1467,8 @@
 ## [1] "bill_length_mm" "bill_depth_mm"
 \end{verbatim}
 
-\hypertarget{ux30b3ux30d4ux30daux306bux4fbfux5229ux306aux5f62ux5f0fux306bux51faux529b}{%
-\subsection{コピペに便利な形式に出力}\label{ux30b3ux30d4ux30daux306bux4fbfux5229ux306aux5f62ux5f0fux306bux51faux529b}}
+\hypertarget{select-get-out}{%
+\subsection{コピペに便利な形式に出力}\label{select-get-out}}
 
 \begin{itemize}
 \tightlist
@@ -1397,12 +1493,18 @@
 \tightlist
 \item
   この出力から必要な変数を選んでコピペができる
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{names()}で出てくるのと違い，\texttt{,}がついているのが地味にうれしい
+  \end{itemize}
 \item
   \texttt{"\ "}すらもいらない，という時は，新しくr script(アイコンNew Fileまたは\texttt{ctrl\ +\ shift\ +\ n})開いて，\texttt{dput()}の出力を貼り付けてすべて置換する力技も
 \end{itemize}
 
 \hypertarget{rename}{%
-\chapter{変数名を変更する：rename( )}\label{rename}}
+\chapter{変数名を変更する：rename}\label{rename}}
 
 \begin{itemize}
 \tightlist
@@ -1411,9 +1513,7 @@
 \item
   tidyな世界では「列名 = 変数名」
 \item
-  変数が多い時に関心ある変数に限定したデータにしたい
-\item
-  関心ある変数の名前を取得したい
+  分かりやすい列名にすることだけでなく，本書の範囲を超えるが複数データの連結や同時処理関連で重要な役割を果たす
 \end{itemize}
 
 \hypertarget{rename-standard}{%
@@ -1422,21 +1522,7 @@
 \begin{itemize}
 \tightlist
 \item
-  変更したい変数名を new = old の順に入力する
-
-  \begin{itemize}
-  \tightlist
-  \item
-    ここではbill\_length\_mmをblmmに変更してみる
-  \end{itemize}
-\item
-  複数の変数名を変更する場合は，\texttt{rename()}の中に\texttt{,}でつなげていく
-
-  \begin{itemize}
-  \tightlist
-  \item
-    たくさんある場合に一つ一つ書いていくのは大変
-  \end{itemize}
+  まずはデータにどういう変数名があるかの確認
 \end{itemize}
 
 \begin{Shaded}
@@ -1450,6 +1536,18 @@
 ## [4] "bill_depth_mm"     "flipper_length_mm" "body_mass_g"      
 ## [7] "sex"               "year"
 \end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  変更したい変数名を new = old の順に入力する
+
+  \begin{itemize}
+  \tightlist
+  \item
+    ここではbill\_length\_mmをblmmに変更してみる
+  \end{itemize}
+\end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1469,9 +1567,20 @@
 ## #   year <int>
 \end{verbatim}
 
+\begin{itemize}
+\tightlist
+\item
+  複数の変数名を変更する場合は，\texttt{rename()}の中に\texttt{,}でつなげていく
+
+  \begin{itemize}
+  \tightlist
+  \item
+    でもたくさんある場合に一つ一つ書いていくのは大変
+  \end{itemize}
+\end{itemize}
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# 複数をrenameする場合}
 \NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{rename}\NormalTok{(}\AttributeTok{blmm =}\NormalTok{ bill\_length\_mm,}
          \AttributeTok{bdmm =}\NormalTok{ bill\_depth\_mm)}
@@ -1526,22 +1635,36 @@
 \end{verbatim}
 
 \hypertarget{rename-strreplace1}{%
-\subsection{【効率化】str\_replace()で一括変換(1)}\label{rename-strreplace1}}
+\subsection{【効率化】str\_replace( )で一括変換(1)}\label{rename-strreplace1}}
 
 \begin{itemize}
 \tightlist
 \item
   \texttt{rename\_with(\ )}は，まず適用したい関数を示し，そのあとに該当する変数を選ぶ
 \item
-  適用したい関数の中にある\texttt{.}の部分に，その後選ぶ変数が入っていく
+  語の置き換えに\texttt{stringr::str\_replace()}を使う
+
+  \begin{itemize}
+  \tightlist
+  \item
+    第一引数に対して，その次の文字列をその後の文字列に置換する（ここでは''bill'' → ``くちばし''）
+  \end{itemize}
 \item
-  語の置き換えは\texttt{stringr::str\_replace()}を使う
+  適用したい関数の中にある\texttt{.x}の部分に，その後選ぶ変数が入っていく(なおこのような単純な場合は\texttt{.}だけでも動く）
+\item
+  この場合適用したい関数の前には\texttt{\textasciitilde{}}（チルダ）が必ずつく
+
+  \begin{itemize}
+  \tightlist
+  \item
+    この部分の理解は今すぐできなくても使えるが，キーワードだけ示しておくと，無名関数(anonymous function)という処理をしている
+  \end{itemize}
 \end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{rename\_with}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\FunctionTok{str\_replace}\NormalTok{(., }\StringTok{"bill"}\NormalTok{, }\StringTok{"くちばし"}\NormalTok{),}
+  \FunctionTok{rename\_with}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\FunctionTok{str\_replace}\NormalTok{(.x, }\StringTok{"bill"}\NormalTok{, }\StringTok{"くちばし"}\NormalTok{),}
               \FunctionTok{starts\_with}\NormalTok{(}\StringTok{"bill"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
@@ -1617,12 +1740,12 @@
 \end{verbatim}
 
 \hypertarget{rename-strreplace2}{%
-\subsection{【効率化】str\_replace()で一括変換（2）}\label{rename-strreplace2}}
+\subsection{【効率化】str\_replace( )で一括変換（2）}\label{rename-strreplace2}}
 
 \begin{itemize}
 \tightlist
 \item
-  \texttt{str\_replace()}で変換先に空白\texttt{""}を指定すると削除できる
+  \texttt{str\_replace(\ )}で変換先に空白\texttt{""}を指定すると削除できる
 \end{itemize}
 
 \begin{Shaded}
@@ -1650,7 +1773,13 @@
 \begin{itemize}
 \tightlist
 \item
-  \texttt{stringr::str\_remove()}の方が直接的
+  \texttt{stringr::str\_remove(\ )}の方が直接的
+
+  \begin{itemize}
+  \tightlist
+  \item
+    第一引数についてその次に来る文字列を取り除く
+  \end{itemize}
 \end{itemize}
 
 \begin{Shaded}
@@ -1680,7 +1809,7 @@
 \item
   変数yearで2007年のみのデータに限定し，くちばし（bill）と翼（flipper）の変数名の末に''\_2007''をつける
 \item
-  renameの中に全部書いていけばできれば数が多いと大変
+  renameの中に全部書いていけばできるが数が多いと大変
 \end{itemize}
 
 \begin{Shaded}
@@ -1705,7 +1834,7 @@
 \end{verbatim}
 
 \hypertarget{rename-strc}{%
-\subsection{【効率化】str\_c()で一括指定}\label{rename-strc}}
+\subsection{【効率化】str\_c( )で一括指定}\label{rename-strc}}
 
 \begin{itemize}
 \tightlist
@@ -1714,7 +1843,7 @@
 \item
   \texttt{stringr::str\_c()}で指定した語をくっつける
 \item
-  ここでは変数year以外なので，\texttt{!}をつけることで変数を指定できる
+  ここでは変数year以外すべてなので，yearに\texttt{!}をつけることで変数を指定できる
 \end{itemize}
 
 \begin{Shaded}
@@ -1740,6 +1869,12 @@
 \hypertarget{rename-strc-other}{%
 \subsubsection{【別解】}\label{rename-strc-other}}
 
+\begin{itemize}
+\tightlist
+\item
+  変数を選ぶときに該当する単語を持つ変数を選びたければ，ヘルパー関数\texttt{matches(\ )}で正規表現を使って柔軟に選べる
+\end{itemize}
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
@@ -1761,64 +1896,8 @@
 ## #   year <int>
 \end{verbatim}
 
-\hypertarget{rename-samew-z}{%
-\section{同}\label{rename-samew-z}}
-
-\begin{itemize}
-\tightlist
-\item
-\end{itemize}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{rename}\NormalTok{(くちばし}\AttributeTok{\_length\_mm =}\NormalTok{ bill\_length\_mm,}
-\NormalTok{         くちばし}\AttributeTok{\_depth\_mm =}\NormalTok{ bill\_depth\_mm)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## # A tibble: 344 x 8
-##   species island    くちばし_length_mm くちばし_depth_mm
-##   <fct>   <fct>                  <dbl>             <dbl>
-## 1 Adelie  Torgersen               39.1              18.7
-## 2 Adelie  Torgersen               39.5              17.4
-## 3 Adelie  Torgersen               40.3              18  
-## # ... with 341 more rows, and 4 more variables:
-## #   flipper_length_mm <int>, body_mass_g <int>, sex <fct>,
-## #   year <int>
-\end{verbatim}
-
-\hypertarget{rename-z2}{%
-\subsection{【効率化】}\label{rename-z2}}
-
-\begin{itemize}
-\tightlist
-\item
-\end{itemize}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{rename\_with}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\FunctionTok{str\_replace}\NormalTok{(., }\StringTok{"bill"}\NormalTok{, }\StringTok{"くちばし"}\NormalTok{),}
-              \FunctionTok{starts\_with}\NormalTok{(}\StringTok{"bill"}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## # A tibble: 344 x 8
-##   species island    くちばし_length_mm くちばし_depth_mm
-##   <fct>   <fct>                  <dbl>             <dbl>
-## 1 Adelie  Torgersen               39.1              18.7
-## 2 Adelie  Torgersen               39.5              17.4
-## 3 Adelie  Torgersen               40.3              18  
-## # ... with 341 more rows, and 4 more variables:
-## #   flipper_length_mm <int>, body_mass_g <int>, sex <fct>,
-## #   year <int>
-\end{verbatim}
-
 \hypertarget{filter}{%
-\chapter{ケース（行）を選ぶ}\label{filter}}
+\chapter{行（ケース）を選ぶ：filter}\label{filter}}
 
 \begin{itemize}
 \tightlist
@@ -1845,7 +1924,7 @@
   \item
     スターウォーズのキャラクターのデータ。\texttt{filter}のヘルプでも例に使用されている
   \item
-    身長や質量(mass)の連続量データに加え，色や種族など豊富なカテゴリを持つ変数がある
+    身長や質量(mass)の連続量データに加え，色や種(species)など豊富なカテゴリを持つ変数がある
   \end{itemize}
 \end{itemize}
 
@@ -1870,7 +1949,7 @@
 \begin{itemize}
 \tightlist
 \item
-  例示しやすくするためspecies変数を先頭にしたデータを作成
+  例示しやすくするため種を先頭にしたデータを作成
 \end{itemize}
 
 \begin{Shaded}
@@ -1881,10 +1960,11 @@
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{filter1}{%
-\section{基本}\label{filter1}}
+\hypertarget{filter-st}{%
+\section{基本}\label{filter-st}}
 
 \begin{itemize}
+\tightlist
 \item
   \texttt{filter(\ )}の引数に論理式（TRUE or FALSEになるもの）を入れる
 
@@ -1894,9 +1974,13 @@
     論理式の部分について，最初の内は\texttt{select(\ )}に入れるものと違って混乱するかもしれない
   \end{itemize}
 \item
-  イコールを表すときは\texttt{=}を2つつなげる
-\item
-  例：種（species）がDroidのケースのみ選ぶ
+  例：種（species）が''Droid''のケースのみ選ぶ
+
+  \begin{itemize}
+  \tightlist
+  \item
+    イコールを表すときは\texttt{=}を2つつなげる
+  \end{itemize}
 \end{itemize}
 
 \begin{Shaded}
@@ -1953,10 +2037,11 @@
 \end{verbatim}
 
 \begin{itemize}
+\tightlist
 \item
   ～以外を表すときは\texttt{!}をつけ，この場合は\texttt{=}は1つでよい
 \item
-  例：種がHumanのケース \textbf{以外} を選ぶ
+  例：種がHumanのケース\textbf{以外}を選ぶ
 \end{itemize}
 
 \begin{Shaded}
@@ -1977,14 +2062,56 @@
 ## #   sex <chr>, gender <chr>, homeworld <chr>
 \end{verbatim}
 
-\hypertarget{ux8907ux6570ux6761ux4ef6}{%
-\section{複数条件}\label{ux8907ux6570ux6761ux4ef6}}
+\hypertarget{filter-st-na}{%
+\subsection{欠損値（NA）の扱い}\label{filter-st-na}}
 
 \begin{itemize}
 \item
-  \texttt{\textbar{}}は「または」を表す
+  現実のデータでは，データが入手できない対象が発生することも多く，変数の値の中にデータがない変数の行（excel風にいうとセル）が発生する
+\item
+  Rではデータのない部分，いわゆる欠損値は\texttt{NA}で表される
+\item
+  例：種がNAのケースを選ぶ
+
+  \begin{itemize}
+  \tightlist
+  \item
+    NAかどうかを判定する論理式は\texttt{is.na(\ )}
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_st }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(species))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 4 x 11
+##   species name       height  mass hair_color skin_color eye_color
+##   <chr>   <chr>       <int> <dbl> <chr>      <chr>      <chr>    
+## 1 <NA>    Ric Olie      183    NA brown      fair       blue     
+## 2 <NA>    Quarsh Pa~    183    NA black      dark       brown    
+## 3 <NA>    Sly Moore     178    48 none       pale       white    
+## 4 <NA>    Captain P~     NA    NA unknown    unknown    unknown  
+## # ... with 4 more variables: birth_year <dbl>, sex <chr>,
+## #   gender <chr>, homeworld <chr>
+\end{verbatim}
+
+\hypertarget{filter-multi}{%
+\section{複数条件}\label{filter-multi}}
+
+\begin{itemize}
+\tightlist
 \item
   例：種がDroidまたはHumanのケースを選ぶ
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{\textbar{}}は「または」を表す
+  \end{itemize}
 \end{itemize}
 
 \begin{Shaded}
@@ -2006,10 +2133,15 @@
 \end{verbatim}
 
 \begin{itemize}
-\item
-  \texttt{\&}は「かつ」を表す
+\tightlist
 \item
   種がDroidかつ身長が100未満のケースのみ選ぶ
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{\&}は「かつ」を表す
+  \end{itemize}
 \end{itemize}
 
 \begin{Shaded}
@@ -2030,15 +2162,15 @@
 ## #   gender <chr>, homeworld <chr>
 \end{verbatim}
 
-\hypertarget{ux52b9ux7387ux5316}{%
-\subsection{【効率化】}\label{ux52b9ux7387ux5316}}
+\hypertarget{filter-multi-eff}{%
+\subsection{【効率化】}\label{filter-multi-eff}}
 
 \begin{itemize}
 \tightlist
 \item
   選びたいものが多くなると，書くのが大変。``species ==''とかをいちいち書きたくない
 \item
-  例: 変数speciesで''Aleena''または ``Dug''または ``Yoda's species''を選びたいとき
+  例: 種で''Aleena''または ``Dug''または ``Yoda's species''を選びたいとき
 \end{itemize}
 
 \begin{Shaded}
@@ -2086,7 +2218,7 @@
 \begin{itemize}
 \tightlist
 \item
-  例: 変数speciesで''Droid'', ``Human''以外を選びたいとき
+  例: 種で''Droid'', ``Human''以外を選びたいとき
 
   \begin{itemize}
   \tightlist
@@ -2137,8 +2269,8 @@
 ## #   sex <chr>, gender <chr>, homeworld <chr>
 \end{verbatim}
 
-\hypertarget{ux30adux30fcux30efux30fcux30c9ux306bux3088ux308bux691cux7d22}{%
-\section{キーワードによる検索}\label{ux30adux30fcux30efux30fcux30c9ux306bux3088ux308bux691cux7d22}}
+\hypertarget{filter-kw}{%
+\section{キーワードによる検索}\label{filter-kw}}
 
 \begin{itemize}
 \item
@@ -2237,7 +2369,7 @@
 \end{verbatim}
 
 \hypertarget{mutate}{%
-\chapter{新しい変数（列）の作成：mutate( )}\label{mutate}}
+\chapter{新しい変数（列）の作成：mutate}\label{mutate}}
 
 \begin{itemize}
 \tightlist
@@ -2245,8 +2377,6 @@
   パッケージ\texttt{dplyr}の関数\texttt{mutate()}
 \item
   新しい変数の列を作成する
-\item
-  mutateの機能解説
 \item
   効率化のための\texttt{across()}
 \end{itemize}
@@ -2319,7 +2449,7 @@
 \item
   \texttt{mutate(\ )}の中に新しく作成する変数名を入れ，\texttt{=}でつないで計算式を入れる
 \item
-  ここでは，まず変数A1の平均値（全ケース同じ値が入る）を計算し，個々の値の差分をする例を示す
+  ここでは，まず変数A1の平均値（全ケース同じ値が入る）を計算し，個々のケースの値の差分を新しく列として追加する例を示す
 \end{itemize}
 
 \begin{Shaded}
@@ -2345,7 +2475,7 @@
 \begin{itemize}
 \tightlist
 \item
-  mean\_a1列にはA1の平均値がすべて同じ値で入る（平均値だけの計算がしたければ\ref{summarise}を参照）
+  mean\_a1列にはA1の平均値がすべて同じ値で入る（平均値だけの計算がしたければ\ref{summarise}章を参照）
 \item
   dif\_a1\_mean列は，A1列からmean\_a1列を引いた値が入る
 \end{itemize}
@@ -2361,7 +2491,7 @@
   \begin{itemize}
   \tightlist
   \item
-    小数も扱う数値 \emph{\texttt{\textless{}dbl\textgreater{}}}
+    小数も扱う数値（double-precision） \emph{\texttt{\textless{}dbl\textgreater{}}}
   \item
     整数 \emph{\texttt{\textless{}int\textgreater{}}}
   \item
@@ -2371,12 +2501,6 @@
   \end{itemize}
 \item
   変数の型の確認は色々方法があるが，tibble形式のデータフレームなら\texttt{select()}でOK
-
-  \begin{itemize}
-  \tightlist
-  \item
-    tibble形式でなくても，最後に\texttt{glimpse()}で確認可能
-  \end{itemize}
 \end{itemize}
 
 \begin{Shaded}
@@ -2396,6 +2520,12 @@
 ## # ... with 2,797 more rows
 \end{verbatim}
 
+\begin{itemize}
+\tightlist
+\item
+  tibble形式でない普通のデータフレームでも，最後に\texttt{glimpse()}で出力することで型を確認可能
+\end{itemize}
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{df\_bfi }\SpecialCharTok{\%\textgreater{}\%}
@@ -2413,6 +2543,8 @@
 
 \begin{itemize}
 \tightlist
+\item
+  \texttt{glimpse()}の結果はデータフレームの表示が行列入れ替わっており，変数の情報が行ごとに出力される
 \item
   gender, education列が \emph{\texttt{\textless{}int\textgreater{}}} になっているので整数型になっている
 \end{itemize}
@@ -2466,7 +2598,7 @@
   \begin{itemize}
   \tightlist
   \item
-    かつての\texttt{mutate\_at()}, \texttt{mutate\_if()}など
+    かつては\texttt{mutate\_at(\ )}, \texttt{mutate\_if(\ )}, \texttt{mutate\_all(\ )}など別々の関数だったが，\texttt{across(\ )}の登場で統一的に\texttt{mutate(\ )}内で扱えるようになった
   \end{itemize}
 \end{itemize}
 
@@ -2520,7 +2652,7 @@
 \begin{itemize}
 \tightlist
 \item
-  \ref{select-cha}で解説した文字も使える
+  同じく\ref{select-cha}で解説した文字型の変数名も指定に使える
 \end{itemize}
 
 \begin{Shaded}
@@ -2545,7 +2677,7 @@
 \end{verbatim}
 
 \hypertarget{mu-across-list}{%
-\subsection{【重要知識！】新しい変数名にして追加}\label{mu-across-list}}
+\subsection{【重要知識】新しい変数名にして追加}\label{mu-across-list}}
 
 \begin{itemize}
 \tightlist
@@ -2559,10 +2691,12 @@
   \begin{itemize}
   \tightlist
   \item
-    関数名の前に\texttt{\textasciitilde{}}（チルダ）が必要
+    関数名の前に\texttt{\textasciitilde{}}（チルダ）が必要（\ref{rename-strreplace1}参照）
   \item
-    list内の関数\texttt{()}内に\texttt{.x}が必要（この場合はxがなくてピリオドのみでも動く）。ここに\texttt{across()}の第一引数に指定した変数が入っていくという意味
+    list内の関数\texttt{()}内に\texttt{.x}が必要。ここに\texttt{across()}の第一引数に指定した変数が入っていくという意味
   \end{itemize}
+\item
+  例：genderとeducationの型を因子型に変換し，変換前後で変わっているかどうか確認
 \end{itemize}
 
 \begin{Shaded}
@@ -2596,15 +2730,7 @@
 \begin{itemize}
 \tightlist
 \item
-  変数の四則演算の式を入れれば合計得点として計算された列をデータフレーム追加できる
-\item
-  別解で合計した例を，変数の逆転項目を反映させた後に \ref{mu-total-ef} で解説する
-
-  \begin{itemize}
-  \tightlist
-  \item
-    項目数が多い場合などはこちらの方が効率化できる場合も
-  \end{itemize}
+  変数の四則演算の式を入れれば合計得点として計算された列をデータフレームに追加できる
 \end{itemize}
 
 \begin{Shaded}
@@ -2628,11 +2754,25 @@
 ## # ... with 2,797 more rows
 \end{verbatim}
 
+\begin{itemize}
+\tightlist
+\item
+  別解として，変数の逆転項目を反映させた後に， \ref{mu-total-ef} で異なるやり方で合計した例を解説する
+
+  \begin{itemize}
+  \tightlist
+  \item
+    項目数が多い場合などはこちらの方が効率化できる場合も
+  \end{itemize}
+\end{itemize}
+
 \hypertarget{mu-total-na}{%
-\subsection{足し上げる変数に欠損があるとどうなるか}\label{mu-total-na}}
+\subsection{足し上げる変数に欠損値があるとどうなるか}\label{mu-total-na}}
 
 \begin{itemize}
 \tightlist
+\item
+  欠損値については\ref{filter-st-na}参照
 \item
   合計得点の計算の場合，対象となる変数の内1つでもNAがあれば合計点もNAとなる
 \end{itemize}
@@ -2661,6 +2801,8 @@
 \tightlist
 \item
   一度因子型に変換してから\texttt{forcats}パッケージの\texttt{fct\_recode(\ )}関数を使うと簡単
+\item
+  例：genderの値1,2をそれぞれmale, femaleという文字に置き換える
 \item
   ちゃんと変換の対応がついているかどうかを\texttt{dplyr}パッケージの\texttt{count(\ )}関数で確認
 
@@ -2762,6 +2904,19 @@
 \hypertarget{mu-rev}{%
 \section{逆転項目を作る}\label{mu-rev}}
 
+\begin{itemize}
+\tightlist
+\item
+  心理尺度などの場合，質問内容に対する回答選択肢の意味が，項目間で逆になるように設定されることがあり，合計点などを作る際に尺度の意味を適切に表すように，取りうる数値の範囲内で値を入れ替える作業が発生することがある
+
+  \begin{itemize}
+  \tightlist
+  \item
+    たとえば，感情の状態を項目を合計してたずねる尺度で，「いつも楽しい」という項目と，「いつも悲しい」という聞き方をしていたら，それぞれの回答を得点化したときに意味が反対になるため，同じ方向になるようにする必要がある
+    例：「1. まったくあてはまらない ←→ 6. 非常にあてはまる」のルールを「いつも悲しい」項目に適用し，1の回答を6に置き換えれば，「いつも楽しい」とポジティブな方向で点数の意味がそろう
+  \end{itemize}
+\end{itemize}
+
 \hypertarget{mu-rev-check}{%
 \subsection{逆転項目の確認}\label{mu-rev-check}}
 
@@ -2780,27 +2935,39 @@
 \end{itemize}
 
 \hypertarget{mu-rev-recode}{%
-\subsection{逆転（recode）}\label{mu-rev-recode}}
+\subsection{逆転：recode}\label{mu-rev-recode}}
 
 \begin{itemize}
 \tightlist
 \item
   \texttt{dplyr::recode()}を使用
 \item
-  入れ替えたい値をold = newで並べていく
+  対象の変数を\texttt{recode(\ )}の第一引数に，入れ替えたい値をold = newで並べていく
 
   \begin{itemize}
   \tightlist
   \item
-    この等式の順番が他(mutateなど)と逆になるため，\texttt{recode()}は将来引退する可能性あり
+    この等式の順番が他(mutateなど)と逆になるため，\texttt{recode()}は将来引退する可能性ありとされている
+  \item
+    また，下記のように考慮すべき点があるから，後述の\ref{mu-rev-rule}【別解】を使う方がよいかもしれない
+  \end{itemize}
+\item
+  値の指定で考慮すべき点
+
+  \begin{itemize}
+  \tightlist
+  \item
+    oldの数値は\texttt{}で囲む必要がある
+  \item
+    newの数値に\texttt{L}がつくのは，型を整数のままにするため
   \end{itemize}
 \end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{df\_bfi }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{A1\_r =} \FunctionTok{recode}\NormalTok{(A1, }\StringTok{\textasciigrave{}}\AttributeTok{1}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 6L, }\StringTok{\textasciigrave{}}\AttributeTok{2}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 5L, }\StringTok{\textasciigrave{}}\AttributeTok{3}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 4L,      }\CommentTok{\# oldの数値は\textasciigrave{} \textasciigrave{}で囲む必要がある}
-                           \StringTok{\textasciigrave{}}\AttributeTok{4}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 3L, }\StringTok{\textasciigrave{}}\AttributeTok{5}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 2L, }\StringTok{\textasciigrave{}}\AttributeTok{6}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 1L)) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# newの数値にLがつくのは，型を整数のままにするため}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{A1\_r =} \FunctionTok{recode}\NormalTok{(A1, }\StringTok{\textasciigrave{}}\AttributeTok{1}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 6L, }\StringTok{\textasciigrave{}}\AttributeTok{2}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 5L, }\StringTok{\textasciigrave{}}\AttributeTok{3}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 4L,      }
+                           \StringTok{\textasciigrave{}}\AttributeTok{4}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 3L, }\StringTok{\textasciigrave{}}\AttributeTok{5}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 2L, }\StringTok{\textasciigrave{}}\AttributeTok{6}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 1L)) }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{select}\NormalTok{(A1, A1\_r)}
 \end{Highlighting}
 \end{Shaded}
@@ -2852,6 +3019,12 @@
 \tightlist
 \item
   \ref{mu-across-list} で解説したlistに関数を入れる方法
+
+  \begin{itemize}
+  \tightlist
+  \item
+    これで対象となる\texttt{across(\ )}内変数に\texttt{\_r}の接尾辞が付いた逆転項目が追加される
+  \end{itemize}
 \end{itemize}
 
 \begin{Shaded}
@@ -2922,7 +3095,7 @@
 \item
   \texttt{\textasciitilde{}}の後に計算式がきても動く
 \item
-  ここでは，\texttt{max\ +\ min\ -\ .x} の\texttt{.x}にacross内に置かれた変数が入っていく
+  ここでは，\texttt{max\ +\ min\ -\ .x} の\texttt{.x}に\texttt{across()}内に置かれた変数が入っていく
 \end{itemize}
 
 \begin{Shaded}
@@ -2969,6 +3142,16 @@
 \tightlist
 \item
   \texttt{base::rowSums(\ )}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    データフレームで行の単位で総計するので，行（ケース）ごとに合計点を作成できる
+  \end{itemize}
+\item
+  まず総計の対象となる変数名を\ref{select-cha}で解説したように文字ベクトルにしていく
+\item
+  \texttt{rowSums(\ )}の中で\texttt{across(\ )}が使えるので，あとは定義した項目のオブジェクトを指定していくだけ
 \end{itemize}
 
 \begin{Shaded}
@@ -3016,6 +3199,14 @@
 \hypertarget{ux78baux8a8d}{%
 \subsection{【確認】}\label{ux78baux8a8d}}
 
+\begin{itemize}
+\tightlist
+\item
+  変数の中にNAが入る場合は合計もNAになる。
+\item
+  rowSums(across(all\_of(Op)), \textbf{na.rm = TRUE})と引数を追加すれば，NAを無視して合計できる
+\end{itemize}
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{df\_bfi }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(}\FunctionTok{all\_of}\NormalTok{(Ag), Agree)}
@@ -3049,6 +3240,12 @@
 ## # ... with 84 more rows
 \end{verbatim}
 
+\begin{itemize}
+\tightlist
+\item
+  \texttt{rowSums(\ )}を\texttt{base::rowMeans(\ )}に変えれば平均値も計算できる
+\end{itemize}
+
 \hypertarget{ux9023ux7d9aux5909ux6570ux3092ux30abux30c6ux30b4ux30eaux306bux533aux5206ux3059ux308b}{%
 \section{連続変数をカテゴリに区分する}\label{ux9023ux7d9aux5909ux6570ux3092ux30abux30c6ux30b4ux30eaux306bux533aux5206ux3059ux308b}}
 
@@ -3058,19 +3255,40 @@
 \begin{itemize}
 \tightlist
 \item
-  変数ageのヒストグラムを描き，中央値を確認する
+  変数ageのヒストグラムを描き，分布を確認する
 \item
-  単純に確認したいだけなら，従来のRでの書き方が楽
+  グラフ作成パッケージ\texttt{ggplot2}でどんなグラフが作れるかは著者作成の辞書参照
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \href{https://izunyan.github.io/practice_ggplot2/}{ggplot2の辞書}
+  \end{itemize}
 \end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# ヒストグラム描画}
-\FunctionTok{hist}\NormalTok{(df\_bfi}\SpecialCharTok{$}\NormalTok{age)}
+\FunctionTok{ggplot}\NormalTok{(df\_bfi) }\SpecialCharTok{+}           \CommentTok{\# ここにデータフレーム}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\FunctionTok{aes}\NormalTok{(age)) }\CommentTok{\# aes( )の中に対象変数}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{gisho12_files/figure-latex/unnamed-chunk-76-1.pdf}
+\includegraphics{gisho12_files/figure-latex/unnamed-chunk-79-1.pdf}
+
+\begin{itemize}
+\tightlist
+\item
+  さっと中央値だけ見たいのであれば，従来のRの書き方が早い
+\item
+  役に立つ場面が多いので，慣れたら従来の書き方を学んでおくとよい
+
+  \begin{itemize}
+  \tightlist
+  \item
+  \end{itemize}
+\item
+  \texttt{データフレーム\$変数名}と指定することで変数として扱える
+\end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3083,13 +3301,21 @@
 ## [1] 26
 \end{verbatim}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# モダンな方法だと少し長くなる}
+\CommentTok{\# df\_bfi \%\textgreater{}\% }
+\CommentTok{\#   summarise(median(age))}
+\end{Highlighting}
+\end{Shaded}
+
 \hypertarget{ux533aux5206}{%
 \subsection{2区分}\label{ux533aux5206}}
 
 \begin{itemize}
 \tightlist
 \item
-  \texttt{dplyr}パッケージの\texttt{if\_else(\ )}関数で条件式（TRUEまたはFALSEを返すもの）によって値を2区分する
+  \texttt{dplyr::if\_else(\ )}で条件式（TRUEまたはFALSEを返すもの）によって値を2区分する
 \item
   構造：\texttt{if\_else(条件式,\ TRUEの場合の値,\ FALSEの場合の値)}
 
@@ -3125,7 +3351,7 @@
 \begin{itemize}
 \tightlist
 \item
-  \texttt{age\ \textgreater{}=\ 27}が1，27未満が0にコーディングされているかfilterで限定して確認
+  \texttt{age\ \textgreater{}=\ 27}が1，27未満が0にコーディングされているか\texttt{filter(\ )}で限定して確認
 \end{itemize}
 
 \begin{Shaded}
@@ -3159,7 +3385,7 @@
 \item
   念のため最初3行（1-3行目）と最後3行（n-2行目からn行目）も確認
 \item
-  \texttt{dplyr(\ )::slice(\ )}で1:3行目と最後の3行を表示させる
+  \texttt{dplyr::slice(\ )}で1:3行目と最後の3行を表示させる
 \end{itemize}
 
 \begin{Shaded}
@@ -3213,8 +3439,8 @@
 \CommentTok{\# 確認するには以下のコードの最初の2行だけでよいが，出力が長いためランダムに10件抽出しageの昇順にしてある}
 \NormalTok{res\_age6 }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{count}\NormalTok{(age, age6) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{slice\_sample}\NormalTok{(}\AttributeTok{n =} \DecValTok{10}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{arrange}\NormalTok{(age)}
+  \FunctionTok{slice\_sample}\NormalTok{(}\AttributeTok{n =} \DecValTok{10}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# ランダムに10件抽出}
+  \FunctionTok{arrange}\NormalTok{(age)             }\CommentTok{\# ageをキーに行を昇順にソート}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3222,15 +3448,15 @@
 ## # A tibble: 10 x 3
 ##      age age6         n
 ##    <int> <chr>    <int>
-##  1    21 20-29歳    144
-##  2    27 20-29歳     97
-##  3    35 30-39歳     52
-##  4    44 40-49歳     25
-##  5    53 50-59歳     17
-##  6    58 50-59歳      7
-##  7    62 60歳以上     4
-##  8    67 60歳以上     3
-##  9    68 60歳以上     1
+##  1    19 20歳未満   190
+##  2    23 20-29歳    138
+##  3    26 20-29歳     99
+##  4    28 20-29歳     86
+##  5    31 30-39歳     73
+##  6    38 30-39歳     52
+##  7    61 60歳以上     4
+##  8    62 60歳以上     4
+##  9    65 60歳以上     1
 ## 10    70 60歳以上     1
 \end{verbatim}
 
@@ -3241,7 +3467,7 @@
 \end{Shaded}
 
 \hypertarget{summarise}{%
-\chapter{要約値を作る：summarise( )}\label{summarise}}
+\chapter{要約値を作る：summarise}\label{summarise}}
 
 \begin{itemize}
 \tightlist
@@ -3250,7 +3476,7 @@
 \item
   結果をデータフレームとして出力するため，扱いが便利
 \item
-  データの要約作業はデータを知るうえで頻繁に行うことが想定される
+  データを知るうえで要約作業は頻繁に行うことが想定される
 
   \begin{itemize}
   \tightlist
@@ -3265,9 +3491,9 @@
 \begin{itemize}
 \tightlist
 \item
-  \texttt{(\ )}の中に出力したい変数名を書き，\texttt{=}の後に関数を入れる
+  \texttt{summarise(\ )}の中に出力したい変数名を書き，\texttt{=}の後に計算する関数を入れる
 \item
-  NAがある場合，引数\texttt{na.rm\ =\ TRUE}がないと結果が出ないので，ほとんどの場合つけて置いた方がよい
+  例：bill\_length\_mmの平均値を算出する
 \end{itemize}
 
 \begin{Shaded}
@@ -3323,11 +3549,8 @@
   \texttt{across()}の第一引数に指定したい変数名ベクトル，またはヘルパー関数を入れる
 \item
   実行したい関数をlist内に名前（接尾辞）をつけて列挙し，関数の前に\texttt{\textasciitilde{}}をつける
-
-  \begin{itemize}
-  \tightlist
-  \item
-  \end{itemize}
+\item
+  \texttt{sum(!is.na(.x))}は，NAのない行の数を総計するので，平均値やSDの計算に用いた人数を取得できる
 \end{itemize}
 
 \begin{Shaded}
@@ -3352,7 +3575,7 @@
 \begin{itemize}
 \tightlist
 \item
-  \texttt{across()}ではヘルパー関数が使える！
+  \texttt{across()}ではヘルパー関数が使える
 \end{itemize}
 
 \begin{Shaded}
@@ -3380,9 +3603,13 @@
 \begin{itemize}
 \tightlist
 \item
+  上記の出力は横に長いため見にくい
+\item
   \texttt{tidyr::pivot\_longer()}で，データフレームの行列入れ替えができる
 \item
   引数を\texttt{names\_pattern}と\texttt{names\_to}を下記のように指定することで，変数の接尾辞を列名にできる
+\item
+  下記コードの\texttt{summarise(\ )}部分の構造は前のチャンクと変数名以外同じ
 \end{itemize}
 
 \begin{Shaded}
@@ -3479,7 +3706,9 @@
 \begin{itemize}
 \tightlist
 \item
-  \texttt{関数名\ \textless{}-\ function(引数)\{\ 計算式やコード\ \}} で関数を定義できる
+  \texttt{自分で名づける関数名\ \textless{}-\ function(引数)\{\ 計算式やコード\ \}} で関数を定義できる
+\item
+  例：関数の引数に数値を入れると\texttt{+1}した値を返す関数
 \end{itemize}
 
 \begin{Shaded}
@@ -3503,7 +3732,15 @@
 \begin{itemize}
 \tightlist
 \item
-  引数にデータフレーム（data）と変数（vars）を入れる
+  \texttt{\{\{\ \}\}}は\texttt{curly\ curly}と読み，関数を作成するときに，代入先の変数名の場所を指定する時などに活躍
+
+  \begin{itemize}
+  \tightlist
+  \item
+    下記の例の場合，\texttt{\{\{\ \}\}}を外すと動かない
+  \end{itemize}
+\item
+  例：引数にデータフレーム（data）と変数（vars）を入れると平均値とSDとnを返す関数
 \end{itemize}
 
 \begin{Shaded}

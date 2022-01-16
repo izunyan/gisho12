@@ -16,7 +16,7 @@
 starwars
 ```
 
-* 例示しやすくするためspecies変数を先頭にしたデータを作成
+* 例示しやすくするため種を先頭にしたデータを作成
 
 ```{r}
 df_st <- 
@@ -25,12 +25,13 @@ df_st <-
 ```
 
 
-## 基本 {#filter1}
+## 基本 {#filter-st}
 
 * `filter( )`の引数に論理式（TRUE or FALSEになるもの）を入れる
   + 論理式の部分について，最初の内は`select( )`に入れるものと違って混乱するかもしれない
 * 例：種（species）が"Droid"のケースのみ選ぶ
   + イコールを表すときは`=`を2つつなげる
+  
 ```{r}
 df_st %>% 
   filter(species == "Droid")
@@ -44,17 +45,29 @@ df_st %>%
 ```
 
 * ～以外を表すときは`!`をつけ，この場合は`=`は1つでよい
-
-* 例：種がHumanのケース __以外__ を選ぶ
+* 例：種がHumanのケース**以外**を選ぶ
 
 ```{r}
 df_st %>% 
   filter(species != "Human")
 ```
 
+### 欠損値（NA）の扱い {#filter-st-na}
+
+* 現実のデータでは，データが入手できない対象が発生することも多く，変数の値の中にデータがない変数の行（excel風にいうとセル）が発生する
+* Rではデータのない部分，いわゆる欠損値は`NA`で表される
+
+* 例：種がNAのケースを選ぶ
+  + NAかどうかを判定する論理式は`is.na( )`
+  
+```{r}
+df_st %>% 
+  filter(is.na(species))
+```
 
 
-## 複数条件
+
+## 複数条件 {#filter-multi}
 
 
 * 例：種がDroidまたはHumanのケースを選ぶ
@@ -76,10 +89,10 @@ df_st %>%
 ```
 
 
-### 【効率化】
+### 【効率化】 {#filter-multi-eff}
 
 * 選びたいものが多くなると，書くのが大変。"species =="とかをいちいち書きたくない
-* 例: 変数speciesで"Aleena"または "Dug"または "Yoda's species"を選びたいとき
+* 例: 種で"Aleena"または "Dug"または "Yoda's species"を選びたいとき
 
 ```{r}
 df_st %>% 
@@ -93,7 +106,7 @@ df_st %>%
   filter(species %in% c("Aleena", "Dug", "Yoda's species"))
 ```
 
-* 例: 変数speciesで"Droid", "Human"以外を選びたいとき
+* 例: 種で"Droid", "Human"以外を選びたいとき
   + この場合，`&`が必須
 
 ```{r}
@@ -109,7 +122,7 @@ df_st %>%
 ```
 
 
-## キーワードによる検索
+## キーワードによる検索 {#filter-kw}
 
 * 手元で特定の名前の行のデータを見たいときに便利
 * キーワード検索には，正規表現の結果をTRUE or FALSEで返す関数`stringr::str_detect( )`を使う
