@@ -1,4 +1,4 @@
-# 要約値を作る：summarise( ) {#summarise}
+# 要約値を作る：summarise {#summarise}
 
 * パッケージ`dplyr`の関数`summarise()`
 * 結果をデータフレームとして出力するため，扱いが便利
