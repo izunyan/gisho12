@@ -21,7 +21,7 @@ df <-
 df 
 ``` 
 
-* 読み込みの様々な方法については拙書[『Rで読むExcelファイル』](https://izunyan.github.io/excel_r/)参照
+* 読み込みの様々な方法については拙書[『Rで読むExcelファイル』](https://techbookfest.org/product/4794168259903488?productVariantID=5913872206659584)参照
 
 
 ## 基本 {#select-standard}
@@ -32,7 +32,7 @@ df
 * 以降すべて`tidyverse`パッケージを読み込んだ前提で進める（\@ref(p-package)参照）
 
 ```{r}
-# まだ読み込んでない場合は以下実行
+# まだtidyverseパッケージを読み込んでない場合は以下の#を外して実行
 # library(tidyverse)
 
 df %>% 

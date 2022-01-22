@@ -25,7 +25,7 @@
   + 6 Very Accurate          非常にあてはまる
   
 ```{r}
-# パッケージが入ってなければ下記実行
+# パッケージが入ってなければ下記の#を外して実行
 # install.packages("psychTools")
 
 df_bfi <- 
@@ -51,6 +51,10 @@ df_bfi %>%
 
 * mean_a1列にはA1の平均値がすべて同じ値で入る（平均値だけの計算がしたければ\@ref(summarise)章を参照）
 * dif_a1_mean列は，A1列からmean_a1列を引いた値が入る
+
+### [練習問題]
+
+* df_bfiデータの変数A1とA2だけを選んで，A2からA1を引いた新しい変数"a1_2"を作成しよう
 
 ## 変数の型の変換 {#mu-kata}
 
@@ -109,6 +113,11 @@ df_bfi %>%
   select(gender, education)   # 結果表示のため冗長だが変わった変数だけselect
 ```
 
+### [練習問題]
+
+
+* df_bfiデータの変数A1, A2, A3, A4, A5だけを選んで，すべて因子型に変換しよう
+
 ## across( )の特徴 {#mu-across}
 
 
@@ -141,7 +150,7 @@ df_bfi %>%
 * 適用する関数をリストにする（`list()`に入れる）ことで，変数名を変更して追加できる
 * `list()`に入れるときはこれまでと異なる書き方が必要になる
   + 関数名の前に`~`（チルダ）が必要（\@ref(rename-strreplace1)参照）
-  + list内の関数`()`内に`.x`が必要。ここに`across()`の第一引数に指定した変数が入っていくという意味
+  + list内の関数`()`内に`.x`が必要。この`.x`に`across()`の第一引数に指定した変数が入っていくという意味
 * 例：genderとeducationの型を因子型に変換し，変換前後で変わっているかどうか確認
 
 ```{r}
@@ -152,6 +161,18 @@ df_bfi %>%
 ```
 
 * 因子型に変換した変数の末尾に_fがつく
+
+### [練習問題]
+
+* df_bfiデータの変数N1, N2, N3, N4, N5だけをすべて因子型に変換して変数名末尾に"_fct"を付けた変数を追加し，ヘルパー関数を使って選んで示そう
+
+```{r eval=FALSE, include=FALSE}
+df_bfi %>%
+  mutate(across(c(N1:N5),
+                list(fct = ~factor(.x)))) %>% 
+  select(starts_with("N"))
+```
+
 
 ## 合計点の作成 {#mu-total}
 
@@ -198,6 +219,22 @@ df_bfi %>%
   count(gender, gender_c)
 
 ```
+
+### [練習問題]
+
+* df_bfiデータの変数educationを数値の値1～5を，それぞれ対応する"HS", "finished HS", "some college", "college graduate", "graduate degree"に変換して，ちゃんと変換されているかどうかcountで確認しよう
+
+```{r eval=FALSE, include=FALSE}
+df_bfi %>%
+  mutate(education = factor(education),
+         education_c = fct_recode(education, "HS" = "1",
+                                "finished HS" = "2",
+                                "some college" = "3",
+                                "college graduate" = "4",
+                                "graduate degree" = "5"
+         )) %>% 
+  count(education, education_c)
+         ```
 
 
 ## 連番からIDの作成 {#mu-seq}

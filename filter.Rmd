@@ -8,7 +8,7 @@
 ## 使用データ
 
 * `dplyr::starwars`データを使用
-  + スターウォーズのキャラクターのデータ。`filter`のヘルプでも例に使用されている
+  + スターウォーズのキャラクターのデータ。`filter( )`のヘルプでも例に使用されている
   + 身長や質量(mass)の連続量データに加え，色や種(species)など豊富なカテゴリを持つ変数がある
 
 
@@ -65,6 +65,10 @@ df_st %>%
   filter(is.na(species))
 ```
 
+### [練習問題]
+
+* df_stのデータから変数"hair_color"の値が"white"のケースを選ぼう
+* df_stのデータから変数"mass"の値が40未満のケースを選ぼう
 
 
 ## 複数条件 {#filter-multi}
@@ -121,6 +125,11 @@ df_st %>%
   filter(!species %in% c("Droid", "Human"))
 ```
 
+### [練習問題]
+
+* df_stのデータから変数"species"の値が"Human"かつ変数"sex"の値が"female"のケースを選ぼう
+* df_stのデータから変数"eye_color"の値が"blue-gray"または"dark"または"gold"または"pink"のケースを効率化した方法で選ぼう
+
 
 ## キーワードによる検索 {#filter-kw}
 
@@ -140,7 +149,6 @@ df_st %>%
 ```{r}
 df_st %>%
   filter(str_detect(name, "^R"))
-
 ```
 
 
@@ -152,3 +160,8 @@ df_st %>%
   filter(str_detect(name, "^Y|^L"))
 
 ```
+
+### [練習問題]
+
+* df_stのデータから変数"name"の値が数字で終わるケースを選ぼう（ヒント^[～で終わる文字の指定は，"`a$`"のように，`文字$`とする；正規表現で数値の指定は"`[0-9]`"または"`[:digit:]`"を使う]）
+　

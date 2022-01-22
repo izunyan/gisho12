@@ -74,6 +74,9 @@ df %>%
 
 ```
 
+### [練習問題]
+
+* dfデータで"_mm"で終わる変数の名前の"_mm"部分を"_ミリ"に一括で変換しよう
 
 
 ## 同じ語を削除する{#rename-remove}
@@ -109,6 +112,10 @@ df %>%
               ends_with("mm"))
 ```
 
+### [練習問題]
+
+* dfデータで"_"を含む変数の名前から，"_"をすべて取り除こう（ヒント^[str_replace( )`も`str_remove( )`も適用は最初の1つだけなので，複数ある場合は`str_replace_all( )`または`str_remove_alla( )`を使う]）
+  
 
 ## 同じ接尾辞をつける{#rename-add}
 
@@ -152,4 +159,15 @@ filter(year == 2007) %>%
 ```
 
 
+### [練習問題]
+
+* dfデータの変数yearで2008年のみのデータに限定し，くちばし（bill）と翼（flipper）で始まる変数以外の変数名の頭に"year08_"をつけてみよう
+
+
+```{r eval=FALSE, include=FALSE}
+df %>% 
+filter(year == 2008) %>% 
+  rename_with(~str_c("year08_", .),
+               !matches("bill|flipper"))
+```
 

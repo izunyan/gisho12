@@ -2,18 +2,20 @@
 
 
 * ここに出てくる用語は初学者にとってなじみがないものばかりかもしれないが，Rでデータ加工をらくらくできるようになるためには避けて通れない
+* これ以降はここで解説した用語を説明なしに解説に使うので，分からない言葉に出くわしたらここに戻ってこよう
 
-## RStudioの使い方
-### 起動画面
+## RStudioの使い方{#p-howtouse-rst}
+### 起動画面{#p-opening}
 
 * RStudioを最初に起動すると大体以下のような画面になる
 
 ```{r start, echo = FALSE, fig.cap = "RStudioの起動画面", fig.align = "center", out.width='80%'}
 knitr::include_graphics("images/start.png")
 ```
-### 見た目の変更
+### 見た目の変更{#p-theme}
+
 * 好みまたは目に優しい画面にするため，RStudioの色合いを下記から変更できる
-  + メニューの`Tools > Global Options > Appearance > Editor theme`
+  + メニューの`Tools > Global Options > Appearance > Editor theme`から選び，OKを押す
   + 筆者は`Tommorow Night Bright`を使用
   + 以下の説明は変更後の画面で示す
 
@@ -31,14 +33,29 @@ knitr::include_graphics("images/pane.png")
 ```
 
 * R Scriptに書くと，たくさん書けるし保存も簡単でおすすめ。色分けもされる
- + 慣れたらR Markdownを使うともっと楽しくなるかも
-* または`File > New file > R Script` 
+ + 慣れたらR Markdownを使うとhtmlレポートにまとめやすくなりもっと便利になる
+* 下図の〇で囲んである左上の緑`＋`がついているアイコンから，または`File > New file > R Script`でR Scriptを開く 
 
-```{r script, echo = FALSE, fig.cap = "Rスクリプトに書く", fig.align = "center", out.width='70%'}
+```{r script, echo = FALSE, fig.cap = "Rスクリプトを開く", fig.align = "center", out.width='70%'}
 knitr::include_graphics("images/newfile.png")
 ```
+* R Scriptを開くとデフォルトでは左上にペインが開き，ここにコードを記述できる
 
-### utf-8
+```{r script2, echo = FALSE, fig.cap = "Rスクリプトに書く", fig.align = "center", out.width='70%'}
+knitr::include_graphics("images/rscript.png")
+```
+
+### Windowsユーザーにつきものの文字化け対策{#p-utf8}
+
+* Windowsだけの問題かもしれず，今後はもしかしたら不要になっていくかもしれないが，Windows10以前の場合，RStudio上で文字コードをUTF-8に指定しておく方が文字化けに悩まなくてすみそう
+* `Tools > Global Options > Code > Saving > Default text encoding`からUTF-8選び，OKを押す
+* 同様に`Tools > Project Options > Code Editing > Text encoding`のところもUTF-8にしておく
+
+```{r utf8, echo = FALSE, fig.cap = "文字エンコーディングの指定", fig.align = "center", out.width='70%'}
+knitr::include_graphics("images/utf8.png")
+```
+
+* 上記設定をした後で，他の環境で作られたR ScriptファイルやR Markdownファイルを開くときに文字化けする場合は，`File > Reopen with Encoding`からCP932（つまりShift-JIS）を選ぶとうまくいくかもしれない
 
 ## 本書に出てくるコード部分の見方{#p-howtoread}
 
@@ -71,7 +88,7 @@ knitr::include_graphics("images/newfile.png")
 * データを加工して解析する際に、1つのフォルダ（サブフォルダも含む）の中に関連するデータやコードなどをまとめておき、そのフォルダを**プロジェクト**と設定する
   + これにより、ファイルの読み書きの際の場所指定をいちいち意識しないで作業できるようになる
 * RStudio画面の右上にProject設定のメニューがある
-  + `Project (None) > New Project > Existing Directory`と選び，プロジェクトにしたいフォルダを設定する（Figure\@ref(fig:project)）  
+  + `Project (None) > New Project > Existing Directory`と選び，プロジェクトにしたいフォルダを設定する  
 
 ```{r project, echo = FALSE, fig.cap = "プロジェクトの設定", fig.align = "center"}
 knitr::include_graphics("images/project.png")
@@ -108,9 +125,11 @@ library(tidyverse)
 
 ## 関数{#p-function}
 
-* 適切な値や変数などを指定すれば，データの処理や計算，統計解析など様々な処理を簡単に実行してくれる
+* データ加工においてほとんどの人は絶対お世話になるもの
+  + 適切な値や変数などを指定すれば，データの処理や計算，統計解析など様々な処理を簡単に実行してくれる
   + データ加工の技術は，色々な便利関数をどの場面でどうやって使うかにつきる
 * 例えば`mean( )`などのように`関数名( )`で出てくるので，`( )`で囲まれてる所を見たらほぼ関数だと思えばよさそう
+  + 本書の2章～6章はすべて基本関数の解説
 * `( )`の中に入る値を**引数**（ひきすう）と呼ぶ
 * 引数は`,`でつないで追加していき，これによって実行したい処理のカスタマイズが可能
   + 関数の`( )`の最初の位置に来るものを**第一引数**という
@@ -120,7 +139,7 @@ library(tidyverse)
 
 * **ベクトル**を作る（複数のものを1つにする）ための関数
   + ベクトルと聞くと数学苦手だった人はいやな記憶を思い出すかもしれないが，Rではとにかく「**複数のものを１つにしたもの**」と理解しておけば何となると思う
-* `c()`は慣れてる人は当たり前に使っているので，初学者にとって理解しとくとよい最重要関数と思われる
+* `c( )`は慣れてる人は当たり前に使っているので，初学者にとって理解しとくとよい最重要関数と思われる
 * ベクトルは，後に解説するデータフレームでの列単位のデータを扱う際にも有用
 
 ```{r}
@@ -136,6 +155,7 @@ c("a", "b", "c") # " "で囲まれる値は文字を表す
 #### 平均値：mean( ){#p-function-ex-m}
 
 * 引数にベクトルを入れることで平均値を計算する
+* 1つのベクトルはデータフレームの1つの列（変数）の単位と同じなので，ここでは横に並んでいるがデータフレーム的にイメージしたら縦に並んでるとみなすと分かりやすいかも
 
 ```{r}
 mean(c(1,2,3))
@@ -194,9 +214,9 @@ knitr::include_graphics("images/df_xl.png")
 * オブジェクトに格納することで，別のデータフレームを作れる
 * 列単位で取り出すとベクトルになる
 * 本書では，データフレームの中でも表示に便利な**tibble**形式を使う
-* 本書では紙面の都合上，表示行数をしぼっているが，任意の行数を見たいときは`print( )`関数で出力ごとに設定
+  + デフォルトでは最初の10行が表示されるが，本書では紙面の都合上，表示行数をしぼっている
 
-### 本書で使う主なデータ{#p-df-main}
+### 本書で使う主なデータ例{#p-df-main}
 #### ペンギンデータ{#p-df-main-p}
 
 ![](images/penguins_logo.png)
@@ -219,7 +239,7 @@ palmerpenguins::penguins
   + 下から2行目にある`... with 341 more rows, and 3 more variables:`で，さらに341行と3列が非表示であることが分かる
   + 非表示になった変数名は最下部に表示される
 
-* tibble形式のデフォルトは最初の10行のみ表示され，本書では最初の3行のみに絞っているが，10行を越えて表示させたい場合は，`print( )`関数を使う
+* 本書では最初の3行の表示のみに絞っているが，任意の行数を表示させたい場合は，`print( )`関数を使う
 
 ```{r}
 palmerpenguins::penguins %>% 
@@ -233,7 +253,24 @@ palmerpenguins::penguins %>%
 * コードを読みやすくするための便利な機能を持つ演算子。初めてみた人は全然わからないと思うが，この本を読んでコードを書きはじめてみたらこれなしではいられなくなるくらいお世話になると思う
   + 主に使用が想定される場面でざっくりいうと，「このデータフレームに対して`%>%`の後にある関数を適用する」という機能
   + 具体的な使用法は\@ref(select-standard-pipe)で解説
+* `tidyverse`パッケージを読み込めば使えるようになる
 * RStudioのショートカットは`Ctrl + Shift + M`(Macは`Cmd + Shift + M`)。たぶん，RStudio以外でもこのショートカット押してしまうぐらい中毒性がある
 * R version 4.1からは`|>`が大体同じ機能を持つ演算子して実装されたので，特にパッケージの読み込みをせずに使えるようになった。こちらを使う説明も今後増えていくと思われる
   + ショートカットで出るパイプを`|>`に切り替えたい場合は，RStudioの`Tools > Global Options > Code > Editing > use native pipe operator`にチェックを入れる
   + 現時点ではデータフレームを第一引数へ渡す形式でない関数の場合（回帰分析の`lm( )`など），工夫が必要な場合があるようなので，本書では`%>%`を使用
+  
+## 困ったときは{#p-help}
+
+* 関数の使い方，引数の入れ方は大抵忘れるので，ヘルプのexampleを見て思い出す場合が多い
+  + コンソールに`?関数名`の用に入れて実行する（例：?rename）
+  + 右下ペインのHelpタブで検索する
+
+ 
+```{r help, echo = FALSE, fig.cap = "ヘルプの確認", fig.align = "center", out.width='80%'}
+knitr::include_graphics("images/help.png")
+```
+
+* チートシートを見る
+  + メニューの`Help > Cheat Sheets > Browse Cheat Sheets`から掲載サイトに行ける
+* エラーメッセージを`" "`で囲んでググる
+* [r-wakalang](https://github.com/tokyor/r-wakalang)の`#r_beginners`チャンネルで質問する
