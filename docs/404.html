@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Page not found | がんばらないデータ加工ーRによる繰り返し作業入門ー　前編</title>
-  <meta name="description" content="Page not found | がんばらないデータ加工ーRによる繰り返し作業入門ー　前編" />
+  <title>Page not found | がんばらないデータ加工</title>
+  <meta name="description" content="Page not found | がんばらないデータ加工" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Page not found | がんばらないデータ加工ーRによる繰り返し作業入門ー　前編" />
+  <meta property="og:title" content="Page not found | がんばらないデータ加工" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/cover.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="https://github.com/izunyan/gisho12.git" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Page not found | がんばらないデータ加工ーRによる繰り返し作業入門ー　前編" />
+  <meta name="twitter:title" content="Page not found | がんばらないデータ加工" />
   
   
   <meta name="twitter:image" content="/images/cover.png" />
@@ -52,6 +52,8 @@
 
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -146,31 +148,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="1" data-path="premise.html"><a href="premise.html"><i class="fa fa-check"></i><b>1</b> 前提知識</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="premise.html"><a href="premise.html#p-howtoread"><i class="fa fa-check"></i><b>1.1</b> 本書に出てくるコード部分の見方</a></li>
-<li class="chapter" data-level="1.2" data-path="premise.html"><a href="premise.html#p-project"><i class="fa fa-check"></i><b>1.2</b> プロジェクト</a></li>
-<li class="chapter" data-level="1.3" data-path="premise.html"><a href="premise.html#p-package"><i class="fa fa-check"></i><b>1.3</b> パッケージ</a></li>
-<li class="chapter" data-level="1.4" data-path="premise.html"><a href="premise.html#p-function"><i class="fa fa-check"></i><b>1.4</b> 関数</a>
+<li class="chapter" data-level="1.1" data-path="premise.html"><a href="premise.html#rstudioの使い方"><i class="fa fa-check"></i><b>1.1</b> RStudioの使い方</a>
 <ul>
-<li class="chapter" data-level="1.4.1" data-path="premise.html"><a href="premise.html#p-function-ex"><i class="fa fa-check"></i><b>1.4.1</b> 例</a></li>
+<li class="chapter" data-level="1.1.1" data-path="premise.html"><a href="premise.html#起動画面"><i class="fa fa-check"></i><b>1.1.1</b> 起動画面</a></li>
+<li class="chapter" data-level="1.1.2" data-path="premise.html"><a href="premise.html#見た目の変更"><i class="fa fa-check"></i><b>1.1.2</b> 見た目の変更</a></li>
+<li class="chapter" data-level="1.1.3" data-path="premise.html"><a href="premise.html#p-howtorun"><i class="fa fa-check"></i><b>1.1.3</b> コードの実行の仕方</a></li>
+<li class="chapter" data-level="1.1.4" data-path="premise.html"><a href="premise.html#utf-8"><i class="fa fa-check"></i><b>1.1.4</b> utf-8</a></li>
 </ul></li>
-<li class="chapter" data-level="1.5" data-path="premise.html"><a href="premise.html#p-object"><i class="fa fa-check"></i><b>1.5</b> オブジェクト</a>
+<li class="chapter" data-level="1.2" data-path="premise.html"><a href="premise.html#p-howtoread"><i class="fa fa-check"></i><b>1.2</b> 本書に出てくるコード部分の見方</a></li>
+<li class="chapter" data-level="1.3" data-path="premise.html"><a href="premise.html#p-project"><i class="fa fa-check"></i><b>1.3</b> プロジェクト</a></li>
+<li class="chapter" data-level="1.4" data-path="premise.html"><a href="premise.html#p-package"><i class="fa fa-check"></i><b>1.4</b> パッケージ</a></li>
+<li class="chapter" data-level="1.5" data-path="premise.html"><a href="premise.html#p-function"><i class="fa fa-check"></i><b>1.5</b> 関数</a>
 <ul>
-<li class="chapter" data-level="1.5.1" data-path="premise.html"><a href="premise.html#p-object-ex"><i class="fa fa-check"></i><b>1.5.1</b> 例</a></li>
+<li class="chapter" data-level="1.5.1" data-path="premise.html"><a href="premise.html#p-function-ex"><i class="fa fa-check"></i><b>1.5.1</b> 例</a></li>
 </ul></li>
-<li class="chapter" data-level="1.6" data-path="premise.html"><a href="premise.html#p-df"><i class="fa fa-check"></i><b>1.6</b> データフレーム</a>
+<li class="chapter" data-level="1.6" data-path="premise.html"><a href="premise.html#p-object"><i class="fa fa-check"></i><b>1.6</b> オブジェクト</a>
 <ul>
-<li class="chapter" data-level="1.6.1" data-path="premise.html"><a href="premise.html#p-df-main"><i class="fa fa-check"></i><b>1.6.1</b> 本書で使う主なデータ</a></li>
+<li class="chapter" data-level="1.6.1" data-path="premise.html"><a href="premise.html#p-object-ex"><i class="fa fa-check"></i><b>1.6.1</b> 例</a></li>
 </ul></li>
-<li class="chapter" data-level="1.7" data-path="premise.html"><a href="premise.html#p-pipe"><i class="fa fa-check"></i><b>1.7</b> %&gt;% （パイプ演算子）</a></li>
+<li class="chapter" data-level="1.7" data-path="premise.html"><a href="premise.html#p-df"><i class="fa fa-check"></i><b>1.7</b> データフレーム</a>
+<ul>
+<li class="chapter" data-level="1.7.1" data-path="premise.html"><a href="premise.html#p-df-main"><i class="fa fa-check"></i><b>1.7.1</b> 本書で使う主なデータ</a></li>
+</ul></li>
+<li class="chapter" data-level="1.8" data-path="premise.html"><a href="premise.html#p-pipe"><i class="fa fa-check"></i><b>1.8</b> %&gt;% （パイプ演算子）</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="select.html"><a href="select.html"><i class="fa fa-check"></i><b>2</b> 列（変数）を選ぶ：select</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="select.html"><a href="select.html#select-read"><i class="fa fa-check"></i><b>2.1</b> データ読み込み</a></li>
+<li class="chapter" data-level="2.1" data-path="select.html"><a href="select.html#select-read"><i class="fa fa-check"></i><b>2.1</b> 使用データ</a></li>
 <li class="chapter" data-level="2.2" data-path="select.html"><a href="select.html#select-standard"><i class="fa fa-check"></i><b>2.2</b> 基本</a>
 <ul>
 <li class="chapter" data-level="2.2.1" data-path="select.html"><a href="select.html#select-standard-pipe"><i class="fa fa-check"></i><b>2.2.1</b> 【補足】%&gt;% の意味</a></li>
 <li class="chapter" data-level="2.2.2" data-path="select.html"><a href="select.html#select-range"><i class="fa fa-check"></i><b>2.2.2</b> 範囲指定</a></li>
 <li class="chapter" data-level="2.2.3" data-path="select.html"><a href="select.html#select-cha"><i class="fa fa-check"></i><b>2.2.3</b> 中身が文字でも動く</a></li>
+<li class="chapter" data-level="2.2.4" data-path="select.html"><a href="select.html#練習問題"><i class="fa fa-check"></i><b>2.2.4</b> [練習問題]</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="select.html"><a href="select.html#select-helper"><i class="fa fa-check"></i><b>2.3</b> 変数の指定に便利なヘルパー関数</a>
 <ul>
@@ -178,8 +188,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.3.2" data-path="select.html"><a href="select.html#select-helper2"><i class="fa fa-check"></i><b>2.3.2</b> 変数名の最後の文字列</a></li>
 <li class="chapter" data-level="2.3.3" data-path="select.html"><a href="select.html#select-helper3"><i class="fa fa-check"></i><b>2.3.3</b> 変数名のどこかに含まれる文字列</a></li>
 <li class="chapter" data-level="2.3.4" data-path="select.html"><a href="select.html#select-helper5"><i class="fa fa-check"></i><b>2.3.4</b> 上記の組み合わせ</a></li>
+<li class="chapter" data-level="2.3.5" data-path="select.html"><a href="select.html#練習問題-1"><i class="fa fa-check"></i><b>2.3.5</b> [練習問題]</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="select.html"><a href="select.html#select-drop"><i class="fa fa-check"></i><b>2.4</b> 特定の変数を選ばない（落とす）</a></li>
+<li class="chapter" data-level="2.4" data-path="select.html"><a href="select.html#select-drop"><i class="fa fa-check"></i><b>2.4</b> 特定の変数を選ばない（落とす）</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="select.html"><a href="select.html#練習問題-2"><i class="fa fa-check"></i><b>2.4.1</b> [練習問題]</a></li>
+</ul></li>
 <li class="chapter" data-level="2.5" data-path="select.html"><a href="select.html#select-get"><i class="fa fa-check"></i><b>2.5</b> 関心のある変数名を取得する</a>
 <ul>
 <li class="chapter" data-level="2.5.1" data-path="select.html"><a href="select.html#select-get-name"><i class="fa fa-check"></i><b>2.5.1</b> 全ての変数名</a></li>
@@ -192,15 +206,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1" data-path="rename.html"><a href="rename.html#rename-standard"><i class="fa fa-check"></i><b>3.1</b> 基本</a></li>
 <li class="chapter" data-level="3.2" data-path="rename.html"><a href="rename.html#rename-samew"><i class="fa fa-check"></i><b>3.2</b> 同じ語を共通の語で置き換える</a>
 <ul>
-<li class="chapter" data-level="3.2.1" data-path="rename.html"><a href="rename.html#rename-strreplace1"><i class="fa fa-check"></i><b>3.2.1</b> 【効率化】str_replace()で一括変換(1)</a></li>
+<li class="chapter" data-level="3.2.1" data-path="rename.html"><a href="rename.html#rename-strreplace1"><i class="fa fa-check"></i><b>3.2.1</b> 【効率化】str_replace( )で一括変換(1)</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="rename.html"><a href="rename.html#rename-remove"><i class="fa fa-check"></i><b>3.3</b> 同じ語を削除する</a>
 <ul>
-<li class="chapter" data-level="3.3.1" data-path="rename.html"><a href="rename.html#rename-strreplace2"><i class="fa fa-check"></i><b>3.3.1</b> 【効率化】str_replace()で一括変換（2）</a></li>
+<li class="chapter" data-level="3.3.1" data-path="rename.html"><a href="rename.html#rename-strreplace2"><i class="fa fa-check"></i><b>3.3.1</b> 【効率化】str_replace( )で一括変換（2）</a></li>
 </ul></li>
 <li class="chapter" data-level="3.4" data-path="rename.html"><a href="rename.html#rename-add"><i class="fa fa-check"></i><b>3.4</b> 同じ接尾辞をつける</a>
 <ul>
-<li class="chapter" data-level="3.4.1" data-path="rename.html"><a href="rename.html#rename-strc"><i class="fa fa-check"></i><b>3.4.1</b> 【効率化】str_c()で一括指定</a></li>
+<li class="chapter" data-level="3.4.1" data-path="rename.html"><a href="rename.html#rename-strc"><i class="fa fa-check"></i><b>3.4.1</b> 【効率化】str_c( )で一括指定</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="filter.html"><a href="filter.html"><i class="fa fa-check"></i><b>4</b> 行（ケース）を選ぶ：filter</a>
@@ -218,7 +232,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5" data-path="mutate.html"><a href="mutate.html"><i class="fa fa-check"></i><b>5</b> 新しい変数（列）の作成：mutate</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="mutate.html"><a href="mutate.html#mu-read"><i class="fa fa-check"></i><b>5.1</b> データ読み込み</a></li>
+<li class="chapter" data-level="5.1" data-path="mutate.html"><a href="mutate.html#mu-read"><i class="fa fa-check"></i><b>5.1</b> 使用データ</a></li>
 <li class="chapter" data-level="5.2" data-path="mutate.html"><a href="mutate.html#mu-standard"><i class="fa fa-check"></i><b>5.2</b> 基本</a></li>
 <li class="chapter" data-level="5.3" data-path="mutate.html"><a href="mutate.html#mu-kata"><i class="fa fa-check"></i><b>5.3</b> 変数の型の変換</a>
 <ul>
@@ -227,7 +241,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="mutate.html"><a href="mutate.html#mu-across"><i class="fa fa-check"></i><b>5.4</b> across( )の特徴</a>
 <ul>
-<li class="chapter" data-level="5.4.1" data-path="mutate.html"><a href="mutate.html#mu-across-list"><i class="fa fa-check"></i><b>5.4.1</b> 【重要知識！】新しい変数名にして追加</a></li>
+<li class="chapter" data-level="5.4.1" data-path="mutate.html"><a href="mutate.html#mu-across-list"><i class="fa fa-check"></i><b>5.4.1</b> 【重要知識】新しい変数名にして追加</a></li>
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="mutate.html"><a href="mutate.html#mu-total"><i class="fa fa-check"></i><b>5.5</b> 合計点の作成</a>
 <ul>
@@ -270,7 +284,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.4.2" data-path="summarise.html"><a href="summarise.html#su-fun-meansdn"><i class="fa fa-check"></i><b>6.4.2</b> 複数変数の平均値とSDとnを計算する関数</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="あとがき.html"><a href="あとがき.html"><i class="fa fa-check"></i>あとがき</a></li>
+<li class="chapter" data-level="" data-path="atogaki.html"><a href="atogaki.html"><i class="fa fa-check"></i>あとがき</a></li>
 </ul>
 
       </nav>
@@ -280,7 +294,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">がんばらないデータ加工ーRによる繰り返し作業入門ー　前編</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">がんばらないデータ加工</a>
           </h1>
         </div>
 

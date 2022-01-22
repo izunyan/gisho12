@@ -129,6 +129,20 @@
         \fi%
     }%
 \makeatother
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -244,17 +258,20 @@
 \subsection*{各セクションの概要}\label{ux5404ux30bbux30afux30b7ux30e7ux30f3ux306eux6982ux8981}}
 \addcontentsline{toc}{subsection}{各セクションの概要}
 
-まず\ref{premise}章では、RとRStudioに初めて触れる方，初学者を対象とした前提知識を解説する。ゆくゆく楽をするためには避けて通れない知識なので，用語になじんでおきたい
-
-\ref{select}章はデータの列（変数）を選ぶ方法を解説する。データをコンパクトにしたり，後のデータ解析等で必要な変数を取得したりするなど，データ加工プロセス全体で必要な基本知識もあるので最初に学んでおきたい
-
-\ref{rename}章はデータの列名（変数名）を変える方法について解説する。単純に見えるがデータ加工の際になくてはならない技術である。効率化させるためには初心者から少し脱する必要があり，奥が深い
-
-\ref{filter}章はデータの行（ケースまたはオブザベーション）を選ぶ方法を解説する。データや加工した結果，分析した結果をコンパクトにするのに役立つ。
-
-\ref{mutate}章はデータに新しい列を追加する方法について解説する。例えば合計点の作成や，年齢層カテゴリや2区分変数（いわゆるダミー変数）の作成など，変数を計算して新しい変数を作る作業はよく発生する。効率化のために避けて通れない\texttt{across(\ )}についてもここで解説する
-
-\ref{summarise}章は要約値の計算について解説する。実務では大量の変数を一気に処理する必要がある場面が多いので，効率化を意識した説明を多く入れている
+\begin{itemize}
+\item
+  まず\ref{premise}章では、RとRStudioに初めて触れる方，初学者を対象とした前提知識を解説する。ゆくゆく楽をするためには避けて通れない知識なので，用語になじんでおきたい
+\item
+  \ref{select}章はデータの列（変数）を選ぶ方法を解説する。データをコンパクトにしたり，後のデータ解析等で必要な変数を取得したりするなど，データ加工プロセス全体で必要な基本知識もあるので最初に学んでおきたい
+\item
+  \ref{rename}章はデータの列名（変数名）を変える方法について解説する。単純に見えるがデータ加工の際になくてはならない技術である。効率化させるためには初心者から少し脱する必要があり，奥が深い
+\item
+  \ref{filter}章はデータの行（ケースまたはオブザベーション）を選ぶ方法を解説する。データや加工した結果，分析した結果をコンパクトにするのに役立つ。
+\item
+  \ref{mutate}章はデータに新しい列を追加する方法について解説する。例えば合計点の作成や，年齢層カテゴリや2区分変数（いわゆるダミー変数）の作成など，変数を計算して新しい変数を作る作業はよく発生する。効率化のために避けて通れない\texttt{across(\ )}についてもここで解説する
+\item
+  \ref{summarise}章は要約値の計算について解説する。実務では大量の変数を一気に処理する必要がある場面が多いので，効率化を意識した説明を多く入れている
+\end{itemize}
 
 \hypertarget{ux57f7ux7b46ux74b0ux5883}{%
 \subsection*{執筆環境}\label{ux57f7ux7b46ux74b0ux5883}}
@@ -282,6 +299,8 @@
   \end{itemize}
 \end{itemize}
 
+\begin{table}
+\centering
 \begin{tabular}{l|l}
 \hline
 ind & values\\
@@ -292,10 +311,13 @@ os & Windows 10 x64 (build 19043)\\
 \hline
 system & x86\_64, mingw32\\
 \hline
-date & 2022-01-16\\
+date & 2022-01-22\\
 \hline
 \end{tabular}
+\end{table}
 
+\begin{table}
+\centering
 \begin{tabular}{l|l}
 \hline
 package & loadedversion\\
@@ -305,6 +327,7 @@ bookdown & 0.24\\
 tidyverse & 1.3.1\\
 \hline
 \end{tabular}
+\end{table}
 
 \hypertarget{ux6ce8ux610fux4e8bux9805ux306aux3069}{%
 \section*{注意事項など}\label{ux6ce8ux610fux4e8bux9805ux306aux3069}}
@@ -372,6 +395,70 @@ tidyverse & 1.3.1\\
 \item
   ここに出てくる用語は初学者にとってなじみがないものばかりかもしれないが，Rでデータ加工をらくらくできるようになるためには避けて通れない
 \end{itemize}
+
+\hypertarget{rstudioux306eux4f7fux3044ux65b9}{%
+\section{RStudioの使い方}\label{rstudioux306eux4f7fux3044ux65b9}}
+
+\hypertarget{ux8d77ux52d5ux753bux9762}{%
+\subsection{起動画面}\label{ux8d77ux52d5ux753bux9762}}
+
+\begin{itemize}
+\tightlist
+\item
+  RStudioを最初に起動すると大体以下のような画面になる
+\end{itemize}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\linewidth]{images/start} 
+
+}
+
+\caption{RStudioの起動画面}\label{fig:start}
+\end{figure}
+
+\hypertarget{ux898bux305fux76eeux306eux5909ux66f4}{%
+\subsection{見た目の変更}\label{ux898bux305fux76eeux306eux5909ux66f4}}
+
+\begin{itemize}
+\tightlist
+\item
+  好みまたは目に優しい画面にするため，RStudioの色合いを下記から変更できる
+
+  \begin{itemize}
+  \tightlist
+  \item
+    メニューの\texttt{Tools\ \textgreater{}\ Global\ Options\ \textgreater{}\ Appearance\ \textgreater{}\ Editor\ theme}
+  \item
+    筆者は\texttt{Tommorow\ Night\ Bright}を使用
+  \item
+    以下の説明は変更後の画面で示す
+  \end{itemize}
+\end{itemize}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\linewidth]{images/appearance} 
+
+}
+
+\caption{テーマの設定画面}\label{fig:appearance}
+\end{figure}
+
+\hypertarget{p-howtorun}{%
+\subsection{コードの実行の仕方}\label{p-howtorun}}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\linewidth]{images/pane} 
+
+}
+
+\caption{コンソールに直接}\label{fig:pane}
+\end{figure}
+
+\hypertarget{utf-8}{%
+\subsection{utf-8}\label{utf-8}}
 
 \hypertarget{p-howtoread}{%
 \section{本書に出てくるコード部分の見方}\label{p-howtoread}}
@@ -498,7 +585,7 @@ tidyverse & 1.3.1\\
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.6\linewidth]{images/package_install} 
+{\centering \includegraphics[width=0.8\linewidth]{images/package_install} 
 
 }
 
@@ -519,7 +606,21 @@ tidyverse & 1.3.1\\
   \item
     以下，例えば「パッケージ\texttt{dplyr}の関数\texttt{select(\ )}」は\texttt{dplyr::select(\ )}と表現する
   \end{itemize}
+\item
+  モダンなRのデータ加工に必須なパッケージをまとめて読み込んでくれる\texttt{tidyverse}をまず読み込んでおく
+
+  \begin{itemize}
+  \tightlist
+  \item
+    以降のコードはすべて\texttt{tidyverse}を読み込んだ前提で進める
+  \end{itemize}
 \end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{p-function}{%
 \section{関数}\label{p-function}}
@@ -727,7 +828,7 @@ tidyverse & 1.3.1\\
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.6\linewidth]{images/dfr} 
+{\centering \includegraphics[width=0.8\linewidth]{images/dfr} 
 
 }
 
@@ -750,7 +851,7 @@ tidyverse & 1.3.1\\
 \item
   列単位で取り出すとベクトルになる
 \item
-  本書では，データフレームの中でも表示に便利なtibble形式を使う
+  本書では，データフレームの中でも表示に便利な\textbf{tibble}形式を使う
 \item
   本書では紙面の都合上，表示行数をしぼっているが，任意の行数を見たいときは\texttt{print(\ )}関数で出力ごとに設定
 \end{itemize}
@@ -767,6 +868,12 @@ tidyverse & 1.3.1\\
 \tightlist
 \item
   \texttt{palmerpenguins}パッケージのpenguinsデータ（CC0）
+
+  \begin{itemize}
+  \tightlist
+  \item
+    最初からtibble形式になっている
+  \end{itemize}
 \end{itemize}
 
 \begin{Shaded}
@@ -799,7 +906,7 @@ tidyverse & 1.3.1\\
   \item
     出力の最上段にある\texttt{A\ tibble:\ 344\ x\ 8}で，tibble形式のデータフレーム，344行 × 8列という情報が分かる
   \item
-    flipper\_length\_\textsubscript{のように，長い変数名は}で省略して表示される
+    \texttt{flipper\_length\_\textasciitilde{}} のように，長い変数名は\texttt{\textasciitilde{}}で省略して表示される
   \item
     変数名の下の行にある\texttt{\textless{}fct\textgreater{}}, \texttt{\textless{}dbl\textgreater{}}, \texttt{\textless{}int\textgreater{}}は変数の型を示し，それぞれ因子型，数値型，整数型であることを示している。詳しくは\ref{mu-kata}で説明する
   \item
@@ -808,7 +915,7 @@ tidyverse & 1.3.1\\
     非表示になった変数名は最下部に表示される
   \end{itemize}
 \item
-  tibble型のデフォルトは最初の10行のみ表示され，本書では最初の3行のみに絞っているが，10行を越えて表示させたい場合は，\texttt{print(\ )}関数を使う
+  tibble形式のデフォルトは最初の10行のみ表示され，本書では最初の3行のみに絞っているが，10行を越えて表示させたい場合は，\texttt{print(\ )}関数を使う
 \end{itemize}
 
 \begin{Shaded}
@@ -878,19 +985,25 @@ tidyverse & 1.3.1\\
 \begin{itemize}
 \tightlist
 \item
-  \texttt{dplyr:select(\ )}
-\item
-  tidyな世界では「列名 = 変数名」
-\item
-  変数が多い時に関心ある変数に限定したデータにしたい
-\item
-  関心ある変数の名前を取得したい
-\item
-  後々出てくる繰り返し作業で便利なヘルパー関数
+  本章のポイント
+
+  \begin{itemize}
+  \tightlist
+  \item
+    列（変数）を選ぶ関数\texttt{dplyr:select(\ )}
+  \item
+    tidyな世界では「列名 = 変数名」
+  \item
+    変数が多い時に関心ある変数に限定したデータにしたい
+  \item
+    関心ある変数の名前を取得したい
+  \item
+    後々出てくる繰り返し作業で便利なヘルパー関数について知る
+  \end{itemize}
 \end{itemize}
 
 \hypertarget{select-read}{%
-\section{データ読み込み}\label{select-read}}
+\section{使用データ}\label{select-read}}
 
 \begin{itemize}
 \tightlist
@@ -902,8 +1015,6 @@ tidyverse & 1.3.1\\
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(tidyverse)}
-
 \NormalTok{df }\OtherTok{\textless{}{-}} 
 \NormalTok{  palmerpenguins}\SpecialCharTok{::}\NormalTok{penguins}
 
@@ -942,10 +1053,17 @@ tidyverse & 1.3.1\\
   \item
     変数は1つからOK
   \end{itemize}
+\item
+  \texttt{\%\textgreater{}\%}についてはすでに\ref{p-pipe}で説明したが，この後また補足を説明するのでまずは何も考えずに使ってみよう
+\item
+  以降すべて\texttt{tidyverse}パッケージを読み込んだ前提で進める（\ref{p-package}参照）
 \end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{\# まだ読み込んでない場合は以下実行}
+\CommentTok{\# library(tidyverse)}
+
 \NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{select}\NormalTok{(bill\_length\_mm, bill\_depth\_mm)}
 \end{Highlighting}
@@ -988,6 +1106,7 @@ tidyverse & 1.3.1\\
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{\# 一時的に見せただけなので削除}
 \FunctionTok{rm}\NormalTok{(df2)}
 \end{Highlighting}
 \end{Shaded}
@@ -1000,7 +1119,7 @@ tidyverse & 1.3.1\\
 \item
   \ref{p-pipe}で説明したパイプ演算子の実例を解説する
 \item
-  基本的に\texttt{select(\ )}を始めとしたモダンなRの処理は，以下のように第一引数にデータフレームを指定する
+  基本的に\texttt{select(\ )}を始めとしたモダンなRの処理は，以下のように\textbf{第一引数にデータフレーム}を指定する
 \end{itemize}
 
 \begin{Shaded}
@@ -1024,7 +1143,7 @@ tidyverse & 1.3.1\\
 \item
   \texttt{\%\textgreater{}\%}の役割は，その左側にあるものを右側の関数の第一引数に入れる，ということなので，第一引数にデータフレームが来ることが決まっていれば，常に次のようにかける
 \item
-  このようにすると複雑な処理を重ねていく場合も，コードの可読性が高まるので，データラングリングの過程で有用
+  このようにすると複雑な処理を重ねていく場合も，コードの可読性が高まるので，コードを共有してチーム作業するデータ加工の過程で有用
 \end{itemize}
 
 \begin{Shaded}
@@ -1050,7 +1169,7 @@ tidyverse & 1.3.1\\
 \begin{itemize}
 \tightlist
 \item
-  関心ある変数が指定された範囲に含まれていれば\texttt{:}でつなげて取得できる
+  関心ある変数が指定された範囲に含まれていれば\texttt{:}（コロン）でつなげて取得できる
 
   \begin{itemize}
   \tightlist
@@ -1183,6 +1302,17 @@ tidyverse & 1.3.1\\
   \end{itemize}
 \end{itemize}
 
+\hypertarget{ux7df4ux7fd2ux554fux984c}{%
+\subsection{{[}練習問題{]}}\label{ux7df4ux7fd2ux554fux984c}}
+
+\begin{itemize}
+\tightlist
+\item
+  dfデータで変数speciesからbill\_length\_mmまでの並び，およびyearの計4列にしてデータフレームを表示させよう
+\item
+  dfデータで変数bill\_length\_mmからbody\_mass\_gまでの並びの計4列を文字ベクトルにしたうえでselectで選んでデータフレームを表示させよう
+\end{itemize}
+
 \hypertarget{select-helper}{%
 \section{変数の指定に便利なヘルパー関数}\label{select-helper}}
 
@@ -1255,6 +1385,9 @@ tidyverse & 1.3.1\\
 \hypertarget{select-helper3}{%
 \subsection{変数名のどこかに含まれる文字列}\label{select-helper3}}
 
+\hypertarget{ux56faux5b9aux3057ux305fux6587ux5b57ux5217}{%
+\subsubsection{固定した文字列}\label{ux56faux5b9aux3057ux305fux6587ux5b57ux5217}}
+
 \begin{itemize}
 \tightlist
 \item
@@ -1279,7 +1412,7 @@ tidyverse & 1.3.1\\
 \end{verbatim}
 
 \hypertarget{select-helper4}{%
-\subsubsection{変数名のどこかに含まれる文字列：その2}\label{select-helper4}}
+\subsubsection{柔軟な文字列}\label{select-helper4}}
 
 \begin{itemize}
 \tightlist
@@ -1367,6 +1500,15 @@ tidyverse & 1.3.1\\
 ## # ... with 341 more rows
 \end{verbatim}
 
+\hypertarget{ux7df4ux7fd2ux554fux984c-1}{%
+\subsection{{[}練習問題{]}}\label{ux7df4ux7fd2ux554fux984c-1}}
+
+\begin{itemize}
+\tightlist
+\item
+  dfデータで''s''で終わる変数を選んでデータフレームを表示させよう
+\end{itemize}
+
 \hypertarget{select-drop}{%
 \section{特定の変数を選ばない（落とす）}\label{select-drop}}
 
@@ -1416,6 +1558,38 @@ tidyverse & 1.3.1\\
 ## 3 Adelie  Torgersen        3250  2007
 ## # ... with 341 more rows
 \end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  ヘルパー関数に対しても使える
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{ends\_with}\NormalTok{(}\StringTok{"\_mm"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 344 x 5
+##   species island    body_mass_g sex     year
+##   <fct>   <fct>           <int> <fct>  <int>
+## 1 Adelie  Torgersen        3750 male    2007
+## 2 Adelie  Torgersen        3800 female  2007
+## 3 Adelie  Torgersen        3250 female  2007
+## # ... with 341 more rows
+\end{verbatim}
+
+\hypertarget{ux7df4ux7fd2ux554fux984c-2}{%
+\subsection{{[}練習問題{]}}\label{ux7df4ux7fd2ux554fux984c-2}}
+
+\begin{itemize}
+\tightlist
+\item
+  dfデータで''length''または''depth''を含む変数以外を選んでデータフレームを表示させよう
+\end{itemize}
 
 \hypertarget{select-get}{%
 \section{関心のある変数名を取得する}\label{select-get}}
@@ -2382,7 +2556,7 @@ tidyverse & 1.3.1\\
 \end{itemize}
 
 \hypertarget{mu-read}{%
-\section{データ読み込み}\label{mu-read}}
+\section{使用データ}\label{mu-read}}
 
 \begin{itemize}
 \tightlist
@@ -3273,7 +3447,7 @@ tidyverse & 1.3.1\\
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{gisho12_files/figure-latex/unnamed-chunk-79-1.pdf}
+\includegraphics{gisho12_files/figure-latex/unnamed-chunk-81-1.pdf}
 
 \begin{itemize}
 \tightlist
@@ -3436,7 +3610,9 @@ tidyverse & 1.3.1\\
 \NormalTok{    age }\SpecialCharTok{\textgreater{}=} \DecValTok{60}             \SpecialCharTok{\textasciitilde{}} \StringTok{"60歳以上"}  
 \NormalTok{  ))}
 
-\CommentTok{\# 確認するには以下のコードの最初の2行だけでよいが，出力が長いためランダムに10件抽出しageの昇順にしてある}
+\CommentTok{\# 確認するには以下のコードの最初の2行だけでよいが，}
+\CommentTok{\# 出力が長いためランダムに10件抽出しageの昇順にしてある}
+
 \NormalTok{res\_age6 }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{count}\NormalTok{(age, age6) }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{slice\_sample}\NormalTok{(}\AttributeTok{n =} \DecValTok{10}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# ランダムに10件抽出}
@@ -3448,16 +3624,16 @@ tidyverse & 1.3.1\\
 ## # A tibble: 10 x 3
 ##      age age6         n
 ##    <int> <chr>    <int>
-##  1    19 20歳未満   190
-##  2    23 20-29歳    138
-##  3    26 20-29歳     99
-##  4    28 20-29歳     86
-##  5    31 30-39歳     73
-##  6    38 30-39歳     52
-##  7    61 60歳以上     4
-##  8    62 60歳以上     4
-##  9    65 60歳以上     1
-## 10    70 60歳以上     1
+##  1    17 20歳未満   100
+##  2    24 20-29歳    105
+##  3    36 30-39歳     50
+##  4    44 40-49歳     25
+##  5    54 50-59歳     14
+##  6    56 50-59歳     17
+##  7    67 60歳以上     3
+##  8    70 60歳以上     1
+##  9    74 60歳以上     1
+## 10    86 60歳以上     1
 \end{verbatim}
 
 \begin{Shaded}
@@ -3815,13 +3991,13 @@ tidyverse & 1.3.1\\
 ## #   bill_depth_mm_sd <dbl>, bill_depth_mm_n <int>
 \end{verbatim}
 
-\hypertarget{ux3042ux3068ux304cux304d}{%
-\chapter*{あとがき}\label{ux3042ux3068ux304cux304d}}
+\hypertarget{atogaki}{%
+\chapter*{あとがき}\label{atogaki}}
 \addcontentsline{toc}{chapter}{あとがき}
 
 あとがき
 
-本書の執筆にあたり、同人誌制作の先輩である\texttt{天川榎@EnokiAmakawa}氏から背中押し＆多くの助言をいただきました。この場を借りてお礼申し上げます。
+本書の執筆にあたり、今回も同人誌制作の先輩である\texttt{天川榎@EnokiAmakawa}氏から背中押し＆多くの助言をいただきました。この場を借りてお礼申し上げます。
 
 \clearpage
 \vspace*{\stretch{1}}

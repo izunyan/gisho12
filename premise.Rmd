@@ -1,6 +1,44 @@
 # 前提知識 {#premise}
 
+
 * ここに出てくる用語は初学者にとってなじみがないものばかりかもしれないが，Rでデータ加工をらくらくできるようになるためには避けて通れない
+
+## RStudioの使い方
+### 起動画面
+
+* RStudioを最初に起動すると大体以下のような画面になる
+
+```{r start, echo = FALSE, fig.cap = "RStudioの起動画面", fig.align = "center", out.width='80%'}
+knitr::include_graphics("images/start.png")
+```
+### 見た目の変更
+* 好みまたは目に優しい画面にするため，RStudioの色合いを下記から変更できる
+  + メニューの`Tools > Global Options > Appearance > Editor theme`
+  + 筆者は`Tommorow Night Bright`を使用
+  + 以下の説明は変更後の画面で示す
+
+```{r appearance, echo = FALSE, fig.cap = "テーマの設定画面", fig.align = "center", out.width='70%'}
+knitr::include_graphics("images/appearance.png")
+```
+
+### コードの実行の仕方{#p-howtorun}
+
+* コンソールに直接コードを入力し出力を確認できる
+  + ちょっとした確認には便利だが，たくさん書きたい時や，内容を保存したい時は不向き
+
+```{r pane, echo = FALSE, fig.cap = "コンソールに直接", fig.align = "center", out.width='70%'}
+knitr::include_graphics("images/pane.png")
+```
+
+* R Scriptに書くと，たくさん書けるし保存も簡単でおすすめ。色分けもされる
+ + 慣れたらR Markdownを使うともっと楽しくなるかも
+* または`File > New file > R Script` 
+
+```{r script, echo = FALSE, fig.cap = "Rスクリプトに書く", fig.align = "center", out.width='70%'}
+knitr::include_graphics("images/newfile.png")
+```
+
+### utf-8
 
 ## 本書に出てくるコード部分の見方{#p-howtoread}
 
@@ -60,6 +98,13 @@ knitr::include_graphics("images/package_install.png")
 * パッケージを読み込まなくても，`パッケージ名::関数名( )`でパッケージ内の関数が使える
   + どのパッケージの関数か明示するのにも便利なので，本書では多用する
   + 以下，例えば「パッケージ`dplyr`の関数`select( )`」は`dplyr::select( )`と表現する
+* モダンなRのデータ加工に必須なパッケージをまとめて読み込んでくれる`tidyverse`をまず読み込んでおく
+  + 以降のコードはすべて`tidyverse`を読み込んだ前提で進める
+
+```{r eval = FALSE}
+library(tidyverse)
+```
+
 
 ## 関数{#p-function}
 
@@ -141,14 +186,14 @@ knitr::include_graphics("images/dfr.png")
 ```
 
 
-```{r dfxl, echo = FALSE, fig.cap = "Excel画面風なイメージ", fig.align = "center", out.width='60%'}
+```{r dfxl, echo = FALSE, fig.cap = "Excel画面風なイメージ", fig.align = "center", out.width='80%'}
 knitr::include_graphics("images/df_xl.png")
 ```
 
 
 * オブジェクトに格納することで，別のデータフレームを作れる
 * 列単位で取り出すとベクトルになる
-* 本書では，データフレームの中でも表示に便利なtibble形式を使う
+* 本書では，データフレームの中でも表示に便利な**tibble**形式を使う
 * 本書では紙面の都合上，表示行数をしぼっているが，任意の行数を見たいときは`print( )`関数で出力ごとに設定
 
 ### 本書で使う主なデータ{#p-df-main}
@@ -158,6 +203,7 @@ knitr::include_graphics("images/df_xl.png")
 
 
 * `palmerpenguins`パッケージのpenguinsデータ（CC0）
+  + 最初からtibble形式になっている
 
 ```{r}
 # パッケージが入ってなければ下記実行
@@ -168,12 +214,12 @@ palmerpenguins::penguins
 
 * tibble形式のデータフレームの出力の見方
   + 出力の最上段にある`A tibble: 344 x 8`で，tibble形式のデータフレーム，344行 × 8列という情報が分かる
-  + flipper_length_~のように，長い変数名は~で省略して表示される
+  + `flipper_length_~` のように，長い変数名は`~`で省略して表示される
   + 変数名の下の行にある`<fct>`, `<dbl>`, `<int>`は変数の型を示し，それぞれ因子型，数値型，整数型であることを示している。詳しくは\@ref(mu-kata)で説明する
   + 下から2行目にある`... with 341 more rows, and 3 more variables:`で，さらに341行と3列が非表示であることが分かる
   + 非表示になった変数名は最下部に表示される
 
-* tibble型のデフォルトは最初の10行のみ表示され，本書では最初の3行のみに絞っているが，10行を越えて表示させたい場合は，`print( )`関数を使う
+* tibble形式のデフォルトは最初の10行のみ表示され，本書では最初の3行のみに絞っているが，10行を越えて表示させたい場合は，`print( )`関数を使う
 
 ```{r}
 palmerpenguins::penguins %>% 

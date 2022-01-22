@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>6 要約値を作る：summarise | がんばらないデータ加工ーRによる繰り返し作業入門ー　前編</title>
-  <meta name="description" content="6 要約値を作る：summarise | がんばらないデータ加工ーRによる繰り返し作業入門ー　前編" />
+  <title>6 要約値を作る：summarise | がんばらないデータ加工</title>
+  <meta name="description" content="6 要約値を作る：summarise | がんばらないデータ加工" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="6 要約値を作る：summarise | がんばらないデータ加工ーRによる繰り返し作業入門ー　前編" />
+  <meta property="og:title" content="6 要約値を作る：summarise | がんばらないデータ加工" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/cover.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="https://github.com/izunyan/gisho12.git" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="6 要約値を作る：summarise | がんばらないデータ加工ーRによる繰り返し作業入門ー　前編" />
+  <meta name="twitter:title" content="6 要約値を作る：summarise | がんばらないデータ加工" />
   
   
   <meta name="twitter:image" content="/images/cover.png" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="mutate.html"/>
-<link rel="next" href="あとがき.html"/>
+<link rel="next" href="atogaki.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -52,6 +52,8 @@
 
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -146,31 +148,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="1" data-path="premise.html"><a href="premise.html"><i class="fa fa-check"></i><b>1</b> 前提知識</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="premise.html"><a href="premise.html#p-howtoread"><i class="fa fa-check"></i><b>1.1</b> 本書に出てくるコード部分の見方</a></li>
-<li class="chapter" data-level="1.2" data-path="premise.html"><a href="premise.html#p-project"><i class="fa fa-check"></i><b>1.2</b> プロジェクト</a></li>
-<li class="chapter" data-level="1.3" data-path="premise.html"><a href="premise.html#p-package"><i class="fa fa-check"></i><b>1.3</b> パッケージ</a></li>
-<li class="chapter" data-level="1.4" data-path="premise.html"><a href="premise.html#p-function"><i class="fa fa-check"></i><b>1.4</b> 関数</a>
+<li class="chapter" data-level="1.1" data-path="premise.html"><a href="premise.html#rstudioの使い方"><i class="fa fa-check"></i><b>1.1</b> RStudioの使い方</a>
 <ul>
-<li class="chapter" data-level="1.4.1" data-path="premise.html"><a href="premise.html#p-function-ex"><i class="fa fa-check"></i><b>1.4.1</b> 例</a></li>
+<li class="chapter" data-level="1.1.1" data-path="premise.html"><a href="premise.html#起動画面"><i class="fa fa-check"></i><b>1.1.1</b> 起動画面</a></li>
+<li class="chapter" data-level="1.1.2" data-path="premise.html"><a href="premise.html#見た目の変更"><i class="fa fa-check"></i><b>1.1.2</b> 見た目の変更</a></li>
+<li class="chapter" data-level="1.1.3" data-path="premise.html"><a href="premise.html#p-howtorun"><i class="fa fa-check"></i><b>1.1.3</b> コードの実行の仕方</a></li>
+<li class="chapter" data-level="1.1.4" data-path="premise.html"><a href="premise.html#utf-8"><i class="fa fa-check"></i><b>1.1.4</b> utf-8</a></li>
 </ul></li>
-<li class="chapter" data-level="1.5" data-path="premise.html"><a href="premise.html#p-object"><i class="fa fa-check"></i><b>1.5</b> オブジェクト</a>
+<li class="chapter" data-level="1.2" data-path="premise.html"><a href="premise.html#p-howtoread"><i class="fa fa-check"></i><b>1.2</b> 本書に出てくるコード部分の見方</a></li>
+<li class="chapter" data-level="1.3" data-path="premise.html"><a href="premise.html#p-project"><i class="fa fa-check"></i><b>1.3</b> プロジェクト</a></li>
+<li class="chapter" data-level="1.4" data-path="premise.html"><a href="premise.html#p-package"><i class="fa fa-check"></i><b>1.4</b> パッケージ</a></li>
+<li class="chapter" data-level="1.5" data-path="premise.html"><a href="premise.html#p-function"><i class="fa fa-check"></i><b>1.5</b> 関数</a>
 <ul>
-<li class="chapter" data-level="1.5.1" data-path="premise.html"><a href="premise.html#p-object-ex"><i class="fa fa-check"></i><b>1.5.1</b> 例</a></li>
+<li class="chapter" data-level="1.5.1" data-path="premise.html"><a href="premise.html#p-function-ex"><i class="fa fa-check"></i><b>1.5.1</b> 例</a></li>
 </ul></li>
-<li class="chapter" data-level="1.6" data-path="premise.html"><a href="premise.html#p-df"><i class="fa fa-check"></i><b>1.6</b> データフレーム</a>
+<li class="chapter" data-level="1.6" data-path="premise.html"><a href="premise.html#p-object"><i class="fa fa-check"></i><b>1.6</b> オブジェクト</a>
 <ul>
-<li class="chapter" data-level="1.6.1" data-path="premise.html"><a href="premise.html#p-df-main"><i class="fa fa-check"></i><b>1.6.1</b> 本書で使う主なデータ</a></li>
+<li class="chapter" data-level="1.6.1" data-path="premise.html"><a href="premise.html#p-object-ex"><i class="fa fa-check"></i><b>1.6.1</b> 例</a></li>
 </ul></li>
-<li class="chapter" data-level="1.7" data-path="premise.html"><a href="premise.html#p-pipe"><i class="fa fa-check"></i><b>1.7</b> %&gt;% （パイプ演算子）</a></li>
+<li class="chapter" data-level="1.7" data-path="premise.html"><a href="premise.html#p-df"><i class="fa fa-check"></i><b>1.7</b> データフレーム</a>
+<ul>
+<li class="chapter" data-level="1.7.1" data-path="premise.html"><a href="premise.html#p-df-main"><i class="fa fa-check"></i><b>1.7.1</b> 本書で使う主なデータ</a></li>
+</ul></li>
+<li class="chapter" data-level="1.8" data-path="premise.html"><a href="premise.html#p-pipe"><i class="fa fa-check"></i><b>1.8</b> %&gt;% （パイプ演算子）</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="select.html"><a href="select.html"><i class="fa fa-check"></i><b>2</b> 列（変数）を選ぶ：select</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="select.html"><a href="select.html#select-read"><i class="fa fa-check"></i><b>2.1</b> データ読み込み</a></li>
+<li class="chapter" data-level="2.1" data-path="select.html"><a href="select.html#select-read"><i class="fa fa-check"></i><b>2.1</b> 使用データ</a></li>
 <li class="chapter" data-level="2.2" data-path="select.html"><a href="select.html#select-standard"><i class="fa fa-check"></i><b>2.2</b> 基本</a>
 <ul>
 <li class="chapter" data-level="2.2.1" data-path="select.html"><a href="select.html#select-standard-pipe"><i class="fa fa-check"></i><b>2.2.1</b> 【補足】%&gt;% の意味</a></li>
 <li class="chapter" data-level="2.2.2" data-path="select.html"><a href="select.html#select-range"><i class="fa fa-check"></i><b>2.2.2</b> 範囲指定</a></li>
 <li class="chapter" data-level="2.2.3" data-path="select.html"><a href="select.html#select-cha"><i class="fa fa-check"></i><b>2.2.3</b> 中身が文字でも動く</a></li>
+<li class="chapter" data-level="2.2.4" data-path="select.html"><a href="select.html#練習問題"><i class="fa fa-check"></i><b>2.2.4</b> [練習問題]</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="select.html"><a href="select.html#select-helper"><i class="fa fa-check"></i><b>2.3</b> 変数の指定に便利なヘルパー関数</a>
 <ul>
@@ -178,8 +188,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.3.2" data-path="select.html"><a href="select.html#select-helper2"><i class="fa fa-check"></i><b>2.3.2</b> 変数名の最後の文字列</a></li>
 <li class="chapter" data-level="2.3.3" data-path="select.html"><a href="select.html#select-helper3"><i class="fa fa-check"></i><b>2.3.3</b> 変数名のどこかに含まれる文字列</a></li>
 <li class="chapter" data-level="2.3.4" data-path="select.html"><a href="select.html#select-helper5"><i class="fa fa-check"></i><b>2.3.4</b> 上記の組み合わせ</a></li>
+<li class="chapter" data-level="2.3.5" data-path="select.html"><a href="select.html#練習問題-1"><i class="fa fa-check"></i><b>2.3.5</b> [練習問題]</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="select.html"><a href="select.html#select-drop"><i class="fa fa-check"></i><b>2.4</b> 特定の変数を選ばない（落とす）</a></li>
+<li class="chapter" data-level="2.4" data-path="select.html"><a href="select.html#select-drop"><i class="fa fa-check"></i><b>2.4</b> 特定の変数を選ばない（落とす）</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="select.html"><a href="select.html#練習問題-2"><i class="fa fa-check"></i><b>2.4.1</b> [練習問題]</a></li>
+</ul></li>
 <li class="chapter" data-level="2.5" data-path="select.html"><a href="select.html#select-get"><i class="fa fa-check"></i><b>2.5</b> 関心のある変数名を取得する</a>
 <ul>
 <li class="chapter" data-level="2.5.1" data-path="select.html"><a href="select.html#select-get-name"><i class="fa fa-check"></i><b>2.5.1</b> 全ての変数名</a></li>
@@ -192,15 +206,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1" data-path="rename.html"><a href="rename.html#rename-standard"><i class="fa fa-check"></i><b>3.1</b> 基本</a></li>
 <li class="chapter" data-level="3.2" data-path="rename.html"><a href="rename.html#rename-samew"><i class="fa fa-check"></i><b>3.2</b> 同じ語を共通の語で置き換える</a>
 <ul>
-<li class="chapter" data-level="3.2.1" data-path="rename.html"><a href="rename.html#rename-strreplace1"><i class="fa fa-check"></i><b>3.2.1</b> 【効率化】str_replace()で一括変換(1)</a></li>
+<li class="chapter" data-level="3.2.1" data-path="rename.html"><a href="rename.html#rename-strreplace1"><i class="fa fa-check"></i><b>3.2.1</b> 【効率化】str_replace( )で一括変換(1)</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="rename.html"><a href="rename.html#rename-remove"><i class="fa fa-check"></i><b>3.3</b> 同じ語を削除する</a>
 <ul>
-<li class="chapter" data-level="3.3.1" data-path="rename.html"><a href="rename.html#rename-strreplace2"><i class="fa fa-check"></i><b>3.3.1</b> 【効率化】str_replace()で一括変換（2）</a></li>
+<li class="chapter" data-level="3.3.1" data-path="rename.html"><a href="rename.html#rename-strreplace2"><i class="fa fa-check"></i><b>3.3.1</b> 【効率化】str_replace( )で一括変換（2）</a></li>
 </ul></li>
 <li class="chapter" data-level="3.4" data-path="rename.html"><a href="rename.html#rename-add"><i class="fa fa-check"></i><b>3.4</b> 同じ接尾辞をつける</a>
 <ul>
-<li class="chapter" data-level="3.4.1" data-path="rename.html"><a href="rename.html#rename-strc"><i class="fa fa-check"></i><b>3.4.1</b> 【効率化】str_c()で一括指定</a></li>
+<li class="chapter" data-level="3.4.1" data-path="rename.html"><a href="rename.html#rename-strc"><i class="fa fa-check"></i><b>3.4.1</b> 【効率化】str_c( )で一括指定</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="filter.html"><a href="filter.html"><i class="fa fa-check"></i><b>4</b> 行（ケース）を選ぶ：filter</a>
@@ -218,7 +232,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5" data-path="mutate.html"><a href="mutate.html"><i class="fa fa-check"></i><b>5</b> 新しい変数（列）の作成：mutate</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="mutate.html"><a href="mutate.html#mu-read"><i class="fa fa-check"></i><b>5.1</b> データ読み込み</a></li>
+<li class="chapter" data-level="5.1" data-path="mutate.html"><a href="mutate.html#mu-read"><i class="fa fa-check"></i><b>5.1</b> 使用データ</a></li>
 <li class="chapter" data-level="5.2" data-path="mutate.html"><a href="mutate.html#mu-standard"><i class="fa fa-check"></i><b>5.2</b> 基本</a></li>
 <li class="chapter" data-level="5.3" data-path="mutate.html"><a href="mutate.html#mu-kata"><i class="fa fa-check"></i><b>5.3</b> 変数の型の変換</a>
 <ul>
@@ -227,7 +241,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="mutate.html"><a href="mutate.html#mu-across"><i class="fa fa-check"></i><b>5.4</b> across( )の特徴</a>
 <ul>
-<li class="chapter" data-level="5.4.1" data-path="mutate.html"><a href="mutate.html#mu-across-list"><i class="fa fa-check"></i><b>5.4.1</b> 【重要知識！】新しい変数名にして追加</a></li>
+<li class="chapter" data-level="5.4.1" data-path="mutate.html"><a href="mutate.html#mu-across-list"><i class="fa fa-check"></i><b>5.4.1</b> 【重要知識】新しい変数名にして追加</a></li>
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="mutate.html"><a href="mutate.html#mu-total"><i class="fa fa-check"></i><b>5.5</b> 合計点の作成</a>
 <ul>
@@ -270,7 +284,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.4.2" data-path="summarise.html"><a href="summarise.html#su-fun-meansdn"><i class="fa fa-check"></i><b>6.4.2</b> 複数変数の平均値とSDとnを計算する関数</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="あとがき.html"><a href="あとがき.html"><i class="fa fa-check"></i>あとがき</a></li>
+<li class="chapter" data-level="" data-path="atogaki.html"><a href="atogaki.html"><i class="fa fa-check"></i>あとがき</a></li>
 </ul>
 
       </nav>
@@ -280,7 +294,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">がんばらないデータ加工ーRによる繰り返し作業入門ー　前編</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">がんばらないデータ加工</a>
           </h1>
         </div>
 
@@ -304,8 +318,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>summarise( )</code>の中に出力したい変数名を書き，<code>=</code>の後に計算する関数を入れる</li>
 <li>例：bill_length_mmの平均値を算出する</li>
 </ul>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="summarise.html#cb182-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
-<span id="cb182-2"><a href="summarise.html#cb182-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(blm_平均値 <span class="ot">=</span> <span class="fu">mean</span>(bill_length_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="summarise.html#cb185-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb185-2"><a href="summarise.html#cb185-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(blm_平均値 <span class="ot">=</span> <span class="fu">mean</span>(bill_length_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 1
 ##   blm_平均値
 ##        &lt;dbl&gt;
@@ -316,13 +330,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>複数の変数について平均値とSDとnを出したいときは，基本知識では全部書くので長くなる</li>
 </ul>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="summarise.html#cb184-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
-<span id="cb184-2"><a href="summarise.html#cb184-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">blm_mean =</span> <span class="fu">mean</span>(bill_length_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb184-3"><a href="summarise.html#cb184-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">bdm_mean =</span> <span class="fu">mean</span>(bill_depth_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb184-4"><a href="summarise.html#cb184-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">blm_sd =</span> <span class="fu">sd</span>(bill_length_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb184-5"><a href="summarise.html#cb184-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">bdm_sd =</span> <span class="fu">sd</span>(bill_depth_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb184-6"><a href="summarise.html#cb184-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">blm_n  =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(bill_length_mm)),</span>
-<span id="cb184-7"><a href="summarise.html#cb184-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">bdm_n  =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(bill_depth_mm)))</span></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="summarise.html#cb187-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb187-2"><a href="summarise.html#cb187-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">blm_mean =</span> <span class="fu">mean</span>(bill_length_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb187-3"><a href="summarise.html#cb187-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">bdm_mean =</span> <span class="fu">mean</span>(bill_depth_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb187-4"><a href="summarise.html#cb187-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">blm_sd =</span> <span class="fu">sd</span>(bill_length_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb187-5"><a href="summarise.html#cb187-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">bdm_sd =</span> <span class="fu">sd</span>(bill_depth_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb187-6"><a href="summarise.html#cb187-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">blm_n  =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(bill_length_mm)),</span>
+<span id="cb187-7"><a href="summarise.html#cb187-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">bdm_n  =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(bill_depth_mm)))</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 6
 ##   blm_mean bdm_mean blm_sd bdm_sd blm_n bdm_n
 ##      &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt; &lt;int&gt;
@@ -335,11 +349,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>実行したい関数をlist内に名前（接尾辞）をつけて列挙し，関数の前に<code>~</code>をつける</li>
 <li><code>sum(!is.na(.x))</code>は，NAのない行の数を総計するので，平均値やSDの計算に用いた人数を取得できる</li>
 </ul>
-<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="summarise.html#cb186-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
-<span id="cb186-2"><a href="summarise.html#cb186-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">c</span>(bill_length_mm, bill_depth_mm),</span>
-<span id="cb186-3"><a href="summarise.html#cb186-3" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">list</span>(<span class="at">mean =</span> <span class="sc">~</span><span class="fu">mean</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb186-4"><a href="summarise.html#cb186-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">sd =</span> <span class="sc">~</span><span class="fu">sd</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb186-5"><a href="summarise.html#cb186-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">n =</span> <span class="sc">~</span><span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(.x)))))</span></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="summarise.html#cb189-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb189-2"><a href="summarise.html#cb189-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">c</span>(bill_length_mm, bill_depth_mm),</span>
+<span id="cb189-3"><a href="summarise.html#cb189-3" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">list</span>(<span class="at">mean =</span> <span class="sc">~</span><span class="fu">mean</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb189-4"><a href="summarise.html#cb189-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">sd =</span> <span class="sc">~</span><span class="fu">sd</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb189-5"><a href="summarise.html#cb189-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">n =</span> <span class="sc">~</span><span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(.x)))))</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 6
 ##   bill_length_mm_mean bill_length_mm_sd bill_length_mm_n
 ##                 &lt;dbl&gt;             &lt;dbl&gt;            &lt;int&gt;
@@ -349,11 +363,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><code>across()</code>ではヘルパー関数が使える</li>
 </ul>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="summarise.html#cb188-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
-<span id="cb188-2"><a href="summarise.html#cb188-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">starts_with</span>(<span class="st">&quot;bill&quot;</span>),</span>
-<span id="cb188-3"><a href="summarise.html#cb188-3" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">list</span>(<span class="at">mean =</span> <span class="sc">~</span><span class="fu">mean</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb188-4"><a href="summarise.html#cb188-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">sd =</span> <span class="sc">~</span><span class="fu">sd</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb188-5"><a href="summarise.html#cb188-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">n =</span> <span class="sc">~</span><span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(.x)))))</span></code></pre></div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="summarise.html#cb191-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb191-2"><a href="summarise.html#cb191-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">starts_with</span>(<span class="st">&quot;bill&quot;</span>),</span>
+<span id="cb191-3"><a href="summarise.html#cb191-3" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">list</span>(<span class="at">mean =</span> <span class="sc">~</span><span class="fu">mean</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb191-4"><a href="summarise.html#cb191-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">sd =</span> <span class="sc">~</span><span class="fu">sd</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb191-5"><a href="summarise.html#cb191-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">n =</span> <span class="sc">~</span><span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(.x)))))</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 6
 ##   bill_length_mm_mean bill_length_mm_sd bill_length_mm_n
 ##                 &lt;dbl&gt;             &lt;dbl&gt;            &lt;int&gt;
@@ -369,14 +383,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>引数を<code>names_pattern</code>と<code>names_to</code>を下記のように指定することで，変数の接尾辞を列名にできる</li>
 <li>下記コードの<code>summarise( )</code>部分の構造は前のチャンクと変数名以外同じ</li>
 </ul>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="summarise.html#cb190-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
-<span id="cb190-2"><a href="summarise.html#cb190-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(bill_length_mm<span class="sc">:</span>body_mass_g,</span>
-<span id="cb190-3"><a href="summarise.html#cb190-3" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">list</span>(<span class="at">mean =</span> <span class="sc">~</span><span class="fu">mean</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb190-4"><a href="summarise.html#cb190-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">sd =</span> <span class="sc">~</span><span class="fu">sd</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb190-5"><a href="summarise.html#cb190-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">n =</span> <span class="sc">~</span><span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(.x))))) <span class="sc">%&gt;%</span> </span>
-<span id="cb190-6"><a href="summarise.html#cb190-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(),</span>
-<span id="cb190-7"><a href="summarise.html#cb190-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">&quot;items&quot;</span>, <span class="st">&quot;.value&quot;</span>), <span class="co"># &quot;.value&quot;の部分を列名に</span></span>
-<span id="cb190-8"><a href="summarise.html#cb190-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_pattern =</span> <span class="st">&quot;(.*)_(.*)&quot;</span>) 　  <span class="co"># 正規表現</span></span></code></pre></div>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="summarise.html#cb193-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb193-2"><a href="summarise.html#cb193-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(bill_length_mm<span class="sc">:</span>body_mass_g,</span>
+<span id="cb193-3"><a href="summarise.html#cb193-3" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">list</span>(<span class="at">mean =</span> <span class="sc">~</span><span class="fu">mean</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb193-4"><a href="summarise.html#cb193-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">sd =</span> <span class="sc">~</span><span class="fu">sd</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb193-5"><a href="summarise.html#cb193-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">n =</span> <span class="sc">~</span><span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(.x))))) <span class="sc">%&gt;%</span> </span>
+<span id="cb193-6"><a href="summarise.html#cb193-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(),</span>
+<span id="cb193-7"><a href="summarise.html#cb193-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">&quot;items&quot;</span>, <span class="st">&quot;.value&quot;</span>), <span class="co"># &quot;.value&quot;の部分を列名に</span></span>
+<span id="cb193-8"><a href="summarise.html#cb193-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_pattern =</span> <span class="st">&quot;(.*)_(.*)&quot;</span>) 　  <span class="co"># 正規表現</span></span></code></pre></div>
 <pre><code>## # A tibble: 4 x 4
 ##   items               mean     sd     n
 ##   &lt;chr&gt;              &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt;
@@ -391,11 +405,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><code>group_by( )</code>にグループを表す変数を指定するとできる</li>
 </ul>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="summarise.html#cb192-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
-<span id="cb192-2"><a href="summarise.html#cb192-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span> </span>
-<span id="cb192-3"><a href="summarise.html#cb192-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">c</span>(bill_length_mm, bill_depth_mm),</span>
-<span id="cb192-4"><a href="summarise.html#cb192-4" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">list</span>(<span class="at">mean =</span> <span class="sc">~</span><span class="fu">mean</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb192-5"><a href="summarise.html#cb192-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">sd =</span> <span class="sc">~</span><span class="fu">sd</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))))</span></code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="summarise.html#cb195-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb195-2"><a href="summarise.html#cb195-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span> </span>
+<span id="cb195-3"><a href="summarise.html#cb195-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">c</span>(bill_length_mm, bill_depth_mm),</span>
+<span id="cb195-4"><a href="summarise.html#cb195-4" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">list</span>(<span class="at">mean =</span> <span class="sc">~</span><span class="fu">mean</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb195-5"><a href="summarise.html#cb195-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">sd =</span> <span class="sc">~</span><span class="fu">sd</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))))</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 5
 ##   species   bill_length_mm_mean bill_length_mm_~ bill_depth_mm_m~
 ##   &lt;fct&gt;                   &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
@@ -406,11 +420,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>グループを重ねることも可能</li>
 </ul>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="summarise.html#cb194-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
-<span id="cb194-2"><a href="summarise.html#cb194-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species, sex) <span class="sc">%&gt;%</span> </span>
-<span id="cb194-3"><a href="summarise.html#cb194-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">c</span>(bill_length_mm, bill_depth_mm),</span>
-<span id="cb194-4"><a href="summarise.html#cb194-4" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">list</span>(<span class="at">mean =</span> <span class="sc">~</span><span class="fu">mean</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb194-5"><a href="summarise.html#cb194-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">sd =</span> <span class="sc">~</span><span class="fu">sd</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))))</span></code></pre></div>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="summarise.html#cb197-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb197-2"><a href="summarise.html#cb197-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species, sex) <span class="sc">%&gt;%</span> </span>
+<span id="cb197-3"><a href="summarise.html#cb197-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">c</span>(bill_length_mm, bill_depth_mm),</span>
+<span id="cb197-4"><a href="summarise.html#cb197-4" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">list</span>(<span class="at">mean =</span> <span class="sc">~</span><span class="fu">mean</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb197-5"><a href="summarise.html#cb197-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">sd =</span> <span class="sc">~</span><span class="fu">sd</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))))</span></code></pre></div>
 <pre><code>## # A tibble: 8 x 6
 ## # Groups:   species [3]
 ##   species   sex    bill_length_mm_mean bill_length_mm_sd
@@ -434,12 +448,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>自分で名づける関数名 &lt;- function(引数){ 計算式やコード }</code> で関数を定義できる</li>
 <li>例：関数の引数に数値を入れると<code>+1</code>した値を返す関数</li>
 </ul>
-<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="summarise.html#cb196-1" aria-hidden="true" tabindex="-1"></a>add_one <span class="ot">&lt;-</span> </span>
-<span id="cb196-2"><a href="summarise.html#cb196-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(x){</span>
-<span id="cb196-3"><a href="summarise.html#cb196-3" aria-hidden="true" tabindex="-1"></a>    x <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb196-4"><a href="summarise.html#cb196-4" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb196-5"><a href="summarise.html#cb196-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-6"><a href="summarise.html#cb196-6" aria-hidden="true" tabindex="-1"></a><span class="fu">add_one</span>(<span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="summarise.html#cb199-1" aria-hidden="true" tabindex="-1"></a>add_one <span class="ot">&lt;-</span> </span>
+<span id="cb199-2"><a href="summarise.html#cb199-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(x){</span>
+<span id="cb199-3"><a href="summarise.html#cb199-3" aria-hidden="true" tabindex="-1"></a>    x <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb199-4"><a href="summarise.html#cb199-4" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb199-5"><a href="summarise.html#cb199-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb199-6"><a href="summarise.html#cb199-6" aria-hidden="true" tabindex="-1"></a><span class="fu">add_one</span>(<span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
 </div>
 <div id="su-fun-meansdn" class="section level3" number="6.4.2">
@@ -451,17 +465,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li>例：引数にデータフレーム（data）と変数（vars）を入れると平均値とSDとnを返す関数</li>
 </ul>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="summarise.html#cb198-1" aria-hidden="true" tabindex="-1"></a>mean_sd_n <span class="ot">&lt;-</span> <span class="cf">function</span>(data, vars){</span>
-<span id="cb198-2"><a href="summarise.html#cb198-2" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
-<span id="cb198-3"><a href="summarise.html#cb198-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>({{vars}},</span>
-<span id="cb198-4"><a href="summarise.html#cb198-4" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">list</span>(<span class="at">mean =</span> <span class="sc">~</span><span class="fu">mean</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb198-5"><a href="summarise.html#cb198-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">sd =</span> <span class="sc">~</span><span class="fu">sd</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb198-6"><a href="summarise.html#cb198-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">n =</span> <span class="sc">~</span><span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(.x)))))</span>
-<span id="cb198-7"><a href="summarise.html#cb198-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="summarise.html#cb201-1" aria-hidden="true" tabindex="-1"></a>mean_sd_n <span class="ot">&lt;-</span> <span class="cf">function</span>(data, vars){</span>
+<span id="cb201-2"><a href="summarise.html#cb201-2" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb201-3"><a href="summarise.html#cb201-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>({{vars}},</span>
+<span id="cb201-4"><a href="summarise.html#cb201-4" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">list</span>(<span class="at">mean =</span> <span class="sc">~</span><span class="fu">mean</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb201-5"><a href="summarise.html#cb201-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">sd =</span> <span class="sc">~</span><span class="fu">sd</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb201-6"><a href="summarise.html#cb201-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">n =</span> <span class="sc">~</span><span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(.x)))))</span>
+<span id="cb201-7"><a href="summarise.html#cb201-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <ul>
 <li>ここで定義した関数<code>mean_sd_n( )</code>にデータフレームと変数を入れると結果が表示される</li>
 </ul>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="summarise.html#cb199-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean_sd_n</span>(df, bill_length_mm)</span></code></pre></div>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="summarise.html#cb202-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean_sd_n</span>(df, bill_length_mm)</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 3
 ##   bill_length_mm_mean bill_length_mm_sd bill_length_mm_n
 ##                 &lt;dbl&gt;             &lt;dbl&gt;            &lt;int&gt;
@@ -469,19 +483,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>vasの部分は<code>across( )</code>の第一引数に入れるものと同じ指定ができるため，変数ベクトルやヘルパー関数が入る</li>
 </ul>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="summarise.html#cb201-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 変数ベクトル</span></span>
-<span id="cb201-2"><a href="summarise.html#cb201-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean_sd_n</span>(df, <span class="fu">c</span>(flipper_length_mm, body_mass_g))</span></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="summarise.html#cb204-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 変数ベクトル</span></span>
+<span id="cb204-2"><a href="summarise.html#cb204-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean_sd_n</span>(df, <span class="fu">c</span>(flipper_length_mm, body_mass_g))</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 6
 ##   flipper_length_mm_mean flipper_length_mm_sd flipper_length_mm_n
 ##                    &lt;dbl&gt;                &lt;dbl&gt;               &lt;int&gt;
 ## 1                   201.                 14.1                 342
 ## # ... with 3 more variables: body_mass_g_mean &lt;dbl&gt;,
 ## #   body_mass_g_sd &lt;dbl&gt;, body_mass_g_n &lt;int&gt;</code></pre>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="summarise.html#cb203-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 文字でも可能</span></span>
-<span id="cb203-2"><a href="summarise.html#cb203-2" aria-hidden="true" tabindex="-1"></a><span class="co"># mean_sd_n(df, c(&quot;flipper_length_mm&quot;, &quot;body_mass_g&quot;))</span></span>
-<span id="cb203-3"><a href="summarise.html#cb203-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb203-4"><a href="summarise.html#cb203-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ヘルパー関数</span></span>
-<span id="cb203-5"><a href="summarise.html#cb203-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mean_sd_n</span>(df, <span class="fu">starts_with</span>(<span class="st">&quot;bill&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="summarise.html#cb206-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 文字でも可能</span></span>
+<span id="cb206-2"><a href="summarise.html#cb206-2" aria-hidden="true" tabindex="-1"></a><span class="co"># mean_sd_n(df, c(&quot;flipper_length_mm&quot;, &quot;body_mass_g&quot;))</span></span>
+<span id="cb206-3"><a href="summarise.html#cb206-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb206-4"><a href="summarise.html#cb206-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ヘルパー関数</span></span>
+<span id="cb206-5"><a href="summarise.html#cb206-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mean_sd_n</span>(df, <span class="fu">starts_with</span>(<span class="st">&quot;bill&quot;</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 6
 ##   bill_length_mm_mean bill_length_mm_sd bill_length_mm_n
 ##                 &lt;dbl&gt;             &lt;dbl&gt;            &lt;int&gt;
@@ -498,7 +512,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 <a href="mutate.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="あとがき.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="atogaki.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
