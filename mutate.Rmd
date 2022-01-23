@@ -1,8 +1,9 @@
 # 新しい変数（列）の作成：mutate {#mutate}
 
-* パッケージ`dplyr`の関数`mutate()`
-* 新しい変数の列を作成する
-* 効率化のための`across()`
+* 本章のポイント
+  + パッケージ`dplyr`の関数`mutate( )`
+  + 後の分析に使うために新しい変数の列を作成する
+  + 効率化のために非常に重要な`across( )`について学ぶ
 
 ## 使用データ {#mu-read}
 
@@ -27,6 +28,9 @@
 ```{r}
 # パッケージが入ってなければ下記の#を外して実行
 # install.packages("psychTools")
+
+# まだtidyverseパッケージを読み込んでない場合は以下の#を外して実行
+# library(tidyverse)
 
 df_bfi <- 
   psychTools::bfi %>% 
@@ -54,7 +58,14 @@ df_bfi %>%
 
 ### [練習問題]
 
-* df_bfiデータの変数A1とA2だけを選んで，A2からA1を引いた新しい変数"a1_2"を作成しよう
+* df_bfiデータの変数A1とA2だけを選んで，A2からA1を引いた新しい変数"A2_1"を作成しよう
+
+```{r eval=FALSE, include=FALSE}
+df_bfi %>% 
+  select(A1, A2) %>% 
+  mutate(A2_1 = A2-A1)
+```
+
 
 ## 変数の型の変換 {#mu-kata}
 
@@ -116,7 +127,15 @@ df_bfi %>%
 ### [練習問題]
 
 
-* df_bfiデータの変数A1, A2, A3, A4, A5だけを選んで，すべて因子型に変換しよう
+* df_bfiデータの変数A1, A2, A3, A4, A5を因子型に変換し，この5つの変数に選択してデータフレームを表示させよう
+
+```{r eval=FALSE, include=FALSE}
+df_bfi %>%
+  mutate(across(c(A1:A5),
+                factor)) %>% 
+  select(A1:A5) 
+```
+
 
 ## across( )の特徴 {#mu-across}
 
@@ -234,7 +253,7 @@ df_bfi %>%
                                 "graduate degree" = "5"
          )) %>% 
   count(education, education_c)
-         ```
+```
 
 
 ## 連番からIDの作成 {#mu-seq}
@@ -266,22 +285,22 @@ rm(df_bfi_n)
   + たとえば，感情の状態を項目を合計してたずねる尺度で，「いつも楽しい」という項目と，「いつも悲しい」という聞き方をしていたら，それぞれの回答を得点化したときに意味が反対になるため，同じ方向になるようにする必要がある
   例：「1. まったくあてはまらない ←→  6. 非常にあてはまる」のルールを「いつも悲しい」項目に適用し，1の回答を6に置き換えれば，「いつも楽しい」とポジティブな方向で点数の意味がそろう
 
-### 逆転項目の確認 {#mu-rev-check}
+### 逆転：recode {#mu-rev-recode}
+#### 逆転項目の確認 {#mu-rev-check}
 
 * bfiデータの場合，どの項目を逆転する必要があるかを示す情報（`-変数名`で表現）がパッケージに含まれている
   + `psychTools::bfi.keys` で確認可能
 * したがって，"-A1", "-C4", "-C5", "-E1", "-E2", "-O2", "-O5"が対象
 
-### 逆転：recode {#mu-rev-recode}
+#### 変数1つを逆転 {#mu-rev-recode1}  
 
-* `dplyr::recode()`を使用
+* `dplyr::recode( )`を使用
 * 対象の変数を`recode( )`の第一引数に，入れ替えたい値をold = newで並べていく
-  + この等式の順番が他(mutateなど)と逆になるため，`recode()`は将来引退する可能性ありとされている
+  + この等式の順番が他(mutateなど)と逆になるため，`recode( )`は将来引退する可能性ありとされている
   + また，下記のように考慮すべき点があるから，後述の\@ref(mu-rev-rule)【別解】を使う方がよいかもしれない
 * 値の指定で考慮すべき点
   + oldの数値は`` ``で囲む必要がある
   + newの数値に`L`がつくのは，型を整数のままにするため
-  
   
 ```{r}
 df_bfi %>% 
@@ -291,8 +310,7 @@ df_bfi %>%
 ```
 
 
-
-#### 変数2つ以上を逆転 {#mu-rev-recode1}
+#### 変数2つ以上を逆転 {#mu-rev-recode2}
 
 * A1と同様に同じ形をくり返し変数名だけ変えていけばできるが，コードが長くなりミスも生じやすくなる
 
@@ -306,7 +324,7 @@ df_bfi %>%
 ```
 
 
-#### 【効率化】 変数2つ以上を逆転 {#mu-rev-recode2}
+#### 【効率化】 変数2つ以上を逆転 {#mu-rev-recode2ef}
 
 * \@ref(mu-across-list) で解説したlistに関数を入れる方法
   + これで対象となる`across( )`内変数に`_r`の接尾辞が付いた逆転項目が追加される
@@ -314,10 +332,10 @@ df_bfi %>%
 ```{r}
 
 df_bfi %>% 
-  mutate(across(c(A1, C4, C5, E1, E2, O2, O5),
+  mutate(across(c(A1, C4),
                 list(r = ~recode(.x, `1` = 6, `2` = 5, `3` = 4, 
                                  `4` = 3, `5` = 2, `6` = 1)))) %>% 
-  select(A1, A1_r, C4,  C4, C5, C5_r, E1, E1_r, E2, E2_r, O2, O2_r, O5, O5_r)
+  select(A1, A1_r, C4, C4_r)
 ```
 
 ### 【別解】逆転（公式） {#mu-rev-rule}
@@ -348,12 +366,12 @@ df_bfi %>%
   select(A1, A1_r, C4, C4_r)
 ```
 
+### [練習問題]
 
-#### 逆転した変数を含むデータフレーム作成 {#mu-rev-rule2}
+* df_bfiデータですべての逆転項目を逆転してdf_bfiに格納しよう
+  + これ以降で使用するため，正解コードを非表示にしてここで実行のみしておく
 
-* これ以降で使用するため，項目を逆転した変数を格納しておく
-
-```{r}
+```{r include=FALSE}
 df_bfi <- 
   df_bfi %>% 
   mutate(across(c(A1, C4, C5, E1, E2, O2, O5),
@@ -362,6 +380,7 @@ df_bfi <-
 
 ## 【別解】合計点の作成 {#mu-total-ef}
 
+* \@ref(mu-total)の別解として，ここですべての合計点を作成する
 * `base::rowSums( )`
   + データフレームで行の単位で総計するので，行（ケース）ごとに合計点を作成できる
 * まず総計の対象となる変数名を\@ref(select-cha)で解説したように文字ベクトルにしていく
@@ -399,11 +418,11 @@ df_bfi %>%
 df_bfi <- 
   df_bfi %>% 
   mutate(
-    Agree = rowSums(across(all_of(Ag))),
+    Agree         = rowSums(across(all_of(Ag))),
     Conscientious = rowSums(across(all_of(Co))),
-    Extraversion = rowSums(across(all_of(Ex))),
-    Neuroticism = rowSums(across(all_of(Ne))),
-    Openness = rowSums(across(all_of(Op)))
+    Extraversion  = rowSums(across(all_of(Ex))),
+    Neuroticism   = rowSums(across(all_of(Ne))),
+    Openness      = rowSums(across(all_of(Op)))
     )
 
 ```
@@ -415,7 +434,9 @@ df_bfi <-
 
 ```{r}
 df_bfi %>% select(all_of(Ag), Agree)
-df_bfi %>% select(all_of(Ex), Extraversion) %>% 
+
+df_bfi %>% 
+  select(all_of(Ex), Extraversion) %>% 
   filter(is.na(Extraversion))
 
 ```
@@ -423,7 +444,6 @@ df_bfi %>% select(all_of(Ex), Extraversion) %>%
 * `rowSums( )`を`base::rowMeans( )`に変えれば平均値も計算できる
 
 ## 連続変数をカテゴリに区分する
-
 ### 分布の把握
 
 * 変数ageのヒストグラムを描き，分布を確認する
@@ -436,9 +456,9 @@ ggplot(df_bfi) +           # ここにデータフレーム
 ```
 
 * さっと中央値だけ見たいのであれば，従来のRの書き方が早い
-* 役に立つ場面が多いので，慣れたら従来の書き方を学んでおくとよい
-  + 
-* `データフレーム$変数名`と指定することで変数として扱える
+  + 役に立つ場面が多いので，慣れたら従来の書き方を学んでおくとよい
+  +  
+* `データフレーム$変数名`と指定することで変数（実際はベクトルになる）として扱える
 
 ```{r}
 # 中央値
@@ -479,7 +499,7 @@ res_age2 %>%
 ```
 
 * 念のため最初3行（1-3行目）と最後3行（n-2行目からn行目）も確認
-* `dplyr::slice( )`で1:3行目と最後の3行を表示させる
+  + `dplyr::slice( )`で1:3行目と最後の3行を表示させる
 
 ```{r}
 res_age2 %>% 
@@ -487,9 +507,23 @@ res_age2 %>%
   slice(1:3, (n()-2):n())
   
 
-rm(res_age2)
 ```
 
+#### 【別解】確認
+
+* 長くなるがこちらの方が覚えやすいかも
+
+```{r}
+res_age2 %>% 
+  count(age, age2) %>% 
+  slice_head(n = 3)
+
+res_age2 %>% 
+  count(age, age2) %>% 
+  slice_tail(n = 3)
+
+rm(res_age2)
+```
 
 
 ### 3区分以上
@@ -519,4 +553,24 @@ res_age6 %>%
 rm(res_age6)
 ```
 
+### [練習問題]
 
+* df_bfiデータの年齢層を以下の基準でカテゴリ化した変数"age4"を作成しよう
+  + "10代", "20_30代", "40_50代", "60代", その他はNA
+  
+```{r eval=FALSE, include=FALSE}
+ 
+  df_bfi %>% 
+  mutate(age4 = case_when(
+    age >= 10  & age < 20 ~ "10代", 
+    age >= 20  & age < 40 ~ "20_30代", 
+    age >= 40  & age < 60 ~ "40_50代",
+    age >= 60  & age < 70 ~ "60代"
+  
+  )) %>% 
+  count(age,age4) %>% 
+  print(n = 64)
+
+```
+  
+  

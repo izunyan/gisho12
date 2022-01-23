@@ -1,10 +1,10 @@
 # 要約値を作る：summarise {#summarise}
 
-* パッケージ`dplyr`の関数`summarise()`
-* 結果をデータフレームとして出力するため，扱いが便利
-* データを知るうえで要約作業は頻繁に行うことが想定される
-  + 便利な要約パッケージが色々あるものの，`summarise()`を使いこなせると役に立つことが多い
-
+* 本章のポイント
+  + パッケージ`dplyr`の関数`summarise( )`
+  + 結果をデータフレームとして出力するため，扱いが便利
+  + データを知るうえで要約作業は頻繁に行うことが想定される
+  + 便利な要約パッケージが色々あるものの，`summarise( )`は柔軟な出力が可能なので使いこなせると役に立つ
 
 
 ## 基本 {#su-st}
@@ -13,13 +13,17 @@
 * 例：bill_length_mmの平均値を算出する
 
 ```{r}
+# まだtidyverseパッケージを読み込んでない場合は以下の#を外して実行
+# library(tidyverse)
+
 df %>% 
   summarise(blm_平均値 = mean(bill_length_mm, na.rm = TRUE))
 ```
 
 ## 複数の計算 {#su-st-multiple}
 
-* 複数の変数について平均値とSDとnを出したいときは，基本知識では全部書くので長くなる
+* 複数の変数について平均値と標準偏差（SD）と人数（n）を出したいときは，基本知識では全部書くので長くなる
+  + SDは`sd( )`関数，nは変数内の欠損のない行以外の数の合計で算出
 
 ```{r}
 df %>% 
@@ -77,6 +81,31 @@ df %>%
                names_pattern = "(.*)_(.*)") 　  # 正規表現
 ```
 
+### [練習問題]
+
+* dfデータの変数名に"length"を含む変数に対して平均値とSDとnを計算したデータフレームを作成して"res"オブジェクトに格納しよう
+* 次に作成したデータフレームを`pivot_longer( )`を使って見やすいように縦に変換しよう
+
+```{r eval=FALSE, include=FALSE}
+res <- 
+  df %>% 
+  summarise(across(contains("length"),
+                   list(mean = ~mean(.x, na.rm = TRUE),
+                        sd = ~sd(.x, na.rm = TRUE),
+                        n = ~sum(!is.na(.x)))))
+
+res %>% 
+  pivot_longer(everything(),
+               names_to = c("items", ".value"), # ".value"の部分を列名に
+               names_pattern = "(.*)_(.*)") 　  # 正規表現
+
+# 確認
+
+df %>% 
+  summarise(n = sum(!is.na(bill_length_mm)))
+
+```
+
 
 ## 層別（グループ別）集計{#su-group}
 
@@ -98,6 +127,17 @@ df %>%
   summarise(across(c(bill_length_mm, bill_depth_mm),
                    list(mean = ~mean(.x, na.rm = TRUE),
                         sd = ~sd(.x, na.rm = TRUE))))
+```
+
+### [練習問題]
+
+* dfデータの変数"bill_length_mm", "bill_depth_mm"について，3変数（species, island, sex）の層別平均値（変数名に"_平均"の接頭辞をつける）を計算しよう
+
+```{r eval=FALSE, include=FALSE}
+df %>% 
+  group_by(species, island, sex) %>% 
+  summarise(across(c(bill_length_mm, bill_depth_mm),
+                   list(平均 = ~mean(.x, na.rm = TRUE))))
 ```
 
 

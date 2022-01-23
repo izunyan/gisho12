@@ -1,8 +1,10 @@
 # 変数名を変更する：rename {#rename}
 
-* パッケージ`dplyr`の関数`rename()`
-* tidyな世界では「列名 = 変数名」
-* 分かりやすい列名にすることだけでなく，本書の範囲を超えるが複数データの連結や同時処理関連で重要な役割を果たす
+* 本章のポイント
+  + パッケージ`dplyr`の関数`rename( )`
+　+ tidyな世界では「列名 = 変数名」
+　+ 分かりやすい列名にすることだけでなく，本書の範囲を超えるが複数データの連結や同時処理関連で重要な役割を果たす
+　+ 文字を扱うためのパッケージ`stringr`の便利さを学ぶ
 
 ## 基本 {#rename-standard}
 
@@ -17,6 +19,8 @@ df %>% names()
 
 
 ```{r}
+# まだtidyverseパッケージを読み込んでない場合は以下の#を外して実行
+# library(tidyverse)
 
 df %>% 
   rename(blmm = bill_length_mm)
@@ -78,6 +82,12 @@ df %>%
 
 * dfデータで"_mm"で終わる変数の名前の"_mm"部分を"_ミリ"に一括で変換しよう
 
+```{r eval=FALSE, include=FALSE}
+df %>% 
+  rename_with(~str_replace(., "_mm", "_ミリ"),
+              ends_with("_mm"))
+```
+
 
 ## 同じ語を削除する{#rename-remove}
 
@@ -114,8 +124,14 @@ df %>%
 
 ### [練習問題]
 
-* dfデータで"_"を含む変数の名前から，"_"をすべて取り除こう（ヒント^[str_replace( )`も`str_remove( )`も適用は最初の1つだけなので，複数ある場合は`str_replace_all( )`または`str_remove_alla( )`を使う]）
-  
+* dfデータで"`_`"を含む変数の名前から，"`_`"をすべて取り除こう（ヒント^[str_replace( )`も`str_remove( )`も適用は最初の1つだけなので，複数ある場合は`str_replace_all( )`または`str_remove_alla( )`を使う]）
+
+
+```{r eval=FALSE, include=FALSE}
+df %>% 
+  rename_with(~str_remove_all(., "_"),
+              contains("_"))
+```  
 
 ## 同じ接尾辞をつける{#rename-add}
 
