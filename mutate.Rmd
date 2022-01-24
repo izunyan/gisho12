@@ -1,0 +1,583 @@
+# 新しい変数（列）の作成：mutate {#mutate}
+
+* 本章のポイント
+  + パッケージ`dplyr`の関数`mutate()`
+  + 後の分析に使うために新しい変数の列を作成する
+  + 効率化のために非常に重要な`across()`について学ぶ
+
+## 使用データ {#mu-read}
+
+* `psychTools`パッケージに入っている国際パーソナリティ項目プールからの2800名分のデータ
+  + 質問項目が25問あり，5つの構成概念（ここでは因子という）に対応する項目への回答を足し合わせたスコアを計算する
+  + 性，教育歴，年齢の変数もあり
+* 項目に対し想定される因子（因子名の頭文字が変数名と対応）
+  + Agree           A1からA5
+  + Conscientious　 C1からC5
+  + Extraversion    E1からE5
+  + Neuroticism　   N1からN5
+  + Openness　　    O1からO5
+
+* 回答選択肢
+  + 1 Very Inaccurate        まったくあてはまらない
+  + 2 Moderately Inaccurate  あてはまらない
+  + 3 Slightly Inaccurate    ややあてはまらない
+  + 4 Slightly Accurate      ややあてはまる
+  + 5 Moderately Accurate    あてはまる
+  + 6 Very Accurate          非常にあてはまる
+  
+```{r}
+# パッケージが入ってなければ下記の#を外して実行
+# install.packages("psychTools")
+
+# まだtidyverseパッケージを読み込んでない場合は以下の#を外して実行
+# library(tidyverse)
+
+df_bfi <- 
+  psychTools::bfi %>% 
+  as_tibble()         # 表示に便利なtibble形式に
+```
+
+
+## 基本 {#mu-standard}
+
+* データフレームに新しい列を計算して追加するまたは置き換える関数
+* `mutate()`の中に新しく作成する変数名を入れ，`=`でつないで計算式を入れる
+* ここでは，まず変数A1の平均値（全ケース同じ値が入る）を計算し，個々のケースの値の差分を新しく列として追加する例を示す
+
+```{r}
+df_bfi %>% 
+  select(A1) %>%                      # A1のみを残す
+  mutate(
+    mean_a1 = mean(A1, na.rm = TRUE), # A1の平均値を作成（NAは除外）
+    dif_a1_mean = A1 - mean_a1)       # 各個体のA1と平均値の差分を計算
+  
+```
+
+* mean_a1列にはA1の平均値がすべて同じ値で入る（平均値だけの計算がしたければ\@ref(summarise)章を参照）
+* dif_a1_mean列は，A1列からmean_a1列を引いた値が入る
+
+### [練習問題]
+
+* df_bfiデータの変数A1とA2だけを選んで，A2からA1を引いた新しい変数"A2_1"を作成しよう
+
+```{r eval=FALSE, include=FALSE}
+df_bfi %>% 
+  select(A1, A2) %>% 
+  mutate(A2_1 = A2-A1)
+```
+
+
+## 変数の型の変換 {#mu-kata}
+
+* \@ref(p-df-main-p)で触れたように，変数には型の情報が伴い，統計解析やデータ加工の際に適切な型を求められることがあるため理解が必要
+  + 小数も扱う数値（double-precision） _`<dbl>`_
+  + 整数 _`<int>`_
+  + 文字 _`<chr>`_ 
+  + 因子 _`<fct>`_
+* 変数の型の確認は色々方法があるが，tibble形式のデータフレームなら`select()`でOK
+  + 以下の出力の変数名の下にその変数の型が表示される
+
+
+```{r}
+df_bfi %>% 
+  select(gender, education)
+
+```
+
+* tibble形式でない普通のデータフレームでも，最後に`glimpse()`で出力することで型を確認可能
+ 
+```{r}
+df_bfi %>%
+  select(gender, education) %>%
+  glimpse()
+
+```
+
+* `glimpse()`の結果はデータフレームの表示が行列入れ替わっており，変数の情報が行ごとに出力される
+* gender, education列が _`<int>`_ になっているので整数型になっている 
+
+
+### 型の変換 {#mu-kata-trans}
+
+* ここでは，2つの数値型変数gender, educationを因子型に変換する例を示す
+* それぞれ`factor()`で因子型に変換
+
+```{r}
+
+df_bfi %>%
+  select(gender, education) %>% 
+  mutate(gender = factor(gender),
+         education = factor(education))
+```
+
+* gender, education列が _`<fct>`_ になっているので整数型になっている 
+
+### 【効率化】複数の変数に対し一度の指定で実行 {#mu-kata-across}
+
+*  変換したい変数が大量にあるときは上記の方法では大変
+* `across()`を使うと，指定した変数に対して同じ内容の処理なら __1回__ ですむようになる
+  + かつては`mutate_at()`, `mutate_if()`, `mutate_all()`など別々の関数だったが，`across()`の登場で統一的に`mutate()`内で扱えるようになった
+* `across()`の第一引数に変数ベクトルを入れ，次に適用する関数（ここではfactor()）を入れる
+
+```{r}
+df_bfi %>%
+  mutate(across(c(gender, education),
+                factor)) %>% 
+  select(gender, education)   # 結果表示のため冗長だが変わった変数だけselect
+```
+
+* この場合，元の変数が上書きされるので，新しい列はできていない
+
+### [練習問題]
+
+
+* df_bfiデータの変数A1, A2, A3, A4, A5を因子型に変換し，この5つの変数に選択してデータフレームを表示させよう
+
+```{r eval=FALSE, include=FALSE}
+df_bfi %>%
+  mutate(across(c(A1:A5),
+                factor)) %>% 
+  select(A1:A5) 
+```
+
+
+## across()の特徴 {#mu-across}
+
+
+* 変数の指定に\@ref(select-helper)で解説したヘルパー関数が使える  
+
+  
+```{r}
+df_bfi %>%
+  mutate(across(starts_with("n"),
+                factor)) %>% 
+  select(starts_with("n"))   # 結果表示のため
+
+```
+
+* 同じく\@ref(select-cha)で解説した文字型の変数名も指定に使える
+
+```{r}
+vars <- c("N1", "N2", "N3", "N4", "N5")
+
+df_bfi %>%
+  mutate(across(all_of(vars),
+                factor)) %>% 
+  select(starts_with("n"))   # 結果表示のため
+
+```
+
+### 【重要知識】新しい変数名にして追加 {#mu-across-list}
+
+* ここはこの後色々なところで出てくる方法のため理解しておきたい
+* 適用する関数をリストにする（`list()`に入れる）ことで，変数名を変更して追加できる
+* `list()`に入れるときはこれまでと異なる書き方が必要になる
+  + 関数名の前に`~`（チルダ）が必要（\@ref(rename-strreplace1)参照）
+  + list内の「関数`()`」内に`.x`が必要。この`.x`に`across()`の第一引数に指定した変数が入っていくという意味
+* 例：genderとeducationの型を因子型に変換し，変換前後で変わっているかどうか確認
+
+```{r}
+df_bfi %>%
+  mutate(across(c(gender, education),
+                list(f = ~factor(.x)))) %>% 
+  select(matches("gender|education"))   
+```
+
+* 因子型に変換した変数の末尾に_fがつく
+* selectで`matches()`を使っているのは，新しく接尾辞が増えた変数を追加しているので入力を少なく効率的に表示させるため
+
+### [練習問題]
+
+* df_bfiデータの変数N1, N2, N3, N4, N5だけをすべて因子型に変換して変数名末尾に"_fct"を付けた変数を追加し，ヘルパー関数を使って選んで示そう
+
+```{r eval=FALSE, include=FALSE}
+df_bfi %>%
+  mutate(across(c(N1:N5),
+                list(fct = ~factor(.x)))) %>% 
+  select(starts_with("N"))
+```
+
+
+## 合計点の作成 {#mu-total}
+
+* 変数の四則演算の式を入れれば合計得点として計算された列をデータフレームに追加できる
+
+```{r}
+df_bfi_n <- 
+  df_bfi %>%
+  select(N1:N5) %>%                       
+  mutate(neuroticism = N1 + N2 + N3 + N4 + N5)
+  
+df_bfi_n
+```
+
+* 別解として，変数の逆転項目を反映させた後に， \@ref(mu-total-ef) で異なるやり方で合計した例を解説する
+  + 項目数が多い場合などはこちらの方が効率化できる場合も
+
+
+### 足し上げる変数に欠損値があるとどうなるか{#mu-total-na}
+
+* 欠損値については\@ref(filter-st-na)参照
+* 合計得点の計算の場合，対象となる変数の内1つでもNAがあれば合計点もNAとなる
+
+```{r}
+df_bfi_n %>% 
+  filter(is.na(neuroticism))     # neuroticismがNAなケースに限定
+
+```
+
+## 変数の値を数値から文字列に変える
+
+* 一度因子型に変換してから`forcats`パッケージの`fct_recode()`関数を使うと簡単
+  + `fct_recode()`の第一引数に変換元の変数を入れそのあとに置き換えルールを `new = old`で入れていく
+* 例：genderの値1,2をそれぞれmale, femaleという文字に置き換える
+* ちゃんと変換の対応がついているかどうかを`dplyr`パッケージの`count()`関数で確認
+  + 適切に変換されていなければ，1 = male, 2 = female以外の組み合わせも発生するため
+  + `count()`の強みは，出力がデータフレームで出てくる点なので，結果が扱いやすい
+
+```{r}
+df_bfi %>%
+  mutate(gender = factor(gender),
+         gender_c = fct_recode(gender, 
+                               male   = "1",
+                               female = "2")) %>% 
+  count(gender, gender_c)
+
+```
+
+### [練習問題]
+
+* df_bfiデータの変数educationを数値の値1～5を，それぞれ対応する"HS", "finished HS", "some college", "college graduate", "graduate degree"に変換して，ちゃんと変換されているかどうかcountで確認しよう
+
+```{r eval=FALSE, include=FALSE}
+df_bfi %>%
+  mutate(education = factor(education),
+         education_c = fct_recode(education, "HS" = "1",
+                                "finished HS" = "2",
+                                "some college" = "3",
+                                "college graduate" = "4",
+                                "graduate degree" = "5"
+         )) %>% 
+  count(education, education_c)
+```
+
+
+## 連番からIDの作成 {#mu-seq}
+
+* `dplyr::row_number()`で行番号からIDを作成
+
+```{r}
+df_bfi_n %>% 
+  mutate(id = row_number())
+```
+
+### 【別解】行の名前を直接変数化 {#mu-seq-other}
+
+* 実は`mutate()`を使わなくてもできて，データの最初に持ってこれる便利関数がある
+* `tibble::rowid_to_column()`
+  + `var =`で連番として追加する変数名を指定
+
+```{r}
+df_bfi_n %>% 
+  rowid_to_column(var = "id")
+
+# この先使わないのでデータフレーム削除
+rm(df_bfi_n)
+```
+
+## 逆転項目を作る {#mu-rev}
+
+* 心理尺度などの場合，質問内容に対する回答選択肢の意味が，項目間で逆になるように設定されることがあり，合計点などを作る際に尺度の意味を適切に表すように，取りうる数値の範囲内で値を入れ替える作業が発生することがある
+  + たとえば，感情の状態を項目を合計してたずねる尺度で，「いつも楽しい」という項目と，「いつも悲しい」という聞き方をしていたら，それぞれの回答を得点化したときに意味が反対になるため，同じ方向になるようにする必要がある
+  + 例：「1. まったくあてはまらない ←→  6. 非常にあてはまる」のルールを「いつも悲しい」項目に適用し，1の回答を6に置き換えれば，「いつも楽しい」とポジティブな方向で点数の意味がそろう
+
+### 逆転：recode {#mu-rev-recode}
+#### 逆転項目の確認 {#mu-rev-check}
+
+* bfiデータの場合，どの項目を逆転する必要があるかを示す情報（
+「`-変数名`」で表現）がパッケージに含まれている
+  + `psychTools::bfi.keys` で確認可能
+* したがって，"-A1", "-C4", "-C5", "-E1", "-E2", "-O2", "-O5"が対象
+
+#### 変数1つを逆転 {#mu-rev-recode1}  
+
+* `dplyr::recode()`を使用
+* 対象の変数を`recode()`の第一引数に，入れ替えたい値を`old = new`で並べていく
+  + この等式の順番が他(mutateなど)と逆になるため，`recode()`は将来引退する可能性ありとされている
+  + また，下記のように考慮すべき点があるから，後述の\@ref(mu-rev-rule)【別解】を使う方がよいかもしれない
+* 値の指定で考慮すべき点
+  + oldの数値は\` \`で囲む必要がある
+  + newの数値に`L`がつくのは，型を整数のままにするため
+  
+```{r}
+df_bfi %>% 
+  mutate(A1_r = recode(A1, `1` = 6L, `2` = 5L, `3` = 4L,      
+                           `4` = 3L, `5` = 2L, `6` = 1L)) %>% 
+  select(A1, A1_r)
+```
+
+
+#### 変数2つ以上を逆転 {#mu-rev-recode2}
+
+* A1と同様に同じ形をくり返し変数名だけ変えていけばできるが，コードが長くなりミスも生じやすくなる
+
+```{r}
+df_bfi %>% 
+  mutate(A1_r = recode(A1, `1` = 6L, `2` = 5L, `3` = 4L, 
+                           `4` = 3L, `5` = 2L, `6` = 1L),
+         C4_r = recode(C4, `1` = 6L, `2` = 5L, `3` = 4L, 
+                           `4` = 3L, `5` = 2L, `6` = 1L)) %>% 
+  select(A1, A1_r, C4, C4_r)
+```
+
+
+#### 【効率化】 変数2つ以上を逆転 {#mu-rev-recode2ef}
+
+* \@ref(mu-across-list) で解説したlistに関数を入れる方法
+  + これで対象となる`across()`内変数に`_r`の接尾辞が付いた逆転項目が追加される
+
+```{r}
+
+df_bfi %>% 
+  mutate(across(c(A1, C4),
+                list(r = ~recode(.x, `1` = 6, `2` = 5, `3` = 4, 
+                                 `4` = 3, `5` = 2, `6` = 1)))) %>% 
+  select(A1, A1_r, C4, C4_r)
+```
+
+### 【別解】逆転（公式） {#mu-rev-rule}
+
+* 項目を反転する公式が「(max + min) - 回答値」であることを利用
+  + `psych::reverse.code()`のhelp参照
+  + 例：最小値1,最大値4の場合，max + min = 5となり，回答値が2の場合，5 - 2 = 3となり反転された結果となる
+
+```{r}
+min <- 1
+max <- 6
+
+df_bfi %>% 
+  mutate(A1_r = max + min - A1,
+         C4_r = max + min - C4) %>% 
+  select(A1, A1_r, C4, C4_r)
+```
+
+#### 【効率化】 変数2つ以上を逆転 {#mu-rev-rule1}
+
+* 「`~`」の後に計算式がきても動く
+* ここでは，`max + min - .x` の`.x`に`across()`内に置かれた変数が入っていく
+
+```{r}
+df_bfi %>% 
+  mutate(across(c(A1,C4),
+                list(r = ~ max + min - .x))) %>% 
+  select(A1, A1_r, C4, C4_r)
+```
+
+### [練習問題]
+
+* df_bfiデータですべての逆転項目を逆転してdf_bfiに格納しよう
+  + これ以降で使用するため，正解コードを非表示にしてここで実行のみしておく
+
+```{r include=FALSE}
+df_bfi <- 
+  df_bfi %>% 
+  mutate(across(c(A1, C4, C5, E1, E2, O2, O5),
+                list(r = ~ max + min - .x)))
+```
+
+## 【別解】合計点の作成 {#mu-total-ef}
+
+* \@ref(mu-total)の別解として，ここですべての合計点を作成する
+* `base::rowSums()`
+  + データフレームで行の単位で総計するので，行（ケース）ごとに合計点を作成できる
+* まず総計の対象となる変数名を\@ref(select-cha)で解説したように文字ベクトルのオブジェクトに格納して定義していく
+* `rowSums()`の中で`across()`が使えるので，あとは定義した項目のオブジェクトを指定していくだけ
+
+```{r}
+# 合計する項目の定義
+
+Ag <- 
+df_bfi %>% 
+  select(A1_r, A2:A5) %>% 
+  names()
+
+Co <- 
+df_bfi %>% 
+  select(C1:C3, C4_r, C5_r) %>% 
+  names()
+
+Ex <- 
+  df_bfi %>% 
+  select(E1_r, E2_r, E3:E5) %>% 
+  names()
+
+Ne <- 
+df_bfi %>% 
+  select(N1:N5) %>% 
+  names()
+
+Op <- 
+df_bfi %>% 
+  select(O1, O2_r, O3, O4, O5_r) %>% 
+  names()
+
+
+df_bfi <- 
+  df_bfi %>% 
+  mutate(
+    Agree         = rowSums(across(all_of(Ag))),
+    Conscientious = rowSums(across(all_of(Co))),
+    Extraversion  = rowSums(across(all_of(Ex))),
+    Neuroticism   = rowSums(across(all_of(Ne))),
+    Openness      = rowSums(across(all_of(Op)))
+    )
+
+```
+
+### 【確認】
+
+* 変数の中にNAが入る場合は合計もNAになる。
+* rowSums(across(all_of(Op)), **na.rm = TRUE**)と引数を追加すれば，NAを無視して合計できる
+
+```{r}
+df_bfi %>% select(all_of(Ag), Agree)
+
+df_bfi %>% 
+  select(all_of(Ex), Extraversion) %>% 
+  filter(is.na(Extraversion))
+
+```
+
+* `rowSums()`を`base::rowMeans()`に変えれば平均値も計算できる
+
+## 連続変数をカテゴリに区分する
+### 分布の把握
+
+* 変数ageのヒストグラムを描き，分布を確認する
+* グラフ作成パッケージ`ggplot2`でどんなグラフが作れるかは著者作成の辞書参照
+  + [ggplot2の辞書](https://izunyan.github.io/practice_ggplot2/)
+
+```{r}
+ggplot(df_bfi) +           # ここにデータフレーム
+  geom_histogram(aes(age)) # aes()の中に対象変数
+```
+
+* さっと中央値だけ見たいのであれば，従来のRの書き方が早い
+  + 役に立つ場面が多いので，慣れたら従来の書き方を学んでおくとよい
+  + 「  `データフレーム$変数名`」と指定することで変数（実際はベクトルになる）として扱える
+
+```{r}
+# 中央値
+median(df_bfi$age)
+
+# モダンな方法だと少し長くなる
+# df_bfi %>% 
+#   summarise(median(age))
+
+```
+
+
+### 数値変数の値で2区分のカテゴリ変数を作る
+
+* `dplyr::if_else()`で条件式（TRUEまたはFALSEを返すもの）によって値を2区分する
+* 構造：`if_else(条件式, TRUEの場合の値, FALSEの場合の値)`
+  + TRUEの場合の値, FALSEの場合の値はそれぞれ文字型を入れることもできる（例:"27歳以上", "27歳未満"）
+* 例：ageの値で27歳以上を1, それ以外を0とした2区分変数を作成する
+
+```{r}
+res_age2 <- 
+  df_bfi %>% 
+  mutate(age2 = if_else(age >= 27, 1, 0)) %>% 
+  select(age, age2)
+
+res_age2 %>% count(age2) 
+```
+
+#### 確認
+
+* `age >= 27`が1，27未満が0にコーディングされているか`filter()`で限定して確認
+
+```{r}
+res_age2 %>% 
+  filter(age >= 20 & age <= 30) %>% 
+  count(age, age2) %>% 
+  print(n = 11)
+
+```
+
+* 念のため最初3行（1-3行目）と最後3行（n-2行目からn行目）も確認
+  + `dplyr::slice()`で1:3行目と最後の3行を表示させる
+
+```{r}
+res_age2 %>% 
+  count(age, age2) %>% 
+  slice(1:3, (n()-2):n())
+  
+
+```
+
+#### 【別解】確認
+
+* 長くなるがこちらの方が覚えやすいかも
+
+```{r}
+res_age2 %>% 
+  count(age, age2) %>% 
+  slice_head(n = 3)
+
+res_age2 %>% 
+  count(age, age2) %>% 
+  slice_tail(n = 3)
+
+rm(res_age2)
+```
+
+
+### 数値変数の値で3区分以上のカテゴリ変数を作る
+
+* 年齢層を10歳区切りでカテゴリ化
+
+```{r}
+res_age6 <- 
+  df_bfi %>% 
+  mutate(age6 = case_when(
+    age < 20              ~ "20歳未満", 
+    age >= 20  & age < 30 ~ "20-29歳", 
+    age >= 30  & age < 40 ~ "30-39歳",
+    age >= 40  & age < 50 ~ "40-49歳",
+    age >= 50  & age < 60 ~ "50-59歳",
+    age >= 60             ~ "60歳以上"  
+  ))
+
+# 確認するには以下のコードの最初の2行だけでよいが，
+# 出力が長いためランダムに10件抽出しageの昇順にしてある
+
+res_age6 %>% 
+  count(age, age6) %>% 
+  slice_sample(n = 10) %>% # ランダムに10件抽出
+  arrange(age)             # ageをキーに行を昇順にソート
+
+rm(res_age6)
+```
+
+### [練習問題]
+
+* df_bfiデータの年齢層を以下の基準でカテゴリ化した変数"age4"を作成しよう
+  + "10代", "20_30代", "40_50代", "60代", その他はNA
+  
+```{r eval=FALSE, include=FALSE}
+ 
+  df_bfi %>% 
+  mutate(age4 = case_when(
+    age >= 10  & age < 20 ~ "10代", 
+    age >= 20  & age < 40 ~ "20_30代", 
+    age >= 40  & age < 60 ~ "40_50代",
+    age >= 60  & age < 70 ~ "60代"
+  
+  )) %>% 
+  count(age,age4) %>% 
+  print(n = 64)
+
+```
+  
+  

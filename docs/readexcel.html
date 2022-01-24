@@ -4,13 +4,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>2 Excelファイルの読み込み | excel_r.knit</title>
+<title>2 Excelファイルの読み込み | タイトル</title>
+<meta name="author" content="著者名">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="2 Excelファイルの読み込み | excel_r.knit">
+<meta property="og:title" content="2 Excelファイルの読み込み | タイトル">
 <meta property="og:type" content="book">
 <meta property="og:image" content="/images/cover.png">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="2 Excelファイルの読み込み | excel_r.knit">
+<meta name="twitter:title" content="2 Excelファイルの読み込み | タイトル">
 <meta name="twitter:image" content="/images/cover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -28,7 +29,7 @@
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
-        <a href="index.html" title=""></a>
+        <a href="index.html" title="">タイトル</a>
       </h1>
       <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
@@ -43,14 +44,11 @@
 <li><a class="" href="index.html">はじめに</a></li>
 <li><a class="" href="project.html"><span class="header-section-number">1</span> 前提：プロジェクトの設定</a></li>
 <li><a class="active" href="readexcel.html"><span class="header-section-number">2</span> Excelファイルの読み込み</a></li>
-<li><a class="" href="writeexcel.html"><span class="header-section-number">3</span> Excelファイルの保存</a></li>
-<li><a class="" href="readsavecsv.html"><span class="header-section-number">4</span> csvファイルの読み込みと保存</a></li>
-<li><a class="" href="dataanal.html"><span class="header-section-number">5</span> データ解析に向けて</a></li>
 <li><a class="" href="%E3%81%82%E3%81%A8%E3%81%8C%E3%81%8D.html">あとがき</a></li>
 </ul>
 
         <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/izunyan/gisyo12.git">View book source <i class="fab fa-github"></i></a></p>
+          <p><a id="book-repo" href="https://github.com/izunyan/gisho12.git">View book source <i class="fab fa-github"></i></a></p>
         </div>
       </nav>
 </div>
@@ -87,7 +85,7 @@
 <p>上記コードを実行すると、RStudioの右上（デフォルトの配置であれば）のEnvironmentタブに、</p>
 <pre><code>df  344 obs. of 9 variables</code></pre>
 <p>という表示が出ると思います。つまり、344行のデータと9列の変数が入っているデータを、<code>df</code>という名前のもの（オブジェクト）としてRに読みこんだ、ということを示しています。<code>df &lt;-</code>の部分がその作業に該当します。<code>&lt;-</code>の右側の内容を左側のオブジェクトに格納するという意味です。ここで読み込まれた形がデータフレーム（<a href="index.html#structure">はじめに&gt;本書の構成</a>の注参照）です。</p>
-<p>オブジェクト名である<code>df</code>と打つことで、デフォルトでは最初の10行分のデータが表示されます。ここでは紙面の都合で設定を変えているので3行だけにしています。表示された最初の行にも、<code>A tibble: 344 x 9</code>と、行数x列数の情報が出ています。表示しきれなかった行は、<code>with 341 more rows</code>と省略され、表示しきれなかった列は、<code>flipper_length_mm &lt;dbl&gt;, body_mass_g &lt;dbl&gt;, sex &lt;chr&gt;, year &lt;dbl&gt;</code>と、<code>名前&lt;データの型名&gt;</code>が表示されます。なお、読みこんだファイルの保存については<a href="writeexcel.html#writeoneexcel">3.1</a>章で解説します。</p>
+<p>オブジェクト名である<code>df</code>と打つことで、デフォルトでは最初の10行分のデータが表示されます。ここでは紙面の都合で設定を変えているので3行だけにしています。表示された最初の行にも、<code>A tibble: 344 x 9</code>と、行数x列数の情報が出ています。表示しきれなかった行は、<code>with 341 more rows</code>と省略され、表示しきれなかった列は、<code>flipper_length_mm &lt;dbl&gt;, body_mass_g &lt;dbl&gt;, sex &lt;chr&gt;, year &lt;dbl&gt;</code>と、<code>名前&lt;データの型名&gt;</code>が表示されます。なお、読みこんだファイルの保存については<a href="#writeoneexcel"><strong>??</strong></a>章で解説します。</p>
 <div id="hokan" class="section level4" number="2.1.1.1">
 <h4>
 <span class="header-section-number">2.1.1.1</span> 最高な機能だよ！パスの自動補完<a class="anchor" aria-label="anchor" href="#hokan"><i class="fas fa-link"></i></a>
@@ -584,7 +582,7 @@
 
   <div class="chapter-nav">
 <div class="prev"><a href="project.html"><span class="header-section-number">1</span> 前提：プロジェクトの設定</a></div>
-<div class="next"><a href="writeexcel.html"><span class="header-section-number">3</span> Excelファイルの保存</a></div>
+<div class="next"><a href="%E3%81%82%E3%81%A8%E3%81%8C%E3%81%8D.html">あとがき</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -616,8 +614,8 @@
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/izunyan/gisyo12.git/blob/master/excel%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%81%BF.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/izunyan/gisyo12.git/edit/master/excel%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%81%BF.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/izunyan/gisho12.git/blob/master/excel%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%81%BF.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/izunyan/gisho12.git/edit/master/excel%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%81%BF.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>
@@ -629,7 +627,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong></strong>" was written by . </p>
+    <p>"<strong>タイトル</strong>" was written by 著者名. </p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

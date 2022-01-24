@@ -1,0 +1,199 @@
+# 要約値を作る：summarise {#summarise}
+
+* 本章のポイント
+  + パッケージ`dplyr`の関数`summarise()`
+  + 結果をデータフレームとして出力するため，扱いが便利
+  + データを知るうえで要約作業は頻繁に行うことが想定される
+  + 便利な要約パッケージが色々あるものの，`summarise()`は柔軟な出力が可能なので使いこなせると役に立つ
+
+
+## 基本 {#su-st}
+
+* `summarise()`の中に出力したい変数名を書き，`=`の後に計算する関数を入れる
+* 例：bill_length_mmの平均値を算出する
+
+```{r}
+# まだtidyverseパッケージを読み込んでない場合は以下の#を外して実行
+# library(tidyverse)
+
+df %>% 
+  summarise(blm_平均値 = mean(bill_length_mm, na.rm = TRUE))
+```
+
+## 複数の計算 {#su-st-multiple}
+
+* 複数の変数について平均値と標準偏差（SD）と人数（n）を出したいときは，基本知識では全部書くので長くなる
+  + SDは`sd()`関数，nは変数内の欠損のない行以外の数の合計で算出
+  + `sum(!is.na(.x))`は，NAのない行の数を総計するので，平均値やSDの計算に用いた人数を取得できる
+
+```{r}
+df %>% 
+  summarise(blm_mean = mean(bill_length_mm, na.rm = TRUE),
+            bdm_mean = mean(bill_depth_mm, na.rm = TRUE),
+            blm_sd = sd(bill_length_mm, na.rm = TRUE),
+            bdm_sd = sd(bill_depth_mm, na.rm = TRUE),
+            blm_n  = sum(!is.na(bill_length_mm)),
+            bdm_n  = sum(!is.na(bill_depth_mm)))
+
+```
+
+### 【効率化】{#su-st-ef}
+
+* \@ref(mu-kata-across)で出てきた`across()`がここでも有用
+* `across()`の第一引数に指定したい変数名ベクトル，またはヘルパー関数を入れる
+* 実行したい関数をlist内に名前（これが接尾辞になる）をつけて列挙し，関数の前に`~`をつける
+ 
+
+```{r}
+df %>% 
+  summarise(across(c(bill_length_mm, bill_depth_mm),
+                   list(mean = ~mean(.x, na.rm = TRUE),
+                        sd = ~sd(.x, na.rm = TRUE),
+                        n = ~sum(!is.na(.x)))))
+```
+
+
+* `across()`ではヘルパー関数が使える
+
+```{r}
+df %>% 
+  summarise(across(starts_with("bill"),
+                   list(mean = ~mean(.x, na.rm = TRUE),
+                        sd = ~sd(.x, na.rm = TRUE),
+                        n = ~sum(!is.na(.x)))))
+```
+
+### 【並び替え】{#su-st-reorder}
+
+* 上記の出力は横に長いため見にくい
+* `tidyr::pivot_longer()`で，データフレームの行列入れ替えができる
+* 引数を`names_pattern`と`names_to`を下記のように指定することで，変数の接尾辞を列名にできる
+* 下記コードの`summarise()`部分の構造は前のチャンクと変数名以外同じ
+
+
+```{r}
+df %>% 
+  summarise(across(bill_length_mm:body_mass_g,
+                   list(mean = ~mean(.x, na.rm = TRUE),
+                        sd = ~sd(.x, na.rm = TRUE),
+                        n = ~sum(!is.na(.x))))) %>% 
+  pivot_longer(everything(),
+               names_to = c("items", ".value"), # ".value"の部分を列名に
+               names_pattern = "(.*)_(.*)") 　  # 正規表現
+```
+
+### [練習問題]
+
+* dfデータの変数名に"length"を含む変数に対して平均値とSDとnを計算したデータフレームを作成して"res"オブジェクトに格納しよう
+* 次に作成したデータフレームを`pivot_longer()`を使って見やすいように縦に変換しよう
+
+```{r eval=FALSE, include=FALSE}
+res <- 
+  df %>% 
+  summarise(across(contains("length"),
+                   list(mean = ~mean(.x, na.rm = TRUE),
+                        sd = ~sd(.x, na.rm = TRUE),
+                        n = ~sum(!is.na(.x)))))
+
+res %>% 
+  pivot_longer(everything(),
+               names_to = c("items", ".value"), # ".value"の部分を列名に
+               names_pattern = "(.*)_(.*)") 　  # 正規表現
+
+# 確認
+
+df %>% 
+  summarise(n = sum(!is.na(bill_length_mm)))
+
+```
+
+
+## 層別（グループ別）集計{#su-group}
+
+* `group_by()`にグループを表す変数を指定するとできる
+
+```{r}
+df %>% 
+  group_by(species) %>% 
+  summarise(across(c(bill_length_mm, bill_depth_mm),
+                   list(mean = ~mean(.x, na.rm = TRUE),
+                        sd = ~sd(.x, na.rm = TRUE))))
+```
+
+* グループを重ねることも可能
+
+```{r}
+df %>% 
+  group_by(species, sex) %>% 
+  summarise(across(c(bill_length_mm, bill_depth_mm),
+                   list(mean = ~mean(.x, na.rm = TRUE),
+                        sd = ~sd(.x, na.rm = TRUE))))
+```
+
+### [練習問題]
+
+* dfデータの変数"bill_length_mm", "bill_depth_mm"について，3変数（species, island, sex）の層別平均値（変数名に"_平均"の接頭辞をつける）を計算しよう
+
+```{r eval=FALSE, include=FALSE}
+df %>% 
+  group_by(species, island, sex) %>% 
+  summarise(across(c(bill_length_mm, bill_depth_mm),
+                   list(平均 = ~mean(.x, na.rm = TRUE))))
+```
+
+
+## 【効率化】関数にする{#su-fun}
+### 基本{#su-fun-st}
+
+* 「`自分で名づける関数名 <- function(引数){ 計算式やコード }`」 で関数を定義できる
+* 例：関数の引数に数値を入れると`+1`した値を返す関数`add_one()`を定義
+
+```{r}
+add_one <- 
+  function(x){
+    x + 1
+  }
+
+add_one(2)
+
+```
+
+
+### 複数変数の平均値とSDとnを計算する関数{#su-fun-meansdn}
+
+* 「`{{ }}`」は`curly curly`と読み，関数を作成するときに，代入先の変数名の場所を指定する時などに活躍
+  + 下記の例の場合，`{{ }}`を外すと動かない
+
+* 例：引数にデータフレーム（data）と変数（vars）を入れると平均値とSDとnを返す関数`mean_sd_n()`を定義
+
+
+```{r}
+mean_sd_n <- function(data, vars){
+data %>% 
+  summarise(across({{vars}},
+                   list(mean = ~mean(.x, na.rm = TRUE),
+                        sd = ~sd(.x, na.rm = TRUE),
+                        n = ~sum(!is.na(.x)))))
+}
+```
+
+* ここで定義した関数`mean_sd_n()`にデータフレームと変数を入れると結果が表示される
+
+```{r}
+mean_sd_n(df, bill_length_mm)
+```
+
+* vasの部分は`across()`の第一引数に入れるものと同じ指定ができるため，変数ベクトルやヘルパー関数が入る
+
+```{r}
+# 変数ベクトル
+mean_sd_n(df, c(flipper_length_mm, body_mass_g))
+
+# 文字でも可能
+# mean_sd_n(df, c("flipper_length_mm", "body_mass_g"))
+
+# ヘルパー関数
+mean_sd_n(df, starts_with("bill"))
+```
+
+
