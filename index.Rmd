@@ -1,8 +1,8 @@
 ---
 site: bookdown::bookdown_site
-# title:  "がんばらないデータ加工"
-# subtitle: "Rによるくり返し作業入門  前編"
-# author: "やわらかクジラ"
+title:  "がんばらないデータ加工"
+subtitle: "Rによるくり返し作業入門  前編"
+author: "やわらかクジラ"
 github-repo: https://github.com/izunyan/gisho12.git
 cover-image: images/cover.png
 documentclass: bxjsbook
@@ -29,6 +29,9 @@ options(tibble_opt)
 # pdf作成時は不要
 # knitr::include_graphics("images/cover.png")
 ```
+
+* 本webサイトは，技術書典12にて頒布した[がんばらないデータ加工　Rによるくり返し作業入門　前編](https://techbookfest.org/product/5161487259664384?productVariantID=5672571053801472)のオンラインバージョン
+* こちらは随時updateされていく予定
 
 ## 概要 {-}
 * 本書の目的
@@ -129,11 +132,11 @@ res_si$packages |>
 * 本書の内容はすべてwindows環境を想定
 * この本に書いてある内容は、筆者が学習したことをまとめているものにすぎないため、正常な動作の保証はできない。使用する際は、自己責任で 
 
-<!-- ## ライセンス {-} -->
+## ライセンス {-}
 
-<!-- * 本webサイトは [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) -->
-<!--   + 引用例：やわらかクジラ（2021）『がんばらないデータ加工ーRによるくり返し作業入門ー　前編』. （サークル名：ヤサイゼリー）, 技術書展12にて頒布  -->
-<!--   + ただし，ライセンスの適用は本書での著作部分のみとなり，用いているデータやパッケージや画像などはそれぞれのライセンスに準じる -->
+* 本webサイトは [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
+  + 引用例：やわらかクジラ（2021）『がんばらないデータ加工　Rによるくり返し作業入門　前編』. （サークル名：ヤサイゼリー）, 技術書展12にて頒布
+  + ただし，ライセンスの適用は本書での著作部分のみとなり，用いているデータやパッケージや画像などはそれぞれのライセンスに準じる
 
 
 ## 関連情報 {-#association}
