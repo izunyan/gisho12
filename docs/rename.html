@@ -6,14 +6,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3 変数名を変更する：rename | がんばらないデータ加工</title>
   <meta name="description" content="3 変数名を変更する：rename | がんばらないデータ加工" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3 変数名を変更する：rename | がんばらないデータ加工" />
   <meta property="og:type" content="book" />
-  
   <meta property="og:image" content="/images/cover.png" />
   
-  <meta name="github-repo" content="https://github.com/izunyan/gisho12.git" />
+  <meta name="github-repo" content="izunyan/gisho12.git" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="3 変数名を変更する：rename | がんばらないデータ加工" />
@@ -32,7 +31,6 @@
   
 <link rel="prev" href="select.html"/>
 <link rel="next" href="filter.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -50,8 +48,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -325,8 +324,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="rename" class="section level1" number="3">
-<h1><span class="header-section-number">3</span> 変数名を変更する：rename</h1>
+<div id="rename" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">3</span> 変数名を変更する：rename<a href="rename.html#rename" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <ul>
 <li>本章のポイント
 <ul>
@@ -339,8 +338,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>文字を扱うためのパッケージ<code>stringr</code>の便利さを学ぶ</li>
 </ul></li>
 </ul>
-<div id="rename-standard" class="section level2" number="3.1">
-<h2><span class="header-section-number">3.1</span> 基本</h2>
+<div id="rename-standard" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> 基本<a href="rename.html#rename-standard" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>まずはデータにどういう変数名があるかの確認</li>
 </ul>
@@ -357,13 +356,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb78-3"><a href="rename.html#cb78-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb78-4"><a href="rename.html#cb78-4" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
 <span id="cb78-5"><a href="rename.html#cb78-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">blmm =</span> bill_length_mm)</span></code></pre></div>
-<pre><code>## # A tibble: 344 x 8
-##   species island  blmm bill_depth_mm flipper_length_~ body_mass_g
+<pre><code>## # A tibble: 344 × 8
+##   species island  blmm bill_depth_mm flipper_length_… body_mass_g
 ##   &lt;fct&gt;   &lt;fct&gt;  &lt;dbl&gt;         &lt;dbl&gt;            &lt;int&gt;       &lt;int&gt;
-## 1 Adelie  Torge~  39.1          18.7              181        3750
-## 2 Adelie  Torge~  39.5          17.4              186        3800
-## 3 Adelie  Torge~  40.3          18                195        3250
-## # ... with 341 more rows, and 2 more variables: sex &lt;fct&gt;,
+## 1 Adelie  Torge…  39.1          18.7              181        3750
+## 2 Adelie  Torge…  39.5          17.4              186        3800
+## 3 Adelie  Torge…  40.3          18                195        3250
+## # … with 341 more rows, and 2 more variables: sex &lt;fct&gt;,
 ## #   year &lt;int&gt;</code></pre>
 <ul>
 <li>複数の変数名を変更する場合は，<code>rename()</code>の中に「<code>,</code>」でつなげていく
@@ -374,19 +373,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="rename.html#cb80-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
 <span id="cb80-2"><a href="rename.html#cb80-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">blmm =</span> bill_length_mm,</span>
 <span id="cb80-3"><a href="rename.html#cb80-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">bdmm =</span> bill_depth_mm)</span></code></pre></div>
-<pre><code>## # A tibble: 344 x 8
-##   species island    blmm  bdmm flipper_length_~ body_mass_g sex  
+<pre><code>## # A tibble: 344 × 8
+##   species island    blmm  bdmm flipper_length_… body_mass_g sex  
 ##   &lt;fct&gt;   &lt;fct&gt;    &lt;dbl&gt; &lt;dbl&gt;            &lt;int&gt;       &lt;int&gt; &lt;fct&gt;
-## 1 Adelie  Torgers~  39.1  18.7              181        3750 male 
-## 2 Adelie  Torgers~  39.5  17.4              186        3800 fema~
-## 3 Adelie  Torgers~  40.3  18                195        3250 fema~
-## # ... with 341 more rows, and 1 more variable: year &lt;int&gt;</code></pre>
+## 1 Adelie  Torgers…  39.1  18.7              181        3750 male 
+## 2 Adelie  Torgers…  39.5  17.4              186        3800 fema…
+## 3 Adelie  Torgers…  40.3  18                195        3250 fema…
+## # … with 341 more rows, and 1 more variable: year &lt;int&gt;</code></pre>
 <ul>
 <li>複数変数を扱うときは<code>rename_with()</code>が便利。以下はそれを用いた例を示していく</li>
 </ul>
 </div>
-<div id="rename-samew" class="section level2" number="3.2">
-<h2><span class="header-section-number">3.2</span> 同じ語を共通の語で置き換える</h2>
+<div id="rename-samew" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> 同じ語を共通の語で置き換える<a href="rename.html#rename-samew" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>変数名の”bill”の部分を日本語の”くちばし”に変更していく</li>
 <li>まずは基本の知識でできる方法</li>
@@ -394,17 +393,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="rename.html#cb82-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
 <span id="cb82-2"><a href="rename.html#cb82-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(くちばし<span class="at">_length_mm =</span> bill_length_mm,</span>
 <span id="cb82-3"><a href="rename.html#cb82-3" aria-hidden="true" tabindex="-1"></a>         くちばし<span class="at">_depth_mm =</span> bill_depth_mm)</span></code></pre></div>
-<pre><code>## # A tibble: 344 x 8
+<pre><code>## # A tibble: 344 × 8
 ##   species island    くちばし_length_mm くちばし_depth_mm
 ##   &lt;fct&gt;   &lt;fct&gt;                  &lt;dbl&gt;             &lt;dbl&gt;
 ## 1 Adelie  Torgersen               39.1              18.7
 ## 2 Adelie  Torgersen               39.5              17.4
 ## 3 Adelie  Torgersen               40.3              18  
-## # ... with 341 more rows, and 4 more variables:
+## # … with 341 more rows, and 4 more variables:
 ## #   flipper_length_mm &lt;int&gt;, body_mass_g &lt;int&gt;, sex &lt;fct&gt;,
 ## #   year &lt;int&gt;</code></pre>
-<div id="rename-strreplace1" class="section level3" number="3.2.1">
-<h3><span class="header-section-number">3.2.1</span> 【効率化】str_replace()で一括変換(1)</h3>
+<div id="rename-strreplace1" class="section level3 hasAnchor" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> 【効率化】str_replace()で一括変換(1)<a href="rename.html#rename-strreplace1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li><code>rename_with()</code>は，まず適用したい関数を示し，そのあとに該当する変数を選ぶ</li>
 <li>語の置き換えに<code>stringr::str_replace()</code>を使う
@@ -420,43 +419,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="rename.html#cb84-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
 <span id="cb84-2"><a href="rename.html#cb84-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename_with</span>(<span class="sc">~</span><span class="fu">str_replace</span>(.x, <span class="st">&quot;bill&quot;</span>, <span class="st">&quot;くちばし&quot;</span>),</span>
 <span id="cb84-3"><a href="rename.html#cb84-3" aria-hidden="true" tabindex="-1"></a>              <span class="fu">starts_with</span>(<span class="st">&quot;bill&quot;</span>))</span></code></pre></div>
-<pre><code>## # A tibble: 344 x 8
+<pre><code>## # A tibble: 344 × 8
 ##   species island    くちばし_length_mm くちばし_depth_mm
 ##   &lt;fct&gt;   &lt;fct&gt;                  &lt;dbl&gt;             &lt;dbl&gt;
 ## 1 Adelie  Torgersen               39.1              18.7
 ## 2 Adelie  Torgersen               39.5              17.4
 ## 3 Adelie  Torgersen               40.3              18  
-## # ... with 341 more rows, and 4 more variables:
+## # … with 341 more rows, and 4 more variables:
 ## #   flipper_length_mm &lt;int&gt;, body_mass_g &lt;int&gt;, sex &lt;fct&gt;,
 ## #   year &lt;int&gt;</code></pre>
-<div id="rename-strreplace1-other" class="section level4" number="3.2.1.1">
-<h4><span class="header-section-number">3.2.1.1</span> 【別解】</h4>
+<div id="rename-strreplace1-other" class="section level4 hasAnchor" number="3.2.1.1">
+<h4><span class="header-section-number">3.2.1.1</span> 【別解】<a href="rename.html#rename-strreplace1-other" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <ul>
 <li><code>select()</code>の時のように単に<code>c()</code>の中に変数を指定していくだけでも動く</li>
 </ul>
 <div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="rename.html#cb86-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
 <span id="cb86-2"><a href="rename.html#cb86-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename_with</span>(<span class="sc">~</span><span class="fu">str_replace</span>(., <span class="st">&quot;bill&quot;</span>, <span class="st">&quot;くちばし&quot;</span>),</span>
 <span id="cb86-3"><a href="rename.html#cb86-3" aria-hidden="true" tabindex="-1"></a>              <span class="fu">c</span>(bill_length_mm, bill_depth_mm))</span></code></pre></div>
-<pre><code>## # A tibble: 344 x 8
+<pre><code>## # A tibble: 344 × 8
 ##   species island    くちばし_length_mm くちばし_depth_mm
 ##   &lt;fct&gt;   &lt;fct&gt;                  &lt;dbl&gt;             &lt;dbl&gt;
 ## 1 Adelie  Torgersen               39.1              18.7
 ## 2 Adelie  Torgersen               39.5              17.4
 ## 3 Adelie  Torgersen               40.3              18  
-## # ... with 341 more rows, and 4 more variables:
+## # … with 341 more rows, and 4 more variables:
 ## #   flipper_length_mm &lt;int&gt;, body_mass_g &lt;int&gt;, sex &lt;fct&gt;,
 ## #   year &lt;int&gt;</code></pre>
 </div>
 </div>
-<div id="練習問題-3" class="section level3" number="3.2.2">
-<h3><span class="header-section-number">3.2.2</span> [練習問題]</h3>
+<div id="練習問題-3" class="section level3 hasAnchor" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> [練習問題]<a href="rename.html#練習問題-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>dfデータで”_mm”で終わる変数の名前の”_mm”部分を”_ミリ”に一括で変換しよう</li>
 </ul>
 </div>
 </div>
-<div id="rename-remove" class="section level2" number="3.3">
-<h2><span class="header-section-number">3.3</span> 同じ語を削除する</h2>
+<div id="rename-remove" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> 同じ語を削除する<a href="rename.html#rename-remove" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>“_mm”を取り除きたい場合，それを削除した変数名を指定すればよいが，たくさんあると大変</li>
 </ul>
@@ -464,32 +463,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb88-2"><a href="rename.html#cb88-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">bill_length =</span> bill_length_mm,</span>
 <span id="cb88-3"><a href="rename.html#cb88-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">bill_depth  =</span> bill_depth_mm,</span>
 <span id="cb88-4"><a href="rename.html#cb88-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">flipper_length =</span> flipper_length_mm)</span></code></pre></div>
-<pre><code>## # A tibble: 344 x 8
+<pre><code>## # A tibble: 344 × 8
 ##   species island    bill_length bill_depth flipper_length
 ##   &lt;fct&gt;   &lt;fct&gt;           &lt;dbl&gt;      &lt;dbl&gt;          &lt;int&gt;
 ## 1 Adelie  Torgersen        39.1       18.7            181
 ## 2 Adelie  Torgersen        39.5       17.4            186
 ## 3 Adelie  Torgersen        40.3       18              195
-## # ... with 341 more rows, and 3 more variables:
-## #   body_mass_g &lt;int&gt;, sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
-<div id="rename-strreplace2" class="section level3" number="3.3.1">
-<h3><span class="header-section-number">3.3.1</span> 【効率化】str_replace()で一括変換（2）</h3>
+## # … with 341 more rows, and 3 more variables: body_mass_g &lt;int&gt;,
+## #   sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
+<div id="rename-strreplace2" class="section level3 hasAnchor" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> 【効率化】str_replace()で一括変換（2）<a href="rename.html#rename-strreplace2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li><code>str_replace()</code>で変換先に空白「<code>" "</code>」を指定すると削除できる</li>
 </ul>
 <div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="rename.html#cb90-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
 <span id="cb90-2"><a href="rename.html#cb90-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename_with</span>(<span class="sc">~</span><span class="fu">str_replace</span>(., <span class="st">&quot;_mm&quot;</span>, <span class="st">&quot; &quot;</span>),</span>
 <span id="cb90-3"><a href="rename.html#cb90-3" aria-hidden="true" tabindex="-1"></a>              <span class="fu">ends_with</span>(<span class="st">&quot;mm&quot;</span>))</span></code></pre></div>
-<pre><code>## # A tibble: 344 x 8
-##   species island    `bill_length ` `bill_depth ` `flipper_length~
+<pre><code>## # A tibble: 344 × 8
+##   species island    `bill_length ` `bill_depth ` `flipper_lengt…`
 ##   &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;            &lt;int&gt;
 ## 1 Adelie  Torgersen           39.1          18.7              181
 ## 2 Adelie  Torgersen           39.5          17.4              186
 ## 3 Adelie  Torgersen           40.3          18                195
-## # ... with 341 more rows, and 3 more variables:
-## #   body_mass_g &lt;int&gt;, sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
-<div id="別解" class="section level4" number="3.3.1.1">
-<h4><span class="header-section-number">3.3.1.1</span> 【別解】</h4>
+## # … with 341 more rows, and 3 more variables: body_mass_g &lt;int&gt;,
+## #   sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
+<div id="別解" class="section level4 hasAnchor" number="3.3.1.1">
+<h4><span class="header-section-number">3.3.1.1</span> 【別解】<a href="rename.html#別解" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <ul>
 <li><code>stringr::str_remove()</code>の方が直接的
 <ul>
@@ -499,25 +498,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="rename.html#cb92-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
 <span id="cb92-2"><a href="rename.html#cb92-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename_with</span>(<span class="sc">~</span><span class="fu">str_remove</span>(., <span class="st">&quot;_mm&quot;</span>),</span>
 <span id="cb92-3"><a href="rename.html#cb92-3" aria-hidden="true" tabindex="-1"></a>              <span class="fu">ends_with</span>(<span class="st">&quot;mm&quot;</span>))</span></code></pre></div>
-<pre><code>## # A tibble: 344 x 8
+<pre><code>## # A tibble: 344 × 8
 ##   species island    bill_length bill_depth flipper_length
 ##   &lt;fct&gt;   &lt;fct&gt;           &lt;dbl&gt;      &lt;dbl&gt;          &lt;int&gt;
 ## 1 Adelie  Torgersen        39.1       18.7            181
 ## 2 Adelie  Torgersen        39.5       17.4            186
 ## 3 Adelie  Torgersen        40.3       18              195
-## # ... with 341 more rows, and 3 more variables:
-## #   body_mass_g &lt;int&gt;, sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
+## # … with 341 more rows, and 3 more variables: body_mass_g &lt;int&gt;,
+## #   sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
 </div>
 </div>
-<div id="練習問題-4" class="section level3" number="3.3.2">
-<h3><span class="header-section-number">3.3.2</span> [練習問題]</h3>
+<div id="練習問題-4" class="section level3 hasAnchor" number="3.3.2">
+<h3><span class="header-section-number">3.3.2</span> [練習問題]<a href="rename.html#練習問題-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>dfデータで”<code>_</code>“を含む変数の名前から，”<code>_</code>“をすべて取り除こう（ヒント<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>）</li>
 </ul>
 </div>
 </div>
-<div id="rename-add" class="section level2" number="3.4">
-<h2><span class="header-section-number">3.4</span> 同じ接尾辞をつける</h2>
+<div id="rename-add" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> 同じ接尾辞をつける<a href="rename.html#rename-add" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>変数yearで2007年のみのデータに限定し，くちばし（bill）と翼（flipper）の変数名の末に接尾辞”_2007”をつける</li>
 <li><code>rename()</code>の中に全部書いていけばできるが数が多いと大変</li>
@@ -528,15 +527,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb94-4"><a href="rename.html#cb94-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">bill_length_mm_2007 =</span> bill_length_mm,</span>
 <span id="cb94-5"><a href="rename.html#cb94-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">bill_depth_mm_2007  =</span> bill_depth_mm,</span>
 <span id="cb94-6"><a href="rename.html#cb94-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">flipper_length_mm_2007 =</span> flipper_length_mm)</span></code></pre></div>
-<pre><code>## # A tibble: 110 x 4
-##   bill_length_mm_2007 bill_depth_mm_2007 flipper_length_mm~  year
+<pre><code>## # A tibble: 110 × 4
+##   bill_length_mm_2007 bill_depth_mm_2007 flipper_length_mm…  year
 ##                 &lt;dbl&gt;              &lt;dbl&gt;              &lt;int&gt; &lt;int&gt;
 ## 1                39.1               18.7                181  2007
 ## 2                39.5               17.4                186  2007
 ## 3                40.3               18                  195  2007
-## # ... with 107 more rows</code></pre>
-<div id="rename-strc" class="section level3" number="3.4.1">
-<h3><span class="header-section-number">3.4.1</span> 【効率化】str_c()で一括指定</h3>
+## # … with 107 more rows</code></pre>
+<div id="rename-strc" class="section level3 hasAnchor" number="3.4.1">
+<h3><span class="header-section-number">3.4.1</span> 【効率化】str_c()で一括指定<a href="rename.html#rename-strc" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>適用したい関数の中にある「<code>.</code>」の部分に，その後選ぶ変数が入っていく</li>
 <li><code>stringr::str_c()</code>で指定した語をくっつける</li>
@@ -547,15 +546,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb96-3"><a href="rename.html#cb96-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(bill_length_mm<span class="sc">:</span>flipper_length_mm, year) <span class="sc">%&gt;%</span> </span>
 <span id="cb96-4"><a href="rename.html#cb96-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename_with</span>(<span class="sc">~</span><span class="fu">str_c</span>(., <span class="st">&quot;_2007&quot;</span>),</span>
 <span id="cb96-5"><a href="rename.html#cb96-5" aria-hidden="true" tabindex="-1"></a>               <span class="sc">!</span>year)</span></code></pre></div>
-<pre><code>## # A tibble: 110 x 4
-##   bill_length_mm_2007 bill_depth_mm_2007 flipper_length_mm~  year
+<pre><code>## # A tibble: 110 × 4
+##   bill_length_mm_2007 bill_depth_mm_2007 flipper_length_mm…  year
 ##                 &lt;dbl&gt;              &lt;dbl&gt;              &lt;int&gt; &lt;int&gt;
 ## 1                39.1               18.7                181  2007
 ## 2                39.5               17.4                186  2007
 ## 3                40.3               18                  195  2007
-## # ... with 107 more rows</code></pre>
-<div id="rename-strc-other" class="section level4" number="3.4.1.1">
-<h4><span class="header-section-number">3.4.1.1</span> 【別解】</h4>
+## # … with 107 more rows</code></pre>
+<div id="rename-strc-other" class="section level4 hasAnchor" number="3.4.1.1">
+<h4><span class="header-section-number">3.4.1.1</span> 【別解】<a href="rename.html#rename-strc-other" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <ul>
 <li>変数を選ぶときに該当する単語を持つ変数を選びたければ，ヘルパー関数<code>matches()</code>で正規表現を使って柔軟に選べる</li>
 </ul>
@@ -563,19 +562,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb98-2"><a href="rename.html#cb98-2" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2007</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb98-3"><a href="rename.html#cb98-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename_with</span>(<span class="sc">~</span><span class="fu">str_c</span>(., <span class="st">&quot;_2007&quot;</span>),</span>
 <span id="cb98-4"><a href="rename.html#cb98-4" aria-hidden="true" tabindex="-1"></a>               <span class="fu">matches</span>(<span class="st">&quot;bill|flipper&quot;</span>))</span></code></pre></div>
-<pre><code>## # A tibble: 110 x 8
+<pre><code>## # A tibble: 110 × 8
 ##   species island    bill_length_mm_2007 bill_depth_mm_2007
 ##   &lt;fct&gt;   &lt;fct&gt;                   &lt;dbl&gt;              &lt;dbl&gt;
 ## 1 Adelie  Torgersen                39.1               18.7
 ## 2 Adelie  Torgersen                39.5               17.4
 ## 3 Adelie  Torgersen                40.3               18  
-## # ... with 107 more rows, and 4 more variables:
+## # … with 107 more rows, and 4 more variables:
 ## #   flipper_length_mm_2007 &lt;int&gt;, body_mass_g &lt;int&gt;, sex &lt;fct&gt;,
 ## #   year &lt;int&gt;</code></pre>
 </div>
 </div>
-<div id="練習問題-5" class="section level3" number="3.4.2">
-<h3><span class="header-section-number">3.4.2</span> [練習問題]</h3>
+<div id="練習問題-5" class="section level3 hasAnchor" number="3.4.2">
+<h3><span class="header-section-number">3.4.2</span> [練習問題]<a href="rename.html#練習問題-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>dfデータの変数yearで2008年のみのデータに限定し，くちばし（bill）と翼（flipper）で始まる変数以外の変数名の頭に”year08_“をつけてみよう</li>
 </ul>

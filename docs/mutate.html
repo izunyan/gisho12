@@ -6,14 +6,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5 新しい変数（列）の作成：mutate | がんばらないデータ加工</title>
   <meta name="description" content="5 新しい変数（列）の作成：mutate | がんばらないデータ加工" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5 新しい変数（列）の作成：mutate | がんばらないデータ加工" />
   <meta property="og:type" content="book" />
-  
   <meta property="og:image" content="/images/cover.png" />
   
-  <meta name="github-repo" content="https://github.com/izunyan/gisho12.git" />
+  <meta name="github-repo" content="izunyan/gisho12.git" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="5 新しい変数（列）の作成：mutate | がんばらないデータ加工" />
@@ -32,7 +31,6 @@
   
 <link rel="prev" href="filter.html"/>
 <link rel="next" href="summarise.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -50,8 +48,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -325,8 +324,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="mutate" class="section level1" number="5">
-<h1><span class="header-section-number">5</span> 新しい変数（列）の作成：mutate</h1>
+<div id="mutate" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">5</span> 新しい変数（列）の作成：mutate<a href="mutate.html#mutate" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <ul>
 <li>本章のポイント
 <ul>
@@ -335,8 +334,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>効率化のために非常に重要な<code>across()</code>について学ぶ</li>
 </ul></li>
 </ul>
-<div id="mu-read" class="section level2" number="5.1">
-<h2><span class="header-section-number">5.1</span> 使用データ</h2>
+<div id="mu-read" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> 使用データ<a href="mutate.html#mu-read" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li><code>psychTools</code>パッケージに入っている国際パーソナリティ項目プールからの2800名分のデータ
 <ul>
@@ -371,8 +370,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb129-8"><a href="mutate.html#cb129-8" aria-hidden="true" tabindex="-1"></a>  psychTools<span class="sc">::</span>bfi <span class="sc">%&gt;%</span> </span>
 <span id="cb129-9"><a href="mutate.html#cb129-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>()         <span class="co"># 表示に便利なtibble形式に</span></span></code></pre></div>
 </div>
-<div id="mu-standard" class="section level2" number="5.2">
-<h2><span class="header-section-number">5.2</span> 基本</h2>
+<div id="mu-standard" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> 基本<a href="mutate.html#mu-standard" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>データフレームに新しい列を計算して追加するまたは置き換える関数</li>
 <li><code>mutate()</code>の中に新しく作成する変数名を入れ，<code>=</code>でつないで計算式を入れる</li>
@@ -383,26 +382,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb130-3"><a href="mutate.html#cb130-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb130-4"><a href="mutate.html#cb130-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_a1 =</span> <span class="fu">mean</span>(A1, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="co"># A1の平均値を作成（NAは除外）</span></span>
 <span id="cb130-5"><a href="mutate.html#cb130-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">dif_a1_mean =</span> A1 <span class="sc">-</span> mean_a1)       <span class="co"># 各個体のA1と平均値の差分を計算</span></span></code></pre></div>
-<pre><code>## # A tibble: 2,800 x 3
+<pre><code>## # A tibble: 2,800 × 3
 ##      A1 mean_a1 dif_a1_mean
 ##   &lt;int&gt;   &lt;dbl&gt;       &lt;dbl&gt;
 ## 1     2    2.41      -0.413
 ## 2     2    2.41      -0.413
 ## 3     5    2.41       2.59 
-## # ... with 2,797 more rows</code></pre>
+## # … with 2,797 more rows</code></pre>
 <ul>
 <li>mean_a1列にはA1の平均値がすべて同じ値で入る（平均値だけの計算がしたければ<a href="summarise.html#summarise">6</a>章を参照）</li>
 <li>dif_a1_mean列は，A1列からmean_a1列を引いた値が入る</li>
 </ul>
-<div id="練習問題-9" class="section level3" number="5.2.1">
-<h3><span class="header-section-number">5.2.1</span> [練習問題]</h3>
+<div id="練習問題-9" class="section level3 hasAnchor" number="5.2.1">
+<h3><span class="header-section-number">5.2.1</span> [練習問題]<a href="mutate.html#練習問題-9" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>df_bfiデータの変数A1とA2だけを選んで，A2からA1を引いた新しい変数”A2_1”を作成しよう</li>
 </ul>
 </div>
 </div>
-<div id="mu-kata" class="section level2" number="5.3">
-<h2><span class="header-section-number">5.3</span> 変数の型の変換</h2>
+<div id="mu-kata" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> 変数の型の変換<a href="mutate.html#mu-kata" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li><a href="premise.html#p-df-main-p">1.6.1.1</a>で触れたように，変数には型の情報が伴い，統計解析やデータ加工の際に適切な型を求められることがあるため理解が必要
 <ul>
@@ -418,13 +417,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="mutate.html#cb132-1" aria-hidden="true" tabindex="-1"></a>df_bfi <span class="sc">%&gt;%</span> </span>
 <span id="cb132-2"><a href="mutate.html#cb132-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(gender, education)</span></code></pre></div>
-<pre><code>## # A tibble: 2,800 x 2
+<pre><code>## # A tibble: 2,800 × 2
 ##   gender education
 ##    &lt;int&gt;     &lt;int&gt;
 ## 1      1        NA
 ## 2      2        NA
 ## 3      2        NA
-## # ... with 2,797 more rows</code></pre>
+## # … with 2,797 more rows</code></pre>
 <ul>
 <li>tibble形式でない普通のデータフレームでも，最後に<code>glimpse()</code>で出力することで型を確認可能</li>
 </ul>
@@ -433,14 +432,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb134-3"><a href="mutate.html#cb134-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code></pre></div>
 <pre><code>## Rows: 2,800
 ## Columns: 2
-## $ gender    &lt;int&gt; 1, 2, 2, 2, 1, 2, 1, 1, 1, 2, 1, 1, 2, 1, 1, ~
-## $ education &lt;int&gt; NA, NA, NA, NA, NA, 3, NA, 2, 1, NA, 1, NA, N~</code></pre>
+## $ gender    &lt;int&gt; 1, 2, 2, 2, 1, 2, 1, 1, 1, 2, 1, 1, 2, 1, 1, …
+## $ education &lt;int&gt; NA, NA, NA, NA, NA, 3, NA, 2, 1, NA, 1, NA, N…</code></pre>
 <ul>
 <li><code>glimpse()</code>の結果はデータフレームの表示が行列入れ替わっており，変数の情報が行ごとに出力される</li>
 <li>gender, education列が <em><code>&lt;int&gt;</code></em> になっているので整数型になっている</li>
 </ul>
-<div id="mu-kata-trans" class="section level3" number="5.3.1">
-<h3><span class="header-section-number">5.3.1</span> 型の変換</h3>
+<div id="mu-kata-trans" class="section level3 hasAnchor" number="5.3.1">
+<h3><span class="header-section-number">5.3.1</span> 型の変換<a href="mutate.html#mu-kata-trans" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>ここでは，2つの数値型変数gender, educationを因子型に変換する例を示す</li>
 <li>それぞれ<code>factor()</code>で因子型に変換</li>
@@ -449,19 +448,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb136-2"><a href="mutate.html#cb136-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(gender, education) <span class="sc">%&gt;%</span> </span>
 <span id="cb136-3"><a href="mutate.html#cb136-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gender =</span> <span class="fu">factor</span>(gender),</span>
 <span id="cb136-4"><a href="mutate.html#cb136-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">education =</span> <span class="fu">factor</span>(education))</span></code></pre></div>
-<pre><code>## # A tibble: 2,800 x 2
+<pre><code>## # A tibble: 2,800 × 2
 ##   gender education
 ##   &lt;fct&gt;  &lt;fct&gt;    
 ## 1 1      &lt;NA&gt;     
 ## 2 2      &lt;NA&gt;     
 ## 3 2      &lt;NA&gt;     
-## # ... with 2,797 more rows</code></pre>
+## # … with 2,797 more rows</code></pre>
 <ul>
 <li>gender, education列が <em><code>&lt;fct&gt;</code></em> になっているので整数型になっている</li>
 </ul>
 </div>
-<div id="mu-kata-across" class="section level3" number="5.3.2">
-<h3><span class="header-section-number">5.3.2</span> 【効率化】複数の変数に対し一度の指定で実行</h3>
+<div id="mu-kata-across" class="section level3 hasAnchor" number="5.3.2">
+<h3><span class="header-section-number">5.3.2</span> 【効率化】複数の変数に対し一度の指定で実行<a href="mutate.html#mu-kata-across" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>変換したい変数が大量にあるときは上記の方法では大変</li>
 <li><code>across()</code>を使うと，指定した変数に対して同じ内容の処理なら <strong>1回</strong> ですむようになる
@@ -474,26 +473,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb138-2"><a href="mutate.html#cb138-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(gender, education),</span>
 <span id="cb138-3"><a href="mutate.html#cb138-3" aria-hidden="true" tabindex="-1"></a>                factor)) <span class="sc">%&gt;%</span> </span>
 <span id="cb138-4"><a href="mutate.html#cb138-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(gender, education)   <span class="co"># 結果表示のため冗長だが変わった変数だけselect</span></span></code></pre></div>
-<pre><code>## # A tibble: 2,800 x 2
+<pre><code>## # A tibble: 2,800 × 2
 ##   gender education
 ##   &lt;fct&gt;  &lt;fct&gt;    
 ## 1 1      &lt;NA&gt;     
 ## 2 2      &lt;NA&gt;     
 ## 3 2      &lt;NA&gt;     
-## # ... with 2,797 more rows</code></pre>
+## # … with 2,797 more rows</code></pre>
 <ul>
 <li>この場合，元の変数が上書きされるので，新しい列はできていない</li>
 </ul>
 </div>
-<div id="練習問題-10" class="section level3" number="5.3.3">
-<h3><span class="header-section-number">5.3.3</span> [練習問題]</h3>
+<div id="練習問題-10" class="section level3 hasAnchor" number="5.3.3">
+<h3><span class="header-section-number">5.3.3</span> [練習問題]<a href="mutate.html#練習問題-10" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>df_bfiデータの変数A1, A2, A3, A4, A5を因子型に変換し，この5つの変数に選択してデータフレームを表示させよう</li>
 </ul>
 </div>
 </div>
-<div id="mu-across" class="section level2" number="5.4">
-<h2><span class="header-section-number">5.4</span> across()の特徴</h2>
+<div id="mu-across" class="section level2 hasAnchor" number="5.4">
+<h2><span class="header-section-number">5.4</span> across()の特徴<a href="mutate.html#mu-across" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>変数の指定に<a href="select.html#select-helper">2.3</a>で解説したヘルパー関数が使える</li>
 </ul>
@@ -501,13 +500,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb140-2"><a href="mutate.html#cb140-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">starts_with</span>(<span class="st">&quot;n&quot;</span>),</span>
 <span id="cb140-3"><a href="mutate.html#cb140-3" aria-hidden="true" tabindex="-1"></a>                factor)) <span class="sc">%&gt;%</span> </span>
 <span id="cb140-4"><a href="mutate.html#cb140-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">&quot;n&quot;</span>))   <span class="co"># 結果表示のため</span></span></code></pre></div>
-<pre><code>## # A tibble: 2,800 x 5
+<pre><code>## # A tibble: 2,800 × 5
 ##   N1    N2    N3    N4    N5   
 ##   &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;
 ## 1 3     4     2     2     3    
 ## 2 3     3     3     5     5    
 ## 3 4     5     4     2     3    
-## # ... with 2,797 more rows</code></pre>
+## # … with 2,797 more rows</code></pre>
 <ul>
 <li>同じく<a href="select.html#select-cha">2.2.3</a>で解説した文字型の変数名も指定に使える</li>
 </ul>
@@ -517,15 +516,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb142-4"><a href="mutate.html#cb142-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(vars),</span>
 <span id="cb142-5"><a href="mutate.html#cb142-5" aria-hidden="true" tabindex="-1"></a>                factor)) <span class="sc">%&gt;%</span> </span>
 <span id="cb142-6"><a href="mutate.html#cb142-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">&quot;n&quot;</span>))   <span class="co"># 結果表示のため</span></span></code></pre></div>
-<pre><code>## # A tibble: 2,800 x 5
+<pre><code>## # A tibble: 2,800 × 5
 ##   N1    N2    N3    N4    N5   
 ##   &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;
 ## 1 3     4     2     2     3    
 ## 2 3     3     3     5     5    
 ## 3 4     5     4     2     3    
-## # ... with 2,797 more rows</code></pre>
-<div id="mu-across-list" class="section level3" number="5.4.1">
-<h3><span class="header-section-number">5.4.1</span> 【重要知識】新しい変数名にして追加</h3>
+## # … with 2,797 more rows</code></pre>
+<div id="mu-across-list" class="section level3 hasAnchor" number="5.4.1">
+<h3><span class="header-section-number">5.4.1</span> 【重要知識】新しい変数名にして追加<a href="mutate.html#mu-across-list" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>ここはこの後色々なところで出てくる方法のため理解しておきたい</li>
 <li>適用する関数をリストにする（<code>list()</code>に入れる）ことで，変数名を変更して追加できる</li>
@@ -540,27 +539,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb144-2"><a href="mutate.html#cb144-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(gender, education),</span>
 <span id="cb144-3"><a href="mutate.html#cb144-3" aria-hidden="true" tabindex="-1"></a>                <span class="fu">list</span>(<span class="at">f =</span> <span class="sc">~</span><span class="fu">factor</span>(.x)))) <span class="sc">%&gt;%</span> </span>
 <span id="cb144-4"><a href="mutate.html#cb144-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">matches</span>(<span class="st">&quot;gender|education&quot;</span>))   </span></code></pre></div>
-<pre><code>## # A tibble: 2,800 x 4
+<pre><code>## # A tibble: 2,800 × 4
 ##   gender education gender_f education_f
 ##    &lt;int&gt;     &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;      
 ## 1      1        NA 1        &lt;NA&gt;       
 ## 2      2        NA 2        &lt;NA&gt;       
 ## 3      2        NA 2        &lt;NA&gt;       
-## # ... with 2,797 more rows</code></pre>
+## # … with 2,797 more rows</code></pre>
 <ul>
 <li>因子型に変換した変数の末尾に_fがつく</li>
 <li>selectで<code>matches()</code>を使っているのは，新しく接尾辞が増えた変数を追加しているので入力を少なく効率的に表示させるため</li>
 </ul>
 </div>
-<div id="練習問題-11" class="section level3" number="5.4.2">
-<h3><span class="header-section-number">5.4.2</span> [練習問題]</h3>
+<div id="練習問題-11" class="section level3 hasAnchor" number="5.4.2">
+<h3><span class="header-section-number">5.4.2</span> [練習問題]<a href="mutate.html#練習問題-11" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>df_bfiデータの変数N1, N2, N3, N4, N5だけをすべて因子型に変換して変数名末尾に”_fct”を付けた変数を追加し，ヘルパー関数を使って選んで示そう</li>
 </ul>
 </div>
 </div>
-<div id="mu-total" class="section level2" number="5.5">
-<h2><span class="header-section-number">5.5</span> 合計点の作成</h2>
+<div id="mu-total" class="section level2 hasAnchor" number="5.5">
+<h2><span class="header-section-number">5.5</span> 合計点の作成<a href="mutate.html#mu-total" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>変数の四則演算の式を入れれば合計得点として計算された列をデータフレームに追加できる</li>
 </ul>
@@ -570,38 +569,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb146-4"><a href="mutate.html#cb146-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">neuroticism =</span> N1 <span class="sc">+</span> N2 <span class="sc">+</span> N3 <span class="sc">+</span> N4 <span class="sc">+</span> N5)</span>
 <span id="cb146-5"><a href="mutate.html#cb146-5" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb146-6"><a href="mutate.html#cb146-6" aria-hidden="true" tabindex="-1"></a>df_bfi_n</span></code></pre></div>
-<pre><code>## # A tibble: 2,800 x 6
+<pre><code>## # A tibble: 2,800 × 6
 ##      N1    N2    N3    N4    N5 neuroticism
 ##   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;       &lt;int&gt;
 ## 1     3     4     2     2     3          14
 ## 2     3     3     3     5     5          19
 ## 3     4     5     4     2     3          18
-## # ... with 2,797 more rows</code></pre>
+## # … with 2,797 more rows</code></pre>
 <ul>
 <li>別解として，変数の逆転項目を反映させた後に， <a href="mutate.html#mu-total-ef">5.9</a> で異なるやり方で合計した例を解説する
 <ul>
 <li>項目数が多い場合などはこちらの方が効率化できる場合も</li>
 </ul></li>
 </ul>
-<div id="mu-total-na" class="section level3" number="5.5.1">
-<h3><span class="header-section-number">5.5.1</span> 足し上げる変数に欠損値があるとどうなるか</h3>
+<div id="mu-total-na" class="section level3 hasAnchor" number="5.5.1">
+<h3><span class="header-section-number">5.5.1</span> 足し上げる変数に欠損値があるとどうなるか<a href="mutate.html#mu-total-na" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>欠損値については<a href="filter.html#filter-st-na">4.2.1</a>参照</li>
 <li>合計得点の計算の場合，対象となる変数の内1つでもNAがあれば合計点もNAとなる</li>
 </ul>
 <div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="mutate.html#cb148-1" aria-hidden="true" tabindex="-1"></a>df_bfi_n <span class="sc">%&gt;%</span> </span>
 <span id="cb148-2"><a href="mutate.html#cb148-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(neuroticism))     <span class="co"># neuroticismがNAなケースに限定</span></span></code></pre></div>
-<pre><code>## # A tibble: 106 x 6
+<pre><code>## # A tibble: 106 × 6
 ##      N1    N2    N3    N4    N5 neuroticism
 ##   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;       &lt;int&gt;
 ## 1     4     5     3     2    NA          NA
 ## 2    NA     2     1     2     2          NA
 ## 3     1     2     1     2    NA          NA
-## # ... with 103 more rows</code></pre>
+## # … with 103 more rows</code></pre>
 </div>
 </div>
-<div id="変数の値を数値から文字列に変える" class="section level2" number="5.6">
-<h2><span class="header-section-number">5.6</span> 変数の値を数値から文字列に変える</h2>
+<div id="変数の値を数値から文字列に変える" class="section level2 hasAnchor" number="5.6">
+<h2><span class="header-section-number">5.6</span> 変数の値を数値から文字列に変える<a href="mutate.html#変数の値を数値から文字列に変える" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>一度因子型に変換してから<code>forcats</code>パッケージの<code>fct_recode()</code>関数を使うと簡単
 <ul>
@@ -620,34 +619,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb150-4"><a href="mutate.html#cb150-4" aria-hidden="true" tabindex="-1"></a>                               <span class="at">male   =</span> <span class="st">&quot;1&quot;</span>,</span>
 <span id="cb150-5"><a href="mutate.html#cb150-5" aria-hidden="true" tabindex="-1"></a>                               <span class="at">female =</span> <span class="st">&quot;2&quot;</span>)) <span class="sc">%&gt;%</span> </span>
 <span id="cb150-6"><a href="mutate.html#cb150-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(gender, gender_c)</span></code></pre></div>
-<pre><code>## # A tibble: 2 x 3
+<pre><code>## # A tibble: 2 × 3
 ##   gender gender_c     n
 ##   &lt;fct&gt;  &lt;fct&gt;    &lt;int&gt;
 ## 1 1      male       919
 ## 2 2      female    1881</code></pre>
-<div id="練習問題-12" class="section level3" number="5.6.1">
-<h3><span class="header-section-number">5.6.1</span> [練習問題]</h3>
+<div id="練習問題-12" class="section level3 hasAnchor" number="5.6.1">
+<h3><span class="header-section-number">5.6.1</span> [練習問題]<a href="mutate.html#練習問題-12" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>df_bfiデータの変数educationを数値の値1～5を，それぞれ対応する”HS”, “finished HS”, “some college”, “college graduate”, “graduate degree”に変換して，ちゃんと変換されているかどうかcountで確認しよう</li>
 </ul>
 </div>
 </div>
-<div id="mu-seq" class="section level2" number="5.7">
-<h2><span class="header-section-number">5.7</span> 連番からIDの作成</h2>
+<div id="mu-seq" class="section level2 hasAnchor" number="5.7">
+<h2><span class="header-section-number">5.7</span> 連番からIDの作成<a href="mutate.html#mu-seq" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li><code>dplyr::row_number()</code>で行番号からIDを作成</li>
 </ul>
 <div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="mutate.html#cb152-1" aria-hidden="true" tabindex="-1"></a>df_bfi_n <span class="sc">%&gt;%</span> </span>
 <span id="cb152-2"><a href="mutate.html#cb152-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">row_number</span>())</span></code></pre></div>
-<pre><code>## # A tibble: 2,800 x 7
+<pre><code>## # A tibble: 2,800 × 7
 ##      N1    N2    N3    N4    N5 neuroticism    id
 ##   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;       &lt;int&gt; &lt;int&gt;
 ## 1     3     4     2     2     3          14     1
 ## 2     3     3     3     5     5          19     2
 ## 3     4     5     4     2     3          18     3
-## # ... with 2,797 more rows</code></pre>
-<div id="mu-seq-other" class="section level3" number="5.7.1">
-<h3><span class="header-section-number">5.7.1</span> 【別解】行の名前を直接変数化</h3>
+## # … with 2,797 more rows</code></pre>
+<div id="mu-seq-other" class="section level3 hasAnchor" number="5.7.1">
+<h3><span class="header-section-number">5.7.1</span> 【別解】行の名前を直接変数化<a href="mutate.html#mu-seq-other" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>実は<code>mutate()</code>を使わなくてもできて，データの最初に持ってこれる便利関数がある</li>
 <li><code>tibble::rowid_to_column()</code>
@@ -657,19 +656,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="mutate.html#cb154-1" aria-hidden="true" tabindex="-1"></a>df_bfi_n <span class="sc">%&gt;%</span> </span>
 <span id="cb154-2"><a href="mutate.html#cb154-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowid_to_column</span>(<span class="at">var =</span> <span class="st">&quot;id&quot;</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 2,800 x 7
+<pre><code>## # A tibble: 2,800 × 7
 ##      id    N1    N2    N3    N4    N5 neuroticism
 ##   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;       &lt;int&gt;
 ## 1     1     3     4     2     2     3          14
 ## 2     2     3     3     3     5     5          19
 ## 3     3     4     5     4     2     3          18
-## # ... with 2,797 more rows</code></pre>
+## # … with 2,797 more rows</code></pre>
 <div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="mutate.html#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="co"># この先使わないのでデータフレーム削除</span></span>
 <span id="cb156-2"><a href="mutate.html#cb156-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(df_bfi_n)</span></code></pre></div>
 </div>
 </div>
-<div id="mu-rev" class="section level2" number="5.8">
-<h2><span class="header-section-number">5.8</span> 逆転項目を作る</h2>
+<div id="mu-rev" class="section level2 hasAnchor" number="5.8">
+<h2><span class="header-section-number">5.8</span> 逆転項目を作る<a href="mutate.html#mu-rev" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>心理尺度などの場合，質問内容に対する回答選択肢の意味が，項目間で逆になるように設定されることがあり，合計点などを作る際に尺度の意味を適切に表すように，取りうる数値の範囲内で値を入れ替える作業が発生することがある
 <ul>
@@ -677,10 +676,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>例：「1. まったくあてはまらない ←→ 6. 非常にあてはまる」のルールを「いつも悲しい」項目に適用し，1の回答を6に置き換えれば，「いつも楽しい」とポジティブな方向で点数の意味がそろう</li>
 </ul></li>
 </ul>
-<div id="mu-rev-recode" class="section level3" number="5.8.1">
-<h3><span class="header-section-number">5.8.1</span> 逆転：recode</h3>
-<div id="mu-rev-check" class="section level4" number="5.8.1.1">
-<h4><span class="header-section-number">5.8.1.1</span> 逆転項目の確認</h4>
+<div id="mu-rev-recode" class="section level3 hasAnchor" number="5.8.1">
+<h3><span class="header-section-number">5.8.1</span> 逆転：recode<a href="mutate.html#mu-rev-recode" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="mu-rev-check" class="section level4 hasAnchor" number="5.8.1.1">
+<h4><span class="header-section-number">5.8.1.1</span> 逆転項目の確認<a href="mutate.html#mu-rev-check" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <ul>
 <li>bfiデータの場合，どの項目を逆転する必要があるかを示す情報（
 「<code>-変数名</code>」で表現）がパッケージに含まれている
@@ -690,8 +689,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>したがって，“-A1”, “-C4”, “-C5”, “-E1”, “-E2”, “-O2”, “-O5”が対象</li>
 </ul>
 </div>
-<div id="mu-rev-recode1" class="section level4" number="5.8.1.2">
-<h4><span class="header-section-number">5.8.1.2</span> 変数1つを逆転</h4>
+<div id="mu-rev-recode1" class="section level4 hasAnchor" number="5.8.1.2">
+<h4><span class="header-section-number">5.8.1.2</span> 変数1つを逆転<a href="mutate.html#mu-rev-recode1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <ul>
 <li><code>dplyr::recode()</code>を使用</li>
 <li>対象の変数を<code>recode()</code>の第一引数に，入れ替えたい値を<code>old = new</code>で並べていく
@@ -709,16 +708,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb157-2"><a href="mutate.html#cb157-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">A1_r =</span> <span class="fu">recode</span>(A1, <span class="st">`</span><span class="at">1</span><span class="st">`</span> <span class="ot">=</span> 6L, <span class="st">`</span><span class="at">2</span><span class="st">`</span> <span class="ot">=</span> 5L, <span class="st">`</span><span class="at">3</span><span class="st">`</span> <span class="ot">=</span> 4L,      </span>
 <span id="cb157-3"><a href="mutate.html#cb157-3" aria-hidden="true" tabindex="-1"></a>                           <span class="st">`</span><span class="at">4</span><span class="st">`</span> <span class="ot">=</span> 3L, <span class="st">`</span><span class="at">5</span><span class="st">`</span> <span class="ot">=</span> 2L, <span class="st">`</span><span class="at">6</span><span class="st">`</span> <span class="ot">=</span> 1L)) <span class="sc">%&gt;%</span> </span>
 <span id="cb157-4"><a href="mutate.html#cb157-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(A1, A1_r)</span></code></pre></div>
-<pre><code>## # A tibble: 2,800 x 2
+<pre><code>## # A tibble: 2,800 × 2
 ##      A1  A1_r
 ##   &lt;int&gt; &lt;int&gt;
 ## 1     2     5
 ## 2     2     5
 ## 3     5     2
-## # ... with 2,797 more rows</code></pre>
+## # … with 2,797 more rows</code></pre>
 </div>
-<div id="mu-rev-recode2" class="section level4" number="5.8.1.3">
-<h4><span class="header-section-number">5.8.1.3</span> 変数2つ以上を逆転</h4>
+<div id="mu-rev-recode2" class="section level4 hasAnchor" number="5.8.1.3">
+<h4><span class="header-section-number">5.8.1.3</span> 変数2つ以上を逆転<a href="mutate.html#mu-rev-recode2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <ul>
 <li>A1と同様に同じ形をくり返し変数名だけ変えていけばできるが，コードが長くなりミスも生じやすくなる</li>
 </ul>
@@ -728,16 +727,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb159-4"><a href="mutate.html#cb159-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">C4_r =</span> <span class="fu">recode</span>(C4, <span class="st">`</span><span class="at">1</span><span class="st">`</span> <span class="ot">=</span> 6L, <span class="st">`</span><span class="at">2</span><span class="st">`</span> <span class="ot">=</span> 5L, <span class="st">`</span><span class="at">3</span><span class="st">`</span> <span class="ot">=</span> 4L, </span>
 <span id="cb159-5"><a href="mutate.html#cb159-5" aria-hidden="true" tabindex="-1"></a>                           <span class="st">`</span><span class="at">4</span><span class="st">`</span> <span class="ot">=</span> 3L, <span class="st">`</span><span class="at">5</span><span class="st">`</span> <span class="ot">=</span> 2L, <span class="st">`</span><span class="at">6</span><span class="st">`</span> <span class="ot">=</span> 1L)) <span class="sc">%&gt;%</span> </span>
 <span id="cb159-6"><a href="mutate.html#cb159-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(A1, A1_r, C4, C4_r)</span></code></pre></div>
-<pre><code>## # A tibble: 2,800 x 4
+<pre><code>## # A tibble: 2,800 × 4
 ##      A1  A1_r    C4  C4_r
 ##   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
 ## 1     2     5     4     3
 ## 2     2     5     3     4
 ## 3     5     2     2     5
-## # ... with 2,797 more rows</code></pre>
+## # … with 2,797 more rows</code></pre>
 </div>
-<div id="mu-rev-recode2ef" class="section level4" number="5.8.1.4">
-<h4><span class="header-section-number">5.8.1.4</span> 【効率化】 変数2つ以上を逆転</h4>
+<div id="mu-rev-recode2ef" class="section level4 hasAnchor" number="5.8.1.4">
+<h4><span class="header-section-number">5.8.1.4</span> 【効率化】 変数2つ以上を逆転<a href="mutate.html#mu-rev-recode2ef" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <ul>
 <li><a href="mutate.html#mu-across-list">5.4.1</a> で解説したlistに関数を入れる方法
 <ul>
@@ -749,17 +748,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb161-3"><a href="mutate.html#cb161-3" aria-hidden="true" tabindex="-1"></a>                <span class="fu">list</span>(<span class="at">r =</span> <span class="sc">~</span><span class="fu">recode</span>(.x, <span class="st">`</span><span class="at">1</span><span class="st">`</span> <span class="ot">=</span> 6L, <span class="st">`</span><span class="at">2</span><span class="st">`</span> <span class="ot">=</span> 5L, <span class="st">`</span><span class="at">3</span><span class="st">`</span> <span class="ot">=</span> 4L, </span>
 <span id="cb161-4"><a href="mutate.html#cb161-4" aria-hidden="true" tabindex="-1"></a>                                     <span class="st">`</span><span class="at">4</span><span class="st">`</span> <span class="ot">=</span> 3L, <span class="st">`</span><span class="at">5</span><span class="st">`</span> <span class="ot">=</span> 2L, <span class="st">`</span><span class="at">6</span><span class="st">`</span> <span class="ot">=</span> 1L)))) <span class="sc">%&gt;%</span> </span>
 <span id="cb161-5"><a href="mutate.html#cb161-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(A1, A1_r, C4, C4_r)</span></code></pre></div>
-<pre><code>## # A tibble: 2,800 x 4
+<pre><code>## # A tibble: 2,800 × 4
 ##      A1  A1_r    C4  C4_r
 ##   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
 ## 1     2     5     4     3
 ## 2     2     5     3     4
 ## 3     5     2     2     5
-## # ... with 2,797 more rows</code></pre>
+## # … with 2,797 more rows</code></pre>
 </div>
 </div>
-<div id="mu-rev-rule1" class="section level3" number="5.8.2">
-<h3><span class="header-section-number">5.8.2</span> 【別解】逆転（公式）</h3>
+<div id="mu-rev-rule1" class="section level3 hasAnchor" number="5.8.2">
+<h3><span class="header-section-number">5.8.2</span> 【別解】逆転（公式）<a href="mutate.html#mu-rev-rule1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>項目を反転する公式が「(max + min) - 回答値」であることを利用
 <ul>
@@ -774,15 +773,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb163-5"><a href="mutate.html#cb163-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">A1_r =</span> max <span class="sc">+</span> min <span class="sc">-</span> A1,</span>
 <span id="cb163-6"><a href="mutate.html#cb163-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">C4_r =</span> max <span class="sc">+</span> min <span class="sc">-</span> C4) <span class="sc">%&gt;%</span> </span>
 <span id="cb163-7"><a href="mutate.html#cb163-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(A1, A1_r, C4, C4_r)</span></code></pre></div>
-<pre><code>## # A tibble: 2,800 x 4
+<pre><code>## # A tibble: 2,800 × 4
 ##      A1  A1_r    C4  C4_r
 ##   &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;
 ## 1     2     5     4     3
 ## 2     2     5     3     4
 ## 3     5     2     2     5
-## # ... with 2,797 more rows</code></pre>
-<div id="mu-rev-rule2" class="section level4" number="5.8.2.1">
-<h4><span class="header-section-number">5.8.2.1</span> 【効率化】 変数2つ以上を逆転</h4>
+## # … with 2,797 more rows</code></pre>
+<div id="mu-rev-rule2" class="section level4 hasAnchor" number="5.8.2.1">
+<h4><span class="header-section-number">5.8.2.1</span> 【効率化】 変数2つ以上を逆転<a href="mutate.html#mu-rev-rule2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <ul>
 <li>「<code>~</code>」の後に計算式がきても動く</li>
 <li>ここでは，<code>max + min - .x</code> の<code>.x</code>に<code>across()</code>内に置かれた変数が入っていく</li>
@@ -791,17 +790,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb165-2"><a href="mutate.html#cb165-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(A1,C4),</span>
 <span id="cb165-3"><a href="mutate.html#cb165-3" aria-hidden="true" tabindex="-1"></a>                <span class="fu">list</span>(<span class="at">r =</span> <span class="sc">~</span> max <span class="sc">+</span> min <span class="sc">-</span> .x))) <span class="sc">%&gt;%</span> </span>
 <span id="cb165-4"><a href="mutate.html#cb165-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(A1, A1_r, C4, C4_r)</span></code></pre></div>
-<pre><code>## # A tibble: 2,800 x 4
+<pre><code>## # A tibble: 2,800 × 4
 ##      A1  A1_r    C4  C4_r
 ##   &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;
 ## 1     2     5     4     3
 ## 2     2     5     3     4
 ## 3     5     2     2     5
-## # ... with 2,797 more rows</code></pre>
+## # … with 2,797 more rows</code></pre>
 </div>
 </div>
-<div id="mu-rev-casewhen1" class="section level3" number="5.8.3">
-<h3><span class="header-section-number">5.8.3</span> 【別解】逆転（case_when）</h3>
+<div id="mu-rev-casewhen1" class="section level3 hasAnchor" number="5.8.3">
+<h3><span class="header-section-number">5.8.3</span> 【別解】逆転（case_when）<a href="mutate.html#mu-rev-casewhen1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>条件式の<code>==</code>を使って値を変換することもできる。こちらだと条件式の内容や複数の変数の組み合わせなど幅広い応用が可能に</li>
 </ul>
@@ -813,15 +812,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb167-6"><a href="mutate.html#cb167-6" aria-hidden="true" tabindex="-1"></a>                          A1 <span class="sc">==</span> <span class="dv">5</span> <span class="sc">~</span> 2L,</span>
 <span id="cb167-7"><a href="mutate.html#cb167-7" aria-hidden="true" tabindex="-1"></a>                          A1 <span class="sc">==</span> <span class="dv">6</span> <span class="sc">~</span> 1L)) <span class="sc">%&gt;%</span> </span>
 <span id="cb167-8"><a href="mutate.html#cb167-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(A1, A1_r)</span></code></pre></div>
-<pre><code>## # A tibble: 2,800 x 2
+<pre><code>## # A tibble: 2,800 × 2
 ##      A1  A1_r
 ##   &lt;int&gt; &lt;int&gt;
 ## 1     2     5
 ## 2     2     5
 ## 3     5     2
-## # ... with 2,797 more rows</code></pre>
-<div id="mu-rev-casewhen2" class="section level4" number="5.8.3.1">
-<h4><span class="header-section-number">5.8.3.1</span> 【効率化】 変数2つ以上を逆転</h4>
+## # … with 2,797 more rows</code></pre>
+<div id="mu-rev-casewhen2" class="section level4 hasAnchor" number="5.8.3.1">
+<h4><span class="header-section-number">5.8.3.1</span> 【効率化】 変数2つ以上を逆転<a href="mutate.html#mu-rev-casewhen2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="mutate.html#cb169-1" aria-hidden="true" tabindex="-1"></a>df_bfi <span class="sc">%&gt;%</span> </span>
 <span id="cb169-2"><a href="mutate.html#cb169-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(A1,C4),</span>
 <span id="cb169-3"><a href="mutate.html#cb169-3" aria-hidden="true" tabindex="-1"></a>                <span class="fu">list</span>(<span class="at">r =</span> <span class="sc">~</span><span class="fu">case_when</span>(.x <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> 6L,</span>
@@ -832,17 +831,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb169-8"><a href="mutate.html#cb169-8" aria-hidden="true" tabindex="-1"></a>                                    .x <span class="sc">==</span> <span class="dv">6</span> <span class="sc">~</span> 1L)))</span>
 <span id="cb169-9"><a href="mutate.html#cb169-9" aria-hidden="true" tabindex="-1"></a>         ) <span class="sc">%&gt;%</span> </span>
 <span id="cb169-10"><a href="mutate.html#cb169-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(A1, A1_r, C4, C4_r)</span></code></pre></div>
-<pre><code>## # A tibble: 2,800 x 4
+<pre><code>## # A tibble: 2,800 × 4
 ##      A1  A1_r    C4  C4_r
 ##   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
 ## 1     2     5     4     3
 ## 2     2     5     3     4
 ## 3     5     2     2     5
-## # ... with 2,797 more rows</code></pre>
+## # … with 2,797 more rows</code></pre>
 </div>
 </div>
-<div id="練習問題-13" class="section level3" number="5.8.4">
-<h3><span class="header-section-number">5.8.4</span> [練習問題]</h3>
+<div id="練習問題-13" class="section level3 hasAnchor" number="5.8.4">
+<h3><span class="header-section-number">5.8.4</span> [練習問題]<a href="mutate.html#練習問題-13" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>df_bfiデータですべての逆転項目を逆転してdf_bfiに格納しよう
 <ul>
@@ -852,8 +851,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 </div>
 </div>
-<div id="mu-total-ef" class="section level2" number="5.9">
-<h2><span class="header-section-number">5.9</span> 【別解】合計点の作成</h2>
+<div id="mu-total-ef" class="section level2 hasAnchor" number="5.9">
+<h2><span class="header-section-number">5.9</span> 【別解】合計点の作成<a href="mutate.html#mu-total-ef" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li><a href="mutate.html#mu-total">5.5</a>の別解として，ここですべての合計点を作成する</li>
 <li><code>base::rowSums()</code>
@@ -900,39 +899,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb171-35"><a href="mutate.html#cb171-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">Neuroticism   =</span> <span class="fu">rowSums</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(Ne))),</span>
 <span id="cb171-36"><a href="mutate.html#cb171-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">Openness      =</span> <span class="fu">rowSums</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(Op)))</span>
 <span id="cb171-37"><a href="mutate.html#cb171-37" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div>
-<div id="確認" class="section level3" number="5.9.1">
-<h3><span class="header-section-number">5.9.1</span> 【確認】</h3>
+<div id="確認" class="section level3 hasAnchor" number="5.9.1">
+<h3><span class="header-section-number">5.9.1</span> 【確認】<a href="mutate.html#確認" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>変数の中にNAが入る場合は合計もNAになる。</li>
 <li>rowSums(across(all_of(Op)), <strong>na.rm = TRUE</strong>)と引数を追加すれば，NAを無視して合計できる</li>
 </ul>
 <div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="mutate.html#cb172-1" aria-hidden="true" tabindex="-1"></a>df_bfi <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">all_of</span>(Ag), Agree)</span></code></pre></div>
-<pre><code>## # A tibble: 2,800 x 6
+<pre><code>## # A tibble: 2,800 × 6
 ##    A1_r    A2    A3    A4    A5 Agree
 ##   &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt;
 ## 1     5     4     3     4     4    20
 ## 2     5     4     5     2     5    21
 ## 3     2     4     5     4     4    19
-## # ... with 2,797 more rows</code></pre>
+## # … with 2,797 more rows</code></pre>
 <div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="mutate.html#cb174-1" aria-hidden="true" tabindex="-1"></a>df_bfi <span class="sc">%&gt;%</span> </span>
 <span id="cb174-2"><a href="mutate.html#cb174-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">all_of</span>(Ex), Extraversion) <span class="sc">%&gt;%</span> </span>
 <span id="cb174-3"><a href="mutate.html#cb174-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(Extraversion))</span></code></pre></div>
-<pre><code>## # A tibble: 87 x 6
+<pre><code>## # A tibble: 87 × 6
 ##    E1_r  E2_r    E3    E4    E5 Extraversion
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;        &lt;dbl&gt;
 ## 1     2     4    NA     4     3           NA
 ## 2     6     6     4     4    NA           NA
 ## 3     2    NA     3     2     3           NA
-## # ... with 84 more rows</code></pre>
+## # … with 84 more rows</code></pre>
 <ul>
 <li><code>rowSums()</code>を<code>base::rowMeans()</code>に変えれば平均値も計算できる</li>
 </ul>
 </div>
 </div>
-<div id="連続変数をカテゴリに区分する" class="section level2" number="5.10">
-<h2><span class="header-section-number">5.10</span> 連続変数をカテゴリに区分する</h2>
-<div id="分布の把握" class="section level3" number="5.10.1">
-<h3><span class="header-section-number">5.10.1</span> 分布の把握</h3>
+<div id="連続変数をカテゴリに区分する" class="section level2 hasAnchor" number="5.10">
+<h2><span class="header-section-number">5.10</span> 連続変数をカテゴリに区分する<a href="mutate.html#連続変数をカテゴリに区分する" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="分布の把握" class="section level3 hasAnchor" number="5.10.1">
+<h3><span class="header-section-number">5.10.1</span> 分布の把握<a href="mutate.html#分布の把握" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>変数ageのヒストグラムを描き，分布を確認する</li>
 <li>グラフ作成パッケージ<code>ggplot2</code>でどんなグラフが作れるかは著者作成の辞書参照
@@ -957,8 +956,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb179-2"><a href="mutate.html#cb179-2" aria-hidden="true" tabindex="-1"></a><span class="co"># df_bfi %&gt;% </span></span>
 <span id="cb179-3"><a href="mutate.html#cb179-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   summarise(median(age))</span></span></code></pre></div>
 </div>
-<div id="数値変数の値で2区分のカテゴリ変数を作る" class="section level3" number="5.10.2">
-<h3><span class="header-section-number">5.10.2</span> 数値変数の値で2区分のカテゴリ変数を作る</h3>
+<div id="数値変数の値で2区分のカテゴリ変数を作る" class="section level3 hasAnchor" number="5.10.2">
+<h3><span class="header-section-number">5.10.2</span> 数値変数の値で2区分のカテゴリ変数を作る<a href="mutate.html#数値変数の値で2区分のカテゴリ変数を作る" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li><code>dplyr::if_else()</code>で条件式（TRUEまたはFALSEを返すもの）によって値を2区分する</li>
 <li>構造：<code>if_else(条件式, TRUEの場合の値, FALSEの場合の値)</code>
@@ -973,13 +972,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb180-4"><a href="mutate.html#cb180-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(age, age2)</span>
 <span id="cb180-5"><a href="mutate.html#cb180-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb180-6"><a href="mutate.html#cb180-6" aria-hidden="true" tabindex="-1"></a>res_age2 <span class="sc">%&gt;%</span> <span class="fu">count</span>(age2) </span></code></pre></div>
-<pre><code>## # A tibble: 2 x 2
+<pre><code>## # A tibble: 2 × 2
 ##    age2     n
 ##   &lt;dbl&gt; &lt;int&gt;
 ## 1     0  1495
 ## 2     1  1305</code></pre>
-<div id="確認-1" class="section level4" number="5.10.2.1">
-<h4><span class="header-section-number">5.10.2.1</span> 確認</h4>
+<div id="確認-1" class="section level4 hasAnchor" number="5.10.2.1">
+<h4><span class="header-section-number">5.10.2.1</span> 確認<a href="mutate.html#確認-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <ul>
 <li><code>age &gt;= 27</code>が1，27未満が0にコーディングされているか<code>filter()</code>で限定して確認</li>
 </ul>
@@ -987,7 +986,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb182-2"><a href="mutate.html#cb182-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(age <span class="sc">&gt;=</span> <span class="dv">20</span> <span class="sc">&amp;</span> age <span class="sc">&lt;=</span> <span class="dv">30</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb182-3"><a href="mutate.html#cb182-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(age, age2) <span class="sc">%&gt;%</span> </span>
 <span id="cb182-4"><a href="mutate.html#cb182-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="at">n =</span> <span class="dv">11</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 11 x 3
+<pre><code>## # A tibble: 11 × 3
 ##      age  age2     n
 ##    &lt;int&gt; &lt;dbl&gt; &lt;int&gt;
 ##  1    20     0   212
@@ -1010,7 +1009,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="mutate.html#cb184-1" aria-hidden="true" tabindex="-1"></a>res_age2 <span class="sc">%&gt;%</span> </span>
 <span id="cb184-2"><a href="mutate.html#cb184-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(age, age2) <span class="sc">%&gt;%</span> </span>
 <span id="cb184-3"><a href="mutate.html#cb184-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, (<span class="fu">n</span>()<span class="sc">-</span><span class="dv">2</span>)<span class="sc">:</span><span class="fu">n</span>())</span></code></pre></div>
-<pre><code>## # A tibble: 6 x 3
+<pre><code>## # A tibble: 6 × 3
 ##     age  age2     n
 ##   &lt;int&gt; &lt;dbl&gt; &lt;int&gt;
 ## 1     3     0     1
@@ -1020,15 +1019,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5    74     1     1
 ## 6    86     1     1</code></pre>
 </div>
-<div id="別解確認" class="section level4" number="5.10.2.2">
-<h4><span class="header-section-number">5.10.2.2</span> 【別解】確認</h4>
+<div id="別解確認" class="section level4 hasAnchor" number="5.10.2.2">
+<h4><span class="header-section-number">5.10.2.2</span> 【別解】確認<a href="mutate.html#別解確認" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <ul>
 <li>長くなるがこちらの方が覚えやすいかも</li>
 </ul>
 <div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="mutate.html#cb186-1" aria-hidden="true" tabindex="-1"></a>res_age2 <span class="sc">%&gt;%</span> </span>
 <span id="cb186-2"><a href="mutate.html#cb186-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(age, age2) <span class="sc">%&gt;%</span> </span>
 <span id="cb186-3"><a href="mutate.html#cb186-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">3</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 3 x 3
+<pre><code>## # A tibble: 3 × 3
 ##     age  age2     n
 ##   &lt;int&gt; &lt;dbl&gt; &lt;int&gt;
 ## 1     3     0     1
@@ -1037,7 +1036,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="mutate.html#cb188-1" aria-hidden="true" tabindex="-1"></a>res_age2 <span class="sc">%&gt;%</span> </span>
 <span id="cb188-2"><a href="mutate.html#cb188-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(age, age2) <span class="sc">%&gt;%</span> </span>
 <span id="cb188-3"><a href="mutate.html#cb188-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_tail</span>(<span class="at">n =</span> <span class="dv">3</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 3 x 3
+<pre><code>## # A tibble: 3 × 3
 ##     age  age2     n
 ##   &lt;int&gt; &lt;dbl&gt; &lt;int&gt;
 ## 1    72     1     1
@@ -1046,8 +1045,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="mutate.html#cb190-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(res_age2)</span></code></pre></div>
 </div>
 </div>
-<div id="数値変数の値で3区分以上のカテゴリ変数を作る" class="section level3" number="5.10.3">
-<h3><span class="header-section-number">5.10.3</span> 数値変数の値で3区分以上のカテゴリ変数を作る</h3>
+<div id="数値変数の値で3区分以上のカテゴリ変数を作る" class="section level3 hasAnchor" number="5.10.3">
+<h3><span class="header-section-number">5.10.3</span> 数値変数の値で3区分以上のカテゴリ変数を作る<a href="mutate.html#数値変数の値で3区分以上のカテゴリ変数を作る" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>年齢層を10歳区切りでカテゴリ化</li>
 </ul>
@@ -1069,23 +1068,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb191-16"><a href="mutate.html#cb191-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(age, age6) <span class="sc">%&gt;%</span> </span>
 <span id="cb191-17"><a href="mutate.html#cb191-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span> <span class="co"># ランダムに10件抽出</span></span>
 <span id="cb191-18"><a href="mutate.html#cb191-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(age)             <span class="co"># ageをキーに行を昇順にソート</span></span></code></pre></div>
-<pre><code>## # A tibble: 10 x 3
+<pre><code>## # A tibble: 10 × 3
 ##      age age6         n
 ##    &lt;int&gt; &lt;chr&gt;    &lt;int&gt;
-##  1    21 20-29歳    144
-##  2    25 20-29歳    113
-##  3    26 20-29歳     99
-##  4    32 30-39歳     66
-##  5    40 40-49歳     56
-##  6    49 40-49歳     16
-##  7    55 50-59歳     17
-##  8    65 60歳以上     1
-##  9    66 60歳以上     1
-## 10    67 60歳以上     3</code></pre>
+##  1    12 20歳未満    28
+##  2    19 20歳未満   190
+##  3    23 20-29歳    138
+##  4    30 30-39歳     65
+##  5    33 30-39歳     50
+##  6    38 30-39歳     52
+##  7    43 40-49歳     37
+##  8    48 40-49歳     30
+##  9    56 50-59歳     17
+## 10    86 60歳以上     1</code></pre>
 <div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="mutate.html#cb193-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(res_age6)</span></code></pre></div>
 </div>
-<div id="練習問題-14" class="section level3" number="5.10.4">
-<h3><span class="header-section-number">5.10.4</span> [練習問題]</h3>
+<div id="練習問題-14" class="section level3 hasAnchor" number="5.10.4">
+<h3><span class="header-section-number">5.10.4</span> [練習問題]<a href="mutate.html#練習問題-14" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>df_bfiデータの年齢層を以下の基準でカテゴリ化した変数”age4”を作成しよう
 <ul>

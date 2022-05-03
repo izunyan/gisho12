@@ -3,7 +3,7 @@ site: bookdown::bookdown_site
 title:  "がんばらないデータ加工"
 subtitle: "Rによるくり返し作業入門  前編"
 author: "やわらかクジラ"
-github-repo: https://github.com/izunyan/gisho12.git
+github-repo: izunyan/gisho12.git
 cover-image: images/cover.png
 documentclass: bxjsbook
 classoption: xelatex,ja=standard, b5paper

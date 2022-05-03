@@ -6,14 +6,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6 要約値を作る：summarise | がんばらないデータ加工</title>
   <meta name="description" content="6 要約値を作る：summarise | がんばらないデータ加工" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6 要約値を作る：summarise | がんばらないデータ加工" />
   <meta property="og:type" content="book" />
-  
   <meta property="og:image" content="/images/cover.png" />
   
-  <meta name="github-repo" content="https://github.com/izunyan/gisho12.git" />
+  <meta name="github-repo" content="izunyan/gisho12.git" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="6 要約値を作る：summarise | がんばらないデータ加工" />
@@ -32,7 +31,6 @@
   
 <link rel="prev" href="mutate.html"/>
 <link rel="next" href="atogaki.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -50,8 +48,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -325,8 +324,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="summarise" class="section level1" number="6">
-<h1><span class="header-section-number">6</span> 要約値を作る：summarise</h1>
+<div id="summarise" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">6</span> 要約値を作る：summarise<a href="summarise.html#summarise" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <ul>
 <li>本章のポイント
 <ul>
@@ -336,8 +335,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>便利な要約パッケージが色々あるものの，<code>summarise()</code>は柔軟な出力が可能なので使いこなせると役に立つ</li>
 </ul></li>
 </ul>
-<div id="su-st" class="section level2" number="6.1">
-<h2><span class="header-section-number">6.1</span> 基本</h2>
+<div id="su-st" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> 基本<a href="summarise.html#su-st" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li><code>summarise()</code>の中に出力したい変数名を書き，<code>=</code>の後に計算する関数を入れる</li>
 <li>例：bill_length_mmの平均値を算出する</li>
@@ -348,13 +347,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb194-3"><a href="summarise.html#cb194-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb194-4"><a href="summarise.html#cb194-4" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
 <span id="cb194-5"><a href="summarise.html#cb194-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(blm_平均値 <span class="ot">=</span> <span class="fu">mean</span>(bill_length_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
-<pre><code>## # A tibble: 1 x 1
+<pre><code>## # A tibble: 1 × 1
 ##   blm_平均値
 ##        &lt;dbl&gt;
 ## 1       43.9</code></pre>
 </div>
-<div id="su-st-multiple" class="section level2" number="6.2">
-<h2><span class="header-section-number">6.2</span> 複数の計算</h2>
+<div id="su-st-multiple" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> 複数の計算<a href="summarise.html#su-st-multiple" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>複数の変数について平均値と標準偏差（SD）と人数（n）を出したいときは，基本知識では全部書くので長くなる
 <ul>
@@ -369,12 +368,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb196-5"><a href="summarise.html#cb196-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">bdm_sd =</span> <span class="fu">sd</span>(bill_depth_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
 <span id="cb196-6"><a href="summarise.html#cb196-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">blm_n  =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(bill_length_mm)),</span>
 <span id="cb196-7"><a href="summarise.html#cb196-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">bdm_n  =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(bill_depth_mm)))</span></code></pre></div>
-<pre><code>## # A tibble: 1 x 6
+<pre><code>## # A tibble: 1 × 6
 ##   blm_mean bdm_mean blm_sd bdm_sd blm_n bdm_n
 ##      &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt; &lt;int&gt;
 ## 1     43.9     17.2   5.46   1.97   342   342</code></pre>
-<div id="su-st-ef" class="section level3" number="6.2.1">
-<h3><span class="header-section-number">6.2.1</span> 【効率化】</h3>
+<div id="su-st-ef" class="section level3 hasAnchor" number="6.2.1">
+<h3><span class="header-section-number">6.2.1</span> 【効率化】<a href="summarise.html#su-st-ef" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li><a href="mutate.html#mu-kata-across">5.3.2</a>で出てきた<code>across()</code>がここでも有用</li>
 <li><code>across()</code>の第一引数に指定したい変数名ベクトル，またはヘルパー関数を入れる</li>
@@ -385,11 +384,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb198-3"><a href="summarise.html#cb198-3" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">list</span>(<span class="at">mean =</span> <span class="sc">~</span><span class="fu">mean</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
 <span id="cb198-4"><a href="summarise.html#cb198-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">sd =</span> <span class="sc">~</span><span class="fu">sd</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
 <span id="cb198-5"><a href="summarise.html#cb198-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">n =</span> <span class="sc">~</span><span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(.x)))))</span></code></pre></div>
-<pre><code>## # A tibble: 1 x 6
+<pre><code>## # A tibble: 1 × 6
 ##   bill_length_mm_mean bill_length_mm_sd bill_length_mm_n
 ##                 &lt;dbl&gt;             &lt;dbl&gt;            &lt;int&gt;
 ## 1                43.9              5.46              342
-## # ... with 3 more variables: bill_depth_mm_mean &lt;dbl&gt;,
+## # … with 3 more variables: bill_depth_mm_mean &lt;dbl&gt;,
 ## #   bill_depth_mm_sd &lt;dbl&gt;, bill_depth_mm_n &lt;int&gt;</code></pre>
 <ul>
 <li><code>across()</code>ではヘルパー関数が使える</li>
@@ -399,15 +398,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb200-3"><a href="summarise.html#cb200-3" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">list</span>(<span class="at">mean =</span> <span class="sc">~</span><span class="fu">mean</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
 <span id="cb200-4"><a href="summarise.html#cb200-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">sd =</span> <span class="sc">~</span><span class="fu">sd</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
 <span id="cb200-5"><a href="summarise.html#cb200-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">n =</span> <span class="sc">~</span><span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(.x)))))</span></code></pre></div>
-<pre><code>## # A tibble: 1 x 6
+<pre><code>## # A tibble: 1 × 6
 ##   bill_length_mm_mean bill_length_mm_sd bill_length_mm_n
 ##                 &lt;dbl&gt;             &lt;dbl&gt;            &lt;int&gt;
 ## 1                43.9              5.46              342
-## # ... with 3 more variables: bill_depth_mm_mean &lt;dbl&gt;,
+## # … with 3 more variables: bill_depth_mm_mean &lt;dbl&gt;,
 ## #   bill_depth_mm_sd &lt;dbl&gt;, bill_depth_mm_n &lt;int&gt;</code></pre>
 </div>
-<div id="su-st-reorder" class="section level3" number="6.2.2">
-<h3><span class="header-section-number">6.2.2</span> 【並び替え】</h3>
+<div id="su-st-reorder" class="section level3 hasAnchor" number="6.2.2">
+<h3><span class="header-section-number">6.2.2</span> 【並び替え】<a href="summarise.html#su-st-reorder" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>上記の出力は横に長いため見にくい</li>
 <li><code>tidyr::pivot_longer()</code>で，データフレームの行列入れ替えができる</li>
@@ -422,7 +421,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb202-6"><a href="summarise.html#cb202-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(),</span>
 <span id="cb202-7"><a href="summarise.html#cb202-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">&quot;items&quot;</span>, <span class="st">&quot;.value&quot;</span>), <span class="co"># &quot;.value&quot;の部分を列名に</span></span>
 <span id="cb202-8"><a href="summarise.html#cb202-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_pattern =</span> <span class="st">&quot;(.*)_(.*)&quot;</span>) 　  <span class="co"># 正規表現</span></span></code></pre></div>
-<pre><code>## # A tibble: 4 x 4
+<pre><code>## # A tibble: 4 × 4
 ##   items               mean     sd     n
 ##   &lt;chr&gt;              &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt;
 ## 1 bill_length_mm      43.9   5.46   342
@@ -430,16 +429,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 3 flipper_length_mm  201.   14.1    342
 ## 4 body_mass_g       4202.  802.     342</code></pre>
 </div>
-<div id="練習問題-15" class="section level3" number="6.2.3">
-<h3><span class="header-section-number">6.2.3</span> [練習問題]</h3>
+<div id="練習問題-15" class="section level3 hasAnchor" number="6.2.3">
+<h3><span class="header-section-number">6.2.3</span> [練習問題]<a href="summarise.html#練習問題-15" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>dfデータの変数名に”length”を含む変数に対して平均値とSDとnを計算したデータフレームを作成して”res”オブジェクトに格納しよう</li>
 <li>次に作成したデータフレームを<code>pivot_longer()</code>を使って見やすいように縦に変換しよう</li>
 </ul>
 </div>
 </div>
-<div id="su-group" class="section level2" number="6.3">
-<h2><span class="header-section-number">6.3</span> 層別（グループ別）集計</h2>
+<div id="su-group" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> 層別（グループ別）集計<a href="summarise.html#su-group" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li><code>group_by()</code>にグループを表す変数を指定するとできる</li>
 </ul>
@@ -448,13 +447,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb204-3"><a href="summarise.html#cb204-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">c</span>(bill_length_mm, bill_depth_mm),</span>
 <span id="cb204-4"><a href="summarise.html#cb204-4" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">list</span>(<span class="at">mean =</span> <span class="sc">~</span><span class="fu">mean</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
 <span id="cb204-5"><a href="summarise.html#cb204-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">sd =</span> <span class="sc">~</span><span class="fu">sd</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))))</span></code></pre></div>
-<pre><code>## # A tibble: 3 x 5
-##   species   bill_length_mm_mean bill_length_mm_~ bill_depth_mm_m~
+<pre><code>## # A tibble: 3 × 5
+##   species   bill_length_mm_mean bill_length_mm_… bill_depth_mm_m…
 ##   &lt;fct&gt;                   &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
 ## 1 Adelie                   38.8             2.66             18.3
 ## 2 Chinstrap                48.8             3.34             18.4
 ## 3 Gentoo                   47.5             3.08             15.0
-## # ... with 1 more variable: bill_depth_mm_sd &lt;dbl&gt;</code></pre>
+## # … with 1 more variable: bill_depth_mm_sd &lt;dbl&gt;</code></pre>
 <ul>
 <li>グループを重ねることも可能</li>
 </ul>
@@ -463,7 +462,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb206-3"><a href="summarise.html#cb206-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">c</span>(bill_length_mm, bill_depth_mm),</span>
 <span id="cb206-4"><a href="summarise.html#cb206-4" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">list</span>(<span class="at">mean =</span> <span class="sc">~</span><span class="fu">mean</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
 <span id="cb206-5"><a href="summarise.html#cb206-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">sd =</span> <span class="sc">~</span><span class="fu">sd</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))))</span></code></pre></div>
-<pre><code>## # A tibble: 8 x 6
+<pre><code>## # A tibble: 8 × 6
 ## # Groups:   species [3]
 ##   species   sex    bill_length_mm_mean bill_length_mm_sd
 ##   &lt;fct&gt;     &lt;fct&gt;                &lt;dbl&gt;             &lt;dbl&gt;
@@ -475,19 +474,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 6 Gentoo    female                45.6              2.05
 ## 7 Gentoo    male                  49.5              2.72
 ## 8 Gentoo    &lt;NA&gt;                  45.6              1.37
-## # ... with 2 more variables: bill_depth_mm_mean &lt;dbl&gt;,
+## # … with 2 more variables: bill_depth_mm_mean &lt;dbl&gt;,
 ## #   bill_depth_mm_sd &lt;dbl&gt;</code></pre>
-<div id="練習問題-16" class="section level3" number="6.3.1">
-<h3><span class="header-section-number">6.3.1</span> [練習問題]</h3>
+<div id="練習問題-16" class="section level3 hasAnchor" number="6.3.1">
+<h3><span class="header-section-number">6.3.1</span> [練習問題]<a href="summarise.html#練習問題-16" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>dfデータの変数”bill_length_mm”, “bill_depth_mm”について，3変数（species, island, sex）の層別平均値（変数名に”_平均”の接頭辞をつける）を計算しよう</li>
 </ul>
 </div>
 </div>
-<div id="su-fun" class="section level2" number="6.4">
-<h2><span class="header-section-number">6.4</span> 【効率化】関数にする</h2>
-<div id="su-fun-st" class="section level3" number="6.4.1">
-<h3><span class="header-section-number">6.4.1</span> 基本</h3>
+<div id="su-fun" class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">6.4</span> 【効率化】関数にする<a href="summarise.html#su-fun" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="su-fun-st" class="section level3 hasAnchor" number="6.4.1">
+<h3><span class="header-section-number">6.4.1</span> 基本<a href="summarise.html#su-fun-st" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>「<code>自分で名づける関数名 &lt;- function(引数){ 計算式やコード }</code>」 で関数を定義できる</li>
 <li>例：関数の引数に数値を入れると<code>+1</code>した値を返す関数<code>add_one()</code>を定義</li>
@@ -500,8 +499,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb208-6"><a href="summarise.html#cb208-6" aria-hidden="true" tabindex="-1"></a><span class="fu">add_one</span>(<span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
 </div>
-<div id="su-fun-meansdn" class="section level3" number="6.4.2">
-<h3><span class="header-section-number">6.4.2</span> 複数変数の平均値とSDとnを計算する関数</h3>
+<div id="su-fun-meansdn" class="section level3 hasAnchor" number="6.4.2">
+<h3><span class="header-section-number">6.4.2</span> 複数変数の平均値とSDとnを計算する関数<a href="summarise.html#su-fun-meansdn" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>「<code>{{ }}</code>」は<code>curly curly</code>と読み，関数を作成するときに，代入先の変数名の場所を指定する時などに活躍
 <ul>
@@ -520,7 +519,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>ここで定義した関数<code>mean_sd_n()</code>にデータフレームと変数を入れると結果が表示される</li>
 </ul>
 <div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="summarise.html#cb211-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean_sd_n</span>(df, bill_length_mm)</span></code></pre></div>
-<pre><code>## # A tibble: 1 x 3
+<pre><code>## # A tibble: 1 × 3
 ##   bill_length_mm_mean bill_length_mm_sd bill_length_mm_n
 ##                 &lt;dbl&gt;             &lt;dbl&gt;            &lt;int&gt;
 ## 1                43.9              5.46              342</code></pre>
@@ -529,22 +528,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="summarise.html#cb213-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 変数ベクトル</span></span>
 <span id="cb213-2"><a href="summarise.html#cb213-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean_sd_n</span>(df, <span class="fu">c</span>(flipper_length_mm, body_mass_g))</span></code></pre></div>
-<pre><code>## # A tibble: 1 x 6
+<pre><code>## # A tibble: 1 × 6
 ##   flipper_length_mm_mean flipper_length_mm_sd flipper_length_mm_n
 ##                    &lt;dbl&gt;                &lt;dbl&gt;               &lt;int&gt;
 ## 1                   201.                 14.1                 342
-## # ... with 3 more variables: body_mass_g_mean &lt;dbl&gt;,
+## # … with 3 more variables: body_mass_g_mean &lt;dbl&gt;,
 ## #   body_mass_g_sd &lt;dbl&gt;, body_mass_g_n &lt;int&gt;</code></pre>
 <div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="summarise.html#cb215-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 文字でも可能</span></span>
 <span id="cb215-2"><a href="summarise.html#cb215-2" aria-hidden="true" tabindex="-1"></a><span class="co"># mean_sd_n(df, c(&quot;flipper_length_mm&quot;, &quot;body_mass_g&quot;))</span></span>
 <span id="cb215-3"><a href="summarise.html#cb215-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb215-4"><a href="summarise.html#cb215-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ヘルパー関数</span></span>
 <span id="cb215-5"><a href="summarise.html#cb215-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mean_sd_n</span>(df, <span class="fu">starts_with</span>(<span class="st">&quot;bill&quot;</span>))</span></code></pre></div>
-<pre><code>## # A tibble: 1 x 6
+<pre><code>## # A tibble: 1 × 6
 ##   bill_length_mm_mean bill_length_mm_sd bill_length_mm_n
 ##                 &lt;dbl&gt;             &lt;dbl&gt;            &lt;int&gt;
 ## 1                43.9              5.46              342
-## # ... with 3 more variables: bill_depth_mm_mean &lt;dbl&gt;,
+## # … with 3 more variables: bill_depth_mm_mean &lt;dbl&gt;,
 ## #   bill_depth_mm_sd &lt;dbl&gt;, bill_depth_mm_n &lt;int&gt;</code></pre>
 
 </div>

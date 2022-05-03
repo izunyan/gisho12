@@ -6,14 +6,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2 列（変数）を選ぶ：select | がんばらないデータ加工</title>
   <meta name="description" content="2 列（変数）を選ぶ：select | がんばらないデータ加工" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2 列（変数）を選ぶ：select | がんばらないデータ加工" />
   <meta property="og:type" content="book" />
-  
   <meta property="og:image" content="/images/cover.png" />
   
-  <meta name="github-repo" content="https://github.com/izunyan/gisho12.git" />
+  <meta name="github-repo" content="izunyan/gisho12.git" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="2 列（変数）を選ぶ：select | がんばらないデータ加工" />
@@ -32,7 +31,6 @@
   
 <link rel="prev" href="premise.html"/>
 <link rel="next" href="rename.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -50,8 +48,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -325,8 +324,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="select" class="section level1" number="2">
-<h1><span class="header-section-number">2</span> 列（変数）を選ぶ：select</h1>
+<div id="select" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">2</span> 列（変数）を選ぶ：select<a href="select.html#select" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <ul>
 <li>本章のポイント
 <ul>
@@ -337,8 +336,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>後々出てくる繰り返し作業で便利なヘルパー関数について知る</li>
 </ul></li>
 </ul>
-<div id="select-read" class="section level2" number="2.1">
-<h2><span class="header-section-number">2.1</span> 使用データ</h2>
+<div id="select-read" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> 使用データ<a href="select.html#select-read" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>データの指定を簡単にするために，penguinsデータを<code>df</code>と読み込む
 <ul>
@@ -351,17 +350,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb33-3"><a href="select.html#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-4"><a href="select.html#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="co"># データの表示  </span></span>
 <span id="cb33-5"><a href="select.html#cb33-5" aria-hidden="true" tabindex="-1"></a>df </span></code></pre></div>
-<pre><code>## # A tibble: 344 x 8
-##   species island    bill_length_mm bill_depth_mm flipper_length_~
+<pre><code>## # A tibble: 344 × 8
+##   species island    bill_length_mm bill_depth_mm flipper_length_…
 ##   &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;            &lt;int&gt;
 ## 1 Adelie  Torgersen           39.1          18.7              181
 ## 2 Adelie  Torgersen           39.5          17.4              186
 ## 3 Adelie  Torgersen           40.3          18                195
-## # ... with 341 more rows, and 3 more variables:
-## #   body_mass_g &lt;int&gt;, sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
+## # … with 341 more rows, and 3 more variables: body_mass_g &lt;int&gt;,
+## #   sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
 </div>
-<div id="select-standard" class="section level2" number="2.2">
-<h2><span class="header-section-number">2.2</span> 基本</h2>
+<div id="select-standard" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> 基本<a href="select.html#select-standard" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li><code>select()</code>の中に関心のある変数名を「<code>,</code>」をつけて並べる
 <ul>
@@ -375,13 +374,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb35-3"><a href="select.html#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb35-4"><a href="select.html#cb35-4" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
 <span id="cb35-5"><a href="select.html#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(bill_length_mm, bill_depth_mm)</span></code></pre></div>
-<pre><code>## # A tibble: 344 x 2
+<pre><code>## # A tibble: 344 × 2
 ##   bill_length_mm bill_depth_mm
 ##            &lt;dbl&gt;         &lt;dbl&gt;
 ## 1           39.1          18.7
 ## 2           39.5          17.4
 ## 3           40.3          18  
-## # ... with 341 more rows</code></pre>
+## # … with 341 more rows</code></pre>
 <ul>
 <li>新しいデータフレームを作りたい場合は<code>&lt;-</code>を使って新しいオブジェクトに格納する</li>
 </ul>
@@ -389,45 +388,45 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb37-2"><a href="select.html#cb37-2" aria-hidden="true" tabindex="-1"></a>  df <span class="sc">%&gt;%</span> <span class="fu">select</span>(bill_length_mm)</span>
 <span id="cb37-3"><a href="select.html#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-4"><a href="select.html#cb37-4" aria-hidden="true" tabindex="-1"></a>df2</span></code></pre></div>
-<pre><code>## # A tibble: 344 x 1
+<pre><code>## # A tibble: 344 × 1
 ##   bill_length_mm
 ##            &lt;dbl&gt;
 ## 1           39.1
 ## 2           39.5
 ## 3           40.3
-## # ... with 341 more rows</code></pre>
+## # … with 341 more rows</code></pre>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="select.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 一時的に見せただけなので削除</span></span>
 <span id="cb39-2"><a href="select.html#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(df2)</span></code></pre></div>
-<div id="select-standard-pipe" class="section level3" number="2.2.1">
-<h3><span class="header-section-number">2.2.1</span> 【補足】%&gt;% の意味</h3>
+<div id="select-standard-pipe" class="section level3 hasAnchor" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> 【補足】%&gt;% の意味<a href="select.html#select-standard-pipe" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li><a href="premise.html#p-pipe">1.7</a>で説明したパイプ演算子の実例を解説する</li>
 <li>基本的に<code>select()</code>を始めとしたモダンなRの処理は，以下のように<strong>第一引数にデータフレーム</strong>を指定する</li>
 </ul>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="select.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(df, bill_length_mm)</span></code></pre></div>
-<pre><code>## # A tibble: 344 x 1
+<pre><code>## # A tibble: 344 × 1
 ##   bill_length_mm
 ##            &lt;dbl&gt;
 ## 1           39.1
 ## 2           39.5
 ## 3           40.3
-## # ... with 341 more rows</code></pre>
+## # … with 341 more rows</code></pre>
 <ul>
 <li><code>%&gt;%</code>の役割は，その左側にあるものを右側の関数の第一引数に入れる，ということなので，第一引数にデータフレームが来ることが決まっていれば，常に次のようにかける</li>
 <li>このようにすると複雑な処理を重ねていく場合も，コードの可読性が高まるので，コードを共有してチーム作業するデータ加工の過程で有用</li>
 </ul>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="select.html#cb42-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
 <span id="cb42-2"><a href="select.html#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(bill_length_mm)</span></code></pre></div>
-<pre><code>## # A tibble: 344 x 1
+<pre><code>## # A tibble: 344 × 1
 ##   bill_length_mm
 ##            &lt;dbl&gt;
 ## 1           39.1
 ## 2           39.5
 ## 3           40.3
-## # ... with 341 more rows</code></pre>
+## # … with 341 more rows</code></pre>
 </div>
-<div id="select-range" class="section level3" number="2.2.2">
-<h3><span class="header-section-number">2.2.2</span> 範囲指定</h3>
+<div id="select-range" class="section level3 hasAnchor" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> 範囲指定<a href="select.html#select-range" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>関心ある変数がデータフレーム上に順番に並んでいれば<code>:</code>（コロン）でつなげて取得できる
 <ul>
@@ -436,13 +435,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="select.html#cb44-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
 <span id="cb44-2"><a href="select.html#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(bill_length_mm<span class="sc">:</span>flipper_length_mm)</span></code></pre></div>
-<pre><code>## # A tibble: 344 x 3
+<pre><code>## # A tibble: 344 × 3
 ##   bill_length_mm bill_depth_mm flipper_length_mm
 ##            &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;
 ## 1           39.1          18.7               181
 ## 2           39.5          17.4               186
 ## 3           40.3          18                 195
-## # ... with 341 more rows</code></pre>
+## # … with 341 more rows</code></pre>
 <ul>
 <li>範囲に加えて追加の変数も「<code>,</code>」でつないで含めることができる
 <ul>
@@ -451,29 +450,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="select.html#cb46-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
 <span id="cb46-2"><a href="select.html#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(bill_length_mm<span class="sc">:</span>flipper_length_mm, sex)</span></code></pre></div>
-<pre><code>## # A tibble: 344 x 4
+<pre><code>## # A tibble: 344 × 4
 ##   bill_length_mm bill_depth_mm flipper_length_mm sex   
 ##            &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt; &lt;fct&gt; 
 ## 1           39.1          18.7               181 male  
 ## 2           39.5          17.4               186 female
 ## 3           40.3          18                 195 female
-## # ... with 341 more rows</code></pre>
+## # … with 341 more rows</code></pre>
 </div>
-<div id="select-cha" class="section level3" number="2.2.3">
-<h3><span class="header-section-number">2.2.3</span> 中身が文字でも動く</h3>
+<div id="select-cha" class="section level3 hasAnchor" number="2.2.3">
+<h3><span class="header-section-number">2.2.3</span> 中身が文字でも動く<a href="select.html#select-cha" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>変数名が<code>" "</code>で囲われていると，Rでは文字(character)だと認識される</li>
 <li><code>select()</code>は文字の変数名を与えても動く</li>
 </ul>
 <div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="select.html#cb48-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
 <span id="cb48-2"><a href="select.html#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">&quot;bill_length_mm&quot;</span>, <span class="st">&quot;bill_depth_mm&quot;</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 344 x 2
+<pre><code>## # A tibble: 344 × 2
 ##   bill_length_mm bill_depth_mm
 ##            &lt;dbl&gt;         &lt;dbl&gt;
 ## 1           39.1          18.7
 ## 2           39.5          17.4
 ## 3           40.3          18  
-## # ... with 341 more rows</code></pre>
+## # … with 341 more rows</code></pre>
 <ul>
 <li>これは<strong>効率化</strong>を図りたいときに重要な特徴</li>
 <li><code>select()</code>の中にたくさんの変数名を並べるより，事前に指定しておきベクトルとして代入した方が読みやすい
@@ -487,13 +486,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb50-3"><a href="select.html#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb50-4"><a href="select.html#cb50-4" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
 <span id="cb50-5"><a href="select.html#cb50-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">all_of</span>(vars))</span></code></pre></div>
-<pre><code>## # A tibble: 344 x 2
+<pre><code>## # A tibble: 344 × 2
 ##   bill_length_mm bill_depth_mm
 ##            &lt;dbl&gt;         &lt;dbl&gt;
 ## 1           39.1          18.7
 ## 2           39.5          17.4
 ## 3           40.3          18  
-## # ... with 341 more rows</code></pre>
+## # … with 341 more rows</code></pre>
 <ul>
 <li>ここで<code>vars</code>は文字ベクトル（vector）のオブジェクトとなっている（文字じゃないとエラーになるため）</li>
 <li><code>all_of()</code>の中に文字ベクトルを指定することで，それぞれの中身を変数名として認識する
@@ -502,37 +501,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul>
 </div>
-<div id="練習問題" class="section level3" number="2.2.4">
-<h3><span class="header-section-number">2.2.4</span> [練習問題]</h3>
+<div id="練習問題" class="section level3 hasAnchor" number="2.2.4">
+<h3><span class="header-section-number">2.2.4</span> [練習問題]<a href="select.html#練習問題" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li><p>dfデータで変数speciesからbill_length_mmまでの並び，およびyearの計4列にしてデータフレームを表示させよう</p></li>
 <li><p>dfデータで変数bill_length_mmからbody_mass_gまでの並びの計4列を文字ベクトルにしたうえでselectで選んでデータフレームを表示させよう(冗長な作業に見えるがこの考え方が役に立つ時がくるはず)</p></li>
 </ul>
 </div>
 </div>
-<div id="select-helper" class="section level2" number="2.3">
-<h2><span class="header-section-number">2.3</span> 変数の指定に便利なヘルパー関数</h2>
+<div id="select-helper" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> 変数の指定に便利なヘルパー関数<a href="select.html#select-helper" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>selection helperと呼ばれる<code>tidyselect</code>パッケージの関数群</li>
 <li><code>select()</code>の所で解説されることが多いが，<a href="mutate.html#mu-kata-across">5.3.2</a>で出てくる<code>across()</code>と併せた活用場面が多いため，なじんでおくと後から楽になる</li>
 </ul>
-<div id="select-helper1" class="section level3" number="2.3.1">
-<h3><span class="header-section-number">2.3.1</span> 変数名の最初の文字列</h3>
+<div id="select-helper1" class="section level3 hasAnchor" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> 変数名の最初の文字列<a href="select.html#select-helper1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li><code>bill</code>から始まる変数を選ぶ</li>
 </ul>
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="select.html#cb52-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
 <span id="cb52-2"><a href="select.html#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">&quot;bill&quot;</span>))</span></code></pre></div>
-<pre><code>## # A tibble: 344 x 2
+<pre><code>## # A tibble: 344 × 2
 ##   bill_length_mm bill_depth_mm
 ##            &lt;dbl&gt;         &lt;dbl&gt;
 ## 1           39.1          18.7
 ## 2           39.5          17.4
 ## 3           40.3          18  
-## # ... with 341 more rows</code></pre>
+## # … with 341 more rows</code></pre>
 </div>
-<div id="select-helper2" class="section level3" number="2.3.2">
-<h3><span class="header-section-number">2.3.2</span> 変数名の最後の文字列</h3>
+<div id="select-helper2" class="section level3 hasAnchor" number="2.3.2">
+<h3><span class="header-section-number">2.3.2</span> 変数名の最後の文字列<a href="select.html#select-helper2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li><code>_mm</code>で終わる変数を選ぶ
 <ul>
@@ -541,33 +540,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="select.html#cb54-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
 <span id="cb54-2"><a href="select.html#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">ends_with</span>(<span class="st">&quot;_mm&quot;</span>))</span></code></pre></div>
-<pre><code>## # A tibble: 344 x 3
+<pre><code>## # A tibble: 344 × 3
 ##   bill_length_mm bill_depth_mm flipper_length_mm
 ##            &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;
 ## 1           39.1          18.7               181
 ## 2           39.5          17.4               186
 ## 3           40.3          18                 195
-## # ... with 341 more rows</code></pre>
+## # … with 341 more rows</code></pre>
 </div>
-<div id="select-helper3" class="section level3" number="2.3.3">
-<h3><span class="header-section-number">2.3.3</span> 変数名のどこかに含まれる文字列</h3>
-<div id="固定した文字列" class="section level4" number="2.3.3.1">
-<h4><span class="header-section-number">2.3.3.1</span> 固定した文字列</h4>
+<div id="select-helper3" class="section level3 hasAnchor" number="2.3.3">
+<h3><span class="header-section-number">2.3.3</span> 変数名のどこかに含まれる文字列<a href="select.html#select-helper3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="固定した文字列" class="section level4 hasAnchor" number="2.3.3.1">
+<h4><span class="header-section-number">2.3.3.1</span> 固定した文字列<a href="select.html#固定した文字列" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <ul>
 <li>指定した文字列を含んだ変数名を対象とする</li>
 </ul>
 <div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="select.html#cb56-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
 <span id="cb56-2"><a href="select.html#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">contains</span>(<span class="st">&quot;length&quot;</span>))</span></code></pre></div>
-<pre><code>## # A tibble: 344 x 2
+<pre><code>## # A tibble: 344 × 2
 ##   bill_length_mm flipper_length_mm
 ##            &lt;dbl&gt;             &lt;int&gt;
 ## 1           39.1               181
 ## 2           39.5               186
 ## 3           40.3               195
-## # ... with 341 more rows</code></pre>
+## # … with 341 more rows</code></pre>
 </div>
-<div id="select-helper4" class="section level4" number="2.3.3.2">
-<h4><span class="header-section-number">2.3.3.2</span> 柔軟な文字列</h4>
+<div id="select-helper4" class="section level4 hasAnchor" number="2.3.3.2">
+<h4><span class="header-section-number">2.3.3.2</span> 柔軟な文字列<a href="select.html#select-helper4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <ul>
 <li>文字列で <strong>正規表現</strong> が使えるため柔軟な指定が可能</li>
 <li>ここでは，“length”または”depth”を含む変数名を対象
@@ -577,96 +576,96 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="select.html#cb58-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
 <span id="cb58-2"><a href="select.html#cb58-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">matches</span>(<span class="st">&quot;length|depth&quot;</span>))</span></code></pre></div>
-<pre><code>## # A tibble: 344 x 3
+<pre><code>## # A tibble: 344 × 3
 ##   bill_length_mm bill_depth_mm flipper_length_mm
 ##            &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;
 ## 1           39.1          18.7               181
 ## 2           39.5          17.4               186
 ## 3           40.3          18                 195
-## # ... with 341 more rows</code></pre>
+## # … with 341 more rows</code></pre>
 </div>
 </div>
-<div id="select-helper5" class="section level3" number="2.3.4">
-<h3><span class="header-section-number">2.3.4</span> 上記の組み合わせ</h3>
-<div id="select-helper5-1" class="section level4" number="2.3.4.1">
-<h4><span class="header-section-number">2.3.4.1</span> かつ</h4>
+<div id="select-helper5" class="section level3 hasAnchor" number="2.3.4">
+<h3><span class="header-section-number">2.3.4</span> 上記の組み合わせ<a href="select.html#select-helper5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="select-helper5-1" class="section level4 hasAnchor" number="2.3.4.1">
+<h4><span class="header-section-number">2.3.4.1</span> かつ<a href="select.html#select-helper5-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <ul>
 <li>それぞれの条件を両方満たす</li>
 </ul>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="select.html#cb60-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
 <span id="cb60-2"><a href="select.html#cb60-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">&quot;bill&quot;</span>) <span class="sc">&amp;</span> <span class="fu">contains</span>(<span class="st">&quot;length&quot;</span>))</span></code></pre></div>
-<pre><code>## # A tibble: 344 x 1
+<pre><code>## # A tibble: 344 × 1
 ##   bill_length_mm
 ##            &lt;dbl&gt;
 ## 1           39.1
 ## 2           39.5
 ## 3           40.3
-## # ... with 341 more rows</code></pre>
+## # … with 341 more rows</code></pre>
 </div>
-<div id="select-helper5-2" class="section level4" number="2.3.4.2">
-<h4><span class="header-section-number">2.3.4.2</span> または</h4>
+<div id="select-helper5-2" class="section level4 hasAnchor" number="2.3.4.2">
+<h4><span class="header-section-number">2.3.4.2</span> または<a href="select.html#select-helper5-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <ul>
 <li>それぞれの条件をいずれか満たす</li>
 </ul>
 <div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="select.html#cb62-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
 <span id="cb62-2"><a href="select.html#cb62-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">&quot;bill&quot;</span>) <span class="sc">|</span> <span class="fu">contains</span>(<span class="st">&quot;length&quot;</span>))</span></code></pre></div>
-<pre><code>## # A tibble: 344 x 3
+<pre><code>## # A tibble: 344 × 3
 ##   bill_length_mm bill_depth_mm flipper_length_mm
 ##            &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;
 ## 1           39.1          18.7               181
 ## 2           39.5          17.4               186
 ## 3           40.3          18                 195
-## # ... with 341 more rows</code></pre>
+## # … with 341 more rows</code></pre>
 </div>
 </div>
-<div id="練習問題-1" class="section level3" number="2.3.5">
-<h3><span class="header-section-number">2.3.5</span> [練習問題]</h3>
+<div id="練習問題-1" class="section level3 hasAnchor" number="2.3.5">
+<h3><span class="header-section-number">2.3.5</span> [練習問題]<a href="select.html#練習問題-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>dfデータで”s”で終わる変数を選んでデータフレームを表示させよう</li>
 </ul>
 </div>
 </div>
-<div id="select-drop" class="section level2" number="2.4">
-<h2><span class="header-section-number">2.4</span> 特定の変数を選ばない（落とす）</h2>
+<div id="select-drop" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> 特定の変数を選ばない（落とす）<a href="select.html#select-drop" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>変数名の前に<code>!</code>をつける</li>
 </ul>
 <div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="select.html#cb64-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
 <span id="cb64-2"><a href="select.html#cb64-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>species)</span></code></pre></div>
-<pre><code>## # A tibble: 344 x 7
+<pre><code>## # A tibble: 344 × 7
 ##   island    bill_length_mm bill_depth_mm flipper_length_mm
 ##   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;
 ## 1 Torgersen           39.1          18.7               181
 ## 2 Torgersen           39.5          17.4               186
 ## 3 Torgersen           40.3          18                 195
-## # ... with 341 more rows, and 3 more variables:
-## #   body_mass_g &lt;int&gt;, sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
+## # … with 341 more rows, and 3 more variables: body_mass_g &lt;int&gt;,
+## #   sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
 <ul>
 <li>複数列を落としたい場合は，<code>!c()</code>の中に対象の列名を含める</li>
 </ul>
 <div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="select.html#cb66-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
 <span id="cb66-2"><a href="select.html#cb66-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span><span class="fu">c</span>(bill_length_mm<span class="sc">:</span>flipper_length_mm, sex))</span></code></pre></div>
-<pre><code>## # A tibble: 344 x 4
+<pre><code>## # A tibble: 344 × 4
 ##   species island    body_mass_g  year
 ##   &lt;fct&gt;   &lt;fct&gt;           &lt;int&gt; &lt;int&gt;
 ## 1 Adelie  Torgersen        3750  2007
 ## 2 Adelie  Torgersen        3800  2007
 ## 3 Adelie  Torgersen        3250  2007
-## # ... with 341 more rows</code></pre>
+## # … with 341 more rows</code></pre>
 <ul>
 <li>ヘルパー関数に対しても使える</li>
 </ul>
 <div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="select.html#cb68-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
 <span id="cb68-2"><a href="select.html#cb68-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span><span class="fu">ends_with</span>(<span class="st">&quot;_mm&quot;</span>))</span></code></pre></div>
-<pre><code>## # A tibble: 344 x 5
+<pre><code>## # A tibble: 344 × 5
 ##   species island    body_mass_g sex     year
 ##   &lt;fct&gt;   &lt;fct&gt;           &lt;int&gt; &lt;fct&gt;  &lt;int&gt;
 ## 1 Adelie  Torgersen        3750 male    2007
 ## 2 Adelie  Torgersen        3800 female  2007
 ## 3 Adelie  Torgersen        3250 female  2007
-## # ... with 341 more rows</code></pre>
-<div id="練習問題-2" class="section level3" number="2.4.1">
-<h3><span class="header-section-number">2.4.1</span> [練習問題]</h3>
+## # … with 341 more rows</code></pre>
+<div id="練習問題-2" class="section level3 hasAnchor" number="2.4.1">
+<h3><span class="header-section-number">2.4.1</span> [練習問題]<a href="select.html#練習問題-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>dfデータで”length”または”depth”を含む変数以外を選んでデータフレームを表示させよう</li>
 </ul>
@@ -674,14 +673,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- ## 変数名を変更する -->
 </div>
 </div>
-<div id="select-get" class="section level2" number="2.5">
-<h2><span class="header-section-number">2.5</span> 関心のある変数名を取得する</h2>
+<div id="select-get" class="section level2 hasAnchor" number="2.5">
+<h2><span class="header-section-number">2.5</span> 関心のある変数名を取得する<a href="select.html#select-get" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>データ分析の段階では，関心のある変数名を選択して，それらを代入する作業が頻出</li>
 <li>変数名手打ちだと時間もかかるしミスもあるので，効率化のために必ずおさえておきたい技術</li>
 </ul>
-<div id="select-get-name" class="section level3" number="2.5.1">
-<h3><span class="header-section-number">2.5.1</span> 全ての変数名</h3>
+<div id="select-get-name" class="section level3 hasAnchor" number="2.5.1">
+<h3><span class="header-section-number">2.5.1</span> 全ての変数名<a href="select.html#select-get-name" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>データフレームの列名（変数名）を表示させたいときは<code>names()</code>を使う（または<code>colnames()</code>）</li>
 </ul>
@@ -690,8 +689,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [4] &quot;bill_depth_mm&quot;     &quot;flipper_length_mm&quot; &quot;body_mass_g&quot;      
 ## [7] &quot;sex&quot;               &quot;year&quot;</code></pre>
 </div>
-<div id="select-get-obj" class="section level3" number="2.5.2">
-<h3><span class="header-section-number">2.5.2</span> 選択した変数名を取得</h3>
+<div id="select-get-obj" class="section level3 hasAnchor" number="2.5.2">
+<h3><span class="header-section-number">2.5.2</span> 選択した変数名を取得<a href="select.html#select-get-obj" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>ベクトルとしてオブジェクトに格納</li>
 </ul>
@@ -703,8 +702,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb72-6"><a href="select.html#cb72-6" aria-hidden="true" tabindex="-1"></a>bill_vars</span></code></pre></div>
 <pre><code>## [1] &quot;bill_length_mm&quot; &quot;bill_depth_mm&quot;</code></pre>
 </div>
-<div id="select-get-out" class="section level3" number="2.5.3">
-<h3><span class="header-section-number">2.5.3</span> コピペに便利な形式に出力</h3>
+<div id="select-get-out" class="section level3 hasAnchor" number="2.5.3">
+<h3><span class="header-section-number">2.5.3</span> コピペに便利な形式に出力<a href="select.html#select-get-out" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>「<code>,</code>」で区切られた形式で出てくれば必要なものを選んでそのまま<code>select()</code>に入れられるのに…と思った方のための便利関数<code>dput()</code></li>
 </ul>
