@@ -1,422 +1,173 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
+<html lang="en">
 <head>
-
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>がんばらないデータ加工</title>
-  <meta name="description" content="がんばらないデータ加工" />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="がんばらないデータ加工" />
-  <meta property="og:type" content="book" />
-  <meta property="og:image" content="/images/cover.png" />
-  
-  <meta name="github-repo" content="izunyan/gisho12.git" />
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="がんばらないデータ加工" />
-  
-  
-  <meta name="twitter:image" content="/images/cover.png" />
-
-<meta name="author" content="やわらかクジラ" />
-
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-
-<link rel="next" href="premise.html"/>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-
-
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
-
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>はじめに | がんばらないデータ加工</title>
+<meta name="author" content="やわらかクジラ">
+<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta property="og:title" content="はじめに | がんばらないデータ加工">
+<meta property="og:type" content="book">
+<meta property="og:image" content="/images/cover.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="はじめに | がんばらないデータ加工">
+<meta name="twitter:image" content="/images/cover.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="bs4_style.css">
+<meta name="description" content="A book created with bookdown.">
+<meta property="og:description" content="A book created with bookdown.">
+<meta name="twitter:description" content="A book created with bookdown.">
 </head>
+<body data-spy="scroll" data-target="#toc">
 
-<body>
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
-
-
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>はじめに</a>
-<ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#概要"><i class="fa fa-check"></i>概要</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#本書の特徴"><i class="fa fa-check"></i>本書の特徴</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#想定読者"><i class="fa fa-check"></i>想定読者</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#各章の紹介"><i class="fa fa-check"></i>各章の紹介</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#執筆環境"><i class="fa fa-check"></i>執筆環境</a>
-<ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#rおよびrstudioパッケージのバージョン"><i class="fa fa-check"></i>RおよびRStudio、パッケージのバージョン</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#注意事項など"><i class="fa fa-check"></i>注意事項など</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#ライセンス"><i class="fa fa-check"></i>ライセンス</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#association"><i class="fa fa-check"></i>関連情報</a></li>
-</ul></li>
-<li class="chapter" data-level="1" data-path="premise.html"><a href="premise.html"><i class="fa fa-check"></i><b>1</b> 前提知識</a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="premise.html"><a href="premise.html#p-howtouse-rst"><i class="fa fa-check"></i><b>1.1</b> RStudioの使い方</a>
-<ul>
-<li class="chapter" data-level="1.1.1" data-path="premise.html"><a href="premise.html#p-opening"><i class="fa fa-check"></i><b>1.1.1</b> 起動画面</a></li>
-<li class="chapter" data-level="1.1.2" data-path="premise.html"><a href="premise.html#p-theme"><i class="fa fa-check"></i><b>1.1.2</b> 見た目の変更</a></li>
-<li class="chapter" data-level="1.1.3" data-path="premise.html"><a href="premise.html#p-howtorun"><i class="fa fa-check"></i><b>1.1.3</b> コードの実行の仕方</a></li>
-<li class="chapter" data-level="1.1.4" data-path="premise.html"><a href="premise.html#p-utf8"><i class="fa fa-check"></i><b>1.1.4</b> Windowsユーザーにつきものの文字化け対策</a></li>
-</ul></li>
-<li class="chapter" data-level="1.2" data-path="premise.html"><a href="premise.html#p-howtoread"><i class="fa fa-check"></i><b>1.2</b> 本書に出てくるコード部分の見方</a></li>
-<li class="chapter" data-level="1.3" data-path="premise.html"><a href="premise.html#p-package"><i class="fa fa-check"></i><b>1.3</b> パッケージ</a></li>
-<li class="chapter" data-level="1.4" data-path="premise.html"><a href="premise.html#p-function"><i class="fa fa-check"></i><b>1.4</b> 関数</a>
-<ul>
-<li class="chapter" data-level="1.4.1" data-path="premise.html"><a href="premise.html#p-function-ex"><i class="fa fa-check"></i><b>1.4.1</b> 関数の例</a></li>
-</ul></li>
-<li class="chapter" data-level="1.5" data-path="premise.html"><a href="premise.html#p-object"><i class="fa fa-check"></i><b>1.5</b> オブジェクト</a>
-<ul>
-<li class="chapter" data-level="1.5.1" data-path="premise.html"><a href="premise.html#p-object-ex"><i class="fa fa-check"></i><b>1.5.1</b> 例</a></li>
-</ul></li>
-<li class="chapter" data-level="1.6" data-path="premise.html"><a href="premise.html#p-df"><i class="fa fa-check"></i><b>1.6</b> データフレーム</a>
-<ul>
-<li class="chapter" data-level="1.6.1" data-path="premise.html"><a href="premise.html#p-df-main"><i class="fa fa-check"></i><b>1.6.1</b> 本書で使う主なデータ例</a></li>
-</ul></li>
-<li class="chapter" data-level="1.7" data-path="premise.html"><a href="premise.html#p-pipe"><i class="fa fa-check"></i><b>1.7</b> %&gt;% （パイプ演算子）</a></li>
-<li class="chapter" data-level="1.8" data-path="premise.html"><a href="premise.html#p-project"><i class="fa fa-check"></i><b>1.8</b> プロジェクト</a></li>
-<li class="chapter" data-level="1.9" data-path="premise.html"><a href="premise.html#p-help"><i class="fa fa-check"></i><b>1.9</b> 困ったときは</a></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="select.html"><a href="select.html"><i class="fa fa-check"></i><b>2</b> 列（変数）を選ぶ：select</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="select.html"><a href="select.html#select-read"><i class="fa fa-check"></i><b>2.1</b> 使用データ</a></li>
-<li class="chapter" data-level="2.2" data-path="select.html"><a href="select.html#select-standard"><i class="fa fa-check"></i><b>2.2</b> 基本</a>
-<ul>
-<li class="chapter" data-level="2.2.1" data-path="select.html"><a href="select.html#select-standard-pipe"><i class="fa fa-check"></i><b>2.2.1</b> 【補足】%&gt;% の意味</a></li>
-<li class="chapter" data-level="2.2.2" data-path="select.html"><a href="select.html#select-range"><i class="fa fa-check"></i><b>2.2.2</b> 範囲指定</a></li>
-<li class="chapter" data-level="2.2.3" data-path="select.html"><a href="select.html#select-cha"><i class="fa fa-check"></i><b>2.2.3</b> 中身が文字でも動く</a></li>
-<li class="chapter" data-level="2.2.4" data-path="select.html"><a href="select.html#練習問題"><i class="fa fa-check"></i><b>2.2.4</b> [練習問題]</a></li>
-</ul></li>
-<li class="chapter" data-level="2.3" data-path="select.html"><a href="select.html#select-helper"><i class="fa fa-check"></i><b>2.3</b> 変数の指定に便利なヘルパー関数</a>
-<ul>
-<li class="chapter" data-level="2.3.1" data-path="select.html"><a href="select.html#select-helper1"><i class="fa fa-check"></i><b>2.3.1</b> 変数名の最初の文字列</a></li>
-<li class="chapter" data-level="2.3.2" data-path="select.html"><a href="select.html#select-helper2"><i class="fa fa-check"></i><b>2.3.2</b> 変数名の最後の文字列</a></li>
-<li class="chapter" data-level="2.3.3" data-path="select.html"><a href="select.html#select-helper3"><i class="fa fa-check"></i><b>2.3.3</b> 変数名のどこかに含まれる文字列</a></li>
-<li class="chapter" data-level="2.3.4" data-path="select.html"><a href="select.html#select-helper5"><i class="fa fa-check"></i><b>2.3.4</b> 上記の組み合わせ</a></li>
-<li class="chapter" data-level="2.3.5" data-path="select.html"><a href="select.html#練習問題-1"><i class="fa fa-check"></i><b>2.3.5</b> [練習問題]</a></li>
-</ul></li>
-<li class="chapter" data-level="2.4" data-path="select.html"><a href="select.html#select-drop"><i class="fa fa-check"></i><b>2.4</b> 特定の変数を選ばない（落とす）</a>
-<ul>
-<li class="chapter" data-level="2.4.1" data-path="select.html"><a href="select.html#練習問題-2"><i class="fa fa-check"></i><b>2.4.1</b> [練習問題]</a></li>
-</ul></li>
-<li class="chapter" data-level="2.5" data-path="select.html"><a href="select.html#select-get"><i class="fa fa-check"></i><b>2.5</b> 関心のある変数名を取得する</a>
-<ul>
-<li class="chapter" data-level="2.5.1" data-path="select.html"><a href="select.html#select-get-name"><i class="fa fa-check"></i><b>2.5.1</b> 全ての変数名</a></li>
-<li class="chapter" data-level="2.5.2" data-path="select.html"><a href="select.html#select-get-obj"><i class="fa fa-check"></i><b>2.5.2</b> 選択した変数名を取得</a></li>
-<li class="chapter" data-level="2.5.3" data-path="select.html"><a href="select.html#select-get-out"><i class="fa fa-check"></i><b>2.5.3</b> コピペに便利な形式に出力</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="rename.html"><a href="rename.html"><i class="fa fa-check"></i><b>3</b> 変数名を変更する：rename</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="rename.html"><a href="rename.html#rename-standard"><i class="fa fa-check"></i><b>3.1</b> 基本</a></li>
-<li class="chapter" data-level="3.2" data-path="rename.html"><a href="rename.html#rename-samew"><i class="fa fa-check"></i><b>3.2</b> 同じ語を共通の語で置き換える</a>
-<ul>
-<li class="chapter" data-level="3.2.1" data-path="rename.html"><a href="rename.html#rename-strreplace1"><i class="fa fa-check"></i><b>3.2.1</b> 【効率化】str_replace()で一括変換(1)</a></li>
-<li class="chapter" data-level="3.2.2" data-path="rename.html"><a href="rename.html#練習問題-3"><i class="fa fa-check"></i><b>3.2.2</b> [練習問題]</a></li>
-</ul></li>
-<li class="chapter" data-level="3.3" data-path="rename.html"><a href="rename.html#rename-remove"><i class="fa fa-check"></i><b>3.3</b> 同じ語を削除する</a>
-<ul>
-<li class="chapter" data-level="3.3.1" data-path="rename.html"><a href="rename.html#rename-strreplace2"><i class="fa fa-check"></i><b>3.3.1</b> 【効率化】str_replace()で一括変換（2）</a></li>
-<li class="chapter" data-level="3.3.2" data-path="rename.html"><a href="rename.html#練習問題-4"><i class="fa fa-check"></i><b>3.3.2</b> [練習問題]</a></li>
-</ul></li>
-<li class="chapter" data-level="3.4" data-path="rename.html"><a href="rename.html#rename-add"><i class="fa fa-check"></i><b>3.4</b> 同じ接尾辞をつける</a>
-<ul>
-<li class="chapter" data-level="3.4.1" data-path="rename.html"><a href="rename.html#rename-strc"><i class="fa fa-check"></i><b>3.4.1</b> 【効率化】str_c()で一括指定</a></li>
-<li class="chapter" data-level="3.4.2" data-path="rename.html"><a href="rename.html#練習問題-5"><i class="fa fa-check"></i><b>3.4.2</b> [練習問題]</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="filter.html"><a href="filter.html"><i class="fa fa-check"></i><b>4</b> 行（ケース）を選ぶ：filter</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="filter.html"><a href="filter.html#使用データ"><i class="fa fa-check"></i><b>4.1</b> 使用データ</a></li>
-<li class="chapter" data-level="4.2" data-path="filter.html"><a href="filter.html#filter-st"><i class="fa fa-check"></i><b>4.2</b> 基本</a>
-<ul>
-<li class="chapter" data-level="4.2.1" data-path="filter.html"><a href="filter.html#filter-st-na"><i class="fa fa-check"></i><b>4.2.1</b> 欠損値（NA）の扱い</a></li>
-<li class="chapter" data-level="4.2.2" data-path="filter.html"><a href="filter.html#練習問題-6"><i class="fa fa-check"></i><b>4.2.2</b> [練習問題]</a></li>
-</ul></li>
-<li class="chapter" data-level="4.3" data-path="filter.html"><a href="filter.html#filter-multi"><i class="fa fa-check"></i><b>4.3</b> 複数条件</a>
-<ul>
-<li class="chapter" data-level="4.3.1" data-path="filter.html"><a href="filter.html#filter-multi-eff"><i class="fa fa-check"></i><b>4.3.1</b> 【効率化】</a></li>
-<li class="chapter" data-level="4.3.2" data-path="filter.html"><a href="filter.html#練習問題-7"><i class="fa fa-check"></i><b>4.3.2</b> [練習問題]</a></li>
-</ul></li>
-<li class="chapter" data-level="4.4" data-path="filter.html"><a href="filter.html#filter-kw"><i class="fa fa-check"></i><b>4.4</b> キーワードによる検索</a>
-<ul>
-<li class="chapter" data-level="4.4.1" data-path="filter.html"><a href="filter.html#練習問題-8"><i class="fa fa-check"></i><b>4.4.1</b> [練習問題]</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="mutate.html"><a href="mutate.html"><i class="fa fa-check"></i><b>5</b> 新しい変数（列）の作成：mutate</a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="mutate.html"><a href="mutate.html#mu-read"><i class="fa fa-check"></i><b>5.1</b> 使用データ</a></li>
-<li class="chapter" data-level="5.2" data-path="mutate.html"><a href="mutate.html#mu-standard"><i class="fa fa-check"></i><b>5.2</b> 基本</a>
-<ul>
-<li class="chapter" data-level="5.2.1" data-path="mutate.html"><a href="mutate.html#練習問題-9"><i class="fa fa-check"></i><b>5.2.1</b> [練習問題]</a></li>
-</ul></li>
-<li class="chapter" data-level="5.3" data-path="mutate.html"><a href="mutate.html#mu-kata"><i class="fa fa-check"></i><b>5.3</b> 変数の型の変換</a>
-<ul>
-<li class="chapter" data-level="5.3.1" data-path="mutate.html"><a href="mutate.html#mu-kata-trans"><i class="fa fa-check"></i><b>5.3.1</b> 型の変換</a></li>
-<li class="chapter" data-level="5.3.2" data-path="mutate.html"><a href="mutate.html#mu-kata-across"><i class="fa fa-check"></i><b>5.3.2</b> 【効率化】複数の変数に対し一度の指定で実行</a></li>
-<li class="chapter" data-level="5.3.3" data-path="mutate.html"><a href="mutate.html#練習問題-10"><i class="fa fa-check"></i><b>5.3.3</b> [練習問題]</a></li>
-</ul></li>
-<li class="chapter" data-level="5.4" data-path="mutate.html"><a href="mutate.html#mu-across"><i class="fa fa-check"></i><b>5.4</b> across()の特徴</a>
-<ul>
-<li class="chapter" data-level="5.4.1" data-path="mutate.html"><a href="mutate.html#mu-across-list"><i class="fa fa-check"></i><b>5.4.1</b> 【重要知識】新しい変数名にして追加</a></li>
-<li class="chapter" data-level="5.4.2" data-path="mutate.html"><a href="mutate.html#練習問題-11"><i class="fa fa-check"></i><b>5.4.2</b> [練習問題]</a></li>
-</ul></li>
-<li class="chapter" data-level="5.5" data-path="mutate.html"><a href="mutate.html#mu-total"><i class="fa fa-check"></i><b>5.5</b> 合計点の作成</a>
-<ul>
-<li class="chapter" data-level="5.5.1" data-path="mutate.html"><a href="mutate.html#mu-total-na"><i class="fa fa-check"></i><b>5.5.1</b> 足し上げる変数に欠損値があるとどうなるか</a></li>
-</ul></li>
-<li class="chapter" data-level="5.6" data-path="mutate.html"><a href="mutate.html#変数の値を数値から文字列に変える"><i class="fa fa-check"></i><b>5.6</b> 変数の値を数値から文字列に変える</a>
-<ul>
-<li class="chapter" data-level="5.6.1" data-path="mutate.html"><a href="mutate.html#練習問題-12"><i class="fa fa-check"></i><b>5.6.1</b> [練習問題]</a></li>
-</ul></li>
-<li class="chapter" data-level="5.7" data-path="mutate.html"><a href="mutate.html#mu-seq"><i class="fa fa-check"></i><b>5.7</b> 連番からIDの作成</a>
-<ul>
-<li class="chapter" data-level="5.7.1" data-path="mutate.html"><a href="mutate.html#mu-seq-other"><i class="fa fa-check"></i><b>5.7.1</b> 【別解】行の名前を直接変数化</a></li>
-</ul></li>
-<li class="chapter" data-level="5.8" data-path="mutate.html"><a href="mutate.html#mu-rev"><i class="fa fa-check"></i><b>5.8</b> 逆転項目を作る</a>
-<ul>
-<li class="chapter" data-level="5.8.1" data-path="mutate.html"><a href="mutate.html#mu-rev-recode"><i class="fa fa-check"></i><b>5.8.1</b> 逆転：recode</a></li>
-<li class="chapter" data-level="5.8.2" data-path="mutate.html"><a href="mutate.html#mu-rev-rule1"><i class="fa fa-check"></i><b>5.8.2</b> 【別解】逆転（公式）</a></li>
-<li class="chapter" data-level="5.8.3" data-path="mutate.html"><a href="mutate.html#mu-rev-casewhen1"><i class="fa fa-check"></i><b>5.8.3</b> 【別解】逆転（case_when）</a></li>
-<li class="chapter" data-level="5.8.4" data-path="mutate.html"><a href="mutate.html#練習問題-13"><i class="fa fa-check"></i><b>5.8.4</b> [練習問題]</a></li>
-</ul></li>
-<li class="chapter" data-level="5.9" data-path="mutate.html"><a href="mutate.html#mu-total-ef"><i class="fa fa-check"></i><b>5.9</b> 【別解】合計点の作成</a>
-<ul>
-<li class="chapter" data-level="5.9.1" data-path="mutate.html"><a href="mutate.html#確認"><i class="fa fa-check"></i><b>5.9.1</b> 【確認】</a></li>
-</ul></li>
-<li class="chapter" data-level="5.10" data-path="mutate.html"><a href="mutate.html#連続変数をカテゴリに区分する"><i class="fa fa-check"></i><b>5.10</b> 連続変数をカテゴリに区分する</a>
-<ul>
-<li class="chapter" data-level="5.10.1" data-path="mutate.html"><a href="mutate.html#分布の把握"><i class="fa fa-check"></i><b>5.10.1</b> 分布の把握</a></li>
-<li class="chapter" data-level="5.10.2" data-path="mutate.html"><a href="mutate.html#数値変数の値で2区分のカテゴリ変数を作る"><i class="fa fa-check"></i><b>5.10.2</b> 数値変数の値で2区分のカテゴリ変数を作る</a></li>
-<li class="chapter" data-level="5.10.3" data-path="mutate.html"><a href="mutate.html#数値変数の値で3区分以上のカテゴリ変数を作る"><i class="fa fa-check"></i><b>5.10.3</b> 数値変数の値で3区分以上のカテゴリ変数を作る</a></li>
-<li class="chapter" data-level="5.10.4" data-path="mutate.html"><a href="mutate.html#練習問題-14"><i class="fa fa-check"></i><b>5.10.4</b> [練習問題]</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="summarise.html"><a href="summarise.html"><i class="fa fa-check"></i><b>6</b> 要約値を作る：summarise</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="summarise.html"><a href="summarise.html#su-st"><i class="fa fa-check"></i><b>6.1</b> 基本</a></li>
-<li class="chapter" data-level="6.2" data-path="summarise.html"><a href="summarise.html#su-st-multiple"><i class="fa fa-check"></i><b>6.2</b> 複数の計算</a>
-<ul>
-<li class="chapter" data-level="6.2.1" data-path="summarise.html"><a href="summarise.html#su-st-ef"><i class="fa fa-check"></i><b>6.2.1</b> 【効率化】</a></li>
-<li class="chapter" data-level="6.2.2" data-path="summarise.html"><a href="summarise.html#su-st-reorder"><i class="fa fa-check"></i><b>6.2.2</b> 【並び替え】</a></li>
-<li class="chapter" data-level="6.2.3" data-path="summarise.html"><a href="summarise.html#練習問題-15"><i class="fa fa-check"></i><b>6.2.3</b> [練習問題]</a></li>
-</ul></li>
-<li class="chapter" data-level="6.3" data-path="summarise.html"><a href="summarise.html#su-group"><i class="fa fa-check"></i><b>6.3</b> 層別（グループ別）集計</a>
-<ul>
-<li class="chapter" data-level="6.3.1" data-path="summarise.html"><a href="summarise.html#練習問題-16"><i class="fa fa-check"></i><b>6.3.1</b> [練習問題]</a></li>
-</ul></li>
-<li class="chapter" data-level="6.4" data-path="summarise.html"><a href="summarise.html#su-fun"><i class="fa fa-check"></i><b>6.4</b> 【効率化】関数にする</a>
-<ul>
-<li class="chapter" data-level="6.4.1" data-path="summarise.html"><a href="summarise.html#su-fun-st"><i class="fa fa-check"></i><b>6.4.1</b> 基本</a></li>
-<li class="chapter" data-level="6.4.2" data-path="summarise.html"><a href="summarise.html#su-fun-meansdn"><i class="fa fa-check"></i><b>6.4.2</b> 複数変数の平均値とSDとnを計算する関数</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="atogaki.html"><a href="atogaki.html"><i class="fa fa-check"></i>あとがき</a></li>
-</ul>
-
-      </nav>
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="Rによるくり返し作業入門 前編">がんばらないデータ加工</a>:
+        <small class="text-muted">Rによるくり返し作業入門 前編</small>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
 
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">がんばらないデータ加工</a>
-          </h1>
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="active" href="index.html">はじめに</a></li>
+<li><a class="" href="premise.html"><span class="header-section-number">1</span> 前提知識</a></li>
+<li><a class="" href="select.html"><span class="header-section-number">2</span> 列（変数）を選ぶ：select</a></li>
+<li><a class="" href="rename.html"><span class="header-section-number">3</span> 変数名を変更する：rename</a></li>
+<li><a class="" href="filter.html"><span class="header-section-number">4</span> 行（ケース）を選ぶ：filter</a></li>
+<li><a class="" href="mutate.html"><span class="header-section-number">5</span> 新しい変数（列）の作成：mutate</a></li>
+<li><a class="" href="summarise.html"><span class="header-section-number">6</span> 要約値を作る：summarise</a></li>
+<li><a class="" href="atogaki.html">あとがき</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/izunyan/gisho12.git">View book source <i class="fab fa-github"></i></a></p>
         </div>
-
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
-
-            <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">がんばらないデータ加工</h1>
-<h2 class="subtitle"><em>Rによるくり返し作業入門 前編</em></h2>
-<p class="author"><em>やわらかクジラ</em></p>
+      </nav>
 </div>
-<div id="hajimeni" class="section level1 unnumbered hasAnchor">
-<h1>はじめに<a href="index.html#hajimeni" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p><img src="images/cover.png" width="50%" style="display: block; margin: auto;" /></p>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><!--bookdown:title:end--><!--bookdown:title:start--><div id="hajimeni" class="section level1 unnumbered">
+<h1>はじめに<a class="anchor" aria-label="anchor" href="#hajimeni"><i class="fas fa-link"></i></a>
+</h1>
+<div class="inline-figure"><img src="images/cover.png" width="50%" style="display: block; margin: auto;"></div>
 <ul>
 <li>本webサイトは，技術書典12にて頒布した<a href="https://techbookfest.org/product/5161487259664384?productVariantID=5672571053801472">がんばらないデータ加工　Rによるくり返し作業入門　前編</a>のオンラインバージョン</li>
 <li>こちらは随時updateされていく予定</li>
 </ul>
-<div id="概要" class="section level2 unnumbered hasAnchor">
-<h2>概要<a href="index.html#概要" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="概要" class="section level2 unnumbered">
+<h2>概要<a class="anchor" aria-label="anchor" href="#%E6%A6%82%E8%A6%81"><i class="fas fa-link"></i></a>
+</h2>
 <ul>
 <li>本書の目的
 <ul>
 <li>データ加工での面倒な作業をRとRStudioで手軽に実行できるようになるための基礎知識を紹介</li>
-</ul></li>
+</ul>
+</li>
 <li>本書の内容
 <ul>
 <li>Rのモダンな方法を使い，データ加工の過程（例：前処理、データクリーニング、データクレンジング、データラングリングなど）で用いる基本関数の紹介</li>
 <li>実際は核心の部分に入る前の準備段階までにとどまる。タイトルに「前編」とあるのはその理由による</li>
 <li>基本的にデータフレーム（<a href="premise.html#p-df">1.6</a>参照）の形になったきれいな構造を想定しているが，ここで解説した技術に熟達することで，その他のデータ形式や汚いデータ構造にも立ち向かえるようになる</li>
-</ul></li>
+</ul>
+</li>
 <li>執筆動機
 <ul>
 <li>本書を書こうと思ったのは拙既刊書<a href="https://techbookfest.org/product/4794168259903488?productVariantID=5913872206659584">『Rで読むExcelファイル』</a>と同じく，「RとRStudioを使いたい！と思う人がもっと増えればいいのに」という願いから</li>
-</ul></li>
+</ul>
+</li>
 <li>今後の展望
 <ul>
 <li>よりタイトルの内容に沿った次回作の「後編」（もしかしたら「中編」も）をお楽しみに！</li>
-</ul></li>
+</ul>
+</li>
 <li>本書の内容は、<a href="https://github.com/izunyan/gisho12">githubレポジトリ</a>ですべて公開</li>
 </ul>
 </div>
-<div id="本書の特徴" class="section level2 unnumbered hasAnchor">
-<h2>本書の特徴<a href="index.html#本書の特徴" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="本書の特徴" class="section level2 unnumbered">
+<h2>本書の特徴<a class="anchor" aria-label="anchor" href="#%E6%9C%AC%E6%9B%B8%E3%81%AE%E7%89%B9%E5%BE%B4"><i class="fas fa-link"></i></a>
+</h2>
 <ul>
 <li>タイトルの「がんばらない」とは，<strong>単純作業のくり返しに無駄なエネルギーを注がなくてよいように</strong>，なるべく人力に頼らないようにすること</li>
 <li>扱う内容は自分が学び始めの時に教えてもらいたかったことが中心</li>
 <li>これまでの解説で不足していると考えられるポイント
 <ul>
 <li>便利な関数や基本的な使い方の解説は多いが，データ加工の実務上知りたいコード例が豊富なわけではない</li>
-<li><strong>同じ作業を大量の変数についてくり返し実行</strong>したい時のやり方の解説は少ない</li>
-</ul></li>
+<li>
+<strong>同じ作業を大量の変数についてくり返し実行</strong>したい時のやり方の解説は少ない</li>
+</ul>
+</li>
 <li>本書の強み
 <ul>
 <li>くり返し同じ作業する部分を効率化したコードを併せて解説する点</li>
 <li>自分の学習経験から，そのコード例が知りたかったんだ！という実用的な方法を整理</li>
-</ul></li>
+</ul>
+</li>
 <li>まずモダンなRのデータ加工法での基本の書き方を解説した後に，<strong>【効率化】</strong>でより効率的にコードを書く解説を行う</li>
-<li><strong>【効率化】</strong>のタグが本書では特に重要になる。手作業のくり返しをなるべく避けることが目指すべき点</li>
+<li>
+<strong>【効率化】</strong>のタグが本書では特に重要になる。手作業のくり返しをなるべく避けることが目指すべき点</li>
 <li>冗長だが【別解】を示すことで様々な関数の働きを理解でき，手持ちの武器が増えデータ加工の幅が広がる</li>
 </ul>
 </div>
-<div id="想定読者" class="section level2 unnumbered hasAnchor">
-<h2>想定読者<a href="index.html#想定読者" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="想定読者" class="section level2 unnumbered">
+<h2>想定読者<a class="anchor" aria-label="anchor" href="#%E6%83%B3%E5%AE%9A%E8%AA%AD%E8%80%85"><i class="fas fa-link"></i></a>
+</h2>
 <ul>
 <li>RとRStudioをダウンロードしてPCにインストールまでできることが最低条件
 <ul>
 <li>web上に様々な解説があり，あとは基本的にOKしていけばできるはず</li>
-<li>例えば公的には<a href="https://www.soumu.go.jp/ict_skill/">総務省の資料</a>などがある<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></li>
+<li>例えば公的には<a href="https://www.soumu.go.jp/ict_skill/">総務省の資料</a>などがある<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;総務省ホームページ「総務省 ICTスキル総合習得プログラム　コース4
+（オープンデータ・ビッグデータ利活用事例）　4-3 プログラミングによるビッグデータの分析（R）」(&lt;a href="https://www.soumu.go.jp/ict_skill/" class="uri"&gt;https://www.soumu.go.jp/ict_skill/&lt;/a&gt;)&lt;/p&gt;'><sup>1</sup></a>
+</li>
 <li>Windows10だとインストール時にうまくいかないことがあり，自分もくじけそうになったことがあったが，それは乗り越えてしまうと戻りたくないので今回は解説あきらめた</li>
 <li>どうしてもインストールできなかったら，ブラウザから実行可能な<a href="https://rstudio.cloud/">RStudio Cloud</a>を使って練習できる</li>
-</ul></li>
+</ul>
+</li>
 <li>初学者から始めてちょっと背伸びできるくらいまでが到達目標</li>
 </ul>
 </div>
-<div id="各章の紹介" class="section level2 unnumbered hasAnchor">
-<h2>各章の紹介<a href="index.html#各章の紹介" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="各章の紹介" class="section level2 unnumbered">
+<h2>各章の紹介<a class="anchor" aria-label="anchor" href="#%E5%90%84%E7%AB%A0%E3%81%AE%E7%B4%B9%E4%BB%8B"><i class="fas fa-link"></i></a>
+</h2>
 <ul>
 <li><p>まず<a href="premise.html#premise">1</a>章では、RとRStudioに初めて触れる方，初学者を対象とした前提知識を解説する。ゆくゆく楽をするためには避けて通れない知識なので，用語になじんでおきたい</p></li>
-<li><p><a href="select.html#select">2</a>章データの列（変数）<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>を選ぶ方法を解説する。データをコンパクトにしたり，後のデータ解析等で必要な変数を取得したりするなど，データ加工プロセス全体で必要な基本知識もあるので最初に学んでおきたい</p></li>
+<li><p><a href="select.html#select">2</a>章データの列（変数）<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="premise.html#p-object"&gt;1.5&lt;/a&gt;のオブジェクトに該当するものとは異なる&lt;/p&gt;'><sup>2</sup></a>を選ぶ方法を解説する。データをコンパクトにしたり，後のデータ解析等で必要な変数を取得したりするなど，データ加工プロセス全体で必要な基本知識もあるので最初に学んでおきたい</p></li>
 <li><p><a href="rename.html#rename">3</a>章はデータの列名（変数名）を変える方法について解説する。単純に見えるがデータ加工の際になくてはならない技術である。効率化させるためには初心者から少し脱する必要があり，奥が深い</p></li>
 <li><p><a href="filter.html#filter">4</a>章はデータの行（ケースまたはオブザベーション）を選ぶ方法を解説する。データや加工した結果，分析した結果をコンパクトにするのに役立つ</p></li>
 <li><p><a href="mutate.html#mutate">5</a>章はデータに新しい列を追加する方法について解説する。例えば合計点の作成や，年齢層カテゴリや2区分変数（いわゆるダミー変数）の作成など，変数を計算して新しい変数を作る作業はよく発生する。効率化のために避けて通れない<code>across()</code>についてもここで解説する</p></li>
 <li><p><a href="summarise.html#summarise">6</a>章は要約値の計算について解説する。実務では大量の変数を一気に処理する必要がある場面が多いので，効率化を意識した説明を多く入れている</p></li>
 </ul>
 </div>
-<div id="執筆環境" class="section level2 unnumbered hasAnchor">
-<h2>執筆環境<a href="index.html#執筆環境" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="執筆環境" class="section level2 unnumbered">
+<h2>執筆環境<a class="anchor" aria-label="anchor" href="#%E5%9F%B7%E7%AD%86%E7%92%B0%E5%A2%83"><i class="fas fa-link"></i></a>
+</h2>
 <ul>
 <li>本書は<a href="https://bookdown.org/">bookdown</a>にて執筆</li>
 <li>表紙のタイトルは「あずきフォントB」v1.20を使用</li>
 </ul>
-<div id="rおよびrstudioパッケージのバージョン" class="section level3 unnumbered hasAnchor">
-<h3>RおよびRStudio、パッケージのバージョン<a href="index.html#rおよびrstudioパッケージのバージョン" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="rおよびrstudioパッケージのバージョン" class="section level3 unnumbered">
+<h3>RおよびRStudio、パッケージのバージョン<a class="anchor" aria-label="anchor" href="#r%E3%81%8A%E3%82%88%E3%81%B3rstudio%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%AE%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3"><i class="fas fa-link"></i></a>
+</h3>
 <ul>
 <li>rstudioだけなぜか表示されないので手動で…
 <ul>
 <li>バージョン 2021.09.1+372 Ghost Orchid (desktop)</li>
-</ul></li>
+</ul>
+</li>
 </ul>
 <pre><code>## # A tibble: 4 × 2
 ##   ind     values                           
@@ -424,7 +175,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 1 version R version 4.2.0 (2022-04-22 ucrt)
 ## 2 os      Windows 10 x64 (build 19043)     
 ## 3 system  x86_64, mingw32                  
-## 4 date    2022-05-04</code></pre>
+## 4 date    2022-05-06</code></pre>
 <pre><code>## # A tibble: 2 × 2
 ##   package   loadedversion
 ##   &lt;chr&gt;     &lt;chr&gt;        
@@ -432,108 +183,91 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 2 tidyverse 1.3.1</code></pre>
 </div>
 </div>
-<div id="注意事項など" class="section level2 unnumbered hasAnchor">
-<h2>注意事項など<a href="index.html#注意事項など" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="注意事項など" class="section level2 unnumbered">
+<h2>注意事項など<a class="anchor" aria-label="anchor" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A0%85%E3%81%AA%E3%81%A9"><i class="fas fa-link"></i></a>
+</h2>
 <ul>
 <li>本書の内容はすべてwindows環境を想定</li>
 <li>この本に書いてある内容は、筆者が学習したことをまとめているものにすぎないため、正常な動作の保証はできない。使用する際は、自己責任で</li>
 </ul>
 </div>
-<div id="ライセンス" class="section level2 unnumbered hasAnchor">
-<h2>ライセンス<a href="index.html#ライセンス" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="ライセンス" class="section level2 unnumbered">
+<h2>ライセンス<a class="anchor" aria-label="anchor" href="#%E3%83%A9%E3%82%A4%E3%82%BB%E3%83%B3%E3%82%B9"><i class="fas fa-link"></i></a>
+</h2>
 <ul>
 <li>本webサイトは <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
 <ul>
-<li>引用例：やわらかクジラ（2021）『がんばらないデータ加工　Rによるくり返し作業入門　前編』. （サークル名：ヤサイゼリー）, オンライン版:<a href="https://izunyan.github.io/gisho12/" class="uri">https://izunyan.github.io/gisho12/</a></li>
+<li>引用例：やわらかクジラ（2021）『がんばらないデータ加工　Rによるくり返し作業入門　前編』. （サークル名：ヤサイゼリー）, オンライン版:<a href="https://izunyan.github.io/gisho12/" class="uri">https://izunyan.github.io/gisho12/</a>
+</li>
 <li>ただし，ライセンスの適用は本書での著作部分のみとなり，用いているデータやパッケージや画像などはそれぞれのライセンスに準じる</li>
-</ul></li>
+</ul>
+</li>
 </ul>
 </div>
-<div id="association" class="section level2 unnumbered hasAnchor">
-<h2>関連情報<a href="index.html#association" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="association" class="section level2 unnumbered">
+<h2>関連情報<a class="anchor" aria-label="anchor" href="#association"><i class="fas fa-link"></i></a>
+</h2>
 <ul>
-<li><a href="https://techbookfest.org/product/4794168259903488?productVariantID=5913872206659584">『Rで読むExcelファイル』</a>
+<li>
+<a href="https://techbookfest.org/product/4794168259903488?productVariantID=5913872206659584">『Rで読むExcelファイル』</a>
 <ul>
 <li>技術書典9で頒布したRでのExcelおよびcsvファイル読み込み解説本</li>
 <li><a href="https://izunyan.github.io/excel_r/">github</a></li>
-</ul></li>
-<li><a href="https://izunyan.github.io/practice_ggplot2/">ggplot2の辞書</a>
+</ul>
+</li>
+<li>
+<a href="https://izunyan.github.io/practice_ggplot2/">ggplot2の辞書</a>
 <ul>
 <li>視覚化のための<code>ggplot2</code>パッケージの辞書的メモ</li>
-</ul></li>
+</ul>
+</li>
 </ul>
 <!-- ![](images/tweet.png)       -->
-
 </div>
 </div>
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>総務省ホームページ「総務省 ICTスキル総合習得プログラム　コース4
-（オープンデータ・ビッグデータ利活用事例）　4-3 プログラミングによるビッグデータの分析（R）」(<a href="https://www.soumu.go.jp/ict_skill/" class="uri">https://www.soumu.go.jp/ict_skill/</a>)<a href="index.html#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p><a href="premise.html#p-object">1.5</a>のオブジェクトに該当するものとは異なる<a href="index.html#fnref2" class="footnote-back">↩︎</a></p></li>
-</ol>
+
+  <div class="chapter-nav">
+<div class="empty"></div>
+<div class="next"><a href="premise.html"><span class="header-section-number">1</span> 前提知識</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#hajimeni">はじめに</a></li>
+<li><a class="nav-link" href="#%E6%A6%82%E8%A6%81">概要</a></li>
+<li><a class="nav-link" href="#%E6%9C%AC%E6%9B%B8%E3%81%AE%E7%89%B9%E5%BE%B4">本書の特徴</a></li>
+<li><a class="nav-link" href="#%E6%83%B3%E5%AE%9A%E8%AA%AD%E8%80%85">想定読者</a></li>
+<li><a class="nav-link" href="#%E5%90%84%E7%AB%A0%E3%81%AE%E7%B4%B9%E4%BB%8B">各章の紹介</a></li>
+<li>
+<a class="nav-link" href="#%E5%9F%B7%E7%AD%86%E7%92%B0%E5%A2%83">執筆環境</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#r%E3%81%8A%E3%82%88%E3%81%B3rstudio%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%AE%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3">RおよびRStudio、パッケージのバージョン</a></li></ul>
+</li>
+<li><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A0%85%E3%81%AA%E3%81%A9">注意事項など</a></li>
+<li><a class="nav-link" href="#%E3%83%A9%E3%82%A4%E3%82%BB%E3%83%B3%E3%82%B9">ライセンス</a></li>
+<li><a class="nav-link" href="#association">関連情報</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/izunyan/gisho12.git/blob/master/index.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/izunyan/gisho12.git/edit/master/index.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
 </div>
-            </section>
+    </nav>
+</div>
 
-          </div>
-        </div>
-      </div>
+</div>
+</div> <!-- .container -->
 
-<a href="premise.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
-    </div>
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>がんばらないデータ加工</strong>: Rによるくり返し作業入門 前編" was written by やわらかクジラ. </p>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-<script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-"sharing": {
-"github": true,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": null,
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-}
-});
-});
-</script>
 
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
 </body>
-
 </html>
