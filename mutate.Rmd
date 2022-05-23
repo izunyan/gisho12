@@ -56,14 +56,28 @@ df_bfi %>%
 * mean_a1列にはA1の平均値がすべて同じ値で入る（平均値だけの計算がしたければ\@ref(summarise)章を参照）
 * dif_a1_mean列は，A1列からmean_a1列を引いた値が入る
 
+### 新しく作成した列を先頭に持ってくる
+
+* `.before = 1`と引数を指定することで,先頭に持ってこれる
+  + `.after = `とあわせて，列名を指定することで出現場所を指定できる
+
+```{r}
+df_bfi %>% 
+  mutate(
+    mean_a1 = mean(A1, na.rm = TRUE), # A1の平均値を作成（NAは除外）
+    dif_a1_mean = A1 - mean_a1,
+    .before = 1) 
+```
+
+
 ### [練習問題]
 
 * df_bfiデータの変数A1とA2だけを選んで，A2からA1を引いた新しい変数"A2_1"を作成しよう
 
 ```{r eval=FALSE, include=FALSE}
 df_bfi %>% 
-  select(A1, A2) %>% 
-  mutate(A2_1 = A2-A1)
+  mutate(A2_1 = A2-A1,
+         .after = A2)
 ```
 
 
@@ -131,13 +145,12 @@ df_bfi %>%
 ### [練習問題]
 
 
-* df_bfiデータの変数A1, A2, A3, A4, A5を因子型に変換し，この5つの変数に選択してデータフレームを表示させよう
+* df_bfiデータの変数A1, A2, A3, A4, A5を因子型に変換してデータフレームを表示させよう
 
 ```{r eval=FALSE, include=FALSE}
 df_bfi %>%
   mutate(across(c(A1:A5),
-                factor)) %>% 
-  select(A1:A5) 
+                factor))
 ```
 
 
