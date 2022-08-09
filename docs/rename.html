@@ -4,14 +4,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>3 変数名を変更する：rename | がんばらないデータ加工</title>
+<title>3 列（変数）名を変更する：rename | がんばらないデータ加工</title>
 <meta name="author" content="やわらかクジラ">
 <meta name="generator" content="bookdown 0.26 with bs4_book()">
-<meta property="og:title" content="3 変数名を変更する：rename | がんばらないデータ加工">
+<meta property="og:title" content="3 列（変数）名を変更する：rename | がんばらないデータ加工">
 <meta property="og:type" content="book">
 <meta property="og:image" content="/images/cover.png">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="3 変数名を変更する：rename | がんばらないデータ加工">
+<meta name="twitter:title" content="3 列（変数）名を変更する：rename | がんばらないデータ加工">
 <meta name="twitter:image" content="/images/cover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -21,9 +21,9 @@
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
 <link rel="stylesheet" href="bs4_style.css">
-<meta name="description" content='本章のポイント パッケージdplyrの関数rename() tidyな世界では「列名 = 変数名」 分かりやすい列名にすることだけでなく，本書の範囲を超えるが複数データの連結や同時処理関連で重要な役割を果たす 文字を扱うためのパッケージstringrの便利さを学ぶ  3.1 基本 まずはデータにどういう変数名があるかの確認 df %&gt;% names() ## [1] "species"  ...'>
-<meta property="og:description" content='本章のポイント パッケージdplyrの関数rename() tidyな世界では「列名 = 変数名」 分かりやすい列名にすることだけでなく，本書の範囲を超えるが複数データの連結や同時処理関連で重要な役割を果たす 文字を扱うためのパッケージstringrの便利さを学ぶ  3.1 基本 まずはデータにどういう変数名があるかの確認 df %&gt;% names() ## [1] "species"  ...'>
-<meta name="twitter:description" content='本章のポイント パッケージdplyrの関数rename() tidyな世界では「列名 = 変数名」 分かりやすい列名にすることだけでなく，本書の範囲を超えるが複数データの連結や同時処理関連で重要な役割を果たす 文字を扱うためのパッケージstringrの便利さを学ぶ  3.1 基本 まずはデータにどういう変数名があるかの確認 df %&gt;% names() ## [1] "species"  ...'>
+<meta name="description" content='本章のポイント パッケージdplyrの関数rename() tidyな世界では「列名 = 変数名」 分かりやすい列名にすることだけでなく，本書の範囲を超えるが複数データの連結や同時処理関連で重要な役割を果たす 文字を扱うためのパッケージstringrの便利さを学ぶ  3.1 基本 まずはデータにどういう変数名があるかの確認 df |&gt; names() ## [1] "species"   ...'>
+<meta property="og:description" content='本章のポイント パッケージdplyrの関数rename() tidyな世界では「列名 = 変数名」 分かりやすい列名にすることだけでなく，本書の範囲を超えるが複数データの連結や同時処理関連で重要な役割を果たす 文字を扱うためのパッケージstringrの便利さを学ぶ  3.1 基本 まずはデータにどういう変数名があるかの確認 df |&gt; names() ## [1] "species"   ...'>
+<meta name="twitter:description" content='本章のポイント パッケージdplyrの関数rename() tidyな世界では「列名 = 変数名」 分かりやすい列名にすることだけでなく，本書の範囲を超えるが複数データの連結や同時処理関連で重要な役割を果たす 文字を扱うためのパッケージstringrの便利さを学ぶ  3.1 基本 まずはデータにどういう変数名があるかの確認 df |&gt; names() ## [1] "species"   ...'>
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -49,7 +49,7 @@
 <li><a class="" href="index.html">はじめに</a></li>
 <li><a class="" href="premise.html"><span class="header-section-number">1</span> 前提知識</a></li>
 <li><a class="" href="select.html"><span class="header-section-number">2</span> 列（変数）を選ぶ：select</a></li>
-<li><a class="active" href="rename.html"><span class="header-section-number">3</span> 変数名を変更する：rename</a></li>
+<li><a class="active" href="rename.html"><span class="header-section-number">3</span> 列（変数）名を変更する：rename</a></li>
 <li><a class="" href="filter.html"><span class="header-section-number">4</span> 行（ケース）を選ぶ：filter</a></li>
 <li><a class="" href="mutate.html"><span class="header-section-number">5</span> 新しい変数（列）の作成：mutate</a></li>
 <li><a class="" href="summarise.html"><span class="header-section-number">6</span> 要約値を作る：summarise</a></li>
@@ -63,7 +63,7 @@
 </div>
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="rename" class="section level1" number="3">
 <h1>
-<span class="header-section-number">3</span> 変数名を変更する：rename<a class="anchor" aria-label="anchor" href="#rename"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3</span> 列（変数）名を変更する：rename<a class="anchor" aria-label="anchor" href="#rename"><i class="fas fa-link"></i></a>
 </h1>
 <ul>
 <li>本章のポイント
@@ -86,7 +86,7 @@
 <li>まずはデータにどういう変数名があるかの確認</li>
 </ul>
 <div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">df</span> |&gt; <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "species"           "island"            "bill_length_mm"   
 ## [4] "bill_depth_mm"     "flipper_length_mm" "body_mass_g"      
 ## [7] "sex"               "year"</code></pre>
@@ -98,7 +98,7 @@
 <code class="sourceCode R"><span class="co"># まだtidyverseパッケージを読み込んでない場合は以下の#を外して実行</span>
 <span class="co"># library(tidyverse)</span>
 
-<span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+<span class="va">df</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>blmm <span class="op">=</span> <span class="va">bill_length_mm</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 344 × 8
 ##   species island  blmm bill_depth_mm flipper_length_… body_mass_g
@@ -116,7 +116,7 @@
 </li>
 </ul>
 <div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+<code class="sourceCode R"><span class="va">df</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>blmm <span class="op">=</span> <span class="va">bill_length_mm</span>,
          bdmm <span class="op">=</span> <span class="va">bill_depth_mm</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 344 × 8
@@ -139,7 +139,7 @@
 <li>まずは基本の知識でできる方法</li>
 </ul>
 <div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+<code class="sourceCode R"><span class="va">df</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>くちばし_length_mm <span class="op">=</span> <span class="va">bill_length_mm</span>,
          くちばし_depth_mm <span class="op">=</span> <span class="va">bill_depth_mm</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 344 × 8
@@ -171,7 +171,7 @@
 </li>
 </ul>
 <div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+<code class="sourceCode R"><span class="va">df</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace</a></span><span class="op">(</span><span class="va">.x</span>, <span class="st">"bill"</span>, <span class="st">"くちばし"</span><span class="op">)</span>,
               <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"bill"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 344 × 8
@@ -192,7 +192,7 @@
 <code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code>の時のように単に<code><a href="https://rdrr.io/r/base/c.html">c()</a></code>の中に変数を指定していくだけでも動く</li>
 </ul>
 <div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+<code class="sourceCode R"><span class="va">df</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"bill"</span>, <span class="st">"くちばし"</span><span class="op">)</span>,
               <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">bill_length_mm</span>, <span class="va">bill_depth_mm</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 344 × 8
@@ -223,7 +223,7 @@
 <li>“_mm”を取り除きたい場合，それを削除した変数名を指定すればよいが，たくさんあると大変</li>
 </ul>
 <div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+<code class="sourceCode R"><span class="va">df</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>bill_length <span class="op">=</span> <span class="va">bill_length_mm</span>,
          bill_depth  <span class="op">=</span> <span class="va">bill_depth_mm</span>,
          flipper_length <span class="op">=</span> <span class="va">flipper_length_mm</span><span class="op">)</span></code></pre></div>
@@ -244,7 +244,7 @@
 <code><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace()</a></code>で変換先に空白「<code>" "</code>」を指定すると削除できる</li>
 </ul>
 <div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+<code class="sourceCode R"><span class="va">df</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"_mm"</span>, <span class="st">" "</span><span class="op">)</span>,
               <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">ends_with</a></span><span class="op">(</span><span class="st">"mm"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 344 × 8
@@ -268,7 +268,7 @@
 </li>
 </ul>
 <div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+<code class="sourceCode R"><span class="va">df</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_remove.html">str_remove</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"_mm"</span><span class="op">)</span>,
               <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">ends_with</a></span><span class="op">(</span><span class="st">"mm"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 344 × 8
@@ -300,9 +300,9 @@
 <code><a href="https://dplyr.tidyverse.org/reference/rename.html">rename()</a></code>の中に全部書いていけばできるが数が多いと大変</li>
 </ul>
 <div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2007</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">bill_length_mm</span><span class="op">:</span><span class="va">flipper_length_mm</span>, <span class="va">year</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+<code class="sourceCode R"><span class="va">df</span> |&gt; 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2007</span><span class="op">)</span> |&gt; 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">bill_length_mm</span><span class="op">:</span><span class="va">flipper_length_mm</span>, <span class="va">year</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>bill_length_mm_2007 <span class="op">=</span> <span class="va">bill_length_mm</span>,
          bill_depth_mm_2007  <span class="op">=</span> <span class="va">bill_depth_mm</span>,
          flipper_length_mm_2007 <span class="op">=</span> <span class="va">flipper_length_mm</span><span class="op">)</span></code></pre></div>
@@ -324,9 +324,9 @@
 <li>ここでは変数”year”以外すべてなので，“year”に「<code>!</code>」をつけることで変数を指定できる</li>
 </ul>
 <div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2007</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">bill_length_mm</span><span class="op">:</span><span class="va">flipper_length_mm</span>, <span class="va">year</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+<code class="sourceCode R"><span class="va">df</span> |&gt; 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2007</span><span class="op">)</span> |&gt; 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">bill_length_mm</span><span class="op">:</span><span class="va">flipper_length_mm</span>, <span class="va">year</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_c.html">str_c</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"_2007"</span><span class="op">)</span>,
                <span class="op">!</span><span class="va">year</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 110 × 4
@@ -344,8 +344,8 @@
 <li>変数を選ぶときに該当する単語を持つ変数を選びたければ，ヘルパー関数<code><a href="https://tidyselect.r-lib.org/reference/starts_with.html">matches()</a></code>で正規表現を使って柔軟に選べる</li>
 </ul>
 <div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-<span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2007</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+<code class="sourceCode R"><span class="va">df</span> |&gt; 
+<span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2007</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_c.html">str_c</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"_2007"</span><span class="op">)</span>,
                <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">matches</a></span><span class="op">(</span><span class="st">"bill|flipper"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 110 × 8
@@ -376,7 +376,7 @@
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#rename"><span class="header-section-number">3</span> 変数名を変更する：rename</a></li>
+<li><a class="nav-link" href="#rename"><span class="header-section-number">3</span> 列（変数）名を変更する：rename</a></li>
 <li><a class="nav-link" href="#rename-standard"><span class="header-section-number">3.1</span> 基本</a></li>
 <li>
 <a class="nav-link" href="#rename-samew"><span class="header-section-number">3.2</span> 同じ語を共通の語で置き換える</a><ul class="nav navbar-nav">

@@ -98,8 +98,7 @@ knitr::include_graphics("images/cover.png")
 
 ### RおよびRStudio、パッケージのバージョン {-}
 
-* rstudioだけなぜか表示されないので手動で…
-  + バージョン 2021.09.1+372 Ghost Orchid (desktop)
+* Rのバージョン
 
 ```{r echo = FALSE}
 library(tidyverse)
@@ -125,6 +124,17 @@ res_si$packages |>
 # |>
 #   knitr::kable() |> 
 #   kableExtra::kable_styling(position = "center")
+```
+
+* RStudioのバージョン（手動で記入）
+  + ‘2022.2.1.461’
+
+
+```{r eval=FALSE, include=FALSE}
+rsinfo <- 
+rstudioapi::versionInfo()
+
+rsinfo$version
 ```
 
 

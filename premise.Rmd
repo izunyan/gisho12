@@ -12,6 +12,7 @@
 ```{r start, echo = FALSE, fig.cap = "RStudioの起動画面", fig.align = "center", out.width='80%'}
 knitr::include_graphics("images/start.png")
 ```
+
 ### 見た目の変更{#p-theme}
 
 * 好みまたは目に優しい画面にするため，RStudioの色合いを下記から変更できる
@@ -145,6 +146,10 @@ c("a", "b", "c") # " "で囲まれる値は文字を表す
 * 引数にベクトルを入れることで平均値を計算する
 * 1つのベクトルはデータフレームの1つの列（変数）の単位と同じなので，ここでは横に並んでいるがデータフレーム的にイメージしたら縦に並んでるとみなすと分かりやすいかも
 
+```{r vectorimage, echo = FALSE, fig.cap = "ベクトルのイメージ", fig.align = "center", out.width='80%'}
+knitr::include_graphics("images/vector_image.png")
+```
+
 ```{r}
 mean(c(1,2,3))
 
@@ -235,22 +240,21 @@ palmerpenguins::penguins
 * 本書では最初の3行の表示のみに絞っているが，**任意の行数を表示させたい場合**は，`print()`関数を使う
 * 例：最初の15行のみ表示させる
 ```{r}
-palmerpenguins::penguins %>% 
+palmerpenguins::penguins  |>  
   print(n = 15)
 ```
 
 
-## %>% （パイプ演算子）{#p-pipe}
+## |>または%>%（パイプ演算子）{#p-pipe}
 
 * 名前は**パイプ**で発音は"*and then*" （[参照](https://adv-r.hadley.nz/functions.html#function-composition)）
 * コードを読みやすくするための便利な機能を持つ演算子。初めてみた人は全然わからないと思うが，この本を読んでコードを書きはじめてみたらこれなしではいられなくなるくらいお世話になると思う
-  + 主に使用が想定される場面でざっくりいうと，「このデータフレームに対して`%>%`の後にある関数を適用する」という機能
+  + 主に使用が想定される場面でざっくりいうと，「このデータフレームに対して`|>`の後にある関数を適用する」という機能
   + 具体的な使用法は\@ref(select-standard-pipe)で解説
-* `tidyverse`パッケージを読み込めば使えるようになる
+  + 最近は特にパッケージを読み込まなくても使える`|>`(base pipe, native pipe)を使う説明が多くなった。
+    - `%>%`(magrittr pipe)は`tidyverse`パッケージを読み込めば使えて，こちらが必要になる特殊なケースもある
 * RStudioのショートカットは`Ctrl + Shift + M`(Macは`Cmd + Shift + M`)。たぶん，RStudio以外でもこのショートカット押してしまうぐらい中毒性がある
-* R version 4.1からは「`|>`」が大体同じ機能を持つ演算子して実装されたので，特にパッケージの読み込みをせずに使えるようになった。こちらを使う説明も今後増えていくと思われる
-  + ショートカットで出るパイプを`|>`に切り替えたい場合は，RStudioの`Tools > Global Options > Code > Editing > use native pipe operator`にチェックを入れる
-  + 現時点ではデータフレームを第一引数へ渡す形式でない関数の場合（回帰分析の`lm()`など），工夫が必要な場合があるようなので，本書では`%>%`を使用
+  + 現時点ではRStudioのデフォルトのショートカットで出るのは`%>%`だが，`|>`に切り替えたい場合は，RStudioの`Tools > Global Options > Code > Editing > use native pipe operator`にチェックを入れる
 
 ## プロジェクト{#p-project}
 * 本書の内容では使わなくても問題ないが，自身のデータを読み書きする際には非常に便利なので，解説しておく

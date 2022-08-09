@@ -33,7 +33,7 @@
 # library(tidyverse)
 
 df_bfi <- 
-  psychTools::bfi %>% 
+  psychTools::bfi |> 
   as_tibble()         # 表示に便利なtibble形式に
 ```
 
@@ -45,8 +45,8 @@ df_bfi <-
 * ここでは，まず変数A1の平均値（全ケース同じ値が入る）を計算し，個々のケースの値の差分を新しく列として追加する例を示す
 
 ```{r}
-df_bfi %>% 
-  select(A1) %>%                      # A1のみを残す
+df_bfi |> 
+  select(A1) |>                      # A1のみを残す
   mutate(
     mean_a1 = mean(A1, na.rm = TRUE), # A1の平均値を作成（NAは除外）
     dif_a1_mean = A1 - mean_a1)       # 各個体のA1と平均値の差分を計算
@@ -56,26 +56,35 @@ df_bfi %>%
 * mean_a1列にはA1の平均値がすべて同じ値で入る（平均値だけの計算がしたければ\@ref(summarise)章を参照）
 * dif_a1_mean列は，A1列からmean_a1列を引いた値が入る
 
-### 新しく作成した列を先頭に持ってくる
+### 新しく作成した列の位置を指定する
 
 * `.before = 1`と引数を指定することで,先頭に持ってこれる
   + `.after = `とあわせて，列名を指定することで出現場所を指定できる
 
 ```{r}
-df_bfi %>% 
+df_bfi |> 
   mutate(
     mean_a1 = mean(A1, na.rm = TRUE), # A1の平均値を作成（NAは除外）
     dif_a1_mean = A1 - mean_a1,
     .before = 1) 
 ```
 
+* 引数`.keep = "used"`で作成に関係した列だけにする
+
+```{r}
+df_bfi |> 
+  mutate(
+    mean_a1 = mean(A1, na.rm = TRUE), # A1の平均値を作成（NAは除外）
+    dif_a1_mean = A1 - mean_a1,
+    .keep = "used") 
+```
 
 ### [練習問題]
 
 * df_bfiデータの変数A1とA2だけを選んで，A2からA1を引いた新しい変数"A2_1"を作成しよう
 
 ```{r eval=FALSE, include=FALSE}
-df_bfi %>% 
+df_bfi |> 
   mutate(A2_1 = A2-A1,
          .after = A2)
 ```
@@ -93,7 +102,7 @@ df_bfi %>%
 
 
 ```{r}
-df_bfi %>% 
+df_bfi |> 
   select(gender, education)
 
 ```
@@ -101,8 +110,8 @@ df_bfi %>%
 * tibble形式でない普通のデータフレームでも，最後に`glimpse()`で出力することで型を確認可能
  
 ```{r}
-df_bfi %>%
-  select(gender, education) %>%
+df_bfi |>
+  select(gender, education) |>
   glimpse()
 
 ```
@@ -118,8 +127,8 @@ df_bfi %>%
 
 ```{r}
 
-df_bfi %>%
-  select(gender, education) %>% 
+df_bfi |>
+  select(gender, education) |> 
   mutate(gender = factor(gender),
          education = factor(education))
 ```
@@ -134,9 +143,9 @@ df_bfi %>%
 * `across()`の第一引数に変数ベクトルを入れ，次に適用する関数（ここではfactor()）を入れる
 
 ```{r}
-df_bfi %>%
+df_bfi |>
   mutate(across(c(gender, education),
-                factor)) %>% 
+                factor)) |> 
   select(gender, education)   # 結果表示のため冗長だが変わった変数だけselect
 ```
 
@@ -148,7 +157,7 @@ df_bfi %>%
 * df_bfiデータの変数A1, A2, A3, A4, A5を因子型に変換してデータフレームを表示させよう
 
 ```{r eval=FALSE, include=FALSE}
-df_bfi %>%
+df_bfi |>
   mutate(across(c(A1:A5),
                 factor))
 ```
@@ -161,9 +170,9 @@ df_bfi %>%
 
   
 ```{r}
-df_bfi %>%
+df_bfi |>
   mutate(across(starts_with("n"),
-                factor)) %>% 
+                factor)) |> 
   select(starts_with("n"))   # 結果表示のため
 
 ```
@@ -173,9 +182,9 @@ df_bfi %>%
 ```{r}
 vars <- c("N1", "N2", "N3", "N4", "N5")
 
-df_bfi %>%
+df_bfi |>
   mutate(across(all_of(vars),
-                factor)) %>% 
+                factor)) |> 
   select(starts_with("n"))   # 結果表示のため
 
 ```
@@ -190,9 +199,9 @@ df_bfi %>%
 * 例：genderとeducationの型を因子型に変換し，変換前後で変わっているかどうか確認
 
 ```{r}
-df_bfi %>%
+df_bfi |>
   mutate(across(c(gender, education),
-                list(f = ~factor(.x)))) %>% 
+                list(f = ~factor(.x)))) |> 
   select(matches("gender|education"))   
 ```
 
@@ -204,9 +213,9 @@ df_bfi %>%
 * df_bfiデータの変数N1, N2, N3, N4, N5だけをすべて因子型に変換して変数名末尾に"_fct"を付けた変数を追加し，ヘルパー関数を使って選んで示そう
 
 ```{r eval=FALSE, include=FALSE}
-df_bfi %>%
+df_bfi |>
   mutate(across(c(N1:N5),
-                list(fct = ~factor(.x)))) %>% 
+                list(fct = ~factor(.x)))) |> 
   select(starts_with("N"))
 ```
 
@@ -217,8 +226,8 @@ df_bfi %>%
 
 ```{r}
 df_bfi_n <- 
-  df_bfi %>%
-  select(N1:N5) %>%                       
+  df_bfi |>
+  select(N1:N5) |>                       
   mutate(neuroticism = N1 + N2 + N3 + N4 + N5)
   
 df_bfi_n
@@ -234,7 +243,7 @@ df_bfi_n
 * 合計得点の計算の場合，対象となる変数の内1つでもNAがあれば合計点もNAとなる
 
 ```{r}
-df_bfi_n %>% 
+df_bfi_n |> 
   filter(is.na(neuroticism))     # neuroticismがNAなケースに限定
 
 ```
@@ -249,11 +258,11 @@ df_bfi_n %>%
   + `count()`の強みは，出力がデータフレームで出てくる点なので，結果が扱いやすい
 
 ```{r}
-df_bfi %>%
+df_bfi |>
   mutate(gender = factor(gender),
          gender_c = fct_recode(gender, 
                                male   = "1",
-                               female = "2")) %>% 
+                               female = "2")) |> 
   count(gender, gender_c)
 
 ```
@@ -263,14 +272,14 @@ df_bfi %>%
 * df_bfiデータの変数educationを数値の値1～5を，それぞれ対応する"HS", "finished HS", "some college", "college graduate", "graduate degree"に変換して，ちゃんと変換されているかどうかcountで確認しよう
 
 ```{r eval=FALSE, include=FALSE}
-df_bfi %>%
+df_bfi |>
   mutate(education = factor(education),
          education_c = fct_recode(education, "HS" = "1",
                                 "finished HS" = "2",
                                 "some college" = "3",
                                 "college graduate" = "4",
                                 "graduate degree" = "5"
-         )) %>% 
+         )) |> 
   count(education, education_c)
 ```
 
@@ -280,7 +289,7 @@ df_bfi %>%
 * `dplyr::row_number()`で行番号からIDを作成
 
 ```{r}
-df_bfi_n %>% 
+df_bfi_n |> 
   mutate(id = row_number())
 ```
 
@@ -291,7 +300,7 @@ df_bfi_n %>%
   + `var =`で連番として追加する変数名を指定
 
 ```{r}
-df_bfi_n %>% 
+df_bfi_n |> 
   rowid_to_column(var = "id")
 
 # この先使わないのでデータフレーム削除
@@ -323,9 +332,9 @@ rm(df_bfi_n)
   + newの数値に`L`がつくのは，型を整数のままにするため。Lなしでも実行できるが，型が`dbl`になる
   
 ```{r}
-df_bfi %>% 
+df_bfi |> 
   mutate(A1_r = recode(A1, `1` = 6L, `2` = 5L, `3` = 4L,      
-                           `4` = 3L, `5` = 2L, `6` = 1L)) %>% 
+                           `4` = 3L, `5` = 2L, `6` = 1L)) |> 
   select(A1, A1_r)
 ```
 
@@ -335,11 +344,11 @@ df_bfi %>%
 * A1と同様に同じ形をくり返し変数名だけ変えていけばできるが，コードが長くなりミスも生じやすくなる
 
 ```{r}
-df_bfi %>% 
+df_bfi |> 
   mutate(A1_r = recode(A1, `1` = 6L, `2` = 5L, `3` = 4L, 
                            `4` = 3L, `5` = 2L, `6` = 1L),
          C4_r = recode(C4, `1` = 6L, `2` = 5L, `3` = 4L, 
-                           `4` = 3L, `5` = 2L, `6` = 1L)) %>% 
+                           `4` = 3L, `5` = 2L, `6` = 1L)) |> 
   select(A1, A1_r, C4, C4_r)
 ```
 
@@ -351,10 +360,10 @@ df_bfi %>%
 
 ```{r}
 
-df_bfi %>% 
+df_bfi |> 
   mutate(across(c(A1, C4),
                 list(r = ~recode(.x, `1` = 6L, `2` = 5L, `3` = 4L, 
-                                     `4` = 3L, `5` = 2L, `6` = 1L)))) %>% 
+                                     `4` = 3L, `5` = 2L, `6` = 1L)))) |> 
   select(A1, A1_r, C4, C4_r)
 ```
 
@@ -368,9 +377,9 @@ df_bfi %>%
 min <- 1
 max <- 6
 
-df_bfi %>% 
+df_bfi |> 
   mutate(A1_r = max + min - A1,
-         C4_r = max + min - C4) %>% 
+         C4_r = max + min - C4) |> 
   select(A1, A1_r, C4, C4_r)
 ```
 
@@ -380,9 +389,9 @@ df_bfi %>%
 * ここでは，`max + min - .x` の`.x`に`across()`内に置かれた変数が入っていく
 
 ```{r}
-df_bfi %>% 
+df_bfi |> 
   mutate(across(c(A1,C4),
-                list(r = ~ max + min - .x))) %>% 
+                list(r = ~ max + min - .x))) |> 
   select(A1, A1_r, C4, C4_r)
 ```
 
@@ -391,20 +400,20 @@ df_bfi %>%
 * 条件式の`==`を使って値を変換することもできる。こちらだと条件式の内容や複数の変数の組み合わせなど幅広い応用が可能に
 
 ```{r}
-df_bfi %>% 
+df_bfi |> 
   mutate(A1_r = case_when(A1 == 1 ~ 6L,
                           A1 == 2 ~ 5L,
                           A1 == 3 ~ 4L,
                           A1 == 4 ~ 3L,
                           A1 == 5 ~ 2L,
-                          A1 == 6 ~ 1L)) %>% 
+                          A1 == 6 ~ 1L)) |> 
   select(A1, A1_r)
 ```
 
 #### 【効率化】 変数2つ以上を逆転 {#mu-rev-casewhen2}
 
 ```{r}
-df_bfi %>% 
+df_bfi |> 
   mutate(across(c(A1,C4),
                 list(r = ~case_when(.x == 1 ~ 6L,
                                     .x == 2 ~ 5L,
@@ -412,7 +421,7 @@ df_bfi %>%
                                     .x == 4 ~ 3L,
                                     .x == 5 ~ 2L,
                                     .x == 6 ~ 1L)))
-         ) %>% 
+         ) |> 
   select(A1, A1_r, C4, C4_r)
 ```
 
@@ -425,7 +434,7 @@ df_bfi %>%
 
 ```{r include=FALSE}
 df_bfi <- 
-  df_bfi %>% 
+  df_bfi |> 
   mutate(across(c(A1, C4, C5, E1, E2, O2, O5),
                 list(r = ~ max + min - .x)))
 ```
@@ -442,33 +451,33 @@ df_bfi <-
 # 合計する項目の定義
 
 Ag <- 
-df_bfi %>% 
-  select(A1_r, A2:A5) %>% 
+df_bfi |> 
+  select(A1_r, A2:A5) |> 
   names()
 
 Co <- 
-df_bfi %>% 
-  select(C1:C3, C4_r, C5_r) %>% 
+df_bfi |> 
+  select(C1:C3, C4_r, C5_r) |> 
   names()
 
 Ex <- 
-  df_bfi %>% 
-  select(E1_r, E2_r, E3:E5) %>% 
+  df_bfi |> 
+  select(E1_r, E2_r, E3:E5) |> 
   names()
 
 Ne <- 
-df_bfi %>% 
-  select(N1:N5) %>% 
+df_bfi |> 
+  select(N1:N5) |> 
   names()
 
 Op <- 
-df_bfi %>% 
-  select(O1, O2_r, O3, O4, O5_r) %>% 
+df_bfi |> 
+  select(O1, O2_r, O3, O4, O5_r) |> 
   names()
 
 
 df_bfi <- 
-  df_bfi %>% 
+  df_bfi |> 
   mutate(
     Agree         = rowSums(across(all_of(Ag))),
     Conscientious = rowSums(across(all_of(Co))),
@@ -485,10 +494,10 @@ df_bfi <-
 * rowSums(across(all_of(Op)), **na.rm = TRUE**)と引数を追加すれば，NAを無視して合計できる
 
 ```{r}
-df_bfi %>% select(all_of(Ag), Agree)
+df_bfi |> select(all_of(Ag), Agree)
 
-df_bfi %>% 
-  select(all_of(Ex), Extraversion) %>% 
+df_bfi |> 
+  select(all_of(Ex), Extraversion) |> 
   filter(is.na(Extraversion))
 
 ```
@@ -516,7 +525,7 @@ ggplot(df_bfi) +           # ここにデータフレーム
 median(df_bfi$age)
 
 # モダンな方法だと少し長くなる
-# df_bfi %>% 
+# df_bfi |> 
 #   summarise(median(age))
 
 ```
@@ -531,11 +540,11 @@ median(df_bfi$age)
 
 ```{r}
 res_age2 <- 
-  df_bfi %>% 
-  mutate(age2 = if_else(age >= 27, 1, 0)) %>% 
+  df_bfi |> 
+  mutate(age2 = if_else(age >= 27, 1, 0)) |> 
   select(age, age2)
 
-res_age2 %>% count(age2) 
+res_age2 |> count(age2) 
 ```
 
 #### 確認
@@ -543,9 +552,9 @@ res_age2 %>% count(age2)
 * `age >= 27`が1，27未満が0にコーディングされているか`filter()`で限定して確認
 
 ```{r}
-res_age2 %>% 
-  filter(age >= 20 & age <= 30) %>% 
-  count(age, age2) %>% 
+res_age2 |> 
+  filter(age >= 20 & age <= 30) |> 
+  count(age, age2) |> 
   print(n = 11)
 
 ```
@@ -554,8 +563,8 @@ res_age2 %>%
   + `dplyr::slice()`で1:3行目と最後の3行を表示させる
 
 ```{r}
-res_age2 %>% 
-  count(age, age2) %>% 
+res_age2 |> 
+  count(age, age2) |> 
   slice(1:3, (n()-2):n())
   
 
@@ -566,12 +575,12 @@ res_age2 %>%
 * 長くなるがこちらの方が覚えやすいかも
 
 ```{r}
-res_age2 %>% 
-  count(age, age2) %>% 
+res_age2 |> 
+  count(age, age2) |> 
   slice_head(n = 3)
 
-res_age2 %>% 
-  count(age, age2) %>% 
+res_age2 |> 
+  count(age, age2) |> 
   slice_tail(n = 3)
 
 rm(res_age2)
@@ -584,7 +593,7 @@ rm(res_age2)
 
 ```{r}
 res_age6 <- 
-  df_bfi %>% 
+  df_bfi |> 
   mutate(age6 = case_when(
     age < 20              ~ "20歳未満", 
     age >= 20  & age < 30 ~ "20-29歳", 
@@ -597,9 +606,9 @@ res_age6 <-
 # 確認するには以下のコードの最初の2行だけでよいが，
 # 出力が長いためランダムに10件抽出しageの昇順にしてある
 
-res_age6 %>% 
-  count(age, age6) %>% 
-  slice_sample(n = 10) %>% # ランダムに10件抽出
+res_age6 |> 
+  count(age, age6) |> 
+  slice_sample(n = 10) |> # ランダムに10件抽出
   arrange(age)             # ageをキーに行を昇順にソート
 
 rm(res_age6)
@@ -612,15 +621,15 @@ rm(res_age6)
   
 ```{r eval=FALSE, include=FALSE}
  
-  df_bfi %>% 
+  df_bfi |> 
   mutate(age4 = case_when(
     age >= 10  & age < 20 ~ "10代", 
     age >= 20  & age < 40 ~ "20_30代", 
     age >= 40  & age < 60 ~ "40_50代",
     age >= 60  & age < 70 ~ "60代"
   
-  )) %>% 
-  count(age,age4) %>% 
+  )) |> 
+  count(age,age4) |> 
   print(n = 64)
 
 ```

@@ -5,6 +5,7 @@ fig:script
 fig:script2
 fig:utf8
 fig:pinst
+fig:vectorimage
 fig:dfxl
 fig:dfr
 fig:project
@@ -79,6 +80,7 @@ filter-kw
 mutate
 mu-read
 mu-standard
+新しく作成した列の位置を指定する
 練習問題-9
 mu-kata
 mu-kata-trans
