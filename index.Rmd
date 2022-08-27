@@ -126,8 +126,8 @@ res_si$packages |>
 #   kableExtra::kable_styling(position = "center")
 ```
 
-* RStudioのバージョン（手動で記入）
-  + ‘2022.2.1.461’
+* RStudioのバージョン
+  + ‘2022.2.1.461’（手動で記入）
 
 
 ```{r eval=FALSE, include=FALSE}
@@ -135,6 +135,7 @@ rsinfo <-
 rstudioapi::versionInfo()
 
 rsinfo$version
+rsinfo$release_name
 ```
 
 
