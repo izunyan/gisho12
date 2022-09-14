@@ -72,7 +72,7 @@ knitr::include_graphics("images/cover.png")
   + 例えば公的には[総務省の資料](https://www.soumu.go.jp/ict_skill/)などがある^[総務省ホームページ「総務省 ICTスキル総合習得プログラム　コース4
 （オープンデータ・ビッグデータ利活用事例）　4-3 プログラミングによるビッグデータの分析（R）」(https://www.soumu.go.jp/ict_skill/)]
   + Windows10だとインストール時にうまくいかないことがあり，自分もくじけそうになったことがあったが，それは乗り越えてしまうと戻りたくないので今回は解説あきらめた
-  + どうしてもインストールできなかったら，ブラウザから実行可能な[RStudio Cloud](https://rstudio.cloud/)を使って練習できる
+  + どうしてもインストールできなかったら，ブラウザから実行可能な[RStudio Cloud](https://rstudio.cloud/)を使って練習できる（ただし無料版は時間制限があるらしい）
 * 初学者から始めてちょっと背伸びできるくらいまでが到達目標
 
 
@@ -80,7 +80,7 @@ knitr::include_graphics("images/cover.png")
 
 * まず\@ref(premise)章では、RとRStudioに初めて触れる方，初学者を対象とした前提知識を解説する。ゆくゆく楽をするためには避けて通れない知識なので，用語になじんでおきたい
 
-* \@ref(select)章データの列（変数）^[\@ref(p-object)のオブジェクトに該当するものとは異なる]を選ぶ方法を解説する。データをコンパクトにしたり，後のデータ解析等で必要な変数を取得したりするなど，データ加工プロセス全体で必要な基本知識もあるので最初に学んでおきたい
+* \@ref(select)章はデータの列（変数）^[\@ref(p-object)のオブジェクトに該当するものとは異なる]を選ぶ方法を解説する。データをコンパクトにしたり，後のデータ解析等で必要な変数を取得したりするなど，データ加工プロセス全体で必要な基本知識もあるので最初に学んでおきたい
 
 * \@ref(rename)章はデータの列名（変数名）を変える方法について解説する。単純に見えるがデータ加工の際になくてはならない技術である。効率化させるためには初心者から少し脱する必要があり，奥が深い
 
@@ -154,7 +154,7 @@ rsinfo$release_name
 
 * [『Rで読むExcelファイル』](https://techbookfest.org/product/4794168259903488?productVariantID=5913872206659584)
   + 技術書典9で頒布したRでのExcelおよびcsvファイル読み込み解説本
-  + [github](https://izunyan.github.io/excel_r/)
+  + [githubレポジトリ](https://izunyan.github.io/excel_r/)
 
 * [ggplot2の辞書](https://izunyan.github.io/practice_ggplot2/)
   + 視覚化のための`ggplot2`パッケージの辞書的メモ    

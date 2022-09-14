@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>1 前提知識 | がんばらないデータ加工</title>
 <meta name="author" content="やわらかクジラ">
-<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta name="generator" content="bookdown 0.29 with bs4_book()">
 <meta property="og:title" content="1 前提知識 | がんばらないデータ加工">
 <meta property="og:type" content="book">
 <meta property="og:image" content="/images/cover.png">
@@ -136,7 +136,7 @@ Figure 1.4: Rスクリプトを開く
 </p>
 </div>
 <ul>
-<li>R Scriptを開くとデフォルトでは左上にペインが開き，ここにコードを記述できる（図<a href="premise.html#fig:script2">1.5</a>）</li>
+<li>R Scriptを開くとデフォルトでは左上にウィンドウ（ペインと呼ばれる）が開き，ここにコードを記述できる（図<a href="premise.html#fig:script2">1.5</a>）</li>
 </ul>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:script2"></span>
@@ -370,7 +370,7 @@ Figure 1.8: ベクトルのイメージ
 </h2>
 <ul>
 <li>
-<strong>行</strong>（別名：ケース；レコード；オブザベーション）と<strong>列</strong>（別名：変数；カラム）<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;オブジェクトに該当するものとは異なる。本書ではこちらの意味で「変数」を使用する&lt;/p&gt;"><sup>4</sup></a>が碁盤の目のようになった集まりの形のデータ
+<strong>行</strong>（別名：ケース；オブザベーション；レコード）と<strong>列</strong>（別名：変数；カラム）<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;オブジェクトに該当するものとは異なる。本書ではこちらの意味で「変数」を使用する&lt;/p&gt;"><sup>4</sup></a>が碁盤の目のようになった集まりの形のデータ
 <ul>
 <li>Excelで表現するのであれば通常1行目に列名が入り、2行目以降が個別のケース（データ）を表す形（図<a href="premise.html#fig:dfxl">1.9</a>）。Rのデータフレームでは列名は別途与えられ，1行目からケースが表される（図<a href="premise.html#fig:dfr">1.10</a>）</li>
 </ul>
@@ -425,7 +425,7 @@ Figure 1.10: Rのデータフレーム(tibble形式)
 </li>
 <li>データフレーム名を打ち込めばそのまま表示できる
 <ul>
-<li>tibble形式でないデータフレームで大きなものに対して実行すると，出力がうまって大変になることもある</li>
+<li>tibble形式でないデータフレームで大きなものに対して実行すると，Consoleの出力がうまって大変になることもある</li>
 </ul>
 </li>
 </ul>

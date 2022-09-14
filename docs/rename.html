@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>3 列（変数）名を変更する：rename | がんばらないデータ加工</title>
 <meta name="author" content="やわらかクジラ">
-<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta name="generator" content="bookdown 0.29 with bs4_book()">
 <meta property="og:title" content="3 列（変数）名を変更する：rename | がんばらないデータ加工">
 <meta property="og:type" content="book">
 <meta property="og:image" content="/images/cover.png">
@@ -21,9 +21,9 @@
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
 <link rel="stylesheet" href="bs4_style.css">
-<meta name="description" content='本章のポイント パッケージdplyrの関数rename() tidyな世界では「列名 = 変数名」 分かりやすい列名にすることだけでなく，本書の範囲を超えるが複数データの連結や同時処理関連で重要な役割を果たす 文字を扱うためのパッケージstringrの便利さを学ぶ  3.1 基本 まずはデータにどういう変数名があるかの確認 df |&gt; names() ## [1] "species"   ...'>
-<meta property="og:description" content='本章のポイント パッケージdplyrの関数rename() tidyな世界では「列名 = 変数名」 分かりやすい列名にすることだけでなく，本書の範囲を超えるが複数データの連結や同時処理関連で重要な役割を果たす 文字を扱うためのパッケージstringrの便利さを学ぶ  3.1 基本 まずはデータにどういう変数名があるかの確認 df |&gt; names() ## [1] "species"   ...'>
-<meta name="twitter:description" content='本章のポイント パッケージdplyrの関数rename() tidyな世界では「列名 = 変数名」 分かりやすい列名にすることだけでなく，本書の範囲を超えるが複数データの連結や同時処理関連で重要な役割を果たす 文字を扱うためのパッケージstringrの便利さを学ぶ  3.1 基本 まずはデータにどういう変数名があるかの確認 df |&gt; names() ## [1] "species"   ...'>
+<meta name="description" content="本章のポイント パッケージdplyrの関数rename() tidyな世界では「列名 = 変数名」 分かりやすい列名にすることだけでなく，本書の範囲を超えるが複数データの連結や同時処理関連で重要な役割を果たす 文字を扱うためのパッケージstringrの便利さを学ぶ  3.1 基本 まずはデータにどういう変数名があるかの確認 使用データは2.1で読み込んだdfを使用 df |&gt;...">
+<meta property="og:description" content="本章のポイント パッケージdplyrの関数rename() tidyな世界では「列名 = 変数名」 分かりやすい列名にすることだけでなく，本書の範囲を超えるが複数データの連結や同時処理関連で重要な役割を果たす 文字を扱うためのパッケージstringrの便利さを学ぶ  3.1 基本 まずはデータにどういう変数名があるかの確認 使用データは2.1で読み込んだdfを使用 df |&gt;...">
+<meta name="twitter:description" content="本章のポイント パッケージdplyrの関数rename() tidyな世界では「列名 = 変数名」 分かりやすい列名にすることだけでなく，本書の範囲を超えるが複数データの連結や同時処理関連で重要な役割を果たす 文字を扱うためのパッケージstringrの便利さを学ぶ  3.1 基本 まずはデータにどういう変数名があるかの確認 使用データは2.1で読み込んだdfを使用 df |&gt;...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -84,6 +84,7 @@
 </h2>
 <ul>
 <li>まずはデータにどういう変数名があるかの確認</li>
+<li>使用データは<a href="select.html#select-read">2.1</a>で読み込んだdfを使用</li>
 </ul>
 <div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> |&gt; <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>

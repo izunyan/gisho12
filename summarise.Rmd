@@ -11,7 +11,7 @@
 
 * `summarise()`の中に出力したい変数名を書き，`=`の後に計算する関数を入れる
 * 例：bill_length_mmの平均値を算出する
-* 使用データは\@ref(select-read)で読み込んだdfを使用
+* データは\@ref(select-read)で読み込んだdfを使用
 
 ```{r}
 # まだtidyverseパッケージを読み込んでない場合は以下の#を外して実行

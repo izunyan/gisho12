@@ -9,6 +9,7 @@
 ## 基本 {#rename-standard}
 
 * まずはデータにどういう変数名があるかの確認
+* 使用データは\@ref(select-read)で読み込んだdfを使用
 
 ```{r}
 df |> names()
