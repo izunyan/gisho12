@@ -4,9 +4,6 @@
 %
 \documentclass[
   xelatex,ja=standard, b5paper]{bxjsbook}
-\author{}
-\date{\vspace{-2.5em}}
-
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
 \usepackage{iftex}
@@ -130,6 +127,9 @@
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
 
+\author{}
+\date{\vspace{-2.5em}}
+
 \begin{document}
 
 {
@@ -139,6 +139,22 @@
 \hypertarget{hajimeni}{%
 \chapter*{はじめに}\label{hajimeni}}
 \addcontentsline{toc}{chapter}{はじめに}
+
+\hypertarget{ux6280ux8853ux66f8ux517812ux9812ux5e03ux7248ux304bux3089ux306eux5909ux66f4ux70b9}{%
+\section*{技術書典12頒布版からの変更点}\label{ux6280ux8853ux66f8ux517812ux9812ux5e03ux7248ux304bux3089ux306eux5909ux66f4ux70b9}}
+\addcontentsline{toc}{section}{技術書典12頒布版からの変更点}
+
+\begin{itemize}
+\tightlist
+\item
+  R4.2対応
+\item
+  パイプを演算子を\texttt{\%\textgreater{}\%}から\texttt{\textbar{}\textgreater{}}に置き換え
+\item
+  軽微な追記
+\item
+  誤字・脱字・細かい表現を修正
+\end{itemize}
 
 \hypertarget{ux6982ux8981}{%
 \section*{概要}\label{ux6982ux8981}}
@@ -160,11 +176,11 @@
   \begin{itemize}
   \tightlist
   \item
-    Rのモダンな方法を使ったデータ加工の過程（例：前処理、データクリーニング、データクレンジング、データラングリングなど）で用いる基本関数の紹介
+    Rのモダンな方法を使い，データ加工の過程（例：前処理、データクリーニング、データクレンジング、データラングリングなど）で用いる基本関数の紹介
   \item
     実際は核心の部分に入る前の準備段階までにとどまる。タイトルに「前編」とあるのはその理由による
   \item
-    基本的にデータフレーム（\ref{p-df}参照）の形になったきれいな構造を想定しているが，ここで解説した技術に熟達することで，汚いデータ構造にも立ち向かえるようになる
+    基本的にデータフレーム（\ref{p-df}参照）の形になったきれいな構造を想定しているが，ここで解説した技術に熟達することで，その他のデータ形式や汚いデータ構造にも立ち向かえるようになる
   \end{itemize}
 \item
   執筆動機
@@ -243,7 +259,7 @@
   \item
     Windows10だとインストール時にうまくいかないことがあり，自分もくじけそうになったことがあったが，それは乗り越えてしまうと戻りたくないので今回は解説あきらめた
   \item
-    どうしてもインストールできなかったら，ブラウザから実行可能な\href{https://rstudio.cloud/}{RStudio Cloud}を使って練習できる
+    どうしてもインストールできなかったら，ブラウザから実行可能な\href{https://rstudio.cloud/}{RStudio Cloud}を使って練習できる（ただし無料版は時間制限があるらしい）
   \end{itemize}
 \item
   初学者から始めてちょっと背伸びできるくらいまでが到達目標
@@ -257,7 +273,7 @@
 \item
   まず\ref{premise}章では、RとRStudioに初めて触れる方，初学者を対象とした前提知識を解説する。ゆくゆく楽をするためには避けて通れない知識なので，用語になじんでおきたい
 \item
-  \ref{select}章はデータの列（変数）を選ぶ方法を解説する。データをコンパクトにしたり，後のデータ解析等で必要な変数を取得したりするなど，データ加工プロセス全体で必要な基本知識もあるので最初に学んでおきたい
+  \ref{select}章はデータの列（変数）\footnote{\ref{p-object}のオブジェクトに該当するものとは異なる}を選ぶ方法を解説する。データをコンパクトにしたり，後のデータ解析等で必要な変数を取得したりするなど，データ加工プロセス全体で必要な基本知識もあるので最初に学んでおきたい
 \item
   \ref{rename}章はデータの列名（変数名）を変える方法について解説する。単純に見えるがデータ加工の際になくてはならない技術である。効率化させるためには初心者から少し脱する必要があり，奥が深い
 \item
@@ -287,32 +303,38 @@
 \begin{itemize}
 \tightlist
 \item
-  rstudioだけなぜか表示されないので手動で\ldots{}
-
-  \begin{itemize}
-  \tightlist
-  \item
-    バージョン 2021.09.1+372 Ghost Orchid (desktop)
-  \end{itemize}
+  Rのバージョン
 \end{itemize}
 
 \begin{verbatim}
 ## # A tibble: 4 x 2
-##   ind     values                      
-##   <chr>   <chr>                       
-## 1 version R version 4.1.0 (2021-05-18)
-## 2 os      Windows 10 x64 (build 19043)
-## 3 system  x86_64, mingw32             
-## 4 date    2022-01-23
+##   ind     values                           
+##   <chr>   <chr>                            
+## 1 version R version 4.2.0 (2022-04-22 ucrt)
+## 2 os      Windows 10 x64 (build 19043)     
+## 3 system  x86_64, mingw32                  
+## 4 date    2022-09-14
 \end{verbatim}
 
 \begin{verbatim}
 ## # A tibble: 2 x 2
 ##   package   loadedversion
 ##   <chr>     <chr>        
-## 1 bookdown  0.24         
+## 1 bookdown  0.29         
 ## 2 tidyverse 1.3.1
 \end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  RStudioのバージョン
+
+  \begin{itemize}
+  \tightlist
+  \item
+    `2022.2.1.461'（手動で記入）
+  \end{itemize}
+\end{itemize}
 
 \hypertarget{ux6ce8ux610fux4e8bux9805ux306aux3069}{%
 \section*{注意事項など}\label{ux6ce8ux610fux4e8bux9805ux306aux3069}}
@@ -340,7 +362,7 @@
   \item
     技術書典9で頒布したRでのExcelおよびcsvファイル読み込み解説本
   \item
-    \href{https://izunyan.github.io/excel_r/}{github}
+    \href{https://izunyan.github.io/excel_r/}{githubレポジトリ}
   \end{itemize}
 \item
   \href{https://izunyan.github.io/practice_ggplot2/}{ggplot2の辞書}
@@ -458,7 +480,7 @@
 \begin{itemize}
 \tightlist
 \item
-  R Scriptを開くとデフォルトでは左上にペインが開き，ここにコードを記述できる（図\ref{fig:script2}）
+  R Scriptを開くとデフォルトでは左上にウィンドウ（ペインと呼ばれる）が開き，ここにコードを記述できる（図\ref{fig:script2}）
 \end{itemize}
 
 \begin{figure}
@@ -558,38 +580,6 @@
 ## [1] 6
 \end{verbatim}
 
-\hypertarget{p-project}{%
-\section{プロジェクト}\label{p-project}}
-
-\begin{itemize}
-\tightlist
-\item
-  データを加工して解析する際に、1つのフォルダ（サブフォルダも含む）の中に関連するデータやコードなどをまとめておき、そのフォルダを\textbf{プロジェクト}と設定する
-
-  \begin{itemize}
-  \tightlist
-  \item
-    これにより、ファイルの読み書きの際の場所指定をいちいち意識しないで作業できるようになる
-  \end{itemize}
-\item
-  RStudio画面の右上にProject設定のメニューがある（図\ref{fig:project}）
-
-  \begin{itemize}
-  \tightlist
-  \item
-    \texttt{Project\ (None)\ \textgreater{}\ New\ Project\ \textgreater{}\ Existing\ Directory}と選び，プロジェクトにしたいフォルダを設定する
-  \end{itemize}
-\end{itemize}
-
-\begin{figure}
-
-{\centering \includegraphics[width=7.11in]{images/project} 
-
-}
-
-\caption{プロジェクトの設定}\label{fig:project}
-\end{figure}
-
 \hypertarget{p-package}{%
 \section{パッケージ}\label{p-package}}
 
@@ -623,7 +613,7 @@
   \item
     以降のコードはすべて\texttt{tidyverse}を読み込んだ前提で進める
   \item
-    本書では明示しない限り，すべてtidyverseを読み込めばつかるパッケージを用いている
+    本書では明示しない限り，すべてtidyverseを読み込めば使えるパッケージを用いている
   \end{itemize}
 \end{itemize}
 
@@ -671,7 +661,7 @@
   \item
     適切な値や変数などを指定すれば，データの処理や計算，統計解析など様々な処理を簡単に実行してくれる
   \item
-    データ加工の技術は，色々な便利関数をどの場面でどうやって使うかにつきる
+    データ加工の技術は，\textbf{色々な便利関数をどの場面でどうやって使うか}につきる
   \end{itemize}
 \item
   例えば\texttt{mean()}などのように「\texttt{関数名()}」で出てくるので，\texttt{()}で囲まれてる所を見たらほぼ関数だと思えばよさそう
@@ -690,6 +680,14 @@
   \tightlist
   \item
     関数の\texttt{()}の最初の位置に来るものを\textbf{第一引数}という
+  \end{itemize}
+\item
+  関数の\texttt{()}内でtabキーを押せば，欲しいものが大体出てくる
+
+  \begin{itemize}
+  \tightlist
+  \item
+    例：\texttt{select()}での候補変数，\texttt{mean()}での引数\texttt{na.rm\ =}など
   \end{itemize}
 \end{itemize}
 
@@ -757,6 +755,15 @@
   1つのベクトルはデータフレームの1つの列（変数）の単位と同じなので，ここでは横に並んでいるがデータフレーム的にイメージしたら縦に並んでるとみなすと分かりやすいかも
 \end{itemize}
 
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\linewidth]{images/vector_image} 
+
+}
+
+\caption{ベクトルのイメージ}\label{fig:vectorimage}
+\end{figure}
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{mean}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{))}
@@ -795,6 +802,8 @@
 
 \begin{itemize}
 \tightlist
+\item
+  Pythonなどの他言語では\textbf{変数}\footnote{データフレームの列を変数と呼ぶものとは異なる}と呼ばれるものに該当
 \item
   計算の結果や，複数の数値や文字など（他にも色々）を1つの文字列に格納することができ，その後のコードで活用できる
 \item
@@ -858,7 +867,7 @@
 \begin{itemize}
 \tightlist
 \item
-  \textbf{行}（ケースまたはオブザベーション）と\textbf{列}（変数）が碁盤の目のようになった集まりの形のデータ
+  \textbf{行}（別名：ケース；オブザベーション；レコード）と\textbf{列}（別名：変数；カラム）\footnote{オブジェクトに該当するものとは異なる。本書ではこちらの意味で「変数」を使用する}が碁盤の目のようになった集まりの形のデータ
 
   \begin{itemize}
   \tightlist
@@ -941,7 +950,7 @@
   \begin{itemize}
   \tightlist
   \item
-    tibble形式でないデータフレームで大きなものに対して実行すると，出力がうまって大変になることもある
+    tibble形式でないデータフレームで大きなものに対して実行すると，Consoleの出力がうまって大変になることもある
   \end{itemize}
 \end{itemize}
 
@@ -995,7 +1004,7 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{palmerpenguins}\SpecialCharTok{::}\NormalTok{penguins }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{palmerpenguins}\SpecialCharTok{::}\NormalTok{penguins  }\SpecialCharTok{|}\ErrorTok{\textgreater{}}  
   \FunctionTok{print}\NormalTok{(}\AttributeTok{n =} \DecValTok{15}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -1024,7 +1033,7 @@
 \end{verbatim}
 
 \hypertarget{p-pipe}{%
-\section{\%\textgreater\% （パイプ演算子）}\label{p-pipe}}
+\section{\textbar\textgreater または\%\textgreater\%（パイプ演算子）}\label{p-pipe}}
 
 \begin{itemize}
 \tightlist
@@ -1036,25 +1045,61 @@
   \begin{itemize}
   \tightlist
   \item
-    主に使用が想定される場面でざっくりいうと，「このデータフレームに対して\texttt{\%\textgreater{}\%}の後にある関数を適用する」という機能
+    主に使用が想定される場面でざっくりいうと，「このデータフレームに対して\texttt{\textbar{}\textgreater{}}の後にある関数を適用する」という機能
   \item
     具体的な使用法は\ref{select-standard-pipe}で解説
+  \item
+    最近は特にパッケージを読み込まなくても使える\texttt{\textbar{}\textgreater{}}(base pipe, native pipe)を使う説明が多くなった。
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{\%\textgreater{}\%}(magrittr pipe)は\texttt{tidyverse}パッケージを読み込めば使えて，こちらが必要になる特殊なケースもある
+    \end{itemize}
   \end{itemize}
 \item
-  \texttt{tidyverse}パッケージを読み込めば使えるようになる
-\item
   RStudioのショートカットは\texttt{Ctrl\ +\ Shift\ +\ M}(Macは\texttt{Cmd\ +\ Shift\ +\ M})。たぶん，RStudio以外でもこのショートカット押してしまうぐらい中毒性がある
-\item
-  R version 4.1からは「\texttt{\textbar{}\textgreater{}}」が大体同じ機能を持つ演算子して実装されたので，特にパッケージの読み込みをせずに使えるようになった。こちらを使う説明も今後増えていくと思われる
 
   \begin{itemize}
   \tightlist
   \item
-    ショートカットで出るパイプを\texttt{\textbar{}\textgreater{}}に切り替えたい場合は，RStudioの\texttt{Tools\ \textgreater{}\ Global\ Options\ \textgreater{}\ Code\ \textgreater{}\ Editing\ \textgreater{}\ use\ native\ pipe\ operator}にチェックを入れる
-  \item
-    現時点ではデータフレームを第一引数へ渡す形式でない関数の場合（回帰分析の\texttt{lm()}など），工夫が必要な場合があるようなので，本書では\texttt{\%\textgreater{}\%}を使用
+    現時点ではRStudioのデフォルトのショートカットで出るのは\texttt{\%\textgreater{}\%}だが，\texttt{\textbar{}\textgreater{}}に切り替えたい場合は，RStudioの\texttt{Tools\ \textgreater{}\ Global\ Options\ \textgreater{}\ Code\ \textgreater{}\ Editing\ \textgreater{}\ use\ native\ pipe\ operator}にチェックを入れる
   \end{itemize}
 \end{itemize}
+
+\hypertarget{p-project}{%
+\section{プロジェクト}\label{p-project}}
+
+\begin{itemize}
+\tightlist
+\item
+  本書の内容では使わなくても問題ないが，自身のデータを読み書きする際には非常に便利なので，解説しておく
+\item
+  データを加工して解析する際に、1つのフォルダ（サブフォルダも含む）の中に関連するデータやコードなどをまとめておき、そのフォルダを\textbf{プロジェクト}と設定する
+
+  \begin{itemize}
+  \tightlist
+  \item
+    これにより、ファイルの読み書きの際の場所指定をいちいち意識しないで作業できるようになる
+  \end{itemize}
+\item
+  RStudio画面の右上にProject設定のメニューがある（図\ref{fig:project}）
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{Project\ (None)\ \textgreater{}\ New\ Project\ \textgreater{}\ Existing\ Directory}と選び，プロジェクトにしたいフォルダを設定する
+  \end{itemize}
+\end{itemize}
+
+\begin{figure}
+
+{\centering \includegraphics[width=7.11in]{images/project} 
+
+}
+
+\caption{プロジェクトの設定}\label{fig:project}
+\end{figure}
 
 \hypertarget{p-help}{%
 \section{困ったときは}\label{p-help}}
@@ -1161,7 +1206,7 @@
 \begin{itemize}
 \tightlist
 \item
-  \texttt{select()}の中に関心のある変数名を「\texttt{,}」をつけて並べる
+  表示させたい変数名（列名）を\texttt{select()}の中に「\texttt{,}」をつけて並べる
 
   \begin{itemize}
   \tightlist
@@ -1169,17 +1214,16 @@
     変数は1つからOK
   \end{itemize}
 \item
-  \texttt{\%\textgreater{}\%}についてはすでに\ref{p-pipe}で説明したが，この後また補足を説明するのでまずは何も考えずに使ってみよう
+  \texttt{\textbar{}\textgreater{}}についてはすでに\ref{p-pipe}で説明したが，この後また補足を説明するのでまずは何も考えずに使ってみよう
 \item
   以降すべて\texttt{tidyverse}パッケージを読み込んだ前提で進める（\ref{p-package}参照）
 \end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# まだtidyverseパッケージを読み込んでない場合は以下の\#を外して実行}
-\CommentTok{\# library(tidyverse)}
+\FunctionTok{library}\NormalTok{(tidyverse)}
 
-\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{select}\NormalTok{(bill\_length\_mm, bill\_depth\_mm)}
 \end{Highlighting}
 \end{Shaded}
@@ -1203,7 +1247,7 @@
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{df2 }\OtherTok{\textless{}{-}} 
-\NormalTok{  df }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(bill\_length\_mm)}
+\NormalTok{  df }\SpecialCharTok{|}\ErrorTok{\textgreater{}} \FunctionTok{select}\NormalTok{(bill\_length\_mm)}
 
 \NormalTok{df2}
 \end{Highlighting}
@@ -1227,7 +1271,7 @@
 \end{Shaded}
 
 \hypertarget{select-standard-pipe}{%
-\subsection{【補足】\%\textgreater\% の意味}\label{select-standard-pipe}}
+\subsection{【補足】\textbar\textgreater{} の意味}\label{select-standard-pipe}}
 
 \begin{itemize}
 \tightlist
@@ -1256,14 +1300,14 @@
 \begin{itemize}
 \tightlist
 \item
-  \texttt{\%\textgreater{}\%}の役割は，その左側にあるものを右側の関数の第一引数に入れる，ということなので，第一引数にデータフレームが来ることが決まっていれば，常に次のようにかける
+  \texttt{\textbar{}\textgreater{}}の役割は，その左側にあるものを右側の関数の第一引数に入れる，ということなので，第一引数にデータフレームが来ることが決まっていれば，常に次のようにかける
 \item
   このようにすると複雑な処理を重ねていく場合も，コードの可読性が高まるので，コードを共有してチーム作業するデータ加工の過程で有用
 \end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{select}\NormalTok{(bill\_length\_mm)}
 \end{Highlighting}
 \end{Shaded}
@@ -1284,7 +1328,7 @@
 \begin{itemize}
 \tightlist
 \item
-  関心ある変数がデータフレーム上に順番に並んでいれば\texttt{:}（コロン）でつなげて取得できる
+  表示させたい変数がデータフレーム上に順番に並んでいれば，その並びの最初の列名と最後の変数名を\texttt{:}（コロン）でつなげて取得できる
 
   \begin{itemize}
   \tightlist
@@ -1295,7 +1339,7 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{select}\NormalTok{(bill\_length\_mm}\SpecialCharTok{:}\NormalTok{flipper\_length\_mm)}
 \end{Highlighting}
 \end{Shaded}
@@ -1324,7 +1368,7 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{select}\NormalTok{(bill\_length\_mm}\SpecialCharTok{:}\NormalTok{flipper\_length\_mm, sex)}
 \end{Highlighting}
 \end{Shaded}
@@ -1352,7 +1396,7 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{select}\NormalTok{(}\StringTok{"bill\_length\_mm"}\NormalTok{, }\StringTok{"bill\_depth\_mm"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -1388,7 +1432,7 @@
 \CommentTok{\# あらかじめオブジェクト（ここではvars）に変数名の文字列を格納して後で使えるようにする}
 \NormalTok{vars }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"bill\_length\_mm"}\NormalTok{, }\StringTok{"bill\_depth\_mm"}\NormalTok{)}
 
-\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{select}\NormalTok{(}\FunctionTok{all\_of}\NormalTok{(vars))}
 \end{Highlighting}
 \end{Shaded}
@@ -1449,7 +1493,7 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{df }\SpecialCharTok{|}\ErrorTok{\textgreater{}}
   \FunctionTok{select}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"bill"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
@@ -1481,7 +1525,7 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{df }\SpecialCharTok{|}\ErrorTok{\textgreater{}}
   \FunctionTok{select}\NormalTok{(}\FunctionTok{ends\_with}\NormalTok{(}\StringTok{"\_mm"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
@@ -1510,7 +1554,7 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{df }\SpecialCharTok{|}\ErrorTok{\textgreater{}}
   \FunctionTok{select}\NormalTok{(}\FunctionTok{contains}\NormalTok{(}\StringTok{"length"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
@@ -1544,7 +1588,7 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{df }\SpecialCharTok{|}\ErrorTok{\textgreater{}}
   \FunctionTok{select}\NormalTok{(}\FunctionTok{matches}\NormalTok{(}\StringTok{"length|depth"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
@@ -1573,7 +1617,7 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{df }\SpecialCharTok{|}\ErrorTok{\textgreater{}}
   \FunctionTok{select}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"bill"}\NormalTok{) }\SpecialCharTok{\&} \FunctionTok{contains}\NormalTok{(}\StringTok{"length"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
@@ -1599,7 +1643,7 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{df }\SpecialCharTok{|}\ErrorTok{\textgreater{}}
   \FunctionTok{select}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"bill"}\NormalTok{) }\SpecialCharTok{|} \FunctionTok{contains}\NormalTok{(}\StringTok{"length"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
@@ -1634,7 +1678,7 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{select}\NormalTok{(}\SpecialCharTok{!}\NormalTok{species)}
 \end{Highlighting}
 \end{Shaded}
@@ -1658,7 +1702,7 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{select}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{c}\NormalTok{(bill\_length\_mm}\SpecialCharTok{:}\NormalTok{flipper\_length\_mm, sex))}
 \end{Highlighting}
 \end{Shaded}
@@ -1681,7 +1725,7 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{select}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{ends\_with}\NormalTok{(}\StringTok{"\_mm"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
@@ -1727,7 +1771,7 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{names}\NormalTok{()}
+\NormalTok{df }\SpecialCharTok{|}\ErrorTok{\textgreater{}} \FunctionTok{names}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1749,8 +1793,8 @@
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{bill\_vars }\OtherTok{\textless{}{-}} 
-\NormalTok{  df }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{select}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"bill"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  df }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
+  \FunctionTok{select}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"bill"}\NormalTok{)) }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{names}\NormalTok{()}
 
 \NormalTok{bill\_vars}
@@ -1772,9 +1816,9 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{select}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"b"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# bから始まる変数名}
-  \FunctionTok{names}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
+  \FunctionTok{select}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"b"}\NormalTok{)) }\SpecialCharTok{|}\ErrorTok{\textgreater{}} \CommentTok{\# bから始まる変数名}
+  \FunctionTok{names}\NormalTok{() }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{dput}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
@@ -1798,7 +1842,7 @@
 \end{itemize}
 
 \hypertarget{rename}{%
-\chapter{変数名を変更する：rename}\label{rename}}
+\chapter{列（変数）名を変更する：rename}\label{rename}}
 
 \begin{itemize}
 \tightlist
@@ -1825,11 +1869,13 @@
 \tightlist
 \item
   まずはデータにどういう変数名があるかの確認
+\item
+  使用データは\ref{select-read}で読み込んだdfを使用
 \end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{names}\NormalTok{()}
+\NormalTok{df }\SpecialCharTok{|}\ErrorTok{\textgreater{}} \FunctionTok{names}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1852,7 +1898,7 @@
 \CommentTok{\# まだtidyverseパッケージを読み込んでない場合は以下の\#を外して実行}
 \CommentTok{\# library(tidyverse)}
 
-\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{rename}\NormalTok{(}\AttributeTok{blmm =}\NormalTok{ bill\_length\_mm)}
 \end{Highlighting}
 \end{Shaded}
@@ -1882,7 +1928,7 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{rename}\NormalTok{(}\AttributeTok{blmm =}\NormalTok{ bill\_length\_mm,}
          \AttributeTok{bdmm =}\NormalTok{ bill\_depth\_mm)}
 \end{Highlighting}
@@ -1917,7 +1963,7 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{rename}\NormalTok{(くちばし}\AttributeTok{\_length\_mm =}\NormalTok{ bill\_length\_mm,}
 \NormalTok{         くちばし}\AttributeTok{\_depth\_mm =}\NormalTok{ bill\_depth\_mm)}
 \end{Highlighting}
@@ -1964,7 +2010,7 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{rename\_with}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\FunctionTok{str\_replace}\NormalTok{(.x, }\StringTok{"bill"}\NormalTok{, }\StringTok{"くちばし"}\NormalTok{),}
               \FunctionTok{starts\_with}\NormalTok{(}\StringTok{"bill"}\NormalTok{))}
 \end{Highlighting}
@@ -1993,7 +2039,7 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{rename\_with}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\FunctionTok{str\_replace}\NormalTok{(., }\StringTok{"bill"}\NormalTok{, }\StringTok{"くちばし"}\NormalTok{),}
               \FunctionTok{c}\NormalTok{(bill\_length\_mm, bill\_depth\_mm))}
 \end{Highlighting}
@@ -2031,7 +2077,7 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{rename}\NormalTok{(}\AttributeTok{bill\_length =}\NormalTok{ bill\_length\_mm,}
          \AttributeTok{bill\_depth  =}\NormalTok{ bill\_depth\_mm,}
          \AttributeTok{flipper\_length =}\NormalTok{ flipper\_length\_mm)}
@@ -2060,7 +2106,7 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{rename\_with}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\FunctionTok{str\_replace}\NormalTok{(., }\StringTok{"\_mm"}\NormalTok{, }\StringTok{" "}\NormalTok{),}
               \FunctionTok{ends\_with}\NormalTok{(}\StringTok{"mm"}\NormalTok{))}
 \end{Highlighting}
@@ -2068,7 +2114,7 @@
 
 \begin{verbatim}
 ## # A tibble: 344 x 8
-##   species island    `bill_length ` `bill_depth ` `flipper_length~
+##   species island    `bill_length ` `bill_depth ` `flipper_lengt~`
 ##   <fct>   <fct>              <dbl>         <dbl>            <int>
 ## 1 Adelie  Torgersen           39.1          18.7              181
 ## 2 Adelie  Torgersen           39.5          17.4              186
@@ -2094,7 +2140,7 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{rename\_with}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\FunctionTok{str\_remove}\NormalTok{(., }\StringTok{"\_mm"}\NormalTok{),}
               \FunctionTok{ends\_with}\NormalTok{(}\StringTok{"mm"}\NormalTok{))}
 \end{Highlighting}
@@ -2133,9 +2179,9 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{filter}\NormalTok{(year }\SpecialCharTok{==} \DecValTok{2007}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{select}\NormalTok{(bill\_length\_mm}\SpecialCharTok{:}\NormalTok{flipper\_length\_mm, year) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
+  \FunctionTok{filter}\NormalTok{(year }\SpecialCharTok{==} \DecValTok{2007}\NormalTok{) }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
+  \FunctionTok{select}\NormalTok{(bill\_length\_mm}\SpecialCharTok{:}\NormalTok{flipper\_length\_mm, year) }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{rename}\NormalTok{(}\AttributeTok{bill\_length\_mm\_2007 =}\NormalTok{ bill\_length\_mm,}
          \AttributeTok{bill\_depth\_mm\_2007  =}\NormalTok{ bill\_depth\_mm,}
          \AttributeTok{flipper\_length\_mm\_2007 =}\NormalTok{ flipper\_length\_mm)}
@@ -2167,9 +2213,9 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{filter}\NormalTok{(year }\SpecialCharTok{==} \DecValTok{2007}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{select}\NormalTok{(bill\_length\_mm}\SpecialCharTok{:}\NormalTok{flipper\_length\_mm, year) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
+  \FunctionTok{filter}\NormalTok{(year }\SpecialCharTok{==} \DecValTok{2007}\NormalTok{) }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
+  \FunctionTok{select}\NormalTok{(bill\_length\_mm}\SpecialCharTok{:}\NormalTok{flipper\_length\_mm, year) }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{rename\_with}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\FunctionTok{str\_c}\NormalTok{(., }\StringTok{"\_2007"}\NormalTok{),}
                \SpecialCharTok{!}\NormalTok{year)}
 \end{Highlighting}
@@ -2196,8 +2242,8 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
-\FunctionTok{filter}\NormalTok{(year }\SpecialCharTok{==} \DecValTok{2007}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
+\FunctionTok{filter}\NormalTok{(year }\SpecialCharTok{==} \DecValTok{2007}\NormalTok{) }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{rename\_with}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\FunctionTok{str\_c}\NormalTok{(., }\StringTok{"\_2007"}\NormalTok{),}
                \FunctionTok{matches}\NormalTok{(}\StringTok{"bill|flipper"}\NormalTok{))}
 \end{Highlighting}
@@ -2283,7 +2329,7 @@
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{df\_st }\OtherTok{\textless{}{-}} 
-\NormalTok{  starwars }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  starwars }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{select}\NormalTok{(species, name}\SpecialCharTok{:}\NormalTok{homeworld)}
 \end{Highlighting}
 \end{Shaded}
@@ -2313,7 +2359,7 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df\_st }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df\_st }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{filter}\NormalTok{(species }\SpecialCharTok{==} \StringTok{"Droid"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -2340,26 +2386,26 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df\_st }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df\_st }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{filter}\NormalTok{(height }\SpecialCharTok{\textgreater{}=} \DecValTok{200}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## # A tibble: 11 x 11
-##    species  name    height  mass hair_color skin_color  eye_color
-##    <chr>    <chr>    <int> <dbl> <chr>      <chr>       <chr>    
-##  1 Human    Darth ~    202   136 none       white       yellow   
-##  2 Wookiee  Chewba~    228   112 brown      unknown     blue     
-##  3 Droid    IG-88      200   140 none       metal       red      
-##  4 Gungan   Roos T~    224    82 none       grey        orange   
-##  5 Gungan   Rugor ~    206    NA none       green       orange   
-##  6 Quermian Yarael~    264    NA none       white       yellow   
-##  7 Kaminoan Lama Su    229    88 none       grey        black    
-##  8 Kaminoan Taun We    213    NA none       grey        black    
-##  9 Kaleesh  Grievo~    216   159 none       brown, whi~ green, y~
-## 10 Wookiee  Tarfful    234   136 brown      brown       blue     
-## 11 Pau'an   Tion M~    206    80 none       grey        black    
+##    species  name     height  mass hair_color skin_color eye_color
+##    <chr>    <chr>     <int> <dbl> <chr>      <chr>      <chr>    
+##  1 Human    Darth V~    202   136 none       white      yellow   
+##  2 Wookiee  Chewbac~    228   112 brown      unknown    blue     
+##  3 Droid    IG-88       200   140 none       metal      red      
+##  4 Gungan   Roos Ta~    224    82 none       grey       orange   
+##  5 Gungan   Rugor N~    206    NA none       green      orange   
+##  6 Quermian Yarael ~    264    NA none       white      yellow   
+##  7 Kaminoan Lama Su     229    88 none       grey       black    
+##  8 Kaminoan Taun We     213    NA none       grey       black    
+##  9 Kaleesh  Grievous    216   159 none       brown, wh~ green, y~
+## 10 Wookiee  Tarfful     234   136 brown      brown      blue     
+## 11 Pau'an   Tion Me~    206    80 none       grey       black    
 ## # ... with 4 more variables: birth_year <dbl>, sex <chr>,
 ## #   gender <chr>, homeworld <chr>
 \end{verbatim}
@@ -2374,7 +2420,7 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df\_st }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df\_st }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{filter}\NormalTok{(species }\SpecialCharTok{!=} \StringTok{"Human"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -2410,7 +2456,7 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df\_st }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df\_st }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{filter}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(species))}
 \end{Highlighting}
 \end{Shaded}
@@ -2419,7 +2465,7 @@
 ## # A tibble: 4 x 11
 ##   species name       height  mass hair_color skin_color eye_color
 ##   <chr>   <chr>       <int> <dbl> <chr>      <chr>      <chr>    
-## 1 <NA>    Ric Olie      183    NA brown      fair       blue     
+## 1 <NA>    Ric Olié      183    NA brown      fair       blue     
 ## 2 <NA>    Quarsh Pa~    183    NA black      dark       brown    
 ## 3 <NA>    Sly Moore     178    48 none       pale       white    
 ## 4 <NA>    Captain P~     NA    NA unknown    unknown    unknown  
@@ -2455,7 +2501,7 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df\_st }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df\_st }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{filter}\NormalTok{(species }\SpecialCharTok{==} \StringTok{"Droid"} \SpecialCharTok{|}\NormalTok{ species }\SpecialCharTok{==} \StringTok{"Human"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -2485,7 +2531,7 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df\_st }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df\_st }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{filter}\NormalTok{(species }\SpecialCharTok{==} \StringTok{"Droid"} \SpecialCharTok{\&}\NormalTok{ height }\SpecialCharTok{\textless{}} \DecValTok{100}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -2514,7 +2560,7 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df\_st }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df\_st }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{filter}\NormalTok{(species }\SpecialCharTok{==} \StringTok{"Aleena"} \SpecialCharTok{|}\NormalTok{ species }\SpecialCharTok{==} \StringTok{"Dug"} \SpecialCharTok{|} 
 \NormalTok{         species }\SpecialCharTok{==} \StringTok{"Yoda\textquotesingle{}s species"}\NormalTok{)}
 \end{Highlighting}
@@ -2522,11 +2568,11 @@
 
 \begin{verbatim}
 ## # A tibble: 3 x 11
-##   species    name    height  mass hair_color skin_color eye_color
-##   <chr>      <chr>    <int> <dbl> <chr>      <chr>      <chr>    
-## 1 Yoda's sp~ Yoda        66    17 white      green      brown    
-## 2 Dug        Sebulba    112    40 none       grey, red  orange   
-## 3 Aleena     Ratts ~     79    15 none       grey, blue unknown  
+##   species      name  height  mass hair_color skin_color eye_color
+##   <chr>        <chr>  <int> <dbl> <chr>      <chr>      <chr>    
+## 1 Yoda's spec~ Yoda      66    17 white      green      brown    
+## 2 Dug          Sebu~    112    40 none       grey, red  orange   
+## 3 Aleena       Ratt~     79    15 none       grey, blue unknown  
 ## # ... with 4 more variables: birth_year <dbl>, sex <chr>,
 ## #   gender <chr>, homeworld <chr>
 \end{verbatim}
@@ -2545,18 +2591,18 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df\_st }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df\_st }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{filter}\NormalTok{(species }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"Aleena"}\NormalTok{, }\StringTok{"Dug"}\NormalTok{, }\StringTok{"Yoda\textquotesingle{}s species"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## # A tibble: 3 x 11
-##   species    name    height  mass hair_color skin_color eye_color
-##   <chr>      <chr>    <int> <dbl> <chr>      <chr>      <chr>    
-## 1 Yoda's sp~ Yoda        66    17 white      green      brown    
-## 2 Dug        Sebulba    112    40 none       grey, red  orange   
-## 3 Aleena     Ratts ~     79    15 none       grey, blue unknown  
+##   species      name  height  mass hair_color skin_color eye_color
+##   <chr>        <chr>  <int> <dbl> <chr>      <chr>      <chr>    
+## 1 Yoda's spec~ Yoda      66    17 white      green      brown    
+## 2 Dug          Sebu~    112    40 none       grey, red  orange   
+## 3 Aleena       Ratt~     79    15 none       grey, blue unknown  
 ## # ... with 4 more variables: birth_year <dbl>, sex <chr>,
 ## #   gender <chr>, homeworld <chr>
 \end{verbatim}
@@ -2575,18 +2621,18 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df\_st }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df\_st }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{filter}\NormalTok{(species }\SpecialCharTok{!=} \StringTok{"Droid"} \SpecialCharTok{\&}\NormalTok{ species }\SpecialCharTok{!=} \StringTok{"Human"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## # A tibble: 42 x 11
-##   species name      height  mass hair_color skin_color  eye_color
-##   <chr>   <chr>      <int> <dbl> <chr>      <chr>       <chr>    
-## 1 Wookiee Chewbacca    228   112 brown      unknown     blue     
-## 2 Rodian  Greedo       173    74 <NA>       green       black    
-## 3 Hutt    Jabba De~    175  1358 <NA>       green-tan,~ orange   
+##   species name       height  mass hair_color skin_color eye_color
+##   <chr>   <chr>       <int> <dbl> <chr>      <chr>      <chr>    
+## 1 Wookiee Chewbacca     228   112 brown      unknown    blue     
+## 2 Rodian  Greedo        173    74 <NA>       green      black    
+## 3 Hutt    Jabba Des~    175  1358 <NA>       green-tan~ orange   
 ## # ... with 39 more rows, and 4 more variables: birth_year <dbl>,
 ## #   sex <chr>, gender <chr>, homeworld <chr>
 \end{verbatim}
@@ -2599,18 +2645,18 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df\_st }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df\_st }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\NormalTok{species }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"Droid"}\NormalTok{, }\StringTok{"Human"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## # A tibble: 46 x 11
-##   species name      height  mass hair_color skin_color  eye_color
-##   <chr>   <chr>      <int> <dbl> <chr>      <chr>       <chr>    
-## 1 Wookiee Chewbacca    228   112 brown      unknown     blue     
-## 2 Rodian  Greedo       173    74 <NA>       green       black    
-## 3 Hutt    Jabba De~    175  1358 <NA>       green-tan,~ orange   
+##   species name       height  mass hair_color skin_color eye_color
+##   <chr>   <chr>       <int> <dbl> <chr>      <chr>      <chr>    
+## 1 Wookiee Chewbacca     228   112 brown      unknown    blue     
+## 2 Rodian  Greedo        173    74 <NA>       green      black    
+## 3 Hutt    Jabba Des~    175  1358 <NA>       green-tan~ orange   
 ## # ... with 43 more rows, and 4 more variables: birth_year <dbl>,
 ## #   sex <chr>, gender <chr>, homeworld <chr>
 \end{verbatim}
@@ -2640,7 +2686,7 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df\_st }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{df\_st }\SpecialCharTok{|}\ErrorTok{\textgreater{}}
   \FunctionTok{filter}\NormalTok{(}\FunctionTok{str\_detect}\NormalTok{(name, }\StringTok{"Luke"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
@@ -2668,7 +2714,7 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df\_st }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{df\_st }\SpecialCharTok{|}\ErrorTok{\textgreater{}}
   \FunctionTok{filter}\NormalTok{(}\FunctionTok{str\_detect}\NormalTok{(name, }\StringTok{"\^{}R"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
@@ -2681,7 +2727,7 @@
 ## 2 Droid   R5-D4          97    32 <NA>       white, red red      
 ## 3 Gungan  Roos Tarp~    224    82 none       grey       orange   
 ## 4 Gungan  Rugor Nass    206    NA none       green      orange   
-## 5 <NA>    Ric Olie      183    NA brown      fair       blue     
+## 5 <NA>    Ric Olié      183    NA brown      fair       blue     
 ## 6 Aleena  Ratts Tye~     79    15 none       grey, blue unknown  
 ## 7 Droid   R4-P17         96    NA none       silver, r~ red, blue
 ## 8 Human   Raymus An~    188    79 brown      light      brown    
@@ -2704,23 +2750,23 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df\_st }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{df\_st }\SpecialCharTok{|}\ErrorTok{\textgreater{}}
   \FunctionTok{filter}\NormalTok{(}\FunctionTok{str\_detect}\NormalTok{(name, }\StringTok{"\^{}Y|\^{}L"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## # A tibble: 8 x 11
-##   species   name     height  mass hair_color skin_color eye_color
-##   <chr>     <chr>     <int> <dbl> <chr>      <chr>      <chr>    
-## 1 Human     Luke Sk~    172  77   blond      fair       blue     
-## 2 Human     Leia Or~    150  49   brown      light      brown    
-## 3 Yoda's s~ Yoda         66  17   white      green      brown    
-## 4 Human     Lando C~    177  79   black      dark       brown    
-## 5 Human     Lobot       175  79   none       light      blue     
-## 6 Quermian  Yarael ~    264  NA   none       white      yellow   
-## 7 Mirialan  Luminar~    170  56.2 black      yellow     blue     
-## 8 Kaminoan  Lama Su     229  88   none       grey       black    
+##   species      name  height  mass hair_color skin_color eye_color
+##   <chr>        <chr>  <int> <dbl> <chr>      <chr>      <chr>    
+## 1 Human        Luke~    172  77   blond      fair       blue     
+## 2 Human        Leia~    150  49   brown      light      brown    
+## 3 Yoda's spec~ Yoda      66  17   white      green      brown    
+## 4 Human        Land~    177  79   black      dark       brown    
+## 5 Human        Lobot    175  79   none       light      blue     
+## 6 Quermian     Yara~    264  NA   none       white      yellow   
+## 7 Mirialan     Lumi~    170  56.2 black      yellow     blue     
+## 8 Kaminoan     Lama~    229  88   none       grey       black    
 ## # ... with 4 more variables: birth_year <dbl>, sex <chr>,
 ## #   gender <chr>, homeworld <chr>
 \end{verbatim}
@@ -2815,7 +2861,7 @@
 \CommentTok{\# library(tidyverse)}
 
 \NormalTok{df\_bfi }\OtherTok{\textless{}{-}} 
-\NormalTok{  psychTools}\SpecialCharTok{::}\NormalTok{bfi }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  psychTools}\SpecialCharTok{::}\NormalTok{bfi }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{as\_tibble}\NormalTok{()         }\CommentTok{\# 表示に便利なtibble形式に}
 \end{Highlighting}
 \end{Shaded}
@@ -2835,8 +2881,8 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df\_bfi }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{select}\NormalTok{(A1) }\SpecialCharTok{\%\textgreater{}\%}                      \CommentTok{\# A1のみを残す}
+\NormalTok{df\_bfi }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
+  \FunctionTok{select}\NormalTok{(A1) }\SpecialCharTok{|}\ErrorTok{\textgreater{}}                      \CommentTok{\# A1のみを残す}
   \FunctionTok{mutate}\NormalTok{(}
     \AttributeTok{mean\_a1 =} \FunctionTok{mean}\NormalTok{(A1, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{), }\CommentTok{\# A1の平均値を作成（NAは除外）}
     \AttributeTok{dif\_a1\_mean =}\NormalTok{ A1 }\SpecialCharTok{{-}}\NormalTok{ mean\_a1)       }\CommentTok{\# 各個体のA1と平均値の差分を計算}
@@ -2860,6 +2906,71 @@
 \item
   dif\_a1\_mean列は，A1列からmean\_a1列を引いた値が入る
 \end{itemize}
+
+\hypertarget{ux65b0ux3057ux304fux4f5cux6210ux3057ux305fux5217ux306eux4f4dux7f6eux3092ux6307ux5b9aux3059ux308b}{%
+\subsection{新しく作成した列の位置を指定する}\label{ux65b0ux3057ux304fux4f5cux6210ux3057ux305fux5217ux306eux4f4dux7f6eux3092ux6307ux5b9aux3059ux308b}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{.before\ =\ 1}と引数を指定することで,先頭に持ってこれる
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{.after\ =}とあわせて，列名を指定することで出現場所を指定できる
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_bfi }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{mean\_a1 =} \FunctionTok{mean}\NormalTok{(A1, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{), }\CommentTok{\# A1の平均値を作成（NAは除外）}
+    \AttributeTok{dif\_a1\_mean =}\NormalTok{ A1 }\SpecialCharTok{{-}}\NormalTok{ mean\_a1,}
+    \AttributeTok{.before =} \DecValTok{1}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2,800 x 30
+##   mean_a1 dif_a1_mean    A1    A2    A3    A4    A5    C1    C2
+##     <dbl>       <dbl> <int> <int> <int> <int> <int> <int> <int>
+## 1    2.41      -0.413     2     4     3     4     4     2     3
+## 2    2.41      -0.413     2     4     5     2     5     5     4
+## 3    2.41       2.59      5     4     5     4     4     4     5
+## # ... with 2,797 more rows, and 21 more variables: C3 <int>,
+## #   C4 <int>, C5 <int>, E1 <int>, E2 <int>, E3 <int>, E4 <int>,
+## #   E5 <int>, N1 <int>, N2 <int>, N3 <int>, N4 <int>, N5 <int>,
+## #   O1 <int>, O2 <int>, O3 <int>, O4 <int>, O5 <int>,
+## #   gender <int>, education <int>, age <int>
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  引数\texttt{.keep\ =\ "used"}で作成に関係した列だけにする
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_bfi }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{mean\_a1 =} \FunctionTok{mean}\NormalTok{(A1, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{), }\CommentTok{\# A1の平均値を作成（NAは除外）}
+    \AttributeTok{dif\_a1\_mean =}\NormalTok{ A1 }\SpecialCharTok{{-}}\NormalTok{ mean\_a1,}
+    \AttributeTok{.keep =} \StringTok{"used"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2,800 x 3
+##      A1 mean_a1 dif_a1_mean
+##   <int>   <dbl>       <dbl>
+## 1     2    2.41      -0.413
+## 2     2    2.41      -0.413
+## 3     5    2.41       2.59 
+## # ... with 2,797 more rows
+\end{verbatim}
 
 \hypertarget{ux7df4ux7fd2ux554fux984c-9}{%
 \subsection{{[}練習問題{]}}\label{ux7df4ux7fd2ux554fux984c-9}}
@@ -2901,7 +3012,7 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df\_bfi }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df\_bfi }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{select}\NormalTok{(gender, education)}
 \end{Highlighting}
 \end{Shaded}
@@ -2924,8 +3035,8 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df\_bfi }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{select}\NormalTok{(gender, education) }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{df\_bfi }\SpecialCharTok{|}\ErrorTok{\textgreater{}}
+  \FunctionTok{select}\NormalTok{(gender, education) }\SpecialCharTok{|}\ErrorTok{\textgreater{}}
   \FunctionTok{glimpse}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
@@ -2958,8 +3069,8 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df\_bfi }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{select}\NormalTok{(gender, education) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df\_bfi }\SpecialCharTok{|}\ErrorTok{\textgreater{}}
+  \FunctionTok{select}\NormalTok{(gender, education) }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{mutate}\NormalTok{(}\AttributeTok{gender =} \FunctionTok{factor}\NormalTok{(gender),}
          \AttributeTok{education =} \FunctionTok{factor}\NormalTok{(education))}
 \end{Highlighting}
@@ -3002,9 +3113,9 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df\_bfi }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{df\_bfi }\SpecialCharTok{|}\ErrorTok{\textgreater{}}
   \FunctionTok{mutate}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{c}\NormalTok{(gender, education),}
-\NormalTok{                factor)) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{                factor)) }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{select}\NormalTok{(gender, education)   }\CommentTok{\# 結果表示のため冗長だが変わった変数だけselect}
 \end{Highlighting}
 \end{Shaded}
@@ -3031,7 +3142,7 @@
 \begin{itemize}
 \tightlist
 \item
-  df\_bfiデータの変数A1, A2, A3, A4, A5を因子型に変換し，この5つの変数に選択してデータフレームを表示させよう
+  df\_bfiデータの変数A1, A2, A3, A4, A5を因子型に変換してデータフレームを表示させよう
 \end{itemize}
 
 \hypertarget{mu-across}{%
@@ -3045,9 +3156,9 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df\_bfi }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{df\_bfi }\SpecialCharTok{|}\ErrorTok{\textgreater{}}
   \FunctionTok{mutate}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"n"}\NormalTok{),}
-\NormalTok{                factor)) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{                factor)) }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{select}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"n"}\NormalTok{))   }\CommentTok{\# 結果表示のため}
 \end{Highlighting}
 \end{Shaded}
@@ -3072,9 +3183,9 @@
 \begin{Highlighting}[]
 \NormalTok{vars }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"N1"}\NormalTok{, }\StringTok{"N2"}\NormalTok{, }\StringTok{"N3"}\NormalTok{, }\StringTok{"N4"}\NormalTok{, }\StringTok{"N5"}\NormalTok{)}
 
-\NormalTok{df\_bfi }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{df\_bfi }\SpecialCharTok{|}\ErrorTok{\textgreater{}}
   \FunctionTok{mutate}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{all\_of}\NormalTok{(vars),}
-\NormalTok{                factor)) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{                factor)) }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{select}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"n"}\NormalTok{))   }\CommentTok{\# 結果表示のため}
 \end{Highlighting}
 \end{Shaded}
@@ -3114,9 +3225,9 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df\_bfi }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{df\_bfi }\SpecialCharTok{|}\ErrorTok{\textgreater{}}
   \FunctionTok{mutate}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{c}\NormalTok{(gender, education),}
-                \FunctionTok{list}\NormalTok{(}\AttributeTok{f =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{factor}\NormalTok{(.x)))) }\SpecialCharTok{\%\textgreater{}\%} 
+                \FunctionTok{list}\NormalTok{(}\AttributeTok{f =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{factor}\NormalTok{(.x)))) }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{select}\NormalTok{(}\FunctionTok{matches}\NormalTok{(}\StringTok{"gender|education"}\NormalTok{))   }
 \end{Highlighting}
 \end{Shaded}
@@ -3160,8 +3271,8 @@
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{df\_bfi\_n }\OtherTok{\textless{}{-}} 
-\NormalTok{  df\_bfi }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{select}\NormalTok{(N1}\SpecialCharTok{:}\NormalTok{N5) }\SpecialCharTok{\%\textgreater{}\%}                       
+\NormalTok{  df\_bfi }\SpecialCharTok{|}\ErrorTok{\textgreater{}}
+  \FunctionTok{select}\NormalTok{(N1}\SpecialCharTok{:}\NormalTok{N5) }\SpecialCharTok{|}\ErrorTok{\textgreater{}}                       
   \FunctionTok{mutate}\NormalTok{(}\AttributeTok{neuroticism =}\NormalTok{ N1 }\SpecialCharTok{+}\NormalTok{ N2 }\SpecialCharTok{+}\NormalTok{ N3 }\SpecialCharTok{+}\NormalTok{ N4 }\SpecialCharTok{+}\NormalTok{ N5)}
   
 \NormalTok{df\_bfi\_n}
@@ -3203,7 +3314,7 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df\_bfi\_n }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df\_bfi\_n }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{filter}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(neuroticism))     }\CommentTok{\# neuroticismがNAなケースに限定}
 \end{Highlighting}
 \end{Shaded}
@@ -3247,11 +3358,11 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df\_bfi }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{df\_bfi }\SpecialCharTok{|}\ErrorTok{\textgreater{}}
   \FunctionTok{mutate}\NormalTok{(}\AttributeTok{gender =} \FunctionTok{factor}\NormalTok{(gender),}
          \AttributeTok{gender\_c =} \FunctionTok{fct\_recode}\NormalTok{(gender, }
                                \AttributeTok{male   =} \StringTok{"1"}\NormalTok{,}
-                               \AttributeTok{female =} \StringTok{"2"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+                               \AttributeTok{female =} \StringTok{"2"}\NormalTok{)) }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{count}\NormalTok{(gender, gender\_c)}
 \end{Highlighting}
 \end{Shaded}
@@ -3284,7 +3395,7 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df\_bfi\_n }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df\_bfi\_n }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{mutate}\NormalTok{(}\AttributeTok{id =} \FunctionTok{row\_number}\NormalTok{())}
 \end{Highlighting}
 \end{Shaded}
@@ -3318,7 +3429,7 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df\_bfi\_n }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df\_bfi\_n }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{rowid\_to\_column}\NormalTok{(}\AttributeTok{var =} \StringTok{"id"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -3393,7 +3504,7 @@
   \item
     この等式の順番が他(mutateなど)と逆になるため，\texttt{recode()}は将来引退する可能性ありとされている
   \item
-    また，下記のように考慮すべき点があるから，後述の\ref{mu-rev-rule}【別解】を使う方がよいかもしれない
+    また，下記のように考慮すべき点があるから，後述の【別解】\ref{mu-rev-rule1}, \ref{mu-rev-casewhen1}を使う方がよいかもしれない
   \end{itemize}
 \item
   値の指定で考慮すべき点
@@ -3403,15 +3514,15 @@
   \item
     oldの数値は` `で囲む必要がある
   \item
-    newの数値に\texttt{L}がつくのは，型を整数のままにするため
+    newの数値に\texttt{L}がつくのは，型を整数のままにするため。Lなしでも実行できるが，型が\texttt{dbl}になる
   \end{itemize}
 \end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df\_bfi }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df\_bfi }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{mutate}\NormalTok{(}\AttributeTok{A1\_r =} \FunctionTok{recode}\NormalTok{(A1, }\StringTok{\textasciigrave{}}\AttributeTok{1}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 6L, }\StringTok{\textasciigrave{}}\AttributeTok{2}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 5L, }\StringTok{\textasciigrave{}}\AttributeTok{3}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 4L,      }
-                           \StringTok{\textasciigrave{}}\AttributeTok{4}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 3L, }\StringTok{\textasciigrave{}}\AttributeTok{5}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 2L, }\StringTok{\textasciigrave{}}\AttributeTok{6}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 1L)) }\SpecialCharTok{\%\textgreater{}\%} 
+                           \StringTok{\textasciigrave{}}\AttributeTok{4}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 3L, }\StringTok{\textasciigrave{}}\AttributeTok{5}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 2L, }\StringTok{\textasciigrave{}}\AttributeTok{6}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 1L)) }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{select}\NormalTok{(A1, A1\_r)}
 \end{Highlighting}
 \end{Shaded}
@@ -3437,11 +3548,11 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df\_bfi }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df\_bfi }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{mutate}\NormalTok{(}\AttributeTok{A1\_r =} \FunctionTok{recode}\NormalTok{(A1, }\StringTok{\textasciigrave{}}\AttributeTok{1}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 6L, }\StringTok{\textasciigrave{}}\AttributeTok{2}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 5L, }\StringTok{\textasciigrave{}}\AttributeTok{3}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 4L, }
                            \StringTok{\textasciigrave{}}\AttributeTok{4}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 3L, }\StringTok{\textasciigrave{}}\AttributeTok{5}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 2L, }\StringTok{\textasciigrave{}}\AttributeTok{6}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 1L),}
          \AttributeTok{C4\_r =} \FunctionTok{recode}\NormalTok{(C4, }\StringTok{\textasciigrave{}}\AttributeTok{1}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 6L, }\StringTok{\textasciigrave{}}\AttributeTok{2}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 5L, }\StringTok{\textasciigrave{}}\AttributeTok{3}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 4L, }
-                           \StringTok{\textasciigrave{}}\AttributeTok{4}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 3L, }\StringTok{\textasciigrave{}}\AttributeTok{5}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 2L, }\StringTok{\textasciigrave{}}\AttributeTok{6}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 1L)) }\SpecialCharTok{\%\textgreater{}\%} 
+                           \StringTok{\textasciigrave{}}\AttributeTok{4}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 3L, }\StringTok{\textasciigrave{}}\AttributeTok{5}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 2L, }\StringTok{\textasciigrave{}}\AttributeTok{6}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 1L)) }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{select}\NormalTok{(A1, A1\_r, C4, C4\_r)}
 \end{Highlighting}
 \end{Shaded}
@@ -3473,10 +3584,10 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df\_bfi }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df\_bfi }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{mutate}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{c}\NormalTok{(A1, C4),}
-                \FunctionTok{list}\NormalTok{(}\AttributeTok{r =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{recode}\NormalTok{(.x, }\StringTok{\textasciigrave{}}\AttributeTok{1}\StringTok{\textasciigrave{}} \OtherTok{=} \DecValTok{6}\NormalTok{, }\StringTok{\textasciigrave{}}\AttributeTok{2}\StringTok{\textasciigrave{}} \OtherTok{=} \DecValTok{5}\NormalTok{, }\StringTok{\textasciigrave{}}\AttributeTok{3}\StringTok{\textasciigrave{}} \OtherTok{=} \DecValTok{4}\NormalTok{, }
-                                 \StringTok{\textasciigrave{}}\AttributeTok{4}\StringTok{\textasciigrave{}} \OtherTok{=} \DecValTok{3}\NormalTok{, }\StringTok{\textasciigrave{}}\AttributeTok{5}\StringTok{\textasciigrave{}} \OtherTok{=} \DecValTok{2}\NormalTok{, }\StringTok{\textasciigrave{}}\AttributeTok{6}\StringTok{\textasciigrave{}} \OtherTok{=} \DecValTok{1}\NormalTok{)))) }\SpecialCharTok{\%\textgreater{}\%} 
+                \FunctionTok{list}\NormalTok{(}\AttributeTok{r =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{recode}\NormalTok{(.x, }\StringTok{\textasciigrave{}}\AttributeTok{1}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 6L, }\StringTok{\textasciigrave{}}\AttributeTok{2}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 5L, }\StringTok{\textasciigrave{}}\AttributeTok{3}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 4L, }
+                                     \StringTok{\textasciigrave{}}\AttributeTok{4}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 3L, }\StringTok{\textasciigrave{}}\AttributeTok{5}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 2L, }\StringTok{\textasciigrave{}}\AttributeTok{6}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ 1L)))) }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{select}\NormalTok{(A1, A1\_r, C4, C4\_r)}
 \end{Highlighting}
 \end{Shaded}
@@ -3484,15 +3595,15 @@
 \begin{verbatim}
 ## # A tibble: 2,800 x 4
 ##      A1  A1_r    C4  C4_r
-##   <int> <dbl> <int> <dbl>
+##   <int> <int> <int> <int>
 ## 1     2     5     4     3
 ## 2     2     5     3     4
 ## 3     5     2     2     5
 ## # ... with 2,797 more rows
 \end{verbatim}
 
-\hypertarget{mu-rev-rule}{%
-\subsection{【別解】逆転（公式）}\label{mu-rev-rule}}
+\hypertarget{mu-rev-rule1}{%
+\subsection{【別解】逆転（公式）}\label{mu-rev-rule1}}
 
 \begin{itemize}
 \tightlist
@@ -3513,9 +3624,9 @@
 \NormalTok{min }\OtherTok{\textless{}{-}} \DecValTok{1}
 \NormalTok{max }\OtherTok{\textless{}{-}} \DecValTok{6}
 
-\NormalTok{df\_bfi }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df\_bfi }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{mutate}\NormalTok{(}\AttributeTok{A1\_r =}\NormalTok{ max }\SpecialCharTok{+}\NormalTok{ min }\SpecialCharTok{{-}}\NormalTok{ A1,}
-         \AttributeTok{C4\_r =}\NormalTok{ max }\SpecialCharTok{+}\NormalTok{ min }\SpecialCharTok{{-}}\NormalTok{ C4) }\SpecialCharTok{\%\textgreater{}\%} 
+         \AttributeTok{C4\_r =}\NormalTok{ max }\SpecialCharTok{+}\NormalTok{ min }\SpecialCharTok{{-}}\NormalTok{ C4) }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{select}\NormalTok{(A1, A1\_r, C4, C4\_r)}
 \end{Highlighting}
 \end{Shaded}
@@ -3530,8 +3641,8 @@
 ## # ... with 2,797 more rows
 \end{verbatim}
 
-\hypertarget{mu-rev-rule1}{%
-\subsubsection{【効率化】 変数2つ以上を逆転}\label{mu-rev-rule1}}
+\hypertarget{mu-rev-rule2}{%
+\subsubsection{【効率化】 変数2つ以上を逆転}\label{mu-rev-rule2}}
 
 \begin{itemize}
 \tightlist
@@ -3543,9 +3654,9 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df\_bfi }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df\_bfi }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{mutate}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{c}\NormalTok{(A1,C4),}
-                \FunctionTok{list}\NormalTok{(}\AttributeTok{r =} \SpecialCharTok{\textasciitilde{}}\NormalTok{ max }\SpecialCharTok{+}\NormalTok{ min }\SpecialCharTok{{-}}\NormalTok{ .x))) }\SpecialCharTok{\%\textgreater{}\%} 
+                \FunctionTok{list}\NormalTok{(}\AttributeTok{r =} \SpecialCharTok{\textasciitilde{}}\NormalTok{ max }\SpecialCharTok{+}\NormalTok{ min }\SpecialCharTok{{-}}\NormalTok{ .x))) }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{select}\NormalTok{(A1, A1\_r, C4, C4\_r)}
 \end{Highlighting}
 \end{Shaded}
@@ -3554,6 +3665,66 @@
 ## # A tibble: 2,800 x 4
 ##      A1  A1_r    C4  C4_r
 ##   <int> <dbl> <int> <dbl>
+## 1     2     5     4     3
+## 2     2     5     3     4
+## 3     5     2     2     5
+## # ... with 2,797 more rows
+\end{verbatim}
+
+\hypertarget{mu-rev-casewhen1}{%
+\subsection{【別解】逆転（case\_when）}\label{mu-rev-casewhen1}}
+
+\begin{itemize}
+\tightlist
+\item
+  条件式の\texttt{==}を使って値を変換することもできる。こちらだと条件式の内容や複数の変数の組み合わせなど幅広い応用が可能に
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_bfi }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{A1\_r =} \FunctionTok{case\_when}\NormalTok{(A1 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\textasciitilde{}}\NormalTok{ 6L,}
+\NormalTok{                          A1 }\SpecialCharTok{==} \DecValTok{2} \SpecialCharTok{\textasciitilde{}}\NormalTok{ 5L,}
+\NormalTok{                          A1 }\SpecialCharTok{==} \DecValTok{3} \SpecialCharTok{\textasciitilde{}}\NormalTok{ 4L,}
+\NormalTok{                          A1 }\SpecialCharTok{==} \DecValTok{4} \SpecialCharTok{\textasciitilde{}}\NormalTok{ 3L,}
+\NormalTok{                          A1 }\SpecialCharTok{==} \DecValTok{5} \SpecialCharTok{\textasciitilde{}}\NormalTok{ 2L,}
+\NormalTok{                          A1 }\SpecialCharTok{==} \DecValTok{6} \SpecialCharTok{\textasciitilde{}}\NormalTok{ 1L)) }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
+  \FunctionTok{select}\NormalTok{(A1, A1\_r)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2,800 x 2
+##      A1  A1_r
+##   <int> <int>
+## 1     2     5
+## 2     2     5
+## 3     5     2
+## # ... with 2,797 more rows
+\end{verbatim}
+
+\hypertarget{mu-rev-casewhen2}{%
+\subsubsection{【効率化】 変数2つ以上を逆転}\label{mu-rev-casewhen2}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_bfi }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
+  \FunctionTok{mutate}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{c}\NormalTok{(A1,C4),}
+                \FunctionTok{list}\NormalTok{(}\AttributeTok{r =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{case\_when}\NormalTok{(.x }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\textasciitilde{}}\NormalTok{ 6L,}
+\NormalTok{                                    .x }\SpecialCharTok{==} \DecValTok{2} \SpecialCharTok{\textasciitilde{}}\NormalTok{ 5L,}
+\NormalTok{                                    .x }\SpecialCharTok{==} \DecValTok{3} \SpecialCharTok{\textasciitilde{}}\NormalTok{ 4L,}
+\NormalTok{                                    .x }\SpecialCharTok{==} \DecValTok{4} \SpecialCharTok{\textasciitilde{}}\NormalTok{ 3L,}
+\NormalTok{                                    .x }\SpecialCharTok{==} \DecValTok{5} \SpecialCharTok{\textasciitilde{}}\NormalTok{ 2L,}
+\NormalTok{                                    .x }\SpecialCharTok{==} \DecValTok{6} \SpecialCharTok{\textasciitilde{}}\NormalTok{ 1L)))}
+\NormalTok{         ) }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
+  \FunctionTok{select}\NormalTok{(A1, A1\_r, C4, C4\_r)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2,800 x 4
+##      A1  A1_r    C4  C4_r
+##   <int> <int> <int> <int>
 ## 1     2     5     4     3
 ## 2     2     5     3     4
 ## 3     5     2     2     5
@@ -3572,6 +3743,8 @@
   \tightlist
   \item
     これ以降で使用するため，正解コードを非表示にしてここで実行のみしておく
+  \item
+    正解は\texttt{mutate.Rmd}ファイルの該当部分参照
   \end{itemize}
 \end{itemize}
 
@@ -3601,33 +3774,33 @@
 \CommentTok{\# 合計する項目の定義}
 
 \NormalTok{Ag }\OtherTok{\textless{}{-}} 
-\NormalTok{df\_bfi }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{select}\NormalTok{(A1\_r, A2}\SpecialCharTok{:}\NormalTok{A5) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df\_bfi }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
+  \FunctionTok{select}\NormalTok{(A1\_r, A2}\SpecialCharTok{:}\NormalTok{A5) }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{names}\NormalTok{()}
 
 \NormalTok{Co }\OtherTok{\textless{}{-}} 
-\NormalTok{df\_bfi }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{select}\NormalTok{(C1}\SpecialCharTok{:}\NormalTok{C3, C4\_r, C5\_r) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df\_bfi }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
+  \FunctionTok{select}\NormalTok{(C1}\SpecialCharTok{:}\NormalTok{C3, C4\_r, C5\_r) }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{names}\NormalTok{()}
 
 \NormalTok{Ex }\OtherTok{\textless{}{-}} 
-\NormalTok{  df\_bfi }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{select}\NormalTok{(E1\_r, E2\_r, E3}\SpecialCharTok{:}\NormalTok{E5) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  df\_bfi }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
+  \FunctionTok{select}\NormalTok{(E1\_r, E2\_r, E3}\SpecialCharTok{:}\NormalTok{E5) }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{names}\NormalTok{()}
 
 \NormalTok{Ne }\OtherTok{\textless{}{-}} 
-\NormalTok{df\_bfi }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{select}\NormalTok{(N1}\SpecialCharTok{:}\NormalTok{N5) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df\_bfi }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
+  \FunctionTok{select}\NormalTok{(N1}\SpecialCharTok{:}\NormalTok{N5) }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{names}\NormalTok{()}
 
 \NormalTok{Op }\OtherTok{\textless{}{-}} 
-\NormalTok{df\_bfi }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{select}\NormalTok{(O1, O2\_r, O3, O4, O5\_r) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df\_bfi }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
+  \FunctionTok{select}\NormalTok{(O1, O2\_r, O3, O4, O5\_r) }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{names}\NormalTok{()}
 
 
 \NormalTok{df\_bfi }\OtherTok{\textless{}{-}} 
-\NormalTok{  df\_bfi }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  df\_bfi }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{mutate}\NormalTok{(}
     \AttributeTok{Agree         =} \FunctionTok{rowSums}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{all\_of}\NormalTok{(Ag))),}
     \AttributeTok{Conscientious =} \FunctionTok{rowSums}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{all\_of}\NormalTok{(Co))),}
@@ -3651,7 +3824,7 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df\_bfi }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(}\FunctionTok{all\_of}\NormalTok{(Ag), Agree)}
+\NormalTok{df\_bfi }\SpecialCharTok{|}\ErrorTok{\textgreater{}} \FunctionTok{select}\NormalTok{(}\FunctionTok{all\_of}\NormalTok{(Ag), Agree)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3667,8 +3840,8 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df\_bfi }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{select}\NormalTok{(}\FunctionTok{all\_of}\NormalTok{(Ex), Extraversion) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df\_bfi }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
+  \FunctionTok{select}\NormalTok{(}\FunctionTok{all\_of}\NormalTok{(Ex), Extraversion) }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{filter}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(Extraversion))}
 \end{Highlighting}
 \end{Shaded}
@@ -3716,7 +3889,7 @@
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{gisho12_files/figure-latex/unnamed-chunk-95-1.pdf}
+\includegraphics{gisho12_files/figure-latex/unnamed-chunk-100-1.pdf}
 
 \begin{itemize}
 \tightlist
@@ -3746,7 +3919,7 @@
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# モダンな方法だと少し長くなる}
-\CommentTok{\# df\_bfi \%\textgreater{}\% }
+\CommentTok{\# df\_bfi |\textgreater{} }
 \CommentTok{\#   summarise(median(age))}
 \end{Highlighting}
 \end{Shaded}
@@ -3773,11 +3946,11 @@
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{res\_age2 }\OtherTok{\textless{}{-}} 
-\NormalTok{  df\_bfi }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{age2 =} \FunctionTok{if\_else}\NormalTok{(age }\SpecialCharTok{\textgreater{}=} \DecValTok{27}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  df\_bfi }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{age2 =} \FunctionTok{if\_else}\NormalTok{(age }\SpecialCharTok{\textgreater{}=} \DecValTok{27}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{)) }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{select}\NormalTok{(age, age2)}
 
-\NormalTok{res\_age2 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{count}\NormalTok{(age2) }
+\NormalTok{res\_age2 }\SpecialCharTok{|}\ErrorTok{\textgreater{}} \FunctionTok{count}\NormalTok{(age2) }
 \end{Highlighting}
 \end{Shaded}
 
@@ -3800,9 +3973,9 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{res\_age2 }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{filter}\NormalTok{(age }\SpecialCharTok{\textgreater{}=} \DecValTok{20} \SpecialCharTok{\&}\NormalTok{ age }\SpecialCharTok{\textless{}=} \DecValTok{30}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{count}\NormalTok{(age, age2) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{res\_age2 }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
+  \FunctionTok{filter}\NormalTok{(age }\SpecialCharTok{\textgreater{}=} \DecValTok{20} \SpecialCharTok{\&}\NormalTok{ age }\SpecialCharTok{\textless{}=} \DecValTok{30}\NormalTok{) }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
+  \FunctionTok{count}\NormalTok{(age, age2) }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{print}\NormalTok{(}\AttributeTok{n =} \DecValTok{11}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -3838,8 +4011,8 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{res\_age2 }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{count}\NormalTok{(age, age2) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{res\_age2 }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
+  \FunctionTok{count}\NormalTok{(age, age2) }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{slice}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{, (}\FunctionTok{n}\NormalTok{()}\SpecialCharTok{{-}}\DecValTok{2}\NormalTok{)}\SpecialCharTok{:}\FunctionTok{n}\NormalTok{())}
 \end{Highlighting}
 \end{Shaded}
@@ -3867,8 +4040,8 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{res\_age2 }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{count}\NormalTok{(age, age2) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{res\_age2 }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
+  \FunctionTok{count}\NormalTok{(age, age2) }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{slice\_head}\NormalTok{(}\AttributeTok{n =} \DecValTok{3}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -3884,8 +4057,8 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{res\_age2 }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{count}\NormalTok{(age, age2) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{res\_age2 }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
+  \FunctionTok{count}\NormalTok{(age, age2) }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{slice\_tail}\NormalTok{(}\AttributeTok{n =} \DecValTok{3}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -3917,7 +4090,7 @@
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{res\_age6 }\OtherTok{\textless{}{-}} 
-\NormalTok{  df\_bfi }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  df\_bfi }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{mutate}\NormalTok{(}\AttributeTok{age6 =} \FunctionTok{case\_when}\NormalTok{(}
 \NormalTok{    age }\SpecialCharTok{\textless{}} \DecValTok{20}              \SpecialCharTok{\textasciitilde{}} \StringTok{"20歳未満"}\NormalTok{, }
 \NormalTok{    age }\SpecialCharTok{\textgreater{}=} \DecValTok{20}  \SpecialCharTok{\&}\NormalTok{ age }\SpecialCharTok{\textless{}} \DecValTok{30} \SpecialCharTok{\textasciitilde{}} \StringTok{"20{-}29歳"}\NormalTok{, }
@@ -3930,9 +4103,9 @@
 \CommentTok{\# 確認するには以下のコードの最初の2行だけでよいが，}
 \CommentTok{\# 出力が長いためランダムに10件抽出しageの昇順にしてある}
 
-\NormalTok{res\_age6 }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{count}\NormalTok{(age, age6) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{slice\_sample}\NormalTok{(}\AttributeTok{n =} \DecValTok{10}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# ランダムに10件抽出}
+\NormalTok{res\_age6 }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
+  \FunctionTok{count}\NormalTok{(age, age6) }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
+  \FunctionTok{slice\_sample}\NormalTok{(}\AttributeTok{n =} \DecValTok{10}\NormalTok{) }\SpecialCharTok{|}\ErrorTok{\textgreater{}} \CommentTok{\# ランダムに10件抽出}
   \FunctionTok{arrange}\NormalTok{(age)             }\CommentTok{\# ageをキーに行を昇順にソート}
 \end{Highlighting}
 \end{Shaded}
@@ -3941,16 +4114,16 @@
 ## # A tibble: 10 x 3
 ##      age age6         n
 ##    <int> <chr>    <int>
-##  1    15 20歳未満    26
-##  2    30 30-39歳     65
-##  3    34 30-39歳     52
-##  4    35 30-39歳     52
-##  5    37 30-39歳     36
-##  6    38 30-39歳     52
-##  7    45 40-49歳     28
-##  8    46 40-49歳     25
-##  9    59 50-59歳      5
-## 10    67 60歳以上     3
+##  1    11 20歳未満     3
+##  2    28 20-29歳     86
+##  3    35 30-39歳     52
+##  4    44 40-49歳     25
+##  5    55 50-59歳     17
+##  6    57 50-59歳      9
+##  7    59 50-59歳      5
+##  8    65 60歳以上     1
+##  9    66 60歳以上     1
+## 10    86 60歳以上     1
 \end{verbatim}
 
 \begin{Shaded}
@@ -4004,6 +4177,8 @@
   \texttt{summarise()}の中に出力したい変数名を書き，\texttt{=}の後に計算する関数を入れる
 \item
   例：bill\_length\_mmの平均値を算出する
+\item
+  データは\ref{select-read}で読み込んだdfを使用
 \end{itemize}
 
 \begin{Shaded}
@@ -4011,7 +4186,7 @@
 \CommentTok{\# まだtidyverseパッケージを読み込んでない場合は以下の\#を外して実行}
 \CommentTok{\# library(tidyverse)}
 
-\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{summarise}\NormalTok{(blm\_平均値 }\OtherTok{=} \FunctionTok{mean}\NormalTok{(bill\_length\_mm, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
@@ -4042,7 +4217,7 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{summarise}\NormalTok{(}\AttributeTok{blm\_mean =} \FunctionTok{mean}\NormalTok{(bill\_length\_mm, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
             \AttributeTok{bdm\_mean =} \FunctionTok{mean}\NormalTok{(bill\_depth\_mm, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
             \AttributeTok{blm\_sd =} \FunctionTok{sd}\NormalTok{(bill\_length\_mm, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
@@ -4074,7 +4249,7 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{summarise}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{c}\NormalTok{(bill\_length\_mm, bill\_depth\_mm),}
                    \FunctionTok{list}\NormalTok{(}\AttributeTok{mean =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{mean}\NormalTok{(.x, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
                         \AttributeTok{sd =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{sd}\NormalTok{(.x, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
@@ -4099,7 +4274,7 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{summarise}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"bill"}\NormalTok{),}
                    \FunctionTok{list}\NormalTok{(}\AttributeTok{mean =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{mean}\NormalTok{(.x, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
                         \AttributeTok{sd =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{sd}\NormalTok{(.x, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
@@ -4114,6 +4289,37 @@
 ## 1                43.9              5.46              342
 ## # ... with 3 more variables: bill_depth_mm_mean <dbl>,
 ## #   bill_depth_mm_sd <dbl>, bill_depth_mm_n <int>
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{list()}内に関数を並べている部分は，関数を名前付きリストにしているだけなので，外に出して１回オブジェクトとして指定すれば繰り返し使える
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fnlist }\OtherTok{\textless{}{-}} 
+  \FunctionTok{list}\NormalTok{(}\AttributeTok{mean =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{mean}\NormalTok{(.x, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+       \AttributeTok{sd =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{sd}\NormalTok{(.x, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+       \AttributeTok{n =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{sum}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(.x)))}
+
+
+\NormalTok{df }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
+  \FunctionTok{summarise}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{ends\_with}\NormalTok{(}\StringTok{"mm"}\NormalTok{),}
+                   \FunctionTok{all\_of}\NormalTok{(fnlist)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 9
+##   bill_length_mm_mean bill_length_mm_sd bill_length_mm_n
+##                 <dbl>             <dbl>            <int>
+## 1                43.9              5.46              342
+## # ... with 6 more variables: bill_depth_mm_mean <dbl>,
+## #   bill_depth_mm_sd <dbl>, bill_depth_mm_n <int>,
+## #   flipper_length_mm_mean <dbl>, flipper_length_mm_sd <dbl>,
+## #   flipper_length_mm_n <int>
 \end{verbatim}
 
 \hypertarget{su-st-reorder}{%
@@ -4133,11 +4339,11 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{summarise}\NormalTok{(}\FunctionTok{across}\NormalTok{(bill\_length\_mm}\SpecialCharTok{:}\NormalTok{body\_mass\_g,}
                    \FunctionTok{list}\NormalTok{(}\AttributeTok{mean =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{mean}\NormalTok{(.x, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
                         \AttributeTok{sd =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{sd}\NormalTok{(.x, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
-                        \AttributeTok{n =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{sum}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(.x))))) }\SpecialCharTok{\%\textgreater{}\%} 
+                        \AttributeTok{n =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{sum}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(.x))))) }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{pivot\_longer}\NormalTok{(}\FunctionTok{everything}\NormalTok{(),}
                \AttributeTok{names\_to =} \FunctionTok{c}\NormalTok{(}\StringTok{"items"}\NormalTok{, }\StringTok{".value"}\NormalTok{), }\CommentTok{\# ".value"の部分を列名に}
                \AttributeTok{names\_pattern =} \StringTok{"(.*)\_(.*)"}\NormalTok{) 　  }\CommentTok{\# 正規表現}
@@ -4176,8 +4382,8 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{group\_by}\NormalTok{(species) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
+  \FunctionTok{group\_by}\NormalTok{(species) }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{summarise}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{c}\NormalTok{(bill\_length\_mm, bill\_depth\_mm),}
                    \FunctionTok{list}\NormalTok{(}\AttributeTok{mean =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{mean}\NormalTok{(.x, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
                         \AttributeTok{sd =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{sd}\NormalTok{(.x, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{))))}
@@ -4202,8 +4408,8 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{group\_by}\NormalTok{(species, sex) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{df }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
+  \FunctionTok{group\_by}\NormalTok{(species, sex) }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{summarise}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{c}\NormalTok{(bill\_length\_mm, bill\_depth\_mm),}
                    \FunctionTok{list}\NormalTok{(}\AttributeTok{mean =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{mean}\NormalTok{(.x, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
                         \AttributeTok{sd =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{sd}\NormalTok{(.x, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{))))}
@@ -4285,7 +4491,7 @@
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{mean\_sd\_n }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(data, vars)\{}
-\NormalTok{data }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{data }\SpecialCharTok{|}\ErrorTok{\textgreater{}} 
   \FunctionTok{summarise}\NormalTok{(}\FunctionTok{across}\NormalTok{(\{\{vars\}\},}
                    \FunctionTok{list}\NormalTok{(}\AttributeTok{mean =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{mean}\NormalTok{(.x, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
                         \AttributeTok{sd =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{sd}\NormalTok{(.x, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
@@ -4370,7 +4576,7 @@
 \begin{minipage}{0.5\hsize}
 \begin{description}
   \item{著者：} やわらかクジラ
-  \item{発行：} 2022年1月26日
+  \item{発行：} 2022年1月26日\\（改訂1:2022年9月14日）
   \item{サークル名：} ヤサイゼリー
   \item{twitter：} @matsuchiy
   \item{印刷：} 電子出版のみ

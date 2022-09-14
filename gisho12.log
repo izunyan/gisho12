@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021/W32TeX) (preloaded format=xelatex 2022.1.15)  23 JAN 2022 23:29
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021/W32TeX) (preloaded format=xelatex 2022.1.15)  14 SEP 2022 15:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -904,44 +904,44 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ]
 LaTeX Font Info:    Font shape `TU/HaranoAjiGothic-Medium.otf(0)/m/n' will be
 (Font)              scaled to size 13.31586pt on input line 144.
-LaTeX Font Info:    Font shape `TU/HaranoAjiMincho-Regular.otf(0)/b/n' will be
-(Font)              scaled to size 9.24713pt on input line 196.
-[5]
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 8.0pt on input line 242.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 6.0pt on input line 242.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 8.00073pt on input line 242.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 6.00055pt on input line 242.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 7.99915pt on input line 242.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 5.99936pt on input line 242.
-LaTeX Font Info:    Font shape `TU/HaranoAjiMincho-Regular.otf(0)/m/n' will be
-(Font)              scaled to size 7.3977pt on input line 242.
-[6]
 
 Package xeCJK Warning: Unknown CJK family `\CJKttdefault' is being ignored.
 (xeCJK)                
 (xeCJK)                Try to use `\setCJKmonofont[...]{...}' to define it.
 
+[5]
+LaTeX Font Info:    Font shape `TU/HaranoAjiMincho-Regular.otf(0)/b/n' will be
+(Font)              scaled to size 9.24713pt on input line 212.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 8.0pt on input line 258.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 6.0pt on input line 258.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 8.00073pt on input line 258.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 6.00055pt on input line 258.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 7.99915pt on input line 258.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 5.99936pt on input line 258.
+LaTeX Font Info:    Font shape `TU/HaranoAjiMincho-Regular.otf(0)/m/n' will be
+(Font)              scaled to size 7.3977pt on input line 258.
+[6]
 LaTeX Font Info:    Font shape `TU/HaranoAjiGothic-Medium.otf(0)/m/n' will be
-(Font)              scaled to size 11.09656pt on input line 284.
-[7] [8]
+(Font)              scaled to size 11.09656pt on input line 300.
+[7] [8] [9] [10
+
+]
 第1章
 LaTeX Font Info:    Font shape `TU/HaranoAjiGothic-Medium.otf(0)/m/n' will be
-(Font)              scaled to size 19.17854pt on input line 356.
+(Font)              scaled to size 19.17854pt on input line 378.
 File: images/start.png Graphic file (type bmp)
 <images/start.png>
 LaTeX Font Info:    Font shape `TU/HaranoAjiMincho-Regular.otf(0)/m/n' will be
-(Font)              scaled to size 8.32242pt on input line 384.
+(Font)              scaled to size 8.32242pt on input line 406.
 File: images/appearance.png Graphic file (type bmp)
 <images/appearance.png>
-[9
-
-] [10]
+[11] [12]
 File: images/pane.png Graphic file (type bmp)
 <images/pane.png>
 File: images/newfile.png Graphic file (type bmp)
@@ -949,100 +949,95 @@ File: images/newfile.png Graphic file (type bmp)
 File: images/rscript.png Graphic file (type bmp)
 <images/rscript.png>
 
-Underfull \hbox (badness 2469) in paragraph at lines 481--483
+Underfull \hbox (badness 2469) in paragraph at lines 503--505
 []\TU/HaranoAjiMincho-Regular.otf(0)/m/n/10 メ ニ ュ ー の \TU/lmtt/m/n/10 Tools > Global Options > Code > Saving > Default text
  []
 
-[11]
+[13]
 File: images/utf8.png Graphic file (type bmp)
 <images/utf8.png>
-[12]
-Overfull \hbox (60.61475pt too wide) in paragraph at lines 541--541
+[14]
+Overfull \hbox (60.61475pt too wide) in paragraph at lines 563--563
 []\TU/lmtt/m/n/10 ##  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25[] 
  []
 
 
-Overfull \hbox (60.61475pt too wide) in paragraph at lines 541--541
+Overfull \hbox (60.61475pt too wide) in paragraph at lines 563--563
 []\TU/lmtt/m/n/10 ## [26] 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50[] 
  []
 
-[13]
+[15]
 
 LaTeX Font Warning: Font shape `TU/HaranoAjiMincho-Regular.otf(0)/m/it' undefined
-(Font)              using `TU/HaranoAjiMincho-Regular.otf(0)/m/n' instead on input line 551.
+(Font)              using `TU/HaranoAjiMincho-Regular.otf(0)/m/n' instead on input line 573.
 
-File: images/project.png Graphic file (type bmp)
-<images/project.png>
-[14]
 File: images/package_install.png Graphic file (type bmp)
 <images/package_install.png>
-[15] [16] [17] [18]
+[16] [17]
+File: images/vector_image.png Graphic file (type bmp)
+<images/vector_image.png>
+[18] [19]
 File: images/df_xl.pdf Graphic file (type pdf)
 <use images/df_xl.pdf>
 File: images/dfr.png Graphic file (type bmp)
 <images/dfr.png>
+[20]
 File: images/penguins_logo.png Graphic file (type bmp)
 <images/penguins_logo.png>
-[19] [20] [21]
-Underfull \hbox (badness 10000) in paragraph at lines 1053--1055
-\TU/lmtt/m/n/10 > Global Options > Code > Editing > use native pipe operator
- []
-
-[22]
+[21] [22]
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 1007.
+[23]
+File: images/project.png Graphic file (type bmp)
+<images/project.png>
+[24]
 File: images/help.png Graphic file (type bmp)
 <images/help.png>
-[23] [24
-
-]
+[25] [26]
 第2章
-[25] [26] [27] [28] [29] [30] [31] [32] [33] [34] [35] [36]
-第3章
-[37
+[27
 
-] [38]
-Overfull \vbox (1.41492pt too high) detected at line 1971
+] [28] [29] [30] [31] [32] [33] [34] [35] [36] [37] [38]
+第3章
+[39
+
+] [40]
+Overfull \vbox (1.41492pt too high) detected at line 2017
  []
 
-[39] [40] [41] [42] [43] [44]
+[41] [42] [43] [44] [45] [46]
 第4章
-[45
+[47
 
-] [46] [47]
-LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 2400.
-[48] [49] [50] [51] [52] [53] [54
+] [48] [49] [50] [51] [52] [53] [54] [55] [56
 
 ]
 第5章
-[55] [56] [57] [58] [59] [60] [61] [62] [63] [64] [65] [66] [67] [68]
-Underfull \vbox (badness 10000) detected at line 3639
- []
-
-[69] [70]
-File: gisho12_files/figure-latex/unnamed-chunk-95-1.pdf Graphic file (type pdf)
-<use gisho12_files/figure-latex/unnamed-chunk-95-1.pdf>
-[71] [72] [73] [74] [75] [76]
+[57] [58] [59] [60] [61] [62] [63] [64] [65] [66] [67] [68] [69] [70] [71] [72] [73] [74]
+File: gisho12_files/figure-latex/unnamed-chunk-100-1.pdf Graphic file (type pdf)
+<use gisho12_files/figure-latex/unnamed-chunk-100-1.pdf>
+[75] [76] [77] [78] [79] [80]
 第6章
-[77
+[81
 
-] [78] [79] [80] [81] [82] [83] [84
+] [82] [83] [84] [85] [86] [87] [88] [89
 
-] [85] [86
+] [90
 
 ] (./gisho12.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `gisho12.out' has not changed.
-(rerunfilecheck)             Checksum: 4BC7C9BBD67385F4ADB7626FFA73E8BD;5854.
+(rerunfilecheck)             Checksum: B22A97FB92DE276B6A777D9310ED4E9D;6074.
  ) 
 Here is how much of TeX's memory you used:
- 21012 strings out of 478189
- 441820 string characters out of 5853131
- 850016 words of memory out of 5000000
- 41304 multiletter control sequences out of 15000+600000
+ 21059 strings out of 478189
+ 444489 string characters out of 5853131
+ 851265 words of memory out of 5000000
+ 41350 multiletter control sequences out of 15000+600000
  475467 words of font info for 97 fonts, out of 8000000 for 9000
  19 hyphenation exceptions out of 8191
- 105i,10n,140p,524b,952s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 105i,10n,140p,491b,948s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on gisho12.pdf (86 pages).
+Output written on gisho12.pdf (90 pages).
