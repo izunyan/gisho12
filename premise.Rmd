@@ -12,6 +12,7 @@
 ```{r start, echo = FALSE, fig.cap = "RStudioの起動画面", fig.align = "center", out.width='80%'}
 knitr::include_graphics("images/start.png")
 ```
+
 ### 見た目の変更{#p-theme}
 
 * 好みまたは目に優しい画面にするため，RStudioの色合いを下記から変更できる
@@ -39,7 +40,7 @@ knitr::include_graphics("images/pane.png")
 ```{r script, echo = FALSE, fig.cap = "Rスクリプトを開く", fig.align = "center", out.width='70%'}
 knitr::include_graphics("images/newfile.png")
 ```
-* R Scriptを開くとデフォルトでは左上にペインが開き，ここにコードを記述できる（図\@ref(fig:script2)）
+* R Scriptを開くとデフォルトでは左上にウィンドウ（ペインと呼ばれる）が開き，ここにコードを記述できる（図\@ref(fig:script2)）
 
 ```{r script2, echo = FALSE, fig.cap = "Rスクリプトに書く", fig.align = "center", out.width='70%'}
 knitr::include_graphics("images/rscript.png")
@@ -82,18 +83,6 @@ knitr::include_graphics("images/utf8.png")
 ```
 
 
-## プロジェクト{#p-project}
-
-* データを加工して解析する際に、1つのフォルダ（サブフォルダも含む）の中に関連するデータやコードなどをまとめておき、そのフォルダを**プロジェクト**と設定する
-  + これにより、ファイルの読み書きの際の場所指定をいちいち意識しないで作業できるようになる
-* RStudio画面の右上にProject設定のメニューがある（図\@ref(fig:project)）
-  + `Project (None) > New Project > Existing Directory`と選び，プロジェクトにしたいフォルダを設定する  
-
-```{r project, echo = FALSE, fig.cap = "プロジェクトの設定", fig.align = "center"}
-knitr::include_graphics("images/project.png")
-```
-
-
 
 ## パッケージ{#p-package}
 
@@ -105,7 +94,7 @@ knitr::include_graphics("images/project.png")
   + 以下，例えば「パッケージ`dplyr`の関数`select()`」は`dplyr::select()`と表現することがある
 * モダンなRのデータ加工に必須なパッケージをまとめて読み込んでくれる`tidyverse`をまず読み込んでおく
   + 以降のコードはすべて`tidyverse`を読み込んだ前提で進める
-  + 本書では明示しない限り，すべてtidyverseを読み込めばつかるパッケージを用いている
+  + 本書では明示しない限り，すべてtidyverseを読み込めば使えるパッケージを用いている
 
 ```{r eval = FALSE}
 library(tidyverse)
@@ -125,12 +114,14 @@ knitr::include_graphics("images/package_install.png")
 
 * データ加工においてほとんどの人は絶対お世話になるもの
   + 適切な値や変数などを指定すれば，データの処理や計算，統計解析など様々な処理を簡単に実行してくれる
-  + データ加工の技術は，色々な便利関数をどの場面でどうやって使うかにつきる
+  + データ加工の技術は，**色々な便利関数をどの場面でどうやって使うか**につきる
 * 例えば`mean()`などのように「`関数名()`」で出てくるので，`()`で囲まれてる所を見たらほぼ関数だと思えばよさそう
   + 本書の2章～6章はすべて基本関数の解説
 * `()`の中に入る値を**引数**（ひきすう）と呼ぶ
 * 引数は「`,`」でつないで追加していき，これによって実行したい処理のカスタマイズが可能
   + 関数の`()`の最初の位置に来るものを**第一引数**という
+* 関数の`()`内でtabキーを押せば，欲しいものが大体出てくる
+  + 例：`select()`での候補変数，`mean()`での引数`na.rm =`など
 
 ### 関数の例{#p-function-ex}
 #### 複数のものを1つにする: c(){#p-function-ex-c}
@@ -155,6 +146,10 @@ c("a", "b", "c") # " "で囲まれる値は文字を表す
 * 引数にベクトルを入れることで平均値を計算する
 * 1つのベクトルはデータフレームの1つの列（変数）の単位と同じなので，ここでは横に並んでいるがデータフレーム的にイメージしたら縦に並んでるとみなすと分かりやすいかも
 
+```{r vectorimage, echo = FALSE, fig.cap = "ベクトルのイメージ", fig.align = "center", out.width='80%'}
+knitr::include_graphics("images/vector_image.png")
+```
+
 ```{r}
 mean(c(1,2,3))
 
@@ -169,6 +164,7 @@ mean(c(1, NA, 3), na.rm = TRUE)
 
 ## オブジェクト{#p-object}
 
+* Pythonなどの他言語では**変数**^[データフレームの列を変数と呼ぶものとは異なる]と呼ばれるものに該当
 * 計算の結果や，複数の数値や文字など（他にも色々）を1つの文字列に格納することができ，その後のコードで活用できる
 * `<-`の矢印の先にあるのがオブジェクト。RStudioではショートカット`alt + -`で出せる(Macは`Option + -`)
 * この後説明するデータフレームもオブジェクトに入れられる
@@ -192,7 +188,7 @@ rm(res, res2, res3)
 
 ## データフレーム{#p-df}
 
-* **行**（ケースまたはオブザベーション）と**列**（変数）が碁盤の目のようになった集まりの形のデータ
+* **行**（別名：ケース；オブザベーション；レコード）と**列**（別名：変数；カラム）^[オブジェクトに該当するものとは異なる。本書ではこちらの意味で「変数」を使用する]が碁盤の目のようになった集まりの形のデータ
   + Excelで表現するのであれば通常1行目に列名が入り、2行目以降が個別のケース（データ）を表す形（図\@ref(fig:dfxl)）。Rのデータフレームでは列名は別途与えられ，1行目からケースが表される（図\@ref(fig:dfr)）
 * データ解析において便利で分かりやすいため、本書ではデータフレームの形で説明していく
   + Rのモダンな方法では，データの加工や統計処理のプロセスをデータフレームの形で返すことが多い
@@ -221,7 +217,7 @@ knitr::include_graphics("images/dfr.png")
 * `palmerpenguins`パッケージのpenguinsデータ（CC0）
   + 最初からtibble形式になっている
 * データフレーム名を打ち込めばそのまま表示できる
-  + tibble形式でないデータフレームで大きなものに対して実行すると，出力がうまって大変になることもある
+  + tibble形式でないデータフレームで大きなものに対して実行すると，Consoleの出力がうまって大変になることもある
 
 ```{r}
 # パッケージが入ってなければ下記実行
@@ -244,22 +240,32 @@ palmerpenguins::penguins
 * 本書では最初の3行の表示のみに絞っているが，**任意の行数を表示させたい場合**は，`print()`関数を使う
 * 例：最初の15行のみ表示させる
 ```{r}
-palmerpenguins::penguins %>% 
+palmerpenguins::penguins  |>  
   print(n = 15)
 ```
 
 
-## %>% （パイプ演算子）{#p-pipe}
+## |>または%>%（パイプ演算子）{#p-pipe}
 
 * 名前は**パイプ**で発音は"*and then*" （[参照](https://adv-r.hadley.nz/functions.html#function-composition)）
 * コードを読みやすくするための便利な機能を持つ演算子。初めてみた人は全然わからないと思うが，この本を読んでコードを書きはじめてみたらこれなしではいられなくなるくらいお世話になると思う
-  + 主に使用が想定される場面でざっくりいうと，「このデータフレームに対して`%>%`の後にある関数を適用する」という機能
+  + 主に使用が想定される場面でざっくりいうと，「このデータフレームに対して`|>`の後にある関数を適用する」という機能
   + 具体的な使用法は\@ref(select-standard-pipe)で解説
-* `tidyverse`パッケージを読み込めば使えるようになる
+  + 最近は特にパッケージを読み込まなくても使える`|>`(base pipe, native pipe)を使う説明が多くなった。
+    - `%>%`(magrittr pipe)は`tidyverse`パッケージを読み込めば使えて，こちらが必要になる特殊なケースもある
 * RStudioのショートカットは`Ctrl + Shift + M`(Macは`Cmd + Shift + M`)。たぶん，RStudio以外でもこのショートカット押してしまうぐらい中毒性がある
-* R version 4.1からは「`|>`」が大体同じ機能を持つ演算子して実装されたので，特にパッケージの読み込みをせずに使えるようになった。こちらを使う説明も今後増えていくと思われる
-  + ショートカットで出るパイプを`|>`に切り替えたい場合は，RStudioの`Tools > Global Options > Code > Editing > use native pipe operator`にチェックを入れる
-  + 現時点ではデータフレームを第一引数へ渡す形式でない関数の場合（回帰分析の`lm()`など），工夫が必要な場合があるようなので，本書では`%>%`を使用
+  + 現時点ではRStudioのデフォルトのショートカットで出るのは`%>%`だが，`|>`に切り替えたい場合は，RStudioの`Tools > Global Options > Code > Editing > use native pipe operator`にチェックを入れる
+
+## プロジェクト{#p-project}
+* 本書の内容では使わなくても問題ないが，自身のデータを読み書きする際には非常に便利なので，解説しておく
+* データを加工して解析する際に、1つのフォルダ（サブフォルダも含む）の中に関連するデータやコードなどをまとめておき、そのフォルダを**プロジェクト**と設定する
+  + これにより、ファイルの読み書きの際の場所指定をいちいち意識しないで作業できるようになる
+* RStudio画面の右上にProject設定のメニューがある（図\@ref(fig:project)）
+  + `Project (None) > New Project > Existing Directory`と選び，プロジェクトにしたいフォルダを設定する  
+
+```{r project, echo = FALSE, fig.cap = "プロジェクトの設定", fig.align = "center"}
+knitr::include_graphics("images/project.png")
+```
   
 ## 困ったときは{#p-help}
 

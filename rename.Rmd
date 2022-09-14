@@ -1,4 +1,4 @@
-# 変数名を変更する：rename {#rename}
+# 列（変数）名を変更する：rename {#rename}
 
 * 本章のポイント  
   + パッケージ`dplyr`の関数`rename()`  
@@ -9,9 +9,10 @@
 ## 基本 {#rename-standard}
 
 * まずはデータにどういう変数名があるかの確認
+* 使用データは\@ref(select-read)で読み込んだdfを使用
 
 ```{r}
-df %>% names()
+df |> names()
 ```
 
 * 変更したい変数名を new = old の順に入力する
@@ -22,7 +23,7 @@ df %>% names()
 # まだtidyverseパッケージを読み込んでない場合は以下の#を外して実行
 # library(tidyverse)
 
-df %>% 
+df |> 
   rename(blmm = bill_length_mm)
 ```
 
@@ -30,7 +31,7 @@ df %>%
   + でもたくさんある場合に一つ一つ書いていくのは大変
 
 ```{r}
-df %>% 
+df |> 
   rename(blmm = bill_length_mm,
          bdmm = bill_depth_mm)
 
@@ -47,7 +48,7 @@ df %>%
 
 ```{r}
 
-df %>% 
+df |> 
   rename(くちばし_length_mm = bill_length_mm,
          くちばし_depth_mm = bill_depth_mm)
 ```
@@ -62,7 +63,7 @@ df %>%
   + この部分の理解は今すぐできなくてもよいが，学習を進めるためにキーワードだけ示しておくと，**無名関数**(anonymous function)という処理をしている
 
 ```{r}
-df %>% 
+df |> 
   rename_with(~str_replace(.x, "bill", "くちばし"),
               starts_with("bill"))
 ```
@@ -72,7 +73,7 @@ df %>%
 * `select()`の時のように単に`c()`の中に変数を指定していくだけでも動く
 
 ```{r}
-df %>% 
+df |> 
   rename_with(~str_replace(., "bill", "くちばし"),
               c(bill_length_mm, bill_depth_mm))
 
@@ -83,7 +84,7 @@ df %>%
 * dfデータで"_mm"で終わる変数の名前の"_mm"部分を"_ミリ"に一括で変換しよう
 
 ```{r eval=FALSE, include=FALSE}
-df %>% 
+df |> 
   rename_with(~str_replace(., "_mm", "_ミリ"),
               ends_with("_mm"))
 ```
@@ -95,7 +96,7 @@ df %>%
 
 ```{r}
 
-df %>% 
+df |> 
   rename(bill_length = bill_length_mm,
          bill_depth  = bill_depth_mm,
          flipper_length = flipper_length_mm)
@@ -106,7 +107,7 @@ df %>%
 * `str_replace()`で変換先に空白「`" "`」を指定すると削除できる
 
 ```{r}
-df %>% 
+df |> 
   rename_with(~str_replace(., "_mm", " "),
               ends_with("mm"))
 ```
@@ -117,7 +118,7 @@ df %>%
   + 第一引数についてその次に来る文字列を取り除く
 
 ```{r}
-df %>% 
+df |> 
   rename_with(~str_remove(., "_mm"),
               ends_with("mm"))
 ```
@@ -128,7 +129,7 @@ df %>%
 
 
 ```{r eval=FALSE, include=FALSE}
-df %>% 
+df |> 
   rename_with(~str_remove_all(., "_"),
               contains("_"))
 ```  
@@ -141,9 +142,9 @@ df %>%
 
 ```{r}
 
-df %>% 
-  filter(year == 2007) %>% 
-  select(bill_length_mm:flipper_length_mm, year) %>% 
+df |> 
+  filter(year == 2007) |> 
+  select(bill_length_mm:flipper_length_mm, year) |> 
   rename(bill_length_mm_2007 = bill_length_mm,
          bill_depth_mm_2007  = bill_depth_mm,
          flipper_length_mm_2007 = flipper_length_mm)
@@ -156,9 +157,9 @@ df %>%
 * ここでは変数"year"以外すべてなので，"year"に「`!`」をつけることで変数を指定できる
 
 ```{r}
-df %>% 
-  filter(year == 2007) %>% 
-  select(bill_length_mm:flipper_length_mm, year) %>% 
+df |> 
+  filter(year == 2007) |> 
+  select(bill_length_mm:flipper_length_mm, year) |> 
   rename_with(~str_c(., "_2007"),
                !year)
 ```
@@ -168,8 +169,8 @@ df %>%
 * 変数を選ぶときに該当する単語を持つ変数を選びたければ，ヘルパー関数`matches()`で正規表現を使って柔軟に選べる
 
 ```{r}
-df %>% 
-filter(year == 2007) %>% 
+df |> 
+filter(year == 2007) |> 
   rename_with(~str_c(., "_2007"),
                matches("bill|flipper"))
 ```
@@ -181,8 +182,8 @@ filter(year == 2007) %>%
 
 
 ```{r eval=FALSE, include=FALSE}
-df %>% 
-filter(year == 2008) %>% 
+df |> 
+filter(year == 2008) |> 
   rename_with(~str_c("year08_", .),
                !matches("bill|flipper"))
 ```

@@ -11,12 +11,13 @@
 
 * `summarise()`の中に出力したい変数名を書き，`=`の後に計算する関数を入れる
 * 例：bill_length_mmの平均値を算出する
+* データは\@ref(select-read)で読み込んだdfを使用
 
 ```{r}
 # まだtidyverseパッケージを読み込んでない場合は以下の#を外して実行
 # library(tidyverse)
 
-df %>% 
+df |> 
   summarise(blm_平均値 = mean(bill_length_mm, na.rm = TRUE))
 ```
 
@@ -27,7 +28,7 @@ df %>%
   + `sum(!is.na(.x))`は，NAのない行の数を総計するので，平均値やSDの計算に用いた人数を取得できる
 
 ```{r}
-df %>% 
+df |> 
   summarise(blm_mean = mean(bill_length_mm, na.rm = TRUE),
             bdm_mean = mean(bill_depth_mm, na.rm = TRUE),
             blm_sd = sd(bill_length_mm, na.rm = TRUE),
@@ -45,7 +46,7 @@ df %>%
  
 
 ```{r}
-df %>% 
+df |> 
   summarise(across(c(bill_length_mm, bill_depth_mm),
                    list(mean = ~mean(.x, na.rm = TRUE),
                         sd = ~sd(.x, na.rm = TRUE),
@@ -56,12 +57,28 @@ df %>%
 * `across()`ではヘルパー関数が使える
 
 ```{r}
-df %>% 
+df |> 
   summarise(across(starts_with("bill"),
                    list(mean = ~mean(.x, na.rm = TRUE),
                         sd = ~sd(.x, na.rm = TRUE),
                         n = ~sum(!is.na(.x)))))
 ```
+
+* `list()`内に関数を並べている部分は，関数を名前付きリストにしているだけなので，外に出して１回オブジェクトとして指定すれば繰り返し使える
+
+```{r}
+fnlist <- 
+  list(mean = ~mean(.x, na.rm = TRUE),
+       sd = ~sd(.x, na.rm = TRUE),
+       n = ~sum(!is.na(.x)))
+
+
+df |> 
+  summarise(across(ends_with("mm"),
+                   all_of(fnlist)))
+```
+
+
 
 ### 【並び替え】{#su-st-reorder}
 
@@ -72,11 +89,11 @@ df %>%
 
 
 ```{r}
-df %>% 
+df |> 
   summarise(across(bill_length_mm:body_mass_g,
                    list(mean = ~mean(.x, na.rm = TRUE),
                         sd = ~sd(.x, na.rm = TRUE),
-                        n = ~sum(!is.na(.x))))) %>% 
+                        n = ~sum(!is.na(.x))))) |> 
   pivot_longer(everything(),
                names_to = c("items", ".value"), # ".value"の部分を列名に
                names_pattern = "(.*)_(.*)") 　  # 正規表現
@@ -89,20 +106,20 @@ df %>%
 
 ```{r eval=FALSE, include=FALSE}
 res <- 
-  df %>% 
+  df |> 
   summarise(across(contains("length"),
                    list(mean = ~mean(.x, na.rm = TRUE),
                         sd = ~sd(.x, na.rm = TRUE),
                         n = ~sum(!is.na(.x)))))
 
-res %>% 
+res |> 
   pivot_longer(everything(),
                names_to = c("items", ".value"), # ".value"の部分を列名に
                names_pattern = "(.*)_(.*)") 　  # 正規表現
 
 # 確認
 
-df %>% 
+df |> 
   summarise(n = sum(!is.na(bill_length_mm)))
 
 ```
@@ -113,8 +130,8 @@ df %>%
 * `group_by()`にグループを表す変数を指定するとできる
 
 ```{r}
-df %>% 
-  group_by(species) %>% 
+df |> 
+  group_by(species) |> 
   summarise(across(c(bill_length_mm, bill_depth_mm),
                    list(mean = ~mean(.x, na.rm = TRUE),
                         sd = ~sd(.x, na.rm = TRUE))))
@@ -123,8 +140,8 @@ df %>%
 * グループを重ねることも可能
 
 ```{r}
-df %>% 
-  group_by(species, sex) %>% 
+df |> 
+  group_by(species, sex) |> 
   summarise(across(c(bill_length_mm, bill_depth_mm),
                    list(mean = ~mean(.x, na.rm = TRUE),
                         sd = ~sd(.x, na.rm = TRUE))))
@@ -135,8 +152,8 @@ df %>%
 * dfデータの変数"bill_length_mm", "bill_depth_mm"について，3変数（species, island, sex）の層別平均値（変数名に"_平均"の接頭辞をつける）を計算しよう
 
 ```{r eval=FALSE, include=FALSE}
-df %>% 
-  group_by(species, island, sex) %>% 
+df |> 
+  group_by(species, island, sex) |> 
   summarise(across(c(bill_length_mm, bill_depth_mm),
                    list(平均 = ~mean(.x, na.rm = TRUE))))
 ```
@@ -169,7 +186,7 @@ add_one(2)
 
 ```{r}
 mean_sd_n <- function(data, vars){
-data %>% 
+data |> 
   summarise(across({{vars}},
                    list(mean = ~mean(.x, na.rm = TRUE),
                         sd = ~sd(.x, na.rm = TRUE),

@@ -1,9 +1,9 @@
 ---
 site: bookdown::bookdown_site
-# title:  "がんばらないデータ加工"
-# subtitle: "Rによるくり返し作業入門  前編"
-# author: "やわらかクジラ"
-github-repo: https://github.com/izunyan/gisho12.git
+title:  "がんばらないデータ加工"
+subtitle: "Rによるくり返し作業入門  前編"
+author: "やわらかクジラ"
+github-repo: izunyan/gisho12.git
 cover-image: images/cover.png
 documentclass: bxjsbook
 classoption: xelatex,ja=standard, b5paper
@@ -27,17 +27,20 @@ options(tibble_opt)
 
 ```{r cover, echo=FALSE, fig.align='center', out.width='50%'}
 # pdf作成時は不要
-# knitr::include_graphics("images/cover.png")
+knitr::include_graphics("images/cover.png")
 ```
+
+* 本webサイトは，技術書典12にて頒布した[がんばらないデータ加工　Rによるくり返し作業入門　前編](https://techbookfest.org/product/5161487259664384?productVariantID=5672571053801472)のオンラインバージョン
+* こちらは随時updateされていく予定
 
 ## 概要 {-}
 * 本書の目的
   + データ加工での面倒な作業をRとRStudioで手軽に実行できるようになるための基礎知識を紹介
 
 * 本書の内容
-  + Rのモダンな方法を使ったデータ加工の過程（例：前処理、データクリーニング、データクレンジング、データラングリングなど）で用いる基本関数の紹介
+  + Rのモダンな方法を使い，データ加工の過程（例：前処理、データクリーニング、データクレンジング、データラングリングなど）で用いる基本関数の紹介
   + 実際は核心の部分に入る前の準備段階までにとどまる。タイトルに「前編」とあるのはその理由による
-  + 基本的にデータフレーム（\@ref(p-df)参照）の形になったきれいな構造を想定しているが，ここで解説した技術に熟達することで，汚いデータ構造にも立ち向かえるようになる
+  + 基本的にデータフレーム（\@ref(p-df)参照）の形になったきれいな構造を想定しているが，ここで解説した技術に熟達することで，その他のデータ形式や汚いデータ構造にも立ち向かえるようになる
 
 * 執筆動機
   + 本書を書こうと思ったのは拙既刊書[『Rで読むExcelファイル』](https://techbookfest.org/product/4794168259903488?productVariantID=5913872206659584)と同じく，「RとRStudioを使いたい！と思う人がもっと増えればいいのに」という願いから
@@ -69,7 +72,7 @@ options(tibble_opt)
   + 例えば公的には[総務省の資料](https://www.soumu.go.jp/ict_skill/)などがある^[総務省ホームページ「総務省 ICTスキル総合習得プログラム　コース4
 （オープンデータ・ビッグデータ利活用事例）　4-3 プログラミングによるビッグデータの分析（R）」(https://www.soumu.go.jp/ict_skill/)]
   + Windows10だとインストール時にうまくいかないことがあり，自分もくじけそうになったことがあったが，それは乗り越えてしまうと戻りたくないので今回は解説あきらめた
-  + どうしてもインストールできなかったら，ブラウザから実行可能な[RStudio Cloud](https://rstudio.cloud/)を使って練習できる
+  + どうしてもインストールできなかったら，ブラウザから実行可能な[RStudio Cloud](https://rstudio.cloud/)を使って練習できる（ただし無料版は時間制限があるらしい）
 * 初学者から始めてちょっと背伸びできるくらいまでが到達目標
 
 
@@ -77,7 +80,7 @@ options(tibble_opt)
 
 * まず\@ref(premise)章では、RとRStudioに初めて触れる方，初学者を対象とした前提知識を解説する。ゆくゆく楽をするためには避けて通れない知識なので，用語になじんでおきたい
 
-* \@ref(select)章はデータの列（変数）を選ぶ方法を解説する。データをコンパクトにしたり，後のデータ解析等で必要な変数を取得したりするなど，データ加工プロセス全体で必要な基本知識もあるので最初に学んでおきたい
+* \@ref(select)章はデータの列（変数）^[\@ref(p-object)のオブジェクトに該当するものとは異なる]を選ぶ方法を解説する。データをコンパクトにしたり，後のデータ解析等で必要な変数を取得したりするなど，データ加工プロセス全体で必要な基本知識もあるので最初に学んでおきたい
 
 * \@ref(rename)章はデータの列名（変数名）を変える方法について解説する。単純に見えるがデータ加工の際になくてはならない技術である。効率化させるためには初心者から少し脱する必要があり，奥が深い
 
@@ -95,8 +98,7 @@ options(tibble_opt)
 
 ### RおよびRStudio、パッケージのバージョン {-}
 
-* rstudioだけなぜか表示されないので手動で…
-  + バージョン 2021.09.1+372 Ghost Orchid (desktop)
+* Rのバージョン
 
 ```{r echo = FALSE}
 library(tidyverse)
@@ -124,23 +126,35 @@ res_si$packages |>
 #   kableExtra::kable_styling(position = "center")
 ```
 
+* RStudioのバージョン
+  + ‘2022.2.1.461’（手動で記入）
+
+
+```{r eval=FALSE, include=FALSE}
+rsinfo <- 
+rstudioapi::versionInfo()
+
+rsinfo$version
+rsinfo$release_name
+```
+
 
 ## 注意事項など {-}
 * 本書の内容はすべてwindows環境を想定
 * この本に書いてある内容は、筆者が学習したことをまとめているものにすぎないため、正常な動作の保証はできない。使用する際は、自己責任で 
 
-<!-- ## ライセンス {-} -->
+## ライセンス {-}
 
-<!-- * 本webサイトは [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) -->
-<!--   + 引用例：やわらかクジラ（2021）『がんばらないデータ加工ーRによるくり返し作業入門ー　前編』. （サークル名：ヤサイゼリー）, 技術書展12にて頒布  -->
-<!--   + ただし，ライセンスの適用は本書での著作部分のみとなり，用いているデータやパッケージや画像などはそれぞれのライセンスに準じる -->
+* 本webサイトは [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
+  + 引用例：やわらかクジラ（2021）『がんばらないデータ加工　Rによるくり返し作業入門　前編』. （サークル名：ヤサイゼリー）, オンライン版:https://izunyan.github.io/gisho12/
+  + ただし，ライセンスの適用は本書での著作部分のみとなり，用いているデータやパッケージや画像などはそれぞれのライセンスに準じる
 
 
 ## 関連情報 {-#association}
 
 * [『Rで読むExcelファイル』](https://techbookfest.org/product/4794168259903488?productVariantID=5913872206659584)
   + 技術書典9で頒布したRでのExcelおよびcsvファイル読み込み解説本
-  + [github](https://izunyan.github.io/excel_r/)
+  + [githubレポジトリ](https://izunyan.github.io/excel_r/)
 
 * [ggplot2の辞書](https://izunyan.github.io/practice_ggplot2/)
   + 視覚化のための`ggplot2`パッケージの辞書的メモ    

@@ -24,16 +24,16 @@ df
 
 ## 基本 {#select-standard}
 
-* `select()`の中に関心のある変数名を「`,`」をつけて並べる
+* 表示させたい変数名（列名）を`select()`の中に「`,`」をつけて並べる
   + 変数は1つからOK
-* `%>%`についてはすでに\@ref(p-pipe)で説明したが，この後また補足を説明するのでまずは何も考えずに使ってみよう 
+* `|>`についてはすでに\@ref(p-pipe)で説明したが，この後また補足を説明するのでまずは何も考えずに使ってみよう 
 * 以降すべて`tidyverse`パッケージを読み込んだ前提で進める（\@ref(p-package)参照）
 
-```{r}
-# まだtidyverseパッケージを読み込んでない場合は以下の#を外して実行
-# library(tidyverse)
 
-df %>% 
+```{r}
+library(tidyverse)
+
+df |> 
   select(bill_length_mm, bill_depth_mm)
 
 ```
@@ -42,7 +42,7 @@ df %>%
 
 ```{r}
 df2 <- 
-  df %>% select(bill_length_mm)
+  df |> select(bill_length_mm)
 
 df2
 
@@ -50,7 +50,7 @@ df2
 rm(df2)
 ```
 
-### 【補足】%>% の意味 {#select-standard-pipe}
+### 【補足】|> の意味 {#select-standard-pipe}
 
 * \@ref(p-pipe)で説明したパイプ演算子の実例を解説する
 * 基本的に`select()`を始めとしたモダンなRの処理は，以下のように**第一引数にデータフレーム**を指定する
@@ -59,22 +59,22 @@ rm(df2)
 select(df, bill_length_mm)
 ```
 
-* `%>%`の役割は，その左側にあるものを右側の関数の第一引数に入れる，ということなので，第一引数にデータフレームが来ることが決まっていれば，常に次のようにかける
+* `|>`の役割は，その左側にあるものを右側の関数の第一引数に入れる，ということなので，第一引数にデータフレームが来ることが決まっていれば，常に次のようにかける
 * このようにすると複雑な処理を重ねていく場合も，コードの可読性が高まるので，コードを共有してチーム作業するデータ加工の過程で有用
 
 ```{r}
-df %>% 
+df |> 
   select(bill_length_mm)
 ```
 
 
 ### 範囲指定 {#select-range}
 
-* 関心ある変数がデータフレーム上に順番に並んでいれば`:`（コロン）でつなげて取得できる
+* 表示させたい変数がデータフレーム上に順番に並んでいれば，その並びの最初の列名と最後の変数名を`:`（コロン）でつなげて取得できる
   + 変数の連番をまとめて指定する時などに便利（例 `設問1:設問100`）
 
 ```{r}
-df %>% 
+df |> 
   select(bill_length_mm:flipper_length_mm)
 ```
 
@@ -82,7 +82,7 @@ df %>%
   + 飛び飛びの変数群を選びたいときに有用
 
 ```{r}
-df %>% 
+df |> 
   select(bill_length_mm:flipper_length_mm, sex)
 ```
 
@@ -92,7 +92,7 @@ df %>%
 * `select()`は文字の変数名を与えても動く
 
 ```{r}
-df %>% 
+df |> 
   select("bill_length_mm", "bill_depth_mm")
 
 ```
@@ -106,7 +106,7 @@ df %>%
 # あらかじめオブジェクト（ここではvars）に変数名の文字列を格納して後で使えるようにする
 vars <- c("bill_length_mm", "bill_depth_mm")
 
-df %>% 
+df |> 
   select(all_of(vars))
 ```
 
@@ -119,7 +119,7 @@ df %>%
 * dfデータで変数speciesからbill_length_mmまでの並び，およびyearの計4列にしてデータフレームを表示させよう
 
 ```{r eval=FALSE, include=FALSE}
-df %>% 
+df |> 
   select(species:bill_length_mm, year)
 ```
 
@@ -129,7 +129,7 @@ df %>%
 ```{r eval=FALSE, include=FALSE}
 vars <- c("bill_length_mm", "bill_depth_mm", "flipper_length_mm", "body_mass_g")
   
-df %>% 
+df |> 
   select(all_of(vars))
 ```
 
@@ -144,7 +144,7 @@ df %>%
 * `bill`から始まる変数を選ぶ
 
 ```{r}
-df %>%
+df |>
   select(starts_with("bill"))
 ```
 
@@ -154,7 +154,7 @@ df %>%
   + `mm`だけだと他にも含まれる場合が出てくるので，「`_`」も含めた方が安全
 
 ```{r}
-df %>%
+df |>
   select(ends_with("_mm"))
 ```
 
@@ -163,7 +163,7 @@ df %>%
 * 指定した文字列を含んだ変数名を対象とする
 
 ```{r}
-df %>%
+df |>
   select(contains("length"))
 ```
 
@@ -174,7 +174,7 @@ df %>%
   + `|`が「または」を意味する
 
 ```{r}
-df %>%
+df |>
   select(matches("length|depth"))
 ```
 
@@ -186,7 +186,7 @@ df %>%
 * それぞれの条件を両方満たす
 
 ```{r}
-df %>%
+df |>
   select(starts_with("bill") & contains("length"))
 ```
 
@@ -195,7 +195,7 @@ df %>%
 * それぞれの条件をいずれか満たす
 
 ```{r}
-df %>%
+df |>
   select(starts_with("bill") | contains("length"))
 ```
 
@@ -204,7 +204,7 @@ df %>%
 * dfデータで"s"で終わる変数を選んでデータフレームを表示させよう
 
 ```{r eval=FALSE, include=FALSE}
-df %>% 
+df |> 
   select(ends_with("s"))
 ```
 
@@ -213,7 +213,7 @@ df %>%
 * 変数名の前に`!`をつける
 
 ```{r}
-df %>% 
+df |> 
   select(!species)
 
 ```
@@ -221,7 +221,7 @@ df %>%
 * 複数列を落としたい場合は，`!c()`の中に対象の列名を含める
 
 ```{r}
-df %>% 
+df |> 
   select(!c(bill_length_mm:flipper_length_mm, sex))
 
 ```
@@ -229,7 +229,7 @@ df %>%
 * ヘルパー関数に対しても使える
 
 ```{r}
-df %>% 
+df |> 
   select(!ends_with("_mm"))
 
 ```
@@ -240,7 +240,7 @@ df %>%
 * dfデータで"length"または"depth"を含む変数以外を選んでデータフレームを表示させよう
 
 ```{r eval=FALSE, include=FALSE}
-df %>% 
+df |> 
   select(!contains("length") & !contains("depth"))  
 ```
 
@@ -258,7 +258,7 @@ df %>%
 * データフレームの列名（変数名）を表示させたいときは`names()`を使う（または`colnames()`）
 
 ```{r}
-df %>% names()
+df |> names()
 ```
 
 ### 選択した変数名を取得 {#select-get-obj}
@@ -267,8 +267,8 @@ df %>% names()
 
 ```{r}
 bill_vars <- 
-  df %>% 
-  select(starts_with("bill")) %>% 
+  df |> 
+  select(starts_with("bill")) |> 
   names()
 
 bill_vars
@@ -278,9 +278,9 @@ bill_vars
 
 * 「`,`」で区切られた形式で出てくれば必要なものを選んでそのまま`select()`に入れられるのに…と思った方のための便利関数`dput()`
 ```{r}
-df %>% 
-  select(starts_with("b")) %>% # bから始まる変数名
-  names() %>% 
+df |> 
+  select(starts_with("b")) |> # bから始まる変数名
+  names() |> 
   dput()
 ```
 
