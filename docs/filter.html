@@ -85,7 +85,7 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">starwars</span></code></pre></div>
 <pre><code>## # A tibble: 87 × 14
 ##   name    height  mass hair_color skin_color eye_color birth_year
@@ -99,7 +99,7 @@
 <ul>
 <li>例示しやすくするためspeciesを先頭にしたデータを作成</li>
 </ul>
-<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_st</span> <span class="op">&lt;-</span> 
   <span class="va">starwars</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">species</span>, <span class="va">name</span><span class="op">:</span><span class="va">homeworld</span><span class="op">)</span></code></pre></div>
@@ -121,7 +121,7 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_st</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">species</span> <span class="op">==</span> <span class="st">"Droid"</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 11
@@ -138,7 +138,7 @@
 <ul>
 <li>例：身長が200以上のケースのみ選ぶ</li>
 </ul>
-<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_st</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">height</span> <span class="op">&gt;=</span> <span class="fl">200</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 11 × 11
@@ -161,7 +161,7 @@
 <li>～以外を表すときは<code>!</code>をつけ，この場合は「<code>=</code>」は1つでよい</li>
 <li>例：種がHumanのケース<strong>以外</strong>を選ぶ</li>
 </ul>
-<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_st</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">species</span> <span class="op">!=</span> <span class="st">"Human"</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 48 × 11
@@ -187,7 +187,7 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_st</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 4 × 11
@@ -221,7 +221,7 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_st</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">species</span> <span class="op">==</span> <span class="st">"Droid"</span> <span class="op">|</span> <span class="va">species</span> <span class="op">==</span> <span class="st">"Human"</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 41 × 11
@@ -240,7 +240,7 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_st</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">species</span> <span class="op">==</span> <span class="st">"Droid"</span> <span class="op">&amp;</span> <span class="va">height</span> <span class="op">&lt;</span> <span class="fl">100</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 3 × 11
@@ -259,7 +259,7 @@
 <li>選びたいものが多くなると，書くのが大変。“species ==”とかをいちいち書きたくない</li>
 <li>例: speciesで”Aleena”または “Dug”または “Yoda’s species”を選びたいとき</li>
 </ul>
-<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_st</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">species</span> <span class="op">==</span> <span class="st">"Aleena"</span> <span class="op">|</span> <span class="va">species</span> <span class="op">==</span> <span class="st">"Dug"</span> <span class="op">|</span> 
          <span class="va">species</span> <span class="op">==</span> <span class="st">"Yoda's species"</span><span class="op">)</span></code></pre></div>
@@ -279,7 +279,7 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_st</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">species</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Aleena"</span>, <span class="st">"Dug"</span>, <span class="st">"Yoda's species"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 3 × 11
@@ -297,7 +297,7 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_st</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">species</span> <span class="op">!=</span> <span class="st">"Droid"</span> <span class="op">&amp;</span> <span class="va">species</span> <span class="op">!=</span> <span class="st">"Human"</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 42 × 11
@@ -312,7 +312,7 @@
 <li>
 <code>%in%</code>を使えば変数名の前に<code>!</code>をつけるだけでよい</li>
 </ul>
-<div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb123"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_st</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">species</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Droid"</span>, <span class="st">"Human"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 46 × 11
@@ -343,7 +343,7 @@
 <li><p>キーワード検索には，正規表現の結果をTRUE or FALSEで返す関数<code><a href="https://stringr.tidyverse.org/reference/str_detect.html">stringr::str_detect()</a></code>を使う</p></li>
 <li><p>例：変数nameに”Luke”を含む行を見たい</p></li>
 </ul>
-<div class="sourceCode" id="cb123"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_st</span> |&gt;
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">name</span>, <span class="st">"Luke"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 11
@@ -359,7 +359,7 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_st</span> |&gt;
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">name</span>, <span class="st">"^R"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 9 × 11
@@ -383,7 +383,7 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_st</span> |&gt;
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">name</span>, <span class="st">"^Y|^L"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 8 × 11

@@ -86,7 +86,7 @@
 <li>例：bill_length_mmの平均値を算出する</li>
 <li>データは<a href="select.html#select-read">2.1</a>で読み込んだdfを使用</li>
 </ul>
-<div class="sourceCode" id="cb198"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb200"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># まだtidyverseパッケージを読み込んでない場合は以下の#を外して実行</span>
 <span class="co"># library(tidyverse)</span>
 
@@ -110,7 +110,7 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb200"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb202"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>blm_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">bill_length_mm</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
             bdm_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">bill_depth_mm</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
@@ -133,7 +133,7 @@
 <code><a href="https://dplyr.tidyverse.org/reference/across.html">across()</a></code>の第一引数に指定したい変数名ベクトル，またはヘルパー関数を入れる</li>
 <li>実行したい関数をlist内に名前（これが接尾辞になる）をつけて列挙し，関数の前に<code>~</code>をつける</li>
 </ul>
-<div class="sourceCode" id="cb202"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb204"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">bill_length_mm</span>, <span class="va">bill_depth_mm</span><span class="op">)</span>,
                    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">.x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
@@ -149,7 +149,7 @@
 <li>
 <code><a href="https://dplyr.tidyverse.org/reference/across.html">across()</a></code>ではヘルパー関数が使える</li>
 </ul>
-<div class="sourceCode" id="cb204"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb206"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"bill"</span><span class="op">)</span>,
                    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">.x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
@@ -165,7 +165,7 @@
 <li>
 <code><a href="https://rdrr.io/r/base/list.html">list()</a></code>内に関数を並べている部分は，関数を名前付きリストにしているだけなので，外に出して１回オブジェクトとして指定すれば繰り返し使える</li>
 </ul>
-<div class="sourceCode" id="cb206"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb208"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">fnlist</span> <span class="op">&lt;-</span> 
   <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">.x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
        sd <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">.x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
@@ -195,7 +195,7 @@
 <li>引数を<code>names_pattern</code>と<code>names_to</code>を下記のように指定することで，変数の接尾辞を列名にできる</li>
 <li>下記コードの<code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a></code>部分の構造は前のチャンクと変数名以外同じ</li>
 </ul>
-<div class="sourceCode" id="cb208"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb210"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="va">bill_length_mm</span><span class="op">:</span><span class="va">body_mass_g</span>,
                    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">.x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
@@ -230,7 +230,7 @@
 <li>
 <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code>にグループを表す変数を指定するとできる</li>
 </ul>
-<div class="sourceCode" id="cb210"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb212"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">bill_length_mm</span>, <span class="va">bill_depth_mm</span><span class="op">)</span>,
@@ -246,7 +246,7 @@
 <ul>
 <li>グループを重ねることも可能</li>
 </ul>
-<div class="sourceCode" id="cb212"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb214"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">species</span>, <span class="va">sex</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">bill_length_mm</span>, <span class="va">bill_depth_mm</span><span class="op">)</span>,
@@ -287,7 +287,7 @@
 <li>「<code>自分で名づける関数名 &lt;- function(引数){ 計算式やコード }</code>」 で関数を定義できる</li>
 <li>例：関数の引数に数値を入れると<code>+1</code>した値を返す関数<code>add_one()</code>を定義</li>
 </ul>
-<div class="sourceCode" id="cb214"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb216"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">add_one</span> <span class="op">&lt;-</span> 
   <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span>
     <span class="va">x</span> <span class="op">+</span> <span class="fl">1</span>
@@ -308,7 +308,7 @@
 </li>
 <li>例：引数にデータフレーム（data）と変数（vars）を入れると平均値とSDとnを返す関数<code>mean_sd_n()</code>を定義</li>
 </ul>
-<div class="sourceCode" id="cb216"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb218"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mean_sd_n</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">vars</span><span class="op">)</span><span class="op">{</span>
 <span class="va">data</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="op">{</span><span class="op">{</span><span class="va">vars</span><span class="op">}</span><span class="op">}</span>,
@@ -319,7 +319,7 @@
 <ul>
 <li>ここで定義した関数<code>mean_sd_n()</code>にデータフレームと変数を入れると結果が表示される</li>
 </ul>
-<div class="sourceCode" id="cb217"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb219"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">mean_sd_n</span><span class="op">(</span><span class="va">df</span>, <span class="va">bill_length_mm</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 3
 ##   bill_length_mm_mean bill_length_mm_sd bill_length_mm_n
@@ -328,7 +328,7 @@
 <ul>
 <li>vasの部分は<code><a href="https://dplyr.tidyverse.org/reference/across.html">across()</a></code>の第一引数に入れるものと同じ指定ができるため，変数ベクトルやヘルパー関数が入る</li>
 </ul>
-<div class="sourceCode" id="cb219"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb221"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># 変数ベクトル</span>
 <span class="fu">mean_sd_n</span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">flipper_length_mm</span>, <span class="va">body_mass_g</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 6
@@ -337,7 +337,7 @@
 ## 1                   201.                 14.1                 342
 ## # … with 3 more variables: body_mass_g_mean &lt;dbl&gt;,
 ## #   body_mass_g_sd &lt;dbl&gt;, body_mass_g_n &lt;int&gt;</code></pre>
-<div class="sourceCode" id="cb221"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb223"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># 文字でも可能</span>
 <span class="co"># mean_sd_n(df, c("flipper_length_mm", "body_mass_g"))</span>
 
