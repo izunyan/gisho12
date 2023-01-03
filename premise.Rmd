@@ -1,3 +1,8 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
 # 前提知識 {#premise}
 
 
@@ -7,7 +12,7 @@
 ## RStudioの使い方{#p-howtouse-rst}
 ### 起動画面{#p-opening}
 
-* RStudioを最初に起動すると大体図\@ref(fig:start)のような画面になる
+* RStudioを最初に起動すると大体Figure\@ref(fig:start)のような画面になる
 
 ```{r start, echo = FALSE, fig.cap = "RStudioの起動画面", fig.align = "center", out.width='80%'}
 knitr::include_graphics("images/start.png")
@@ -16,7 +21,7 @@ knitr::include_graphics("images/start.png")
 ### 見た目の変更{#p-theme}
 
 * 好みまたは目に優しい画面にするため，RStudioの色合いを下記から変更できる
-  + メニューの`Tools > Global Options > Appearance > Editor theme`から選び，OKを押す（図\@ref(fig:appearance)）
+  + メニューの`Tools > Global Options > Appearance > Editor theme`から選び，OKを押す（Figure\@ref(fig:appearance)）
   + 筆者は`Tommorow Night Bright`を使用
   + 以下の説明は変更後の画面で示す
 
@@ -26,7 +31,7 @@ knitr::include_graphics("images/appearance.png")
 
 ### コードの実行の仕方{#p-howtorun}
 
-* コンソールに直接コードを入力し出力を確認できる（図\@ref(fig:pane)）
+* コンソールに直接コードを入力し出力を確認できる（Figure\@ref(fig:pane)）
   + ちょっとした確認には便利だが，たくさん書きたい時や，内容を保存したい時は不向き
 
 ```{r pane, echo = FALSE, fig.cap = "コンソールに直接", fig.align = "center", out.width='70%'}
@@ -35,12 +40,12 @@ knitr::include_graphics("images/pane.png")
 
 * R Scriptに書くと，たくさん書けるし保存も簡単でおすすめ。色分けもされる
  + 慣れたらR Markdownを使うとhtmlレポートにまとめやすくなりもっと便利になる
-* 図\@ref(fig:script)の左上の〇で囲んである緑`＋`がついているアイコンから，または`File > New file > R Script`でR Scriptを開く 
+* Figure\@ref(fig:script)の左上の〇で囲んである緑`＋`がついているアイコンから，または`File > New file > R Script`でR Scriptを開く 
 
 ```{r script, echo = FALSE, fig.cap = "Rスクリプトを開く", fig.align = "center", out.width='70%'}
 knitr::include_graphics("images/newfile.png")
 ```
-* R Scriptを開くとデフォルトでは左上にウィンドウ（ペインと呼ばれる）が開き，ここにコードを記述できる（図\@ref(fig:script2)）
+* R Scriptを開くとデフォルトでは左上にウィンドウ（ペインと呼ばれる）が開き，ここにコードを記述できる（Figure\@ref(fig:script2)）
 
 ```{r script2, echo = FALSE, fig.cap = "Rスクリプトに書く", fig.align = "center", out.width='70%'}
 knitr::include_graphics("images/rscript.png")
@@ -49,7 +54,7 @@ knitr::include_graphics("images/rscript.png")
 ### Windowsユーザーにつきものの文字化け対策{#p-utf8}
 
 * Windowsだけの問題かもしれず，今後はもしかしたら不要になっていくかもしれないが，Windows10以前の場合，RStudio上で文字コードをUTF-8に指定しておく方が文字化けに悩まなくてすみそう
-* メニューの`Tools > Global Options > Code > Saving > Default text encoding`からUTF-8選び，OKを押す（図\@ref(fig:utf8)）
+* メニューの`Tools > Global Options > Code > Saving > Default text encoding`からUTF-8選び，OKを押す（Figure\@ref(fig:utf8)）
 * 同様に`Tools > Project Options > Code Editing > Text encoding`のところもUTF-8にしておく
 * 上記設定をした後で，他の環境で作られたR ScriptファイルやR Markdownファイルを開くときに文字化けする場合は，`File > Reopen with Encoding`からCP932（つまりShift-JIS）を選ぶとうまくいくかもしれない
 
@@ -102,7 +107,7 @@ library(tidyverse)
 
 * インストールされているパッケージはRStudioのデフォルト画面で右下にあるウィンドウ（ペインと呼ぶ）のパッケージタブで確認可能  
 * 入っていないパッケージは，インターネットにつながっていれば以下の方法でインストールできる
-  + パッケージタブの`install`をクリックして出てくるウィンドウでパッケージ名を入力（図\@ref(fig:pinst)）
+  + パッケージタブの`install`をクリックして出てくるウィンドウでパッケージ名を入力（Figure\@ref(fig:pinst)）
   + コマンドから`install.packages("パッケージ名をここに入れる")`  
   
 ```{r pinst, echo = FALSE, fig.cap = "パッケージタブからのインストール", fig.align = "center", out.width='80%'}
@@ -120,7 +125,7 @@ knitr::include_graphics("images/package_install.png")
 * `()`の中に入る値を**引数**（ひきすう）と呼ぶ
 * 引数は「`,`」でつないで追加していき，これによって実行したい処理のカスタマイズが可能
   + 関数の`()`の最初の位置に来るものを**第一引数**という
-* 関数の`()`内でtabキーを押せば，欲しいものが大体出てくる
+* 関数の`()`内でtabキーを押せば，欲しいものが出てくることがある
   + 例：`select()`での候補変数，`mean()`での引数`na.rm =`など
 
 ### 関数の例{#p-function-ex}
@@ -129,7 +134,7 @@ knitr::include_graphics("images/package_install.png")
 * **ベクトル**を作る（複数のものを1つにする）ための関数
   + ベクトルと聞くと数学苦手だった人はいやな記憶を思い出すかもしれないが，Rではとにかく「**複数のものを１つにしたもの**」と理解しておけば何となると思う
 * `c()`は慣れてる人は当たり前に使っているので，あまり解説されない気がするが，初学者にとってまず理解すべき最重要関数と思われる
-* ベクトルは，後に解説するデータフレームでの列単位のデータを扱う際にも有用
+* ベクトルは，\@ref(p-df)）で解説するデータフレームでの列単位のデータを扱う際にも有用
 
 ```{r}
 c(1,2,3)
@@ -167,17 +172,17 @@ mean(c(1, NA, 3), na.rm = TRUE)
   - ここは最初は難しいかもしれないので，飛ばしても差支えないが，知っておくと\@ref(rename-strreplace1)や\@ref(mu-across-list)の重要知識部分や\@ref(su-fun)の理解がしやすくなる
   - 慣れてきてもっと効率的に繰り返し作業したい気分になったら読み返すと役立つ
 * 関数名は任意で名づけることができる
-* 参考：[Rの関数定義の基本](http://www.okadajp.org/RWiki/?R%E3%81%AE%E9%96%A2%E6%95%B0%E5%AE%9A%E7%BE%A9%E3%81%AE%E5%9F%BA%E6%9C%AC)(RjpWiki)
+  - 参考：[Rの関数定義の基本](http://www.okadajp.org/RWiki/?R%E3%81%AE%E9%96%A2%E6%95%B0%E5%AE%9A%E7%BE%A9%E3%81%AE%E5%9F%BA%E6%9C%AC)(RjpWiki)
 
 
 #### 基本例：x + 1でxに入る数字を変えていって結果を出力する{#p-function-make-ex}
 
 * 「`自分で名づける関数名 <- function(引数){ 計算式やコード }`」 で関数を定義できる
 * 関数の引数に数値を入れたら，その数値に1を加算する関数を作成
-  - まずここでは，関数名として`one_plus`と名付けたオブジェクトを作成
+  - まずここでは，関数名として`add_one`と名付けたオブジェクトを作成
   - `function()`の()内に，引数として入れる内容を指定する
   - `{}`内に処理したい式やコードを入れる
-  - 作成した`one_plus()`関数に引数を入れて実行する
+  - 作成した`add_one()`関数に引数を入れて実行する
 
 ```{r}
 add_one <- 
@@ -237,7 +242,7 @@ rm(res, res2, res3)
 ## データフレーム{#p-df}
 
 * **行**（別名：ケース；オブザベーション；レコード）と**列**（別名：変数；カラム）^[オブジェクトに該当するものとは異なる。本書ではこちらの意味で「変数」を使用する]が碁盤の目のようになった集まりの形のデータ
-  + Excelで表現するのであれば通常1行目に列名が入り、2行目以降が個別のケース（データ）を表す形（図\@ref(fig:dfxl)）。Rのデータフレームでは列名は別途与えられ，1行目からケースが表される（図\@ref(fig:dfr)）
+  + Excelで表現するのであれば通常1行目に列名が入り、2行目以降が個別のケース（データ）を表す形（Figure\@ref(fig:dfxl)）。Rのデータフレームでは列名は別途与えられ，1行目からケースが表される（Figure\@ref(fig:dfr)）
 * データ解析において便利で分かりやすいため、本書ではデータフレームの形で説明していく
   + Rのモダンな方法では，データの加工や統計処理のプロセスをデータフレームの形で返すことが多い
 * 解析すべきデータがデータフレーム上に整えられているような状態を**tidy**(読み：タイディー，意味：整然)と呼び，データ解析において理想的な形とされている
@@ -276,16 +281,34 @@ palmerpenguins::penguins
 
 * tibble形式のデータフレームの出力の見方
   + 出力の最上段にある`A tibble: 344 x 8`で，tibble形式のデータフレーム，344行 × 8列という情報が分かる
-  + `flipper_length_…` のように，長い変数名は`…`で省略して表示され，フルネームは脚注に表示される
+  <!-- + `Indiv…²` のように，長い変数名は`…`と数字で省略して表示され，フルネームは脚注に数字に対応させて表示される -->
   + 変数名の下の行にある`<fct>`, `<dbl>`, `<int>`は変数の型を示し，それぞれ因子型，数値型，整数型であることを示している。詳しくは\@ref(mu-kata)で説明する
-  + 下から2行目にある
-  `... with 341 more rows, and 3 more variables:`
-    で，さらに341行と3列が非表示であることが分かる
+  <!-- + データフレーム下の#でコメントアウトされた１行目にある -->
+  <!-- `... with 334 more rows, and 8 more variables:` -->
+  <!--   で，さらに334行と8列が非表示であることが分かる -->
+  <!-- + 非表示になった変数名は -->
+  <!--  `Culmen Length (mm) <dbl>, Culmen Depth (mm) <dbl>` -->
+  <!--    のように最下部に表示される -->
+
+
+
+* より大きいデータフレームで情報が多い場合の出力例を次に示す
+
+```{r}
+palmerpenguins::penguins_raw
+```
+
+* tibble形式のデータフレームの出力の見方
+  + `Indiv…²` のように，長い変数名は`…`と数字で省略して表示され，フルネームは脚注に数字に対応させて表示される
+  + データフレーム下の１行目にある
+  `… with 341 more rows, 9 more variables:`
+    で，さらに341行と9列が非表示であることが分かる
   + 非表示になった変数名は
-   `body_mass_g <int>, sex <fct>, year <int>`
+   `Date Egg <date>, Culmen Length (mm) <dbl>`
      のように最下部に表示される
 
-* 本書では最初の3行の表示のみに絞っているが，**任意の行数を表示させたい場合**は，`print()`関数を使う
+* 本書では最初の3行の表示のみに絞っているが，出力されるデータフレームの実行結果はデフォルトで10行表示される。**任意の行数を表示させたい場合**は，`print()`関数を使う
+
 * 例：最初の15行のみ表示させる
 ```{r}
 palmerpenguins::penguins  |>  
@@ -308,7 +331,7 @@ palmerpenguins::penguins  |>
 * 本書の内容では使わなくても問題ないが，自身のデータを読み書きする際には非常に便利なので，解説しておく
 * データを加工して解析する際に、1つのフォルダ（サブフォルダも含む）の中に関連するデータやコードなどをまとめておき、そのフォルダを**プロジェクト**と設定する
   + これにより、ファイルの読み書きの際の場所指定をいちいち意識しないで作業できるようになる
-* RStudio画面の右上にProject設定のメニューがある（図\@ref(fig:project)）
+* RStudio画面の右上にProject設定のメニューがある（Figure\@ref(fig:project)）
   + `Project (None) > New Project > Existing Directory`と選び，プロジェクトにしたいフォルダを設定する  
 
 ```{r project, echo = FALSE, fig.cap = "プロジェクトの設定", fig.align = "center"}
@@ -319,7 +342,7 @@ knitr::include_graphics("images/project.png")
 
 * 関数の使い方，引数の入れ方は大抵忘れるので，ヘルプのexampleを見て思い出す場合が多い
   + コンソールに「`?関数名`」のように入れて実行する（例：?rename）と右下ペインのHelpタブに情報が出てくる
-  + 右下ペインのHelpタブで検索する（図\@ref(fig:help)）
+  + 右下ペインのHelpタブで検索する（Figure\@ref(fig:help)）
 * チートシートを見る
   + メニューの`Help > Cheat Sheets > Browse Cheat Sheets`から掲載サイトに行ける
 * エラーメッセージを`" "`で囲んでググる（フレーズ検索）

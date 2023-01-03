@@ -86,7 +86,7 @@
 <li>まずはデータにどういう変数名があるかの確認</li>
 <li>使用データは<a href="select.html#select-read">2.1</a>で読み込んだdfを使用</li>
 </ul>
-<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> |&gt; <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "species"           "island"            "bill_length_mm"   
 ## [4] "bill_depth_mm"     "flipper_length_mm" "body_mass_g"      
@@ -95,7 +95,7 @@
 <li>変更したい変数名を new = old の順に入力する</li>
 <li>例：bill_length_mmをblmmに変更してみる</li>
 </ul>
-<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># まだtidyverseパッケージを読み込んでない場合は以下の#を外して実行</span>
 <span class="co"># library(tidyverse)</span>
 
@@ -116,7 +116,7 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>blmm <span class="op">=</span> <span class="va">bill_length_mm</span>,
          bdmm <span class="op">=</span> <span class="va">bill_depth_mm</span><span class="op">)</span></code></pre></div>
@@ -140,7 +140,7 @@
 <li>変数名の”bill”の部分を日本語の”くちばし”に変更していく</li>
 <li>まずは基本の知識でできる方法</li>
 </ul>
-<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>くちばし_length_mm <span class="op">=</span> <span class="va">bill_length_mm</span>,
          くちばし_depth_mm <span class="op">=</span> <span class="va">bill_depth_mm</span><span class="op">)</span></code></pre></div>
@@ -181,7 +181,7 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"bill"</span>, <span class="st">"くちばし"</span><span class="op">)</span>,
               <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"bill"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -194,7 +194,7 @@
 ## # … with 341 more rows, and abbreviated variable names
 ## #   ¹​くちばし_length_mm, ²​くちばし_depth_mm, ³​flipper_length_mm,
 ## #   ⁴​body_mass_g</code></pre>
-<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># purrr 1.0.0より前のバージョンでの書き方</span>
 <span class="co"># df |&gt; </span>
 <span class="co">#   rename_with(~str_replace(.x, "bill", "くちばし"),</span>
@@ -202,7 +202,7 @@
 <ul>
 <li>デフォルトで全ての列が対象になっているので，実は<code>starts_with("bill")</code>がなくても動く</li>
 </ul>
-<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"bill"</span>, <span class="st">"くちばし"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 344 × 8
@@ -222,7 +222,7 @@
 <li>
 <code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code>の時のように単に<code><a href="https://rdrr.io/r/base/c.html">c()</a></code>の中に変数を指定していくだけでも動く</li>
 </ul>
-<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"bill"</span>, <span class="st">"くちばし"</span><span class="op">)</span>,
               <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">bill_length_mm</span>, <span class="va">bill_depth_mm</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -253,7 +253,7 @@
 <ul>
 <li>“_mm”を取り除きたい場合，それを削除した変数名を指定すればよいが，たくさんあると大変</li>
 </ul>
-<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>bill_length <span class="op">=</span> <span class="va">bill_length_mm</span>,
          bill_depth  <span class="op">=</span> <span class="va">bill_depth_mm</span>,
@@ -274,7 +274,7 @@
 <li>
 <code><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace()</a></code>で変換先に空白「<code>" "</code>」を指定すると削除できる</li>
 </ul>
-<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"_mm"</span>, <span class="st">" "</span><span class="op">)</span>,
               <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">ends_with</a></span><span class="op">(</span><span class="st">"mm"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -299,7 +299,7 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_remove.html">str_remove</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"_mm"</span><span class="op">)</span>,
               <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">ends_with</a></span><span class="op">(</span><span class="st">"mm"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -331,7 +331,7 @@
 <li>
 <code><a href="https://dplyr.tidyverse.org/reference/rename.html">rename()</a></code>の中に全部書いていけばできるが数が多いと大変</li>
 </ul>
-<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2007</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">bill_length_mm</span><span class="op">:</span><span class="va">flipper_length_mm</span>, <span class="va">year</span><span class="op">)</span> |&gt; 
@@ -356,7 +356,7 @@
 <code><a href="https://stringr.tidyverse.org/reference/str_c.html">stringr::str_c()</a></code>で指定した語をくっつける</li>
 <li>ここでは変数”year”以外すべてなので，“year”に「<code>!</code>」をつけることで変数を指定できる</li>
 </ul>
-<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2007</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">bill_length_mm</span><span class="op">:</span><span class="va">flipper_length_mm</span>, <span class="va">year</span><span class="op">)</span> |&gt; 
@@ -377,7 +377,7 @@
 <ul>
 <li>変数を選ぶときに該当する単語を持つ変数を選びたければ，ヘルパー関数<code><a href="https://tidyselect.r-lib.org/reference/starts_with.html">matches()</a></code>で正規表現を使って柔軟に選べる</li>
 </ul>
-<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> |&gt; 
 <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2007</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_c.html">str_c</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"_2007"</span><span class="op">)</span>,
