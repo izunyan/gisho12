@@ -42,15 +42,21 @@ df |>
 
 * \@ref(mu-kata-across)で出てきた`across()`がここでも有用
 * `across()`の第一引数に指定したい変数名ベクトル，またはヘルパー関数を入れる
-* 実行したい関数をlist内に名前（これが接尾辞になる）をつけて列挙し，関数の前に`~`をつける
- 
+* 実行したい関数を無名関数としてlist内に名前（これが接尾辞になる）をつけて列挙する
 
 ```{r}
 df |> 
   summarise(across(c(bill_length_mm, bill_depth_mm),
-                   list(mean = ~mean(.x, na.rm = TRUE),
-                        sd = ~sd(.x, na.rm = TRUE),
-                        n = ~sum(!is.na(.x)))))
+                   list(mean = \(x) mean(x, na.rm = TRUE),
+                          sd = \(x)   sd(x, na.rm = TRUE),
+                           n = \(x)  sum(!is.na(x)))))
+
+# purrr 1.0.0より前のバージョンでの書き方
+# df |> 
+#   summarise(across(c(bill_length_mm, bill_depth_mm),
+#                    list(mean = ~mean(.x, na.rm = TRUE),
+#                           sd = ~sd(.x, na.rm = TRUE),
+#                            n = ~sum(!is.na(.x)))))
 ```
 
 
@@ -59,18 +65,19 @@ df |>
 ```{r}
 df |> 
   summarise(across(starts_with("bill"),
-                   list(mean = ~mean(.x, na.rm = TRUE),
-                        sd = ~sd(.x, na.rm = TRUE),
-                        n = ~sum(!is.na(.x)))))
+                   list(mean = \(x) mean(x, na.rm = TRUE),
+                          sd = \(x)   sd(x, na.rm = TRUE),
+                           n = \(x)  sum(!is.na(x)))))
 ```
 
-* `list()`内に関数を並べている部分は，関数を名前付きリストにしているだけなので，外に出して１回オブジェクトとして指定すれば繰り返し使える
+* `list()`内に関数を並べている部分は，関数を名前付きリストにしているだけなので，外に出して１回オブジェクトとして指定すれば記述がすっきりするし，後の同じ作業で繰り返し使える
 
 ```{r}
+# 関数のリストをオブジェクトfnlistに格納
 fnlist <- 
-  list(mean = ~mean(.x, na.rm = TRUE),
-       sd = ~sd(.x, na.rm = TRUE),
-       n = ~sum(!is.na(.x)))
+  list(mean = \(x) mean(x, na.rm = TRUE),
+         sd = \(x)   sd(x, na.rm = TRUE),
+          n = \(x)  sum(!is.na(x)))
 
 
 df |> 
@@ -91,9 +98,9 @@ df |>
 ```{r}
 df |> 
   summarise(across(bill_length_mm:body_mass_g,
-                   list(mean = ~mean(.x, na.rm = TRUE),
-                        sd = ~sd(.x, na.rm = TRUE),
-                        n = ~sum(!is.na(.x))))) |> 
+                   list(mean = \(x) mean(x, na.rm = TRUE),
+                          sd = \(x)   sd(x, na.rm = TRUE),
+                           n = \(x)  sum(!is.na(x))))) |> 
   pivot_longer(everything(),
                names_to = c("items", ".value"), # ".value"の部分を列名に
                names_pattern = "(.*)_(.*)") 　  # 正規表現
@@ -108,9 +115,9 @@ df |>
 res <- 
   df |> 
   summarise(across(contains("length"),
-                   list(mean = ~mean(.x, na.rm = TRUE),
-                        sd = ~sd(.x, na.rm = TRUE),
-                        n = ~sum(!is.na(.x)))))
+                   list(mean = \(x) mean(x, na.rm = TRUE),
+                          sd = \(x)   sd(x, na.rm = TRUE),
+                           n = \(x)  sum(!is.na(x)))))
 
 res |> 
   pivot_longer(everything(),
@@ -133,8 +140,8 @@ df |>
 df |> 
   group_by(species) |> 
   summarise(across(c(bill_length_mm, bill_depth_mm),
-                   list(mean = ~mean(.x, na.rm = TRUE),
-                        sd = ~sd(.x, na.rm = TRUE))))
+                   list(mean = \(x) mean(x, na.rm = TRUE),
+                          sd = \(x)   sd(x, na.rm = TRUE))))
 ```
 
 * グループを重ねることも可能
@@ -143,8 +150,8 @@ df |>
 df |> 
   group_by(species, sex) |> 
   summarise(across(c(bill_length_mm, bill_depth_mm),
-                   list(mean = ~mean(.x, na.rm = TRUE),
-                        sd = ~sd(.x, na.rm = TRUE))))
+                   list(mean = \(x) mean(x, na.rm = TRUE),
+                          sd = \(x)   sd(x, na.rm = TRUE))))
 ```
 
 ### [練習問題]
@@ -155,52 +162,39 @@ df |>
 df |> 
   group_by(species, island, sex) |> 
   summarise(across(c(bill_length_mm, bill_depth_mm),
-                   list(平均 = ~mean(.x, na.rm = TRUE))))
+                   list(平均 = \(x) mean(x, na.rm = TRUE))))
 ```
 
 
 ## 【効率化】関数にする{#su-fun}
-### 基本{#su-fun-st}
 
-* 「`自分で名づける関数名 <- function(引数){ 計算式やコード }`」 で関数を定義できる
-* 例：関数の引数に数値を入れると`+1`した値を返す関数`add_one()`を定義
-
-```{r}
-add_one <- 
-  function(x){
-    x + 1
-  }
-
-add_one(2)
-
-```
-
+* 関数作成の基本は(\@ref(p-function-make-anonymous)参照)
 
 ### 複数変数の平均値とSDとnを計算する関数{#su-fun-meansdn}
 
 * 「`{{ }}`」は`curly curly`と読み，関数を作成するときに，代入先の変数名の場所を指定する時などに活躍
   + 下記の例の場合，`{{ }}`を外すと動かない
 
-* 例：引数にデータフレーム（data）と変数（vars）を入れると平均値とSDとnを返す関数`mean_sd_n()`を定義
+* 例：引数にデータフレーム（`data`）と変数（`vars`）を入れると平均値とSDとnを返す関数`mean_sd_n()`を定義
 
 
 ```{r}
 mean_sd_n <- function(data, vars){
-data |> 
-  summarise(across({{vars}},
-                   list(mean = ~mean(.x, na.rm = TRUE),
-                        sd = ~sd(.x, na.rm = TRUE),
-                        n = ~sum(!is.na(.x)))))
+  data |> 
+    summarise(across({{vars}},
+                     list(mean = \(x) mean(x, na.rm = TRUE),
+                            sd = \(x) sd(x, na.rm = TRUE),
+                             n = \(x) sum(!is.na(x)))))
 }
 ```
 
-* ここで定義した関数`mean_sd_n()`にデータフレームと変数を入れると結果が表示される
+* ここで定義した関数`mean_sd_n()`に引数としてデータフレームと変数を入れると結果が表示される
 
 ```{r}
 mean_sd_n(df, bill_length_mm)
 ```
 
-* vasの部分は`across()`の第一引数に入れるものと同じ指定ができるため，変数ベクトルやヘルパー関数が入る
+* 引数`vars`の部分は`across()`の第一引数に入れるものと同じ指定ができるため，変数ベクトルやヘルパー関数が入る
 
 ```{r}
 # 変数ベクトル

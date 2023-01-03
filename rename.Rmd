@@ -55,26 +55,38 @@ df |>
 
 ### 【効率化】str_replace()で一括変換(1){#rename-strreplace1}
 
-* `rename_with()`は，まず適用したい関数を示し，そのあとに該当する変数を選ぶ
-  +  該当する変数を選ぶ部分は，デフォルトで全ての列に対して適用となっているので，全ての列に適用したい場合は省略してもよい
-* 語の置き換えに`stringr::str_replace()`を使う
+* `rename_with()`は，まず適用したい関数を示し，そのあとに該当する列を選ぶ
+  +  該当する変数を選ぶ部分は，デフォルトで全ての列に対して適用（`everything()`）となっているので，全ての列に適用したい場合は省略してもよい
+* 語の置き換えに`stringr::str_replace()`を適用してみたい
   + 第一引数に対して，その次の文字列をその後の文字列に置換する（ここでは"bill" → "くちばし"）
-* 適用したい関数の中にある「`.x`」の部分に，その後選ぶ変数が入っていく(なおこのような単純な場合はxを省略した「`.`」だけでも動く）
-* この場合適用したい関数の前には`~`（チルダ）が必ずつく
-  + この部分の理解は今すぐできなくてもよいが，学習を進めるためにキーワードだけ示しておくと，**無名関数**(anonymous function)という処理をしている
+* 第一引数の「`x`」の部分に，その後選ぶ列が入っていく
+  + この部分の理解は今すぐできなくてもよいが，学習を進めるためにキーワードだけ示しておくと，**無名関数**(anonymous function)という処理をしている(\@ref(p-function-make-anonymous)参照)
+
+* （参考）purrr 1.0.0より前のバージョンでの説明
+  - 第一引数の「`.x`」の部分に，その後選ぶ変数が入っていく(なおこのような単純な場合はxを省略した「`.`」だけでも動く）
+  - この場合適用したい関数の前には`~`（チルダ）が必ずつく
 
 ```{r}
 df |> 
-  rename_with(~str_replace(.x, "bill", "くちばし"),
+  rename_with(\(x) str_replace(x, "bill", "くちばし"),
               starts_with("bill"))
+
+# purrr 1.0.0より前のバージョンでの書き方
+# df |> 
+#   rename_with(~str_replace(.x, "bill", "くちばし"),
+#               starts_with("bill"))
 ```
 
 * デフォルトで全ての列が対象になっているので，実は`starts_with("bill")`がなくても動く
 
 ```{r}
 df |> 
-  rename_with(~str_replace(.x, "bill", "くちばし"))
+  rename_with(\(x) str_replace(x, "bill", "くちばし"))
 ```
+
+
+
+
 
 
 #### 【別解】{#rename-strreplace1-other}
@@ -83,7 +95,7 @@ df |>
 
 ```{r}
 df |> 
-  rename_with(~str_replace(., "bill", "くちばし"),
+  rename_with(\(x) str_replace(x, "bill", "くちばし"),
               c(bill_length_mm, bill_depth_mm))
 
 ```
@@ -94,7 +106,7 @@ df |>
 
 ```{r eval=FALSE, include=FALSE}
 df |> 
-  rename_with(~str_replace(., "_mm", "_ミリ"),
+  rename_with(\(x) str_replace(x, "_mm", "_ミリ"),
               ends_with("_mm"))
 ```
 
@@ -117,7 +129,7 @@ df |>
 
 ```{r}
 df |> 
-  rename_with(~str_replace(., "_mm", " "),
+  rename_with(\(x) str_replace(x, "_mm", " "),
               ends_with("mm"))
 ```
 
@@ -128,7 +140,7 @@ df |>
 
 ```{r}
 df |> 
-  rename_with(~str_remove(., "_mm"),
+  rename_with(\(x) str_remove(x, "_mm"),
               ends_with("mm"))
 ```
 
@@ -139,7 +151,7 @@ df |>
 
 ```{r eval=FALSE, include=FALSE}
 df |> 
-  rename_with(~str_remove_all(., "_"),
+  rename_with(\(x) str_remove_all(x, "_"),
               contains("_"))
 ```  
 
@@ -169,7 +181,7 @@ df |>
 df |> 
   filter(year == 2007) |> 
   select(bill_length_mm:flipper_length_mm, year) |> 
-  rename_with(~str_c(., "_2007"),
+  rename_with(\(x) str_c(x, "_2007"),
                !year)
 ```
 
@@ -180,7 +192,7 @@ df |>
 ```{r}
 df |> 
 filter(year == 2007) |> 
-  rename_with(~str_c(., "_2007"),
+  rename_with(\(x) str_c(x, "_2007"),
                matches("bill|flipper"))
 ```
 
@@ -193,7 +205,7 @@ filter(year == 2007) |>
 ```{r eval=FALSE, include=FALSE}
 df |> 
 filter(year == 2008) |> 
-  rename_with(~str_c("year08_", .),
+  rename_with(\(x) str_c("year08_", x),
                !matches("bill|flipper"))
 ```
 

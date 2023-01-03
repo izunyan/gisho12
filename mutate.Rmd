@@ -194,6 +194,14 @@ df_bfi |>
 * ここはこの後色々なところで出てくる方法のため理解しておきたい
 * 適用する関数をリストにする（`list()`に入れる）ことで，変数名を変更して追加できる
 * `list()`に入れるときはこれまでと異なる書き方が必要になる
+
+
+
+* purrr 1.0.0では，従来の`~`と`.x`を使った記法から，無名関数の`\(x)` と`x`を使う書き方に移行した（参考：[purrr 1.0.0 Docmentation](https://www.tidyverse.org/blog/2022/12/purrr-1-0-0/#documentation)）(詳しくは\@ref(p-function-make-anonymous)参照)
+  + 関数名の前に`\(x)`が必要。`x`部分は他の文字でもよいし，引数がいくつも必要なら，複数の文字を入れられる
+  + list内の「関数`()`」内に`x`（上記同様，`\()`内と一致していれば他の文字でもよい）が必要。この`x`に`across()`の第一引数に指定した変数が入っていくという意味
+
+* （参考）purrr 1.0.0より前のバージョンでの説明
   + 関数名の前に`~`（チルダ）が必要（\@ref(rename-strreplace1)参照）
   + list内の「関数`()`」内に`.x`が必要。この`.x`に`across()`の第一引数に指定した変数が入っていくという意味
 * 例：genderとeducationの型を因子型に変換し，変換前後で変わっているかどうか確認
@@ -201,8 +209,15 @@ df_bfi |>
 ```{r}
 df_bfi |>
   mutate(across(c(gender, education),
-                list(f = ~factor(.x)))) |> 
+                list(f = \(x) factor(x)))) |> 
   select(matches("gender|education"))   
+
+
+# purrr 1.0.0より前のバージョンでの書き方
+# df_bfi |>
+#   mutate(across(c(gender, education),
+#                 list(f = ~factor(.x)))) |> 
+#   select(matches("gender|education"))   
 ```
 
 * 因子型に変換した変数の末尾に_fがつく
@@ -215,7 +230,7 @@ df_bfi |>
 ```{r eval=FALSE, include=FALSE}
 df_bfi |>
   mutate(across(c(N1:N5),
-                list(fct = ~factor(.x)))) |> 
+                list(fct = \(x) factor(x)))) |> 
   select(starts_with("N"))
 ```
 
@@ -362,7 +377,7 @@ df_bfi |>
 
 df_bfi |> 
   mutate(across(c(A1, C4),
-                list(r = ~recode(.x, `1` = 6L, `2` = 5L, `3` = 4L, 
+                list(r = \(x) recode(x, `1` = 6L, `2` = 5L, `3` = 4L, 
                                      `4` = 3L, `5` = 2L, `6` = 1L)))) |> 
   select(A1, A1_r, C4, C4_r)
 ```
@@ -391,7 +406,7 @@ df_bfi |>
 ```{r}
 df_bfi |> 
   mutate(across(c(A1,C4),
-                list(r = ~ max + min - .x))) |> 
+                list(r = \(x) max + min - x))) |> 
   select(A1, A1_r, C4, C4_r)
 ```
 
@@ -415,13 +430,13 @@ df_bfi |>
 ```{r}
 df_bfi |> 
   mutate(across(c(A1,C4),
-                list(r = ~case_when(.x == 1 ~ 6L,
-                                    .x == 2 ~ 5L,
-                                    .x == 3 ~ 4L,
-                                    .x == 4 ~ 3L,
-                                    .x == 5 ~ 2L,
-                                    .x == 6 ~ 1L)))
-         ) |> 
+                list(r = \(x) case_when(x == 1 ~ 6L,
+                                        x == 2 ~ 5L,
+                                        x == 3 ~ 4L,
+                                        x == 4 ~ 3L,
+                                        x == 5 ~ 2L,
+                                        x == 6 ~ 1L)))
+  ) |> 
   select(A1, A1_r, C4, C4_r)
 ```
 
@@ -436,7 +451,7 @@ df_bfi |>
 df_bfi <- 
   df_bfi |> 
   mutate(across(c(A1, C4, C5, E1, E2, O2, O5),
-                list(r = ~ max + min - .x)))
+                list(r = \(x) max + min - x)))
 ```
 
 ## 【別解】合計点の作成 {#mu-total-ef}

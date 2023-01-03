@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>6 要約値を作る：summarise | がんばらないデータ加工</title>
 <meta name="author" content="やわらかクジラ">
-<meta name="generator" content="bookdown 0.29 with bs4_book()">
+<meta name="generator" content="bookdown 0.31 with bs4_book()">
 <meta property="og:title" content="6 要約値を作る：summarise | がんばらないデータ加工">
 <meta property="og:type" content="book">
 <meta property="og:image" content="/images/cover.png">
@@ -86,7 +86,7 @@
 <li>例：bill_length_mmの平均値を算出する</li>
 <li>データは<a href="select.html#select-read">2.1</a>で読み込んだdfを使用</li>
 </ul>
-<div class="sourceCode" id="cb200"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb214"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># まだtidyverseパッケージを読み込んでない場合は以下の#を外して実行</span>
 <span class="co"># library(tidyverse)</span>
 
@@ -110,7 +110,7 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb202"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb216"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>blm_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">bill_length_mm</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
             bdm_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">bill_depth_mm</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
@@ -131,58 +131,69 @@
 <a href="mutate.html#mu-kata-across">5.3.2</a>で出てきた<code><a href="https://dplyr.tidyverse.org/reference/across.html">across()</a></code>がここでも有用</li>
 <li>
 <code><a href="https://dplyr.tidyverse.org/reference/across.html">across()</a></code>の第一引数に指定したい変数名ベクトル，またはヘルパー関数を入れる</li>
-<li>実行したい関数をlist内に名前（これが接尾辞になる）をつけて列挙し，関数の前に<code>~</code>をつける</li>
+<li>実行したい関数を無名関数としてlist内に名前（これが接尾辞になる）をつけて列挙する</li>
 </ul>
-<div class="sourceCode" id="cb204"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb218"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">bill_length_mm</span>, <span class="va">bill_depth_mm</span><span class="op">)</span>,
-                   <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">.x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
-                        sd <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">.x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
-                        n <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+                   <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>mean <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
+                          sd <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span>   <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
+                           n <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span>  <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 6
-##   bill_length_mm_mean bill_length_mm_sd bill_length_mm_n
-##                 &lt;dbl&gt;             &lt;dbl&gt;            &lt;int&gt;
-## 1                43.9              5.46              342
-## # … with 3 more variables: bill_depth_mm_mean &lt;dbl&gt;,
-## #   bill_depth_mm_sd &lt;dbl&gt;, bill_depth_mm_n &lt;int&gt;</code></pre>
+##   bill_length_mm_mean bill_leng…¹ bill_…² bill_…³ bill_…⁴ bill_…⁵
+##                 &lt;dbl&gt;       &lt;dbl&gt;   &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;int&gt;
+## 1                43.9        5.46     342    17.2    1.97     342
+## # … with abbreviated variable names ¹​bill_length_mm_sd,
+## #   ²​bill_length_mm_n, ³​bill_depth_mm_mean, ⁴​bill_depth_mm_sd,
+## #   ⁵​bill_depth_mm_n</code></pre>
+<div class="sourceCode" id="cb220"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># purrr 1.0.0より前のバージョンでの書き方</span>
+<span class="co"># df |&gt; </span>
+<span class="co">#   summarise(across(c(bill_length_mm, bill_depth_mm),</span>
+<span class="co">#                    list(mean = ~mean(.x, na.rm = TRUE),</span>
+<span class="co">#                           sd = ~sd(.x, na.rm = TRUE),</span>
+<span class="co">#                            n = ~sum(!is.na(.x)))))</span></code></pre></div>
 <ul>
 <li>
 <code><a href="https://dplyr.tidyverse.org/reference/across.html">across()</a></code>ではヘルパー関数が使える</li>
 </ul>
-<div class="sourceCode" id="cb206"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb221"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"bill"</span><span class="op">)</span>,
-                   <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">.x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
-                        sd <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">.x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
-                        n <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+                   <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>mean <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
+                          sd <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span>   <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
+                           n <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span>  <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 6
-##   bill_length_mm_mean bill_length_mm_sd bill_length_mm_n
-##                 &lt;dbl&gt;             &lt;dbl&gt;            &lt;int&gt;
-## 1                43.9              5.46              342
-## # … with 3 more variables: bill_depth_mm_mean &lt;dbl&gt;,
-## #   bill_depth_mm_sd &lt;dbl&gt;, bill_depth_mm_n &lt;int&gt;</code></pre>
+##   bill_length_mm_mean bill_leng…¹ bill_…² bill_…³ bill_…⁴ bill_…⁵
+##                 &lt;dbl&gt;       &lt;dbl&gt;   &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;int&gt;
+## 1                43.9        5.46     342    17.2    1.97     342
+## # … with abbreviated variable names ¹​bill_length_mm_sd,
+## #   ²​bill_length_mm_n, ³​bill_depth_mm_mean, ⁴​bill_depth_mm_sd,
+## #   ⁵​bill_depth_mm_n</code></pre>
 <ul>
 <li>
-<code><a href="https://rdrr.io/r/base/list.html">list()</a></code>内に関数を並べている部分は，関数を名前付きリストにしているだけなので，外に出して１回オブジェクトとして指定すれば繰り返し使える</li>
+<code><a href="https://rdrr.io/r/base/list.html">list()</a></code>内に関数を並べている部分は，関数を名前付きリストにしているだけなので，外に出して１回オブジェクトとして指定すれば記述がすっきりするし，後の同じ作業で繰り返し使える</li>
 </ul>
-<div class="sourceCode" id="cb208"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">fnlist</span> <span class="op">&lt;-</span> 
-  <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">.x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
-       sd <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">.x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
-       n <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<div class="sourceCode" id="cb223"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># 関数のリストをオブジェクトfnlistに格納</span>
+<span class="va">fnlist</span> <span class="op">&lt;-</span> 
+  <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>mean <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
+         sd <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span>   <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
+          n <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span>  <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 
 
 <span class="va">df</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">ends_with</a></span><span class="op">(</span><span class="st">"mm"</span><span class="op">)</span>,
                    <span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html">all_of</a></span><span class="op">(</span><span class="va">fnlist</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 9
-##   bill_length_mm_mean bill_length_mm_sd bill_length_mm_n
-##                 &lt;dbl&gt;             &lt;dbl&gt;            &lt;int&gt;
-## 1                43.9              5.46              342
-## # … with 6 more variables: bill_depth_mm_mean &lt;dbl&gt;,
-## #   bill_depth_mm_sd &lt;dbl&gt;, bill_depth_mm_n &lt;int&gt;,
-## #   flipper_length_mm_mean &lt;dbl&gt;, flipper_length_mm_sd &lt;dbl&gt;,
-## #   flipper_length_mm_n &lt;int&gt;</code></pre>
+##   bill_…¹ bill_…² bill_…³ bill_…⁴ bill_…⁵ bill_…⁶ flipp…⁷ flipp…⁸
+##     &lt;dbl&gt;   &lt;dbl&gt;   &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+## 1    43.9    5.46     342    17.2    1.97     342    201.    14.1
+## # … with 1 more variable: flipper_length_mm_n &lt;int&gt;, and
+## #   abbreviated variable names ¹​bill_length_mm_mean,
+## #   ²​bill_length_mm_sd, ³​bill_length_mm_n, ⁴​bill_depth_mm_mean,
+## #   ⁵​bill_depth_mm_sd, ⁶​bill_depth_mm_n,
+## #   ⁷​flipper_length_mm_mean, ⁸​flipper_length_mm_sd</code></pre>
 </div>
 <div id="su-st-reorder" class="section level3" number="6.2.2">
 <h3>
@@ -195,12 +206,12 @@
 <li>引数を<code>names_pattern</code>と<code>names_to</code>を下記のように指定することで，変数の接尾辞を列名にできる</li>
 <li>下記コードの<code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a></code>部分の構造は前のチャンクと変数名以外同じ</li>
 </ul>
-<div class="sourceCode" id="cb210"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb225"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="va">bill_length_mm</span><span class="op">:</span><span class="va">body_mass_g</span>,
-                   <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">.x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
-                        sd <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">.x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
-                        n <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> |&gt; 
+                   <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>mean <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
+                          sd <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span>   <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
+                           n <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span>  <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span>,
                names_to <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"items"</span>, <span class="st">".value"</span><span class="op">)</span>, <span class="co"># ".value"の部分を列名に</span>
                names_pattern <span class="op">=</span> <span class="st">"(.*)_(.*)"</span><span class="op">)</span> 　  <span class="co"># 正規表現</span></code></pre></div>
@@ -230,42 +241,43 @@
 <li>
 <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code>にグループを表す変数を指定するとできる</li>
 </ul>
-<div class="sourceCode" id="cb212"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb227"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">bill_length_mm</span>, <span class="va">bill_depth_mm</span><span class="op">)</span>,
-                   <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">.x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
-                        sd <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">.x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+                   <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>mean <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
+                          sd <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span>   <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 3 × 5
-##   species   bill_length_mm_mean bill_length_mm_… bill_depth_mm_m…
-##   &lt;fct&gt;                   &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
-## 1 Adelie                   38.8             2.66             18.3
-## 2 Chinstrap                48.8             3.34             18.4
-## 3 Gentoo                   47.5             3.08             15.0
-## # … with 1 more variable: bill_depth_mm_sd &lt;dbl&gt;</code></pre>
+##   species   bill_length_mm_mean bill_length_mm_sd bill_…¹ bill_…²
+##   &lt;fct&gt;                   &lt;dbl&gt;             &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+## 1 Adelie                   38.8              2.66    18.3   1.22 
+## 2 Chinstrap                48.8              3.34    18.4   1.14 
+## 3 Gentoo                   47.5              3.08    15.0   0.981
+## # … with abbreviated variable names ¹​bill_depth_mm_mean,
+## #   ²​bill_depth_mm_sd</code></pre>
 <ul>
 <li>グループを重ねることも可能</li>
 </ul>
-<div class="sourceCode" id="cb214"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb229"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">species</span>, <span class="va">sex</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">bill_length_mm</span>, <span class="va">bill_depth_mm</span><span class="op">)</span>,
-                   <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">.x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
-                        sd <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">.x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+                   <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>mean <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
+                          sd <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span>   <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 8 × 6
 ## # Groups:   species [3]
-##   species   sex    bill_length_mm_mean bill_length_mm_sd
-##   &lt;fct&gt;     &lt;fct&gt;                &lt;dbl&gt;             &lt;dbl&gt;
-## 1 Adelie    female                37.3              2.03
-## 2 Adelie    male                  40.4              2.28
-## 3 Adelie    &lt;NA&gt;                  37.8              2.80
-## 4 Chinstrap female                46.6              3.11
-## 5 Chinstrap male                  51.1              1.56
-## 6 Gentoo    female                45.6              2.05
-## 7 Gentoo    male                  49.5              2.72
-## 8 Gentoo    &lt;NA&gt;                  45.6              1.37
-## # … with 2 more variables: bill_depth_mm_mean &lt;dbl&gt;,
-## #   bill_depth_mm_sd &lt;dbl&gt;</code></pre>
+##   species   sex    bill_length_mm_mean bill_len…¹ bill_…² bill_…³
+##   &lt;fct&gt;     &lt;fct&gt;                &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+## 1 Adelie    female                37.3       2.03    17.6   0.943
+## 2 Adelie    male                  40.4       2.28    19.1   1.02 
+## 3 Adelie    &lt;NA&gt;                  37.8       2.80    18.3   1.27 
+## 4 Chinstrap female                46.6       3.11    17.6   0.781
+## 5 Chinstrap male                  51.1       1.56    19.3   0.761
+## 6 Gentoo    female                45.6       2.05    14.2   0.540
+## 7 Gentoo    male                  49.5       2.72    15.7   0.741
+## 8 Gentoo    &lt;NA&gt;                  45.6       1.37    14.6   0.810
+## # … with abbreviated variable names ¹​bill_length_mm_sd,
+## #   ²​bill_depth_mm_mean, ³​bill_depth_mm_sd</code></pre>
 <div id="練習問題-16" class="section level3" number="6.3.1">
 <h3>
 <span class="header-section-number">6.3.1</span> [練習問題]<a class="anchor" aria-label="anchor" href="#%E7%B7%B4%E7%BF%92%E5%95%8F%E9%A1%8C-16"><i class="fas fa-link"></i></a>
@@ -279,26 +291,12 @@
 <h2>
 <span class="header-section-number">6.4</span> 【効率化】関数にする<a class="anchor" aria-label="anchor" href="#su-fun"><i class="fas fa-link"></i></a>
 </h2>
-<div id="su-fun-st" class="section level3" number="6.4.1">
-<h3>
-<span class="header-section-number">6.4.1</span> 基本<a class="anchor" aria-label="anchor" href="#su-fun-st"><i class="fas fa-link"></i></a>
-</h3>
 <ul>
-<li>「<code>自分で名づける関数名 &lt;- function(引数){ 計算式やコード }</code>」 で関数を定義できる</li>
-<li>例：関数の引数に数値を入れると<code>+1</code>した値を返す関数<code>add_one()</code>を定義</li>
+<li>関数作成の基本は(<a href="premise.html#p-function-make-anonymous">1.4.2.2</a>参照)</li>
 </ul>
-<div class="sourceCode" id="cb216"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">add_one</span> <span class="op">&lt;-</span> 
-  <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span>
-    <span class="va">x</span> <span class="op">+</span> <span class="fl">1</span>
-  <span class="op">}</span>
-
-<span class="fu">add_one</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] 3</code></pre>
-</div>
-<div id="su-fun-meansdn" class="section level3" number="6.4.2">
+<div id="su-fun-meansdn" class="section level3" number="6.4.1">
 <h3>
-<span class="header-section-number">6.4.2</span> 複数変数の平均値とSDとnを計算する関数<a class="anchor" aria-label="anchor" href="#su-fun-meansdn"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.4.1</span> 複数変数の平均値とSDとnを計算する関数<a class="anchor" aria-label="anchor" href="#su-fun-meansdn"><i class="fas fa-link"></i></a>
 </h3>
 <ul>
 <li>「<code>{{ }}</code>」は<code>curly curly</code>と読み，関数を作成するときに，代入先の変数名の場所を指定する時などに活躍
@@ -306,49 +304,51 @@
 <li>下記の例の場合，<code>{{ }}</code>を外すと動かない</li>
 </ul>
 </li>
-<li>例：引数にデータフレーム（data）と変数（vars）を入れると平均値とSDとnを返す関数<code>mean_sd_n()</code>を定義</li>
+<li>例：引数にデータフレーム（<code>data</code>）と変数（<code>vars</code>）を入れると平均値とSDとnを返す関数<code>mean_sd_n()</code>を定義</li>
 </ul>
-<div class="sourceCode" id="cb218"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb231"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mean_sd_n</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">vars</span><span class="op">)</span><span class="op">{</span>
-<span class="va">data</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="op">{</span><span class="op">{</span><span class="va">vars</span><span class="op">}</span><span class="op">}</span>,
-                   <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">.x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
-                        sd <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">.x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
-                        n <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+  <span class="va">data</span> |&gt; 
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="op">{</span><span class="op">{</span><span class="va">vars</span><span class="op">}</span><span class="op">}</span>,
+                     <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>mean <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
+                            sd <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
+                             n <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
 <ul>
-<li>ここで定義した関数<code>mean_sd_n()</code>にデータフレームと変数を入れると結果が表示される</li>
+<li>ここで定義した関数<code>mean_sd_n()</code>に引数としてデータフレームと変数を入れると結果が表示される</li>
 </ul>
-<div class="sourceCode" id="cb219"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">mean_sd_n</span><span class="op">(</span><span class="va">df</span>, <span class="va">bill_length_mm</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 3
 ##   bill_length_mm_mean bill_length_mm_sd bill_length_mm_n
 ##                 &lt;dbl&gt;             &lt;dbl&gt;            &lt;int&gt;
 ## 1                43.9              5.46              342</code></pre>
 <ul>
-<li>vasの部分は<code><a href="https://dplyr.tidyverse.org/reference/across.html">across()</a></code>の第一引数に入れるものと同じ指定ができるため，変数ベクトルやヘルパー関数が入る</li>
+<li>引数<code>vars</code>の部分は<code><a href="https://dplyr.tidyverse.org/reference/across.html">across()</a></code>の第一引数に入れるものと同じ指定ができるため，変数ベクトルやヘルパー関数が入る</li>
 </ul>
-<div class="sourceCode" id="cb221"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb234"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># 変数ベクトル</span>
 <span class="fu">mean_sd_n</span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">flipper_length_mm</span>, <span class="va">body_mass_g</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 6
-##   flipper_length_mm_mean flipper_length_mm_sd flipper_length_mm_n
-##                    &lt;dbl&gt;                &lt;dbl&gt;               &lt;int&gt;
-## 1                   201.                 14.1                 342
-## # … with 3 more variables: body_mass_g_mean &lt;dbl&gt;,
-## #   body_mass_g_sd &lt;dbl&gt;, body_mass_g_n &lt;int&gt;</code></pre>
-<div class="sourceCode" id="cb223"><pre class="downlit sourceCode r">
+##   flipper_length_mm_mean flippe…¹ flipp…² body_…³ body_…⁴ body_…⁵
+##                    &lt;dbl&gt;    &lt;dbl&gt;   &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;int&gt;
+## 1                   201.     14.1     342   4202.    802.     342
+## # … with abbreviated variable names ¹​flipper_length_mm_sd,
+## #   ²​flipper_length_mm_n, ³​body_mass_g_mean, ⁴​body_mass_g_sd,
+## #   ⁵​body_mass_g_n</code></pre>
+<div class="sourceCode" id="cb236"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># 文字でも可能</span>
 <span class="co"># mean_sd_n(df, c("flipper_length_mm", "body_mass_g"))</span>
 
 <span class="co"># ヘルパー関数</span>
 <span class="fu">mean_sd_n</span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"bill"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 6
-##   bill_length_mm_mean bill_length_mm_sd bill_length_mm_n
-##                 &lt;dbl&gt;             &lt;dbl&gt;            &lt;int&gt;
-## 1                43.9              5.46              342
-## # … with 3 more variables: bill_depth_mm_mean &lt;dbl&gt;,
-## #   bill_depth_mm_sd &lt;dbl&gt;, bill_depth_mm_n &lt;int&gt;</code></pre>
+##   bill_length_mm_mean bill_leng…¹ bill_…² bill_…³ bill_…⁴ bill_…⁵
+##                 &lt;dbl&gt;       &lt;dbl&gt;   &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;int&gt;
+## 1                43.9        5.46     342    17.2    1.97     342
+## # … with abbreviated variable names ¹​bill_length_mm_sd,
+## #   ²​bill_length_mm_n, ³​bill_depth_mm_mean, ⁴​bill_depth_mm_sd,
+## #   ⁵​bill_depth_mm_n</code></pre>
 
 </div>
 </div>
@@ -372,10 +372,7 @@
 <a class="nav-link" href="#su-group"><span class="header-section-number">6.3</span> 層別（グループ別）集計</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#%E7%B7%B4%E7%BF%92%E5%95%8F%E9%A1%8C-16"><span class="header-section-number">6.3.1</span> [練習問題]</a></li></ul>
 </li>
 <li>
-<a class="nav-link" href="#su-fun"><span class="header-section-number">6.4</span> 【効率化】関数にする</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#su-fun-st"><span class="header-section-number">6.4.1</span> 基本</a></li>
-<li><a class="nav-link" href="#su-fun-meansdn"><span class="header-section-number">6.4.2</span> 複数変数の平均値とSDとnを計算する関数</a></li>
-</ul>
+<a class="nav-link" href="#su-fun"><span class="header-section-number">6.4</span> 【効率化】関数にする</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#su-fun-meansdn"><span class="header-section-number">6.4.1</span> 複数変数の平均値とSDとnを計算する関数</a></li></ul>
 </li>
 </ul>
 

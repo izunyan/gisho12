@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>1 前提知識 | がんばらないデータ加工</title>
 <meta name="author" content="やわらかクジラ">
-<meta name="generator" content="bookdown 0.29 with bs4_book()">
+<meta name="generator" content="bookdown 0.31 with bs4_book()">
 <meta property="og:title" content="1 前提知識 | がんばらないデータ加工">
 <meta property="og:type" content="book">
 <meta property="og:image" content="/images/cover.png">
@@ -327,6 +327,81 @@ Figure 1.8: ベクトルのイメージ
 <pre><code>## [1] 2</code></pre>
 </div>
 </div>
+<div id="p-function-make" class="section level3" number="1.4.2">
+<h3>
+<span class="header-section-number">1.4.2</span> 【応用編】関数を作る<a class="anchor" aria-label="anchor" href="#p-function-make"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>一連の作業を，値を変えて繰り返したいときに役立つ
+<ul>
+<li>ここは最初は難しいかもしれないので，飛ばしても差支えないが，知っておくと<a href="rename.html#rename-strreplace1">3.2.1</a>や<a href="mutate.html#mu-across-list">5.4.1</a>の重要知識部分や<a href="summarise.html#su-fun">6.4</a>の理解がしやすくなる</li>
+<li>慣れてきてもっと効率的に繰り返し作業したい気分になったら読み返すと役立つ</li>
+</ul>
+</li>
+<li>関数名は任意で名づけることができる</li>
+<li>参考：<a href="http://www.okadajp.org/RWiki/?R%E3%81%AE%E9%96%A2%E6%95%B0%E5%AE%9A%E7%BE%A9%E3%81%AE%E5%9F%BA%E6%9C%AC">Rの関数定義の基本</a>(RjpWiki)</li>
+</ul>
+<div id="p-function-make-ex" class="section level4" number="1.4.2.1">
+<h4>
+<span class="header-section-number">1.4.2.1</span> 基本例：x + 1でxに入る数字を変えていって結果を出力する<a class="anchor" aria-label="anchor" href="#p-function-make-ex"><i class="fas fa-link"></i></a>
+</h4>
+<ul>
+<li>「<code>自分で名づける関数名 &lt;- function(引数){ 計算式やコード }</code>」 で関数を定義できる</li>
+<li>関数の引数に数値を入れたら，その数値に1を加算する関数を作成
+<ul>
+<li>まずここでは，関数名として<code>one_plus</code>と名付けたオブジェクトを作成</li>
+<li>
+<code>function()</code>の()内に，引数として入れる内容を指定する</li>
+<li>
+<code><a href="https://rdrr.io/r/base/Paren.html">{}</a></code>内に処理したい式やコードを入れる</li>
+<li>作成した<code>one_plus()</code>関数に引数を入れて実行する</li>
+</ul>
+</li>
+</ul>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">add_one</span> <span class="op">&lt;-</span> 
+  <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span>
+    <span class="va">x</span> <span class="op">+</span> <span class="fl">1</span>
+  <span class="op">}</span>
+
+<span class="fu">add_one</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">add_one</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+</div>
+<div id="p-function-make-anonymous" class="section level4" number="1.4.2.2">
+<h4>
+<span class="header-section-number">1.4.2.2</span> 無名関数（anonymous function）<a class="anchor" aria-label="anchor" href="#p-function-make-anonymous"><i class="fas fa-link"></i></a>
+</h4>
+<ul>
+<li>このあたりの内容は無名関数（または匿名関数）の記法でよく使われる，ラムダ式(lambda expression)と呼ばれることもある</li>
+<li>関数名を定義しなくても実行できる。<code><a href="https://rdrr.io/r/base/Paren.html">{}</a></code>がなくても動く
+<ul>
+<li>他の関数の中で（例：<code><a href="https://dplyr.tidyverse.org/reference/across.html">across()</a></code>; <a href="mutate.html#mu-across-list">5.4.1</a>参照）使われる際は不要だが，ここだけで実行する場合は<code>function() x + 1</code>部分を<code>()</code>で囲む必要がある</li>
+</ul>
+</li>
+<li>右端の部分の<code>()</code>に引数を入れることで実行できる</li>
+</ul>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<ul>
+<li>R 4.1.0より，<code>function</code>を省略して<strong>バックスラッシュ<code>\</code>で示せるように</strong>なった</li>
+<li>purrr 1.0.0では，従来の<code>~</code>と<code>.x</code>を使った記法から，無名関数の<code>\(x)</code> と<code>x</code>を使う書き方に移行した（参考：<a href="https://www.tidyverse.org/blog/2022/12/purrr-1-0-0/#documentation">purrr 1.0.0 Docmentation</a>）
+<ul>
+<li>これにより，本書で中心的に扱う繰り返し作業の記法もこれに対応する</li>
+</ul>
+</li>
+</ul>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+</div>
+</div>
 </div>
 <div id="p-object" class="section level2" number="1.5">
 <h2>
@@ -347,19 +422,19 @@ Figure 1.8: ベクトルのイメージ
 <h3>
 <span class="header-section-number">1.5.1</span> 例<a class="anchor" aria-label="anchor" href="#p-object-ex"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">res</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">+</span> <span class="fl">1</span>
 <span class="va">res</span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">res2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">4</span>, <span class="fl">5</span><span class="op">)</span>
 <span class="va">res2</span></code></pre></div>
 <pre><code>## [1] 1 2 3 4 5</code></pre>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">res3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span>
 <span class="va">res3</span></code></pre></div>
 <pre><code>## [1] "a" "b"</code></pre>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># この後は不要なので削除</span>
 <span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span><span class="va">res</span>, <span class="va">res2</span>, <span class="va">res3</span><span class="op">)</span></code></pre></div>
 </div>
@@ -429,25 +504,26 @@ Figure 1.10: Rのデータフレーム(tibble形式)
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># パッケージが入ってなければ下記実行</span>
 <span class="co"># install.packages("palmerpenguins")</span>
 
 <span class="fu">palmerpenguins</span><span class="fu">::</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/reference/penguins.html">penguins</a></span></code></pre></div>
 <pre><code>## # A tibble: 344 × 8
-##   species island    bill_length_mm bill_depth_mm flipper_length_…
-##   &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;            &lt;int&gt;
-## 1 Adelie  Torgersen           39.1          18.7              181
-## 2 Adelie  Torgersen           39.5          17.4              186
-## 3 Adelie  Torgersen           40.3          18                195
-## # … with 341 more rows, and 3 more variables: body_mass_g &lt;int&gt;,
-## #   sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
+##   species island    bill_le…¹ bill_…² flipp…³ body_…⁴ sex    year
+##   &lt;fct&gt;   &lt;fct&gt;         &lt;dbl&gt;   &lt;dbl&gt;   &lt;int&gt;   &lt;int&gt; &lt;fct&gt; &lt;int&gt;
+## 1 Adelie  Torgersen      39.1    18.7     181    3750 male   2007
+## 2 Adelie  Torgersen      39.5    17.4     186    3800 fema…  2007
+## 3 Adelie  Torgersen      40.3    18       195    3250 fema…  2007
+## # … with 341 more rows, and abbreviated variable names
+## #   ¹​bill_length_mm, ²​bill_depth_mm, ³​flipper_length_mm,
+## #   ⁴​body_mass_g</code></pre>
 <ul>
 <li>tibble形式のデータフレームの出力の見方
 <ul>
 <li>出力の最上段にある<code>A tibble: 344 x 8</code>で，tibble形式のデータフレーム，344行 × 8列という情報が分かる</li>
 <li>
-<code>flipper_length_~</code> のように，長い変数名は<code>~</code>で省略して表示される</li>
+<code>flipper_length_…</code> のように，長い変数名は<code>…</code>で省略して表示され，フルネームは脚注に表示される</li>
 <li>変数名の下の行にある<code>&lt;fct&gt;</code>, <code>&lt;dbl&gt;</code>, <code>&lt;int&gt;</code>は変数の型を示し，それぞれ因子型，数値型，整数型であることを示している。詳しくは<a href="mutate.html#mu-kata">5.3</a>で説明する</li>
 <li>下から2行目にある
 <code>... with 341 more rows, and 3 more variables:</code>
@@ -460,29 +536,30 @@ Figure 1.10: Rのデータフレーム(tibble形式)
 <li>本書では最初の3行の表示のみに絞っているが，<strong>任意の行数を表示させたい場合</strong>は，<code><a href="https://rdrr.io/r/base/print.html">print()</a></code>関数を使う</li>
 <li>例：最初の15行のみ表示させる</li>
 </ul>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">palmerpenguins</span><span class="fu">::</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/reference/penguins.html">penguins</a></span>  |&gt;  
   <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">15</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 344 × 8
-##    species island   bill_length_mm bill_depth_mm flipper_length_…
-##    &lt;fct&gt;   &lt;fct&gt;             &lt;dbl&gt;         &lt;dbl&gt;            &lt;int&gt;
-##  1 Adelie  Torgers…           39.1          18.7              181
-##  2 Adelie  Torgers…           39.5          17.4              186
-##  3 Adelie  Torgers…           40.3          18                195
-##  4 Adelie  Torgers…           NA            NA                 NA
-##  5 Adelie  Torgers…           36.7          19.3              193
-##  6 Adelie  Torgers…           39.3          20.6              190
-##  7 Adelie  Torgers…           38.9          17.8              181
-##  8 Adelie  Torgers…           39.2          19.6              195
-##  9 Adelie  Torgers…           34.1          18.1              193
-## 10 Adelie  Torgers…           42            20.2              190
-## 11 Adelie  Torgers…           37.8          17.1              186
-## 12 Adelie  Torgers…           37.8          17.3              180
-## 13 Adelie  Torgers…           41.1          17.6              182
-## 14 Adelie  Torgers…           38.6          21.2              191
-## 15 Adelie  Torgers…           34.6          21.1              198
-## # … with 329 more rows, and 3 more variables: body_mass_g &lt;int&gt;,
-## #   sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
+##    species island    bill_l…¹ bill_…² flipp…³ body_…⁴ sex    year
+##    &lt;fct&gt;   &lt;fct&gt;        &lt;dbl&gt;   &lt;dbl&gt;   &lt;int&gt;   &lt;int&gt; &lt;fct&gt; &lt;int&gt;
+##  1 Adelie  Torgersen     39.1    18.7     181    3750 male   2007
+##  2 Adelie  Torgersen     39.5    17.4     186    3800 fema…  2007
+##  3 Adelie  Torgersen     40.3    18       195    3250 fema…  2007
+##  4 Adelie  Torgersen     NA      NA        NA      NA &lt;NA&gt;   2007
+##  5 Adelie  Torgersen     36.7    19.3     193    3450 fema…  2007
+##  6 Adelie  Torgersen     39.3    20.6     190    3650 male   2007
+##  7 Adelie  Torgersen     38.9    17.8     181    3625 fema…  2007
+##  8 Adelie  Torgersen     39.2    19.6     195    4675 male   2007
+##  9 Adelie  Torgersen     34.1    18.1     193    3475 &lt;NA&gt;   2007
+## 10 Adelie  Torgersen     42      20.2     190    4250 &lt;NA&gt;   2007
+## 11 Adelie  Torgersen     37.8    17.1     186    3300 &lt;NA&gt;   2007
+## 12 Adelie  Torgersen     37.8    17.3     180    3700 &lt;NA&gt;   2007
+## 13 Adelie  Torgersen     41.1    17.6     182    3200 fema…  2007
+## 14 Adelie  Torgersen     38.6    21.2     191    3800 male   2007
+## 15 Adelie  Torgersen     34.6    21.1     198    4400 male   2007
+## # … with 329 more rows, and abbreviated variable names
+## #   ¹​bill_length_mm, ²​bill_depth_mm, ³​flipper_length_mm,
+## #   ⁴​body_mass_g</code></pre>
 </div>
 </div>
 </div>
@@ -584,7 +661,10 @@ Figure 1.12: ヘルプの確認
 <li><a class="nav-link" href="#p-howtoread"><span class="header-section-number">1.2</span> 本書に出てくるコード部分の見方</a></li>
 <li><a class="nav-link" href="#p-package"><span class="header-section-number">1.3</span> パッケージ</a></li>
 <li>
-<a class="nav-link" href="#p-function"><span class="header-section-number">1.4</span> 関数</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#p-function-ex"><span class="header-section-number">1.4.1</span> 関数の例</a></li></ul>
+<a class="nav-link" href="#p-function"><span class="header-section-number">1.4</span> 関数</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#p-function-ex"><span class="header-section-number">1.4.1</span> 関数の例</a></li>
+<li><a class="nav-link" href="#p-function-make"><span class="header-section-number">1.4.2</span> 【応用編】関数を作る</a></li>
+</ul>
 </li>
 <li>
 <a class="nav-link" href="#p-object"><span class="header-section-number">1.5</span> オブジェクト</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#p-object-ex"><span class="header-section-number">1.5.1</span> 例</a></li></ul>

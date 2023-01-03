@@ -22,6 +22,9 @@ p-function
 p-function-ex
 p-function-ex-c
 p-function-ex-m
+p-function-make
+p-function-make-ex
+p-function-make-anonymous
 p-object
 p-object-ex
 p-df
@@ -124,5 +127,4 @@ su-st-reorder
 su-group
 練習問題-16
 su-fun
-su-fun-st
 su-fun-meansdn
