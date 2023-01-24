@@ -169,15 +169,9 @@
 <li>第一引数に対して，その次の文字列をその後の文字列に置換する（ここでは”bill” → “くちばし”）</li>
 </ul>
 </li>
-<li>第一引数の「<code>x</code>」の部分に，その後選ぶ列が入っていく
+<li>第一引数の「<code>x</code>」の部分に，その後選ぶ列が入っていく（ここでは<code>starts_with("bill")</code>）
 <ul>
 <li>この部分の理解は今すぐできなくてもよいが，学習を進めるためにキーワードだけ示しておくと，<strong>無名関数</strong>(anonymous function)という処理をしている(<a href="premise.html#p-function-make-anonymous">1.4.2.2</a>参照)</li>
-</ul>
-</li>
-<li>（参考）purrr 1.0.0より前のバージョンでの説明
-<ul>
-<li>第一引数の「<code>.x</code>」の部分に，その後選ぶ変数が入っていく(なおこのような単純な場合はxを省略した「<code>.</code>」だけでも動く）</li>
-<li>この場合適用したい関数の前には<code>~</code>（チルダ）が必ずつく</li>
 </ul>
 </li>
 </ul>
@@ -194,6 +188,14 @@
 ## # … with 341 more rows, and abbreviated variable names
 ## #   ¹​くちばし_length_mm, ²​くちばし_depth_mm, ³​flipper_length_mm,
 ## #   ⁴​body_mass_g</code></pre>
+<ul>
+<li>（参考）purrr 1.0.0より前のバージョンでの説明
+<ul>
+<li>第一引数の「<code>.x</code>」の部分に，その後選ぶ変数が入っていく(なおこのような単純な場合はxを省略した「<code>.</code>」だけでも動く）</li>
+<li>この場合適用したい関数の前には<code>~</code>（チルダ）が必ずつく</li>
+</ul>
+</li>
+</ul>
 <div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># purrr 1.0.0より前のバージョンでの書き方</span>
 <span class="co"># df |&gt; </span>
@@ -351,7 +353,8 @@
 <span class="header-section-number">3.4.1</span> 【効率化】str_c()で一括指定<a class="anchor" aria-label="anchor" href="#rename-strc"><i class="fas fa-link"></i></a>
 </h3>
 <ul>
-<li>適用したい関数の中にある「<code>.</code>」の部分に，その後選ぶ変数が入っていく</li>
+<li>
+<code><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with()</a></code>の中で適用したい関数の中にある「<code>x</code>」の部分に，その後選ぶ列が入っていく</li>
 <li>
 <code><a href="https://stringr.tidyverse.org/reference/str_c.html">stringr::str_c()</a></code>で指定した語をくっつける</li>
 <li>ここでは変数”year”以外すべてなので，“year”に「<code>!</code>」をつけることで変数を指定できる</li>

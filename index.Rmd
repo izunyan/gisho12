@@ -136,6 +136,11 @@ rstudioapi::versionInfo()
 
 rsinfo$version
 rsinfo$release_name
+
+# or
+
+RStudio.Version()$version
+
 ```
 
 
