@@ -303,6 +303,7 @@
 <li>例: 種で”Droid”, “Human”以外を選びたいとき
 <ul>
 <li>この場合，<code>&amp;</code>が必須</li>
+<li>ただしspeciesのNAは選ばれない</li>
 </ul>
 </li>
 </ul>
@@ -318,11 +319,26 @@
 ## # … with 39 more rows, 3 more variables: sex &lt;chr&gt;,
 ## #   gender &lt;chr&gt;, homeworld &lt;chr&gt;, and abbreviated variable
 ## #   names ¹​hair_color, ²​skin_color, ³​eye_color, ⁴​birth_year</code></pre>
-<ul>
-<li>
-<code>%in%</code>を使えば変数名の前に<code>!</code>をつけるだけでよい</li>
-</ul>
 <div class="sourceCode" id="cb138"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># 確認</span>
+<span class="va">df_st</span> |&gt; 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">species</span> <span class="op">!=</span> <span class="st">"Droid"</span> <span class="op">&amp;</span> <span class="va">species</span> <span class="op">!=</span> <span class="st">"Human"</span><span class="op">)</span> |&gt; 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span> |&gt; 
+  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 2
+##   species            n
+##   &lt;chr&gt;          &lt;int&gt;
+## 1 Twi'lek            2
+## 2 Vulptereen         1
+## 3 Wookiee            2
+## 4 Xexto              1
+## 5 Yoda's species     1
+## 6 Zabrak             2</code></pre>
+<ul>
+<li><p><del><code>%in%</code>を使えば変数名の前に<code>!</code>をつけるだけでよい</del></p></li>
+<li><p>例: 種で”Droid”, “Human”以外を選び，かつNAも含みたい時</p></li>
+</ul>
+<div class="sourceCode" id="cb140"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_st</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">species</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Droid"</span>, <span class="st">"Human"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 46 × 11
@@ -334,6 +350,21 @@
 ## # … with 43 more rows, 3 more variables: sex &lt;chr&gt;,
 ## #   gender &lt;chr&gt;, homeworld &lt;chr&gt;, and abbreviated variable
 ## #   names ¹​hair_color, ²​skin_color, ³​eye_color, ⁴​birth_year</code></pre>
+<div class="sourceCode" id="cb142"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># 確認</span>
+<span class="va">df_st</span> |&gt; 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">species</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Droid"</span>, <span class="st">"Human"</span><span class="op">)</span><span class="op">)</span> |&gt; 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span> |&gt; 
+  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 2
+##   species            n
+##   &lt;chr&gt;          &lt;int&gt;
+## 1 Vulptereen         1
+## 2 Wookiee            2
+## 3 Xexto              1
+## 4 Yoda's species     1
+## 5 Zabrak             2
+## 6 &lt;NA&gt;               4</code></pre>
 </div>
 <div id="練習問題-7" class="section level3" number="4.3.2">
 <h3>
@@ -354,7 +385,7 @@
 <li><p>キーワード検索には，正規表現の結果をTRUE or FALSEで返す関数<code><a href="https://stringr.tidyverse.org/reference/str_detect.html">stringr::str_detect()</a></code>を使う</p></li>
 <li><p>例：変数nameに”Luke”を含む行を見たい</p></li>
 </ul>
-<div class="sourceCode" id="cb140"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_st</span> |&gt;
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">name</span>, <span class="st">"Luke"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 11
@@ -371,7 +402,7 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb142"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_st</span> |&gt;
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">name</span>, <span class="st">"^R"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 9 × 11
@@ -396,7 +427,7 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_st</span> |&gt;
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">name</span>, <span class="st">"^Y|^L"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 8 × 11

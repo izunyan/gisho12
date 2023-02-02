@@ -123,18 +123,39 @@ df_st |>
 
 * 例: 種で"Droid", "Human"以外を選びたいとき
   + この場合，`&`が必須
+  + ただしspeciesのNAは選ばれない
 
 ```{r}
 df_st |> 
   filter(species != "Droid" & species != "Human")
 ```
 
-* `%in%`を使えば変数名の前に`!`をつけるだけでよい
+```{r}
+# 確認
+df_st |> 
+  filter(species != "Droid" & species != "Human") |> 
+  count(species) |> 
+  tail()
+```
+
+
+* ~~`%in%`を使えば変数名の前に`!`をつけるだけでよい~~
+
+* 例: 種で"Droid", "Human"以外を選び，かつNAも含みたい時
 
 ```{r}
 df_st |> 
   filter(!species %in% c("Droid", "Human"))
 ```
+
+```{r}
+# 確認
+df_st |> 
+  filter(!species %in% c("Droid", "Human")) |> 
+  count(species) |> 
+  tail()
+```
+
 
 ### [練習問題]
 

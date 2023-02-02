@@ -194,12 +194,9 @@ df_bfi |>
 * 適用する関数をリストにする（`list()`に入れる）ことで，変数名を変更して追加できる
 * `list()`に入れるときはこれまでと異なる書き方が必要になる
 
-
-
-* purrr 1.0.0では，従来の`~`と`.x`を使った記法から，無名関数の`\(x)` と`x`を使う書き方に移行した（参考：[purrr 1.0.0 Docmentation](https://www.tidyverse.org/blog/2022/12/purrr-1-0-0/#documentation)）(詳しくは\@ref(p-function-make-anonymous)参照)
-  + 関数名の前に`\(x)`が必要。`x`部分は他の文字でもよいし，引数がいくつも必要なら，複数の文字を入れられる
+* 関数名の前に`\(x)`が必要。`x`部分は他の文字でもよいし，引数がいくつも必要なら，複数の文字を入れられる
   + list内の「関数`()`」内に`x`（上記同様，`\()`内と一致していれば他の文字でもよい）が必要。この`x`に`across()`の第一引数に指定した変数が入っていくという意味
-
+  + purrr 1.0.0では，従来の`~`と`.x`を使った記法から，無名関数の`\(x)` と`x`を使う書き方に移行した（参考：[purrr 1.0.0 Docmentation](https://www.tidyverse.org/blog/2022/12/purrr-1-0-0/#documentation)）(詳しくは\@ref(p-function-make-anonymous)参照)
 
 * 例：genderとeducationの型を因子型に変換し，変換前後で変わっているかどうか確認
 

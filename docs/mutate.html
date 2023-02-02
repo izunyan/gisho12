@@ -107,7 +107,7 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># パッケージが入ってなければ下記の#を外して実行</span>
 <span class="co"># install.packages("psychTools")</span>
 
@@ -128,7 +128,7 @@
 <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code>の中に新しく作成する変数名を入れ，<code>=</code>でつないで計算式を入れる</li>
 <li>ここでは，まず変数A1の平均値（全ケース同じ値が入る）を計算し，個々のケースの値の差分を新しく列として追加する例を示す</li>
 </ul>
-<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_bfi</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">A1</span><span class="op">)</span> |&gt;                      <span class="co"># A1のみを残す</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>
@@ -158,7 +158,7 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_bfi</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>
     mean_a1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">A1</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="co"># A1の平均値を作成（NAは除外）</span>
@@ -178,7 +178,7 @@
 <ul>
 <li>引数<code>.keep = "used"</code>で作成に関係した列だけにする</li>
 </ul>
-<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_bfi</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>
     mean_a1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">A1</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="co"># A1の平均値を作成（NAは除外）</span>
@@ -225,7 +225,7 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_bfi</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">gender</span>, <span class="va">education</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 2,800 × 2
@@ -238,7 +238,7 @@
 <ul>
 <li>tibble形式でない普通のデータフレームでも，最後に<code><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse()</a></code>で出力することで型を確認可能</li>
 </ul>
-<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_bfi</span> |&gt;
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">gender</span>, <span class="va">education</span><span class="op">)</span> |&gt;
   <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
@@ -259,7 +259,7 @@
 <li>ここでは，2つの数値型変数gender, educationを因子型に変換する例を示す</li>
 <li>それぞれ<code><a href="https://rdrr.io/r/base/factor.html">factor()</a></code>で因子型に変換</li>
 </ul>
-<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_bfi</span> |&gt;
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">gender</span>, <span class="va">education</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>gender <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">gender</span><span class="op">)</span>,
@@ -287,7 +287,7 @@
 <li>
 <code><a href="https://dplyr.tidyverse.org/reference/across.html">across()</a></code>の第一引数に変数ベクトルを入れ，次に適用する関数（ここではfactor()）を入れる</li>
 </ul>
-<div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_bfi</span> |&gt;
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">gender</span>, <span class="va">education</span><span class="op">)</span>,
                 <span class="va">factor</span><span class="op">)</span><span class="op">)</span> |&gt; 
@@ -319,7 +319,7 @@
 <ul>
 <li>変数の指定に<a href="select.html#select-helper">2.3</a>で解説したヘルパー関数が使える</li>
 </ul>
-<div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_bfi</span> |&gt;
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"n"</span><span class="op">)</span>,
                 <span class="va">factor</span><span class="op">)</span><span class="op">)</span> |&gt; 
@@ -334,7 +334,7 @@
 <ul>
 <li>同じく<a href="select.html#select-cha">2.2.3</a>で解説した文字型の変数名も指定に使える</li>
 </ul>
-<div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"N1"</span>, <span class="st">"N2"</span>, <span class="st">"N3"</span>, <span class="st">"N4"</span>, <span class="st">"N5"</span><span class="op">)</span>
 
 <span class="va">df_bfi</span> |&gt;
@@ -357,15 +357,15 @@
 <li><p>適用する関数をリストにする（<code><a href="https://rdrr.io/r/base/list.html">list()</a></code>に入れる）ことで，変数名を変更して追加できる</p></li>
 <li><p><code><a href="https://rdrr.io/r/base/list.html">list()</a></code>に入れるときはこれまでと異なる書き方が必要になる</p></li>
 <li>
-<p>purrr 1.0.0では，従来の<code>~</code>と<code>.x</code>を使った記法から，無名関数の<code>\(x)</code> と<code>x</code>を使う書き方に移行した（参考：<a href="https://www.tidyverse.org/blog/2022/12/purrr-1-0-0/#documentation">purrr 1.0.0 Docmentation</a>）(詳しくは<a href="premise.html#p-function-make-anonymous">1.4.2.2</a>参照)</p>
+<p>関数名の前に<code>\(x)</code>が必要。<code>x</code>部分は他の文字でもよいし，引数がいくつも必要なら，複数の文字を入れられる</p>
 <ul>
-<li>関数名の前に<code>\(x)</code>が必要。<code>x</code>部分は他の文字でもよいし，引数がいくつも必要なら，複数の文字を入れられる</li>
 <li>list内の「関数<code>()</code>」内に<code>x</code>（上記同様，<code>\()</code>内と一致していれば他の文字でもよい）が必要。この<code>x</code>に<code><a href="https://dplyr.tidyverse.org/reference/across.html">across()</a></code>の第一引数に指定した変数が入っていくという意味</li>
+<li>purrr 1.0.0では，従来の<code>~</code>と<code>.x</code>を使った記法から，無名関数の<code>\(x)</code> と<code>x</code>を使う書き方に移行した（参考：<a href="https://www.tidyverse.org/blog/2022/12/purrr-1-0-0/#documentation">purrr 1.0.0 Docmentation</a>）(詳しくは<a href="premise.html#p-function-make-anonymous">1.4.2.2</a>参照)</li>
 </ul>
 </li>
 <li><p>例：genderとeducationの型を因子型に変換し，変換前後で変わっているかどうか確認</p></li>
 </ul>
-<div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_bfi</span> |&gt;
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">gender</span>, <span class="va">education</span><span class="op">)</span>,
                 <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>f <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> |&gt; 
@@ -385,7 +385,7 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># purrr 1.0.0より前のバージョンでの書き方</span>
 <span class="co"># df_bfi |&gt;</span>
 <span class="co">#   mutate(across(c(gender, education),</span>
@@ -412,7 +412,7 @@
 <ul>
 <li>変数の四則演算の式を入れれば合計得点として計算された列をデータフレームに追加できる</li>
 </ul>
-<div class="sourceCode" id="cb168"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb172"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_bfi_n</span> <span class="op">&lt;-</span> 
   <span class="va">df_bfi</span> |&gt;
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">N1</span><span class="op">:</span><span class="va">N5</span><span class="op">)</span> |&gt;                       
@@ -441,7 +441,7 @@
 <li>欠損値については<a href="filter.html#filter-st-na">4.2.1</a>参照</li>
 <li>合計得点の計算の場合，対象となる変数の内1つでもNAがあれば合計点もNAとなる</li>
 </ul>
-<div class="sourceCode" id="cb170"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb174"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_bfi_n</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">neuroticism</span><span class="op">)</span><span class="op">)</span>     <span class="co"># neuroticismがNAなケースに限定</span></code></pre></div>
 <pre><code>## # A tibble: 106 × 6
@@ -473,7 +473,7 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb172"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_bfi</span> |&gt;
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>gender <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">gender</span><span class="op">)</span>,
          gender_c <span class="op">=</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_recode.html">fct_recode</a></span><span class="op">(</span><span class="va">gender</span>, 
@@ -502,7 +502,7 @@
 <li>
 <code><a href="https://dplyr.tidyverse.org/reference/ranking.html">dplyr::row_number()</a></code>で行番号からIDを作成</li>
 </ul>
-<div class="sourceCode" id="cb174"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb178"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_bfi_n</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>id <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/ranking.html">row_number</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 2,800 × 7
@@ -526,7 +526,7 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_bfi_n</span> |&gt; 
   <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rowid_to_column</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"id"</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 2,800 × 7
@@ -536,7 +536,7 @@
 ## 2     2     3     3     3     5     5          19
 ## 3     3     4     5     4     2     3          18
 ## # … with 2,797 more rows</code></pre>
-<div class="sourceCode" id="cb178"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb182"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># この先使わないのでデータフレーム削除</span>
 <span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span><span class="va">df_bfi_n</span><span class="op">)</span></code></pre></div>
 </div>
@@ -592,7 +592,7 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb179"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_bfi</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>A1_r <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/recode.html">recode</a></span><span class="op">(</span><span class="va">A1</span>, `1` <span class="op">=</span> <span class="fl">6L</span>, `2` <span class="op">=</span> <span class="fl">5L</span>, `3` <span class="op">=</span> <span class="fl">4L</span>,      
                            `4` <span class="op">=</span> <span class="fl">3L</span>, `5` <span class="op">=</span> <span class="fl">2L</span>, `6` <span class="op">=</span> <span class="fl">1L</span><span class="op">)</span><span class="op">)</span> |&gt; 
@@ -612,7 +612,7 @@
 <ul>
 <li>A1と同様に同じ形をくり返し変数名だけ変えていけばできるが，コードが長くなりミスも生じやすくなる</li>
 </ul>
-<div class="sourceCode" id="cb181"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb185"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_bfi</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>A1_r <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/recode.html">recode</a></span><span class="op">(</span><span class="va">A1</span>, `1` <span class="op">=</span> <span class="fl">6L</span>, `2` <span class="op">=</span> <span class="fl">5L</span>, `3` <span class="op">=</span> <span class="fl">4L</span>, 
                            `4` <span class="op">=</span> <span class="fl">3L</span>, `5` <span class="op">=</span> <span class="fl">2L</span>, `6` <span class="op">=</span> <span class="fl">1L</span><span class="op">)</span>,
@@ -639,7 +639,7 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb187"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_bfi</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">A1</span>, <span class="va">C4</span><span class="op">)</span>,
                 <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>r <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/recode.html">recode</a></span><span class="op">(</span><span class="va">x</span>, `1` <span class="op">=</span> <span class="fl">6L</span>, `2` <span class="op">=</span> <span class="fl">5L</span>, `3` <span class="op">=</span> <span class="fl">4L</span>, 
@@ -667,7 +667,7 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb185"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb189"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">min</span> <span class="op">&lt;-</span> <span class="fl">1</span>
 <span class="va">max</span> <span class="op">&lt;-</span> <span class="fl">6</span>
 
@@ -690,7 +690,7 @@
 <li>「<code>\(x)</code>」の後に計算式がきても動く</li>
 <li>ここでは，<code>max + min - x</code> の<code>x</code>に<code><a href="https://dplyr.tidyverse.org/reference/across.html">across()</a></code>内に置かれた変数が入っていく</li>
 </ul>
-<div class="sourceCode" id="cb187"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb191"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_bfi</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">A1</span>,<span class="va">C4</span><span class="op">)</span>,
                 <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>r <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">max</span> <span class="op">+</span> <span class="va">min</span> <span class="op">-</span> <span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> |&gt; 
@@ -711,7 +711,7 @@
 <ul>
 <li>条件式の<code>==</code>を使って値を変換することもできる。こちらだと条件式の内容や複数の変数の組み合わせなど幅広い応用が可能に</li>
 </ul>
-<div class="sourceCode" id="cb189"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb193"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_bfi</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>A1_r <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span><span class="va">A1</span> <span class="op">==</span> <span class="fl">1</span> <span class="op">~</span> <span class="fl">6L</span>,
                           <span class="va">A1</span> <span class="op">==</span> <span class="fl">2</span> <span class="op">~</span> <span class="fl">5L</span>,
@@ -731,7 +731,7 @@
 <h4>
 <span class="header-section-number">5.8.3.1</span> 【効率化】 変数2つ以上を逆転<a class="anchor" aria-label="anchor" href="#mu-rev-casewhen2"><i class="fas fa-link"></i></a>
 </h4>
-<div class="sourceCode" id="cb191"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb195"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_bfi</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">A1</span>,<span class="va">C4</span><span class="op">)</span>,
                 <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>r <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="fl">1</span> <span class="op">~</span> <span class="fl">6L</span>,
@@ -782,7 +782,7 @@
 <li>
 <code><a href="https://rdrr.io/r/base/colSums.html">rowSums()</a></code>の中で<code><a href="https://dplyr.tidyverse.org/reference/across.html">across()</a></code>が使えるので，あとは定義した項目のオブジェクトを指定していくだけ</li>
 </ul>
-<div class="sourceCode" id="cb193"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb197"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># 合計する項目の定義</span>
 
 <span class="va">Ag</span> <span class="op">&lt;-</span> 
@@ -828,7 +828,7 @@
 <li>変数の中にNAが入る場合は合計もNAになる。</li>
 <li>rowSums(across(all_of(Op)), <strong>na.rm = TRUE</strong>)と引数を追加すれば，NAを無視して合計できる</li>
 </ul>
-<div class="sourceCode" id="cb194"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb198"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_bfi</span> |&gt; <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html">all_of</a></span><span class="op">(</span><span class="va">Ag</span><span class="op">)</span>, <span class="va">Agree</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 2,800 × 6
 ##    A1_r    A2    A3    A4    A5 Agree
@@ -837,7 +837,7 @@
 ## 2     5     4     5     2     5    21
 ## 3     2     4     5     4     4    19
 ## # … with 2,797 more rows</code></pre>
-<div class="sourceCode" id="cb196"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb200"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_bfi</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html">all_of</a></span><span class="op">(</span><span class="va">Ex</span><span class="op">)</span>, <span class="va">Extraversion</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">Extraversion</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -870,10 +870,10 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb198"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb202"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df_bfi</span><span class="op">)</span> <span class="op">+</span>           <span class="co"># ここにデータフレーム</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">age</span><span class="op">)</span><span class="op">)</span> <span class="co"># aes()の中に対象変数</span></code></pre></div>
-<embed src="gisho12_files/figure-html/unnamed-chunk-108-1.pdf" width="672" type="application/pdf"></embed><ul>
+<embed src="gisho12_files/figure-html/unnamed-chunk-110-1.pdf" width="672" type="application/pdf"></embed><ul>
 <li>さっと中央値だけ見たいのであれば，従来のRの書き方が早い
 <ul>
 <li>役に立つ場面が多いので，慣れたら従来の書き方を学んでおくとよい</li>
@@ -881,11 +881,11 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb199"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb203"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># 中央値</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">df_bfi</span><span class="op">$</span><span class="va">age</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 26</code></pre>
-<div class="sourceCode" id="cb201"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb205"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># モダンな方法だと少し長くなる</span>
 <span class="co"># df_bfi |&gt; </span>
 <span class="co">#   summarise(median(age))</span></code></pre></div>
@@ -904,7 +904,7 @@
 </li>
 <li>例：ageの値で27歳以上を1, それ以外を0とした2区分変数を作成する</li>
 </ul>
-<div class="sourceCode" id="cb202"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb206"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">res_age2</span> <span class="op">&lt;-</span> 
   <span class="va">df_bfi</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>age2 <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">age</span> <span class="op">&gt;=</span> <span class="fl">27</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span> |&gt; 
@@ -924,7 +924,7 @@
 <li>
 <code>age &gt;= 27</code>が1，27未満が0にコーディングされているか<code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code>で限定して確認</li>
 </ul>
-<div class="sourceCode" id="cb204"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb208"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">res_age2</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">age</span> <span class="op">&gt;=</span> <span class="fl">20</span> <span class="op">&amp;</span> <span class="va">age</span> <span class="op">&lt;=</span> <span class="fl">30</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">age</span>, <span class="va">age2</span><span class="op">)</span> |&gt; 
@@ -951,7 +951,7 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb206"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb210"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">res_age2</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">age</span>, <span class="va">age2</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">-</span><span class="fl">2</span><span class="op">)</span><span class="op">:</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -972,7 +972,7 @@
 <ul>
 <li>長くなるがこちらの方が覚えやすいかも</li>
 </ul>
-<div class="sourceCode" id="cb208"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb212"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">res_age2</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">age</span>, <span class="va">age2</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_head</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
@@ -982,7 +982,7 @@
 ## 1     3     0     1
 ## 2     9     0     1
 ## 3    11     0     3</code></pre>
-<div class="sourceCode" id="cb210"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb214"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">res_age2</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">age</span>, <span class="va">age2</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_tail</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
@@ -992,7 +992,7 @@
 ## 1    72     1     1
 ## 2    74     1     1
 ## 3    86     1     1</code></pre>
-<div class="sourceCode" id="cb212"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb216"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span><span class="va">res_age2</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
@@ -1003,7 +1003,7 @@
 <ul>
 <li>年齢層を10歳区切りでカテゴリ化</li>
 </ul>
-<div class="sourceCode" id="cb213"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb217"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">res_age6</span> <span class="op">&lt;-</span> 
   <span class="va">df_bfi</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>age6 <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span>
@@ -1025,17 +1025,17 @@
 <pre><code>## # A tibble: 10 × 3
 ##      age age6         n
 ##    &lt;int&gt; &lt;chr&gt;    &lt;int&gt;
-##  1     3 20歳未満     1
-##  2     9 20歳未満     1
+##  1    12 20歳未満    28
+##  2    15 20歳未満    26
 ##  3    20 20-29歳    212
-##  4    22 20-29歳    122
-##  5    28 20-29歳     86
-##  6    40 40-49歳     56
-##  7    47 40-49歳     21
-##  8    56 50-59歳     17
-##  9    65 60歳以上     1
-## 10    68 60歳以上     1</code></pre>
-<div class="sourceCode" id="cb215"><pre class="downlit sourceCode r">
+##  4    24 20-29歳    105
+##  5    29 20-29歳     78
+##  6    34 30-39歳     52
+##  7    45 40-49歳     28
+##  8    49 40-49歳     16
+##  9    50 50-59歳     34
+## 10    51 50-59歳     24</code></pre>
+<div class="sourceCode" id="cb219"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span><span class="va">res_age6</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="練習問題-14" class="section level3" number="5.10.4">
