@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>3 列（変数）名を変更する：rename | がんばらないデータ加工</title>
 <meta name="author" content="やわらかクジラ">
-<meta name="generator" content="bookdown 0.32 with bs4_book()">
+<meta name="generator" content="bookdown 0.34 with bs4_book()">
 <meta property="og:title" content="3 列（変数）名を変更する：rename | がんばらないデータ加工">
 <meta property="og:type" content="book">
 <meta property="og:image" content="/images/cover.png">
@@ -87,7 +87,7 @@
 <li>使用データは<a href="select.html#select-read">2.1</a>で読み込んだdfを使用</li>
 </ul>
 <div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> |&gt; <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "species"           "island"            "bill_length_mm"   
 ## [4] "bill_depth_mm"     "flipper_length_mm" "body_mass_g"      
 ## [7] "sex"               "year"</code></pre>
@@ -96,19 +96,19 @@
 <li>例：bill_length_mmをblmmに変更してみる</li>
 </ul>
 <div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># まだtidyverseパッケージを読み込んでない場合は以下の#を外して実行</span>
-<span class="co"># library(tidyverse)</span>
-
-<span class="va">df</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>blmm <span class="op">=</span> <span class="va">bill_length_mm</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># まだtidyverseパッケージを読み込んでない場合は以下の#を外して実行</span></span>
+<span><span class="co"># library(tidyverse)</span></span>
+<span></span>
+<span><span class="va">df</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>blmm <span class="op">=</span> <span class="va">bill_length_mm</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 344 × 8
-##   species island     blmm bill_dept…¹ flipp…² body_…³ sex    year
-##   &lt;fct&gt;   &lt;fct&gt;     &lt;dbl&gt;       &lt;dbl&gt;   &lt;int&gt;   &lt;int&gt; &lt;fct&gt; &lt;int&gt;
-## 1 Adelie  Torgersen  39.1        18.7     181    3750 male   2007
-## 2 Adelie  Torgersen  39.5        17.4     186    3800 fema…  2007
-## 3 Adelie  Torgersen  40.3        18       195    3250 fema…  2007
-## # … with 341 more rows, and abbreviated variable names
-## #   ¹​bill_depth_mm, ²​flipper_length_mm, ³​body_mass_g</code></pre>
+##   species island     blmm bill_depth_mm flipper_length_mm
+##   &lt;fct&gt;   &lt;fct&gt;     &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;
+## 1 Adelie  Torgersen  39.1          18.7               181
+## 2 Adelie  Torgersen  39.5          17.4               186
+## 3 Adelie  Torgersen  40.3          18                 195
+## # ℹ 341 more rows
+## # ℹ 3 more variables: body_mass_g &lt;int&gt;, sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
 <ul>
 <li>複数の変数名を変更する場合は，<code><a href="https://dplyr.tidyverse.org/reference/rename.html">rename()</a></code>の中に「<code>,</code>」でつなげていく
 <ul>
@@ -117,17 +117,17 @@
 </li>
 </ul>
 <div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>blmm <span class="op">=</span> <span class="va">bill_length_mm</span>,
-         bdmm <span class="op">=</span> <span class="va">bill_depth_mm</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>blmm <span class="op">=</span> <span class="va">bill_length_mm</span>,</span>
+<span>         bdmm <span class="op">=</span> <span class="va">bill_depth_mm</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 344 × 8
-##   species island     blmm  bdmm flipper_len…¹ body_…² sex    year
-##   &lt;fct&gt;   &lt;fct&gt;     &lt;dbl&gt; &lt;dbl&gt;         &lt;int&gt;   &lt;int&gt; &lt;fct&gt; &lt;int&gt;
-## 1 Adelie  Torgersen  39.1  18.7           181    3750 male   2007
-## 2 Adelie  Torgersen  39.5  17.4           186    3800 fema…  2007
-## 3 Adelie  Torgersen  40.3  18             195    3250 fema…  2007
-## # … with 341 more rows, and abbreviated variable names
-## #   ¹​flipper_length_mm, ²​body_mass_g</code></pre>
+##   species island   blmm  bdmm flipper_length_mm body_mass_g sex  
+##   &lt;fct&gt;   &lt;fct&gt;   &lt;dbl&gt; &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt; &lt;fct&gt;
+## 1 Adelie  Torger…  39.1  18.7               181        3750 male 
+## 2 Adelie  Torger…  39.5  17.4               186        3800 fema…
+## 3 Adelie  Torger…  40.3  18                 195        3250 fema…
+## # ℹ 341 more rows
+## # ℹ 1 more variable: year &lt;int&gt;</code></pre>
 <ul>
 <li>複数変数を扱うときは<code><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with()</a></code>が便利。以下はそれを用いた例を示していく</li>
 </ul>
@@ -141,18 +141,18 @@
 <li>まずは基本の知識でできる方法</li>
 </ul>
 <div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>くちばし_length_mm <span class="op">=</span> <span class="va">bill_length_mm</span>,
-         くちばし_depth_mm <span class="op">=</span> <span class="va">bill_depth_mm</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>くちばし_length_mm <span class="op">=</span> <span class="va">bill_length_mm</span>,</span>
+<span>         くちばし_depth_mm <span class="op">=</span> <span class="va">bill_depth_mm</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 344 × 8
-##   species island    くちば…¹ くちば…² flipp…³ body_…⁴ sex    year
-##   &lt;fct&gt;   &lt;fct&gt;        &lt;dbl&gt;    &lt;dbl&gt;   &lt;int&gt;   &lt;int&gt; &lt;fct&gt; &lt;int&gt;
-## 1 Adelie  Torgersen     39.1     18.7     181    3750 male   2007
-## 2 Adelie  Torgersen     39.5     17.4     186    3800 fema…  2007
-## 3 Adelie  Torgersen     40.3     18       195    3250 fema…  2007
-## # … with 341 more rows, and abbreviated variable names
-## #   ¹​くちばし_length_mm, ²​くちばし_depth_mm, ³​flipper_length_mm,
-## #   ⁴​body_mass_g</code></pre>
+##   species island    くちばし_length_mm くちばし_depth_mm
+##   &lt;fct&gt;   &lt;fct&gt;                  &lt;dbl&gt;             &lt;dbl&gt;
+## 1 Adelie  Torgersen               39.1              18.7
+## 2 Adelie  Torgersen               39.5              17.4
+## 3 Adelie  Torgersen               40.3              18  
+## # ℹ 341 more rows
+## # ℹ 4 more variables: flipper_length_mm &lt;int&gt;,
+## #   body_mass_g &lt;int&gt;, sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
 <div id="rename-strreplace1" class="section level3" number="3.2.1">
 <h3>
 <span class="header-section-number">3.2.1</span> 【効率化】str_replace()で一括変換(1)<a class="anchor" aria-label="anchor" href="#rename-strreplace1"><i class="fas fa-link"></i></a>
@@ -176,18 +176,18 @@
 </li>
 </ul>
 <div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"bill"</span>, <span class="st">"くちばし"</span><span class="op">)</span>,
-              <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"bill"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"bill"</span>, <span class="st">"くちばし"</span><span class="op">)</span>,</span>
+<span>              <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"bill"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 344 × 8
-##   species island    くちば…¹ くちば…² flipp…³ body_…⁴ sex    year
-##   &lt;fct&gt;   &lt;fct&gt;        &lt;dbl&gt;    &lt;dbl&gt;   &lt;int&gt;   &lt;int&gt; &lt;fct&gt; &lt;int&gt;
-## 1 Adelie  Torgersen     39.1     18.7     181    3750 male   2007
-## 2 Adelie  Torgersen     39.5     17.4     186    3800 fema…  2007
-## 3 Adelie  Torgersen     40.3     18       195    3250 fema…  2007
-## # … with 341 more rows, and abbreviated variable names
-## #   ¹​くちばし_length_mm, ²​くちばし_depth_mm, ³​flipper_length_mm,
-## #   ⁴​body_mass_g</code></pre>
+##   species island    くちばし_length_mm くちばし_depth_mm
+##   &lt;fct&gt;   &lt;fct&gt;                  &lt;dbl&gt;             &lt;dbl&gt;
+## 1 Adelie  Torgersen               39.1              18.7
+## 2 Adelie  Torgersen               39.5              17.4
+## 3 Adelie  Torgersen               40.3              18  
+## # ℹ 341 more rows
+## # ℹ 4 more variables: flipper_length_mm &lt;int&gt;,
+## #   body_mass_g &lt;int&gt;, sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
 <ul>
 <li>（参考）purrr 1.0.0より前のバージョンでの説明
 <ul>
@@ -197,25 +197,25 @@
 </li>
 </ul>
 <div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># purrr 1.0.0より前のバージョンでの書き方</span>
-<span class="co"># df |&gt; </span>
-<span class="co">#   rename_with(~str_replace(.x, "bill", "くちばし"),</span>
-<span class="co">#               starts_with("bill"))</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># purrr 1.0.0より前のバージョンでの書き方</span></span>
+<span><span class="co"># df |&gt; </span></span>
+<span><span class="co">#   rename_with(~str_replace(.x, "bill", "くちばし"),</span></span>
+<span><span class="co">#               starts_with("bill"))</span></span></code></pre></div>
 <ul>
 <li>デフォルトで全ての列が対象になっているので，実は<code>starts_with("bill")</code>がなくても動く</li>
 </ul>
 <div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"bill"</span>, <span class="st">"くちばし"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"bill"</span>, <span class="st">"くちばし"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 344 × 8
-##   species island    くちば…¹ くちば…² flipp…³ body_…⁴ sex    year
-##   &lt;fct&gt;   &lt;fct&gt;        &lt;dbl&gt;    &lt;dbl&gt;   &lt;int&gt;   &lt;int&gt; &lt;fct&gt; &lt;int&gt;
-## 1 Adelie  Torgersen     39.1     18.7     181    3750 male   2007
-## 2 Adelie  Torgersen     39.5     17.4     186    3800 fema…  2007
-## 3 Adelie  Torgersen     40.3     18       195    3250 fema…  2007
-## # … with 341 more rows, and abbreviated variable names
-## #   ¹​くちばし_length_mm, ²​くちばし_depth_mm, ³​flipper_length_mm,
-## #   ⁴​body_mass_g</code></pre>
+##   species island    くちばし_length_mm くちばし_depth_mm
+##   &lt;fct&gt;   &lt;fct&gt;                  &lt;dbl&gt;             &lt;dbl&gt;
+## 1 Adelie  Torgersen               39.1              18.7
+## 2 Adelie  Torgersen               39.5              17.4
+## 3 Adelie  Torgersen               40.3              18  
+## # ℹ 341 more rows
+## # ℹ 4 more variables: flipper_length_mm &lt;int&gt;,
+## #   body_mass_g &lt;int&gt;, sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
 <div id="rename-strreplace1-other" class="section level4" number="3.2.1.1">
 <h4>
 <span class="header-section-number">3.2.1.1</span> 【別解】<a class="anchor" aria-label="anchor" href="#rename-strreplace1-other"><i class="fas fa-link"></i></a>
@@ -225,18 +225,18 @@
 <code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code>の時のように単に<code><a href="https://rdrr.io/r/base/c.html">c()</a></code>の中に変数を指定していくだけでも動く</li>
 </ul>
 <div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"bill"</span>, <span class="st">"くちばし"</span><span class="op">)</span>,
-              <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">bill_length_mm</span>, <span class="va">bill_depth_mm</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"bill"</span>, <span class="st">"くちばし"</span><span class="op">)</span>,</span>
+<span>              <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">bill_length_mm</span>, <span class="va">bill_depth_mm</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 344 × 8
-##   species island    くちば…¹ くちば…² flipp…³ body_…⁴ sex    year
-##   &lt;fct&gt;   &lt;fct&gt;        &lt;dbl&gt;    &lt;dbl&gt;   &lt;int&gt;   &lt;int&gt; &lt;fct&gt; &lt;int&gt;
-## 1 Adelie  Torgersen     39.1     18.7     181    3750 male   2007
-## 2 Adelie  Torgersen     39.5     17.4     186    3800 fema…  2007
-## 3 Adelie  Torgersen     40.3     18       195    3250 fema…  2007
-## # … with 341 more rows, and abbreviated variable names
-## #   ¹​くちばし_length_mm, ²​くちばし_depth_mm, ³​flipper_length_mm,
-## #   ⁴​body_mass_g</code></pre>
+##   species island    くちばし_length_mm くちばし_depth_mm
+##   &lt;fct&gt;   &lt;fct&gt;                  &lt;dbl&gt;             &lt;dbl&gt;
+## 1 Adelie  Torgersen               39.1              18.7
+## 2 Adelie  Torgersen               39.5              17.4
+## 3 Adelie  Torgersen               40.3              18  
+## # ℹ 341 more rows
+## # ℹ 4 more variables: flipper_length_mm &lt;int&gt;,
+## #   body_mass_g &lt;int&gt;, sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
 </div>
 </div>
 <div id="練習問題-3" class="section level3" number="3.2.2">
@@ -256,18 +256,18 @@
 <li>“_mm”を取り除きたい場合，それを削除した変数名を指定すればよいが，たくさんあると大変</li>
 </ul>
 <div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>bill_length <span class="op">=</span> <span class="va">bill_length_mm</span>,
-         bill_depth  <span class="op">=</span> <span class="va">bill_depth_mm</span>,
-         flipper_length <span class="op">=</span> <span class="va">flipper_length_mm</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>bill_length <span class="op">=</span> <span class="va">bill_length_mm</span>,</span>
+<span>         bill_depth  <span class="op">=</span> <span class="va">bill_depth_mm</span>,</span>
+<span>         flipper_length <span class="op">=</span> <span class="va">flipper_length_mm</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 344 × 8
-##   species island    bill_le…¹ bill_…² flipp…³ body_…⁴ sex    year
-##   &lt;fct&gt;   &lt;fct&gt;         &lt;dbl&gt;   &lt;dbl&gt;   &lt;int&gt;   &lt;int&gt; &lt;fct&gt; &lt;int&gt;
-## 1 Adelie  Torgersen      39.1    18.7     181    3750 male   2007
-## 2 Adelie  Torgersen      39.5    17.4     186    3800 fema…  2007
-## 3 Adelie  Torgersen      40.3    18       195    3250 fema…  2007
-## # … with 341 more rows, and abbreviated variable names
-## #   ¹​bill_length, ²​bill_depth, ³​flipper_length, ⁴​body_mass_g</code></pre>
+##   species island    bill_length bill_depth flipper_length
+##   &lt;fct&gt;   &lt;fct&gt;           &lt;dbl&gt;      &lt;dbl&gt;          &lt;int&gt;
+## 1 Adelie  Torgersen        39.1       18.7            181
+## 2 Adelie  Torgersen        39.5       17.4            186
+## 3 Adelie  Torgersen        40.3       18              195
+## # ℹ 341 more rows
+## # ℹ 3 more variables: body_mass_g &lt;int&gt;, sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
 <div id="rename-strreplace2" class="section level3" number="3.3.1">
 <h3>
 <span class="header-section-number">3.3.1</span> 【効率化】str_replace()で一括変換（2）<a class="anchor" aria-label="anchor" href="#rename-strreplace2"><i class="fas fa-link"></i></a>
@@ -277,18 +277,17 @@
 <code><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace()</a></code>で変換先に空白「<code>" "</code>」を指定すると削除できる</li>
 </ul>
 <div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"_mm"</span>, <span class="st">" "</span><span class="op">)</span>,
-              <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">ends_with</a></span><span class="op">(</span><span class="st">"mm"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"_mm"</span>, <span class="st">" "</span><span class="op">)</span>,</span>
+<span>              <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">ends_with</a></span><span class="op">(</span><span class="st">"mm"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 344 × 8
-##   species island    bill_le…¹ bill_…² flipp…³ body_…⁴ sex    year
-##   &lt;fct&gt;   &lt;fct&gt;         &lt;dbl&gt;   &lt;dbl&gt;   &lt;int&gt;   &lt;int&gt; &lt;fct&gt; &lt;int&gt;
-## 1 Adelie  Torgersen      39.1    18.7     181    3750 male   2007
-## 2 Adelie  Torgersen      39.5    17.4     186    3800 fema…  2007
-## 3 Adelie  Torgersen      40.3    18       195    3250 fema…  2007
-## # … with 341 more rows, and abbreviated variable names
-## #   ¹​`bill_length `, ²​`bill_depth `, ³​`flipper_length `,
-## #   ⁴​body_mass_g</code></pre>
+##   species island   `bill_length ` `bill_depth ` `flipper_length `
+##   &lt;fct&gt;   &lt;fct&gt;             &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;
+## 1 Adelie  Torgers…           39.1          18.7               181
+## 2 Adelie  Torgers…           39.5          17.4               186
+## 3 Adelie  Torgers…           40.3          18                 195
+## # ℹ 341 more rows
+## # ℹ 3 more variables: body_mass_g &lt;int&gt;, sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
 <div id="別解" class="section level4" number="3.3.1.1">
 <h4>
 <span class="header-section-number">3.3.1.1</span> 【別解】<a class="anchor" aria-label="anchor" href="#%E5%88%A5%E8%A7%A3"><i class="fas fa-link"></i></a>
@@ -302,17 +301,17 @@
 </li>
 </ul>
 <div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_remove.html">str_remove</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"_mm"</span><span class="op">)</span>,
-              <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">ends_with</a></span><span class="op">(</span><span class="st">"mm"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_remove.html">str_remove</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"_mm"</span><span class="op">)</span>,</span>
+<span>              <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">ends_with</a></span><span class="op">(</span><span class="st">"mm"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 344 × 8
-##   species island    bill_le…¹ bill_…² flipp…³ body_…⁴ sex    year
-##   &lt;fct&gt;   &lt;fct&gt;         &lt;dbl&gt;   &lt;dbl&gt;   &lt;int&gt;   &lt;int&gt; &lt;fct&gt; &lt;int&gt;
-## 1 Adelie  Torgersen      39.1    18.7     181    3750 male   2007
-## 2 Adelie  Torgersen      39.5    17.4     186    3800 fema…  2007
-## 3 Adelie  Torgersen      40.3    18       195    3250 fema…  2007
-## # … with 341 more rows, and abbreviated variable names
-## #   ¹​bill_length, ²​bill_depth, ³​flipper_length, ⁴​body_mass_g</code></pre>
+##   species island    bill_length bill_depth flipper_length
+##   &lt;fct&gt;   &lt;fct&gt;           &lt;dbl&gt;      &lt;dbl&gt;          &lt;int&gt;
+## 1 Adelie  Torgersen        39.1       18.7            181
+## 2 Adelie  Torgersen        39.5       17.4            186
+## 3 Adelie  Torgersen        40.3       18              195
+## # ℹ 341 more rows
+## # ℹ 3 more variables: body_mass_g &lt;int&gt;, sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
 </div>
 </div>
 <div id="練習問題-4" class="section level3" number="3.3.2">
@@ -334,20 +333,20 @@
 <code><a href="https://dplyr.tidyverse.org/reference/rename.html">rename()</a></code>の中に全部書いていけばできるが数が多いと大変</li>
 </ul>
 <div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2007</span><span class="op">)</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">bill_length_mm</span><span class="op">:</span><span class="va">flipper_length_mm</span>, <span class="va">year</span><span class="op">)</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>bill_length_mm_2007 <span class="op">=</span> <span class="va">bill_length_mm</span>,
-         bill_depth_mm_2007  <span class="op">=</span> <span class="va">bill_depth_mm</span>,
-         flipper_length_mm_2007 <span class="op">=</span> <span class="va">flipper_length_mm</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2007</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">bill_length_mm</span><span class="op">:</span><span class="va">flipper_length_mm</span>, <span class="va">year</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>bill_length_mm_2007 <span class="op">=</span> <span class="va">bill_length_mm</span>,</span>
+<span>         bill_depth_mm_2007  <span class="op">=</span> <span class="va">bill_depth_mm</span>,</span>
+<span>         flipper_length_mm_2007 <span class="op">=</span> <span class="va">flipper_length_mm</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 110 × 4
-##   bill_length_mm_2007 bill_depth_mm_2007 flipper_length_m…¹  year
-##                 &lt;dbl&gt;              &lt;dbl&gt;              &lt;int&gt; &lt;int&gt;
-## 1                39.1               18.7                181  2007
-## 2                39.5               17.4                186  2007
-## 3                40.3               18                  195  2007
-## # … with 107 more rows, and abbreviated variable name
-## #   ¹​flipper_length_mm_2007</code></pre>
+##   bill_length_mm_2007 bill_depth_mm_2007 flipper_length_mm_2007
+##                 &lt;dbl&gt;              &lt;dbl&gt;                  &lt;int&gt;
+## 1                39.1               18.7                    181
+## 2                39.5               17.4                    186
+## 3                40.3               18                      195
+## # ℹ 107 more rows
+## # ℹ 1 more variable: year &lt;int&gt;</code></pre>
 <div id="rename-strc" class="section level3" number="3.4.1">
 <h3>
 <span class="header-section-number">3.4.1</span> 【効率化】str_c()で一括指定<a class="anchor" aria-label="anchor" href="#rename-strc"><i class="fas fa-link"></i></a>
@@ -360,19 +359,19 @@
 <li>ここでは変数”year”以外すべてなので，“year”に「<code>!</code>」をつけることで変数を指定できる</li>
 </ul>
 <div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2007</span><span class="op">)</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">bill_length_mm</span><span class="op">:</span><span class="va">flipper_length_mm</span>, <span class="va">year</span><span class="op">)</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_c.html">str_c</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"_2007"</span><span class="op">)</span>,
-               <span class="op">!</span><span class="va">year</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2007</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">bill_length_mm</span><span class="op">:</span><span class="va">flipper_length_mm</span>, <span class="va">year</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_c.html">str_c</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"_2007"</span><span class="op">)</span>,</span>
+<span>               <span class="op">!</span><span class="va">year</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 110 × 4
-##   bill_length_mm_2007 bill_depth_mm_2007 flipper_length_m…¹  year
-##                 &lt;dbl&gt;              &lt;dbl&gt;              &lt;int&gt; &lt;int&gt;
-## 1                39.1               18.7                181  2007
-## 2                39.5               17.4                186  2007
-## 3                40.3               18                  195  2007
-## # … with 107 more rows, and abbreviated variable name
-## #   ¹​flipper_length_mm_2007</code></pre>
+##   bill_length_mm_2007 bill_depth_mm_2007 flipper_length_mm_2007
+##                 &lt;dbl&gt;              &lt;dbl&gt;                  &lt;int&gt;
+## 1                39.1               18.7                    181
+## 2                39.5               17.4                    186
+## 3                40.3               18                      195
+## # ℹ 107 more rows
+## # ℹ 1 more variable: year &lt;int&gt;</code></pre>
 <div id="rename-strc-other" class="section level4" number="3.4.1.1">
 <h4>
 <span class="header-section-number">3.4.1.1</span> 【別解】<a class="anchor" aria-label="anchor" href="#rename-strc-other"><i class="fas fa-link"></i></a>
@@ -381,19 +380,19 @@
 <li>変数を選ぶときに該当する単語を持つ変数を選びたければ，ヘルパー関数<code><a href="https://tidyselect.r-lib.org/reference/starts_with.html">matches()</a></code>で正規表現を使って柔軟に選べる</li>
 </ul>
 <div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> |&gt; 
-<span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2007</span><span class="op">)</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_c.html">str_c</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"_2007"</span><span class="op">)</span>,
-               <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">matches</a></span><span class="op">(</span><span class="st">"bill|flipper"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">|&gt;</span> </span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2007</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_c.html">str_c</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"_2007"</span><span class="op">)</span>,</span>
+<span>               <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">matches</a></span><span class="op">(</span><span class="st">"bill|flipper"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 110 × 8
-##   species island    bill_le…¹ bill_…² flipp…³ body_…⁴ sex    year
-##   &lt;fct&gt;   &lt;fct&gt;         &lt;dbl&gt;   &lt;dbl&gt;   &lt;int&gt;   &lt;int&gt; &lt;fct&gt; &lt;int&gt;
-## 1 Adelie  Torgersen      39.1    18.7     181    3750 male   2007
-## 2 Adelie  Torgersen      39.5    17.4     186    3800 fema…  2007
-## 3 Adelie  Torgersen      40.3    18       195    3250 fema…  2007
-## # … with 107 more rows, and abbreviated variable names
-## #   ¹​bill_length_mm_2007, ²​bill_depth_mm_2007,
-## #   ³​flipper_length_mm_2007, ⁴​body_mass_g</code></pre>
+##   species island    bill_length_mm_2007 bill_depth_mm_2007
+##   &lt;fct&gt;   &lt;fct&gt;                   &lt;dbl&gt;              &lt;dbl&gt;
+## 1 Adelie  Torgersen                39.1               18.7
+## 2 Adelie  Torgersen                39.5               17.4
+## 3 Adelie  Torgersen                40.3               18  
+## # ℹ 107 more rows
+## # ℹ 4 more variables: flipper_length_mm_2007 &lt;int&gt;,
+## #   body_mass_g &lt;int&gt;, sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
 </div>
 </div>
 <div id="練習問題-5" class="section level3" number="3.4.2">

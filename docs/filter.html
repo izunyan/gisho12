@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>4 行（ケース）を選ぶ：filter | がんばらないデータ加工</title>
 <meta name="author" content="やわらかクジラ">
-<meta name="generator" content="bookdown 0.32 with bs4_book()">
+<meta name="generator" content="bookdown 0.34 with bs4_book()">
 <meta property="og:title" content="4 行（ケース）を選ぶ：filter | がんばらないデータ加工">
 <meta property="og:type" content="book">
 <meta property="og:image" content="/images/cover.png">
@@ -86,24 +86,24 @@
 </li>
 </ul>
 <div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">starwars</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">starwars</span></span></code></pre></div>
 <pre><code>## # A tibble: 87 × 14
-##   name  height  mass hair_…¹ skin_…² eye_c…³ birth…⁴ sex   gender
-##   &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
-## 1 Luke…    172    77 blond   fair    blue         19 male  mascu…
-## 2 C-3PO    167    75 &lt;NA&gt;    gold    yellow      112 none  mascu…
-## 3 R2-D2     96    32 &lt;NA&gt;    white,… red          33 none  mascu…
-## # … with 84 more rows, 5 more variables: homeworld &lt;chr&gt;,
+##   name    height  mass hair_color skin_color eye_color birth_year
+##   &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt;
+## 1 Luke S…    172    77 blond      fair       blue              19
+## 2 C-3PO      167    75 &lt;NA&gt;       gold       yellow           112
+## 3 R2-D2       96    32 &lt;NA&gt;       white, bl… red               33
+## # ℹ 84 more rows
+## # ℹ 7 more variables: sex &lt;chr&gt;, gender &lt;chr&gt;, homeworld &lt;chr&gt;,
 ## #   species &lt;chr&gt;, films &lt;list&gt;, vehicles &lt;list&gt;,
-## #   starships &lt;list&gt;, and abbreviated variable names
-## #   ¹​hair_color, ²​skin_color, ³​eye_color, ⁴​birth_year</code></pre>
+## #   starships &lt;list&gt;</code></pre>
 <ul>
 <li>例示しやすくするためspeciesを先頭にしたデータを作成</li>
 </ul>
 <div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_st</span> <span class="op">&lt;-</span> 
-  <span class="va">starwars</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">species</span>, <span class="va">name</span><span class="op">:</span><span class="va">homeworld</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df_st</span> <span class="op">&lt;-</span> </span>
+<span>  <span class="va">starwars</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">species</span>, <span class="va">name</span><span class="op">:</span><span class="va">homeworld</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="filter-st" class="section level2" number="4.2">
 <h2>
@@ -123,59 +123,57 @@
 </li>
 </ul>
 <div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_st</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">species</span> <span class="op">==</span> <span class="st">"Droid"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df_st</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">species</span> <span class="op">==</span> <span class="st">"Droid"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 6 × 11
-##   species name   height  mass hair_color skin_c…¹ eye_c…² birth…³
-##   &lt;chr&gt;   &lt;chr&gt;   &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;    &lt;chr&gt;     &lt;dbl&gt;
-## 1 Droid   C-3PO     167    75 &lt;NA&gt;       gold     yellow      112
-## 2 Droid   R2-D2      96    32 &lt;NA&gt;       white, … red          33
-## 3 Droid   R5-D4      97    32 &lt;NA&gt;       white, … red          NA
-## 4 Droid   IG-88     200   140 none       metal    red          15
-## 5 Droid   R4-P17     96    NA none       silver,… red, b…      NA
-## 6 Droid   BB8        NA    NA none       none     black        NA
-## # … with 3 more variables: sex &lt;chr&gt;, gender &lt;chr&gt;,
-## #   homeworld &lt;chr&gt;, and abbreviated variable names ¹​skin_color,
-## #   ²​eye_color, ³​birth_year</code></pre>
+##   species name   height  mass hair_color skin_color  eye_color
+##   &lt;chr&gt;   &lt;chr&gt;   &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;    
+## 1 Droid   C-3PO     167    75 &lt;NA&gt;       gold        yellow   
+## 2 Droid   R2-D2      96    32 &lt;NA&gt;       white, blue red      
+## 3 Droid   R5-D4      97    32 &lt;NA&gt;       white, red  red      
+## 4 Droid   IG-88     200   140 none       metal       red      
+## 5 Droid   R4-P17     96    NA none       silver, red red, blue
+## 6 Droid   BB8        NA    NA none       none        black    
+## # ℹ 4 more variables: birth_year &lt;dbl&gt;, sex &lt;chr&gt;, gender &lt;chr&gt;,
+## #   homeworld &lt;chr&gt;</code></pre>
 <ul>
 <li>例：身長が200以上のケースのみ選ぶ</li>
 </ul>
 <div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_st</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">height</span> <span class="op">&gt;=</span> <span class="fl">200</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df_st</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">height</span> <span class="op">&gt;=</span> <span class="fl">200</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 11 × 11
-##    species  name     height  mass hair_…¹ skin_…² eye_c…³ birth…⁴
-##    &lt;chr&gt;    &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;
-##  1 Human    Darth V…    202   136 none    white   yellow     41.9
-##  2 Wookiee  Chewbac…    228   112 brown   unknown blue      200  
-##  3 Droid    IG-88       200   140 none    metal   red        15  
-##  4 Gungan   Roos Ta…    224    82 none    grey    orange     NA  
-##  5 Gungan   Rugor N…    206    NA none    green   orange     NA  
-##  6 Quermian Yarael …    264    NA none    white   yellow     NA  
-##  7 Kaminoan Lama Su     229    88 none    grey    black      NA  
-##  8 Kaminoan Taun We     213    NA none    grey    black      NA  
-##  9 Kaleesh  Grievous    216   159 none    brown,… green,…    NA  
-## 10 Wookiee  Tarfful     234   136 brown   brown   blue       NA  
-## 11 Pau'an   Tion Me…    206    80 none    grey    black      NA  
-## # … with 3 more variables: sex &lt;chr&gt;, gender &lt;chr&gt;,
-## #   homeworld &lt;chr&gt;, and abbreviated variable names ¹​hair_color,
-## #   ²​skin_color, ³​eye_color, ⁴​birth_year</code></pre>
+##    species  name     height  mass hair_color skin_color eye_color
+##    &lt;chr&gt;    &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;    
+##  1 Human    Darth V…    202   136 none       white      yellow   
+##  2 Wookiee  Chewbac…    228   112 brown      unknown    blue     
+##  3 Droid    IG-88       200   140 none       metal      red      
+##  4 Gungan   Roos Ta…    224    82 none       grey       orange   
+##  5 Gungan   Rugor N…    206    NA none       green      orange   
+##  6 Quermian Yarael …    264    NA none       white      yellow   
+##  7 Kaminoan Lama Su     229    88 none       grey       black    
+##  8 Kaminoan Taun We     213    NA none       grey       black    
+##  9 Kaleesh  Grievous    216   159 none       brown, wh… green, y…
+## 10 Wookiee  Tarfful     234   136 brown      brown      blue     
+## 11 Pau'an   Tion Me…    206    80 none       grey       black    
+## # ℹ 4 more variables: birth_year &lt;dbl&gt;, sex &lt;chr&gt;, gender &lt;chr&gt;,
+## #   homeworld &lt;chr&gt;</code></pre>
 <ul>
 <li>～以外を表すときは<code>!</code>をつけ，この場合は「<code>=</code>」は1つでよい</li>
 <li>例：種がHumanのケース<strong>以外</strong>を選ぶ</li>
 </ul>
 <div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_st</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">species</span> <span class="op">!=</span> <span class="st">"Human"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df_st</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">species</span> <span class="op">!=</span> <span class="st">"Human"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 48 × 11
-##   species name  height  mass hair_color skin_co…¹ eye_c…² birth…³
-##   &lt;chr&gt;   &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;     &lt;dbl&gt;
-## 1 Droid   C-3PO    167    75 &lt;NA&gt;       gold      yellow      112
-## 2 Droid   R2-D2     96    32 &lt;NA&gt;       white, b… red          33
-## 3 Droid   R5-D4     97    32 &lt;NA&gt;       white, r… red          NA
-## # … with 45 more rows, 3 more variables: sex &lt;chr&gt;,
-## #   gender &lt;chr&gt;, homeworld &lt;chr&gt;, and abbreviated variable
-## #   names ¹​skin_color, ²​eye_color, ³​birth_year</code></pre>
+##   species name  height  mass hair_color skin_color  eye_color
+##   &lt;chr&gt;   &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;    
+## 1 Droid   C-3PO    167    75 &lt;NA&gt;       gold        yellow   
+## 2 Droid   R2-D2     96    32 &lt;NA&gt;       white, blue red      
+## 3 Droid   R5-D4     97    32 &lt;NA&gt;       white, red  red      
+## # ℹ 45 more rows
+## # ℹ 4 more variables: birth_year &lt;dbl&gt;, sex &lt;chr&gt;, gender &lt;chr&gt;,
+## #   homeworld &lt;chr&gt;</code></pre>
 <div id="filter-st-na" class="section level3" number="4.2.1">
 <h3>
 <span class="header-section-number">4.2.1</span> 欠損値（NA）の扱い<a class="anchor" aria-label="anchor" href="#filter-st-na"><i class="fas fa-link"></i></a>
@@ -192,18 +190,17 @@
 </li>
 </ul>
 <div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_st</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df_st</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 4 × 11
-##   species name       height  mass hair_…¹ skin_…² eye_c…³ birth…⁴
-##   &lt;chr&gt;   &lt;chr&gt;       &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;
-## 1 &lt;NA&gt;    Ric Olié      183    NA brown   fair    blue         NA
-## 2 &lt;NA&gt;    Quarsh Pa…    183    NA black   dark    brown        62
-## 3 &lt;NA&gt;    Sly Moore     178    48 none    pale    white        NA
-## 4 &lt;NA&gt;    Captain P…     NA    NA unknown unknown unknown      NA
-## # … with 3 more variables: sex &lt;chr&gt;, gender &lt;chr&gt;,
-## #   homeworld &lt;chr&gt;, and abbreviated variable names ¹​hair_color,
-## #   ²​skin_color, ³​eye_color, ⁴​birth_year</code></pre>
+##   species name       height  mass hair_color skin_color eye_color
+##   &lt;chr&gt;   &lt;chr&gt;       &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;    
+## 1 &lt;NA&gt;    Ric Olié      183    NA brown      fair       blue     
+## 2 &lt;NA&gt;    Quarsh Pa…    183    NA black      dark       brown    
+## 3 &lt;NA&gt;    Sly Moore     178    48 none       pale       white    
+## 4 &lt;NA&gt;    Captain P…     NA    NA unknown    unknown    unknown  
+## # ℹ 4 more variables: birth_year &lt;dbl&gt;, sex &lt;chr&gt;, gender &lt;chr&gt;,
+## #   homeworld &lt;chr&gt;</code></pre>
 </div>
 <div id="練習問題-6" class="section level3" number="4.2.2">
 <h3>
@@ -227,17 +224,17 @@
 </li>
 </ul>
 <div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_st</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">species</span> <span class="op">==</span> <span class="st">"Droid"</span> <span class="op">|</span> <span class="va">species</span> <span class="op">==</span> <span class="st">"Human"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df_st</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">species</span> <span class="op">==</span> <span class="st">"Droid"</span> <span class="op">|</span> <span class="va">species</span> <span class="op">==</span> <span class="st">"Human"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 41 × 11
-##   species name       height  mass hair_…¹ skin_…² eye_c…³ birth…⁴
-##   &lt;chr&gt;   &lt;chr&gt;       &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;
-## 1 Human   Luke Skyw…    172    77 blond   fair    blue         19
-## 2 Droid   C-3PO         167    75 &lt;NA&gt;    gold    yellow      112
-## 3 Droid   R2-D2          96    32 &lt;NA&gt;    white,… red          33
-## # … with 38 more rows, 3 more variables: sex &lt;chr&gt;,
-## #   gender &lt;chr&gt;, homeworld &lt;chr&gt;, and abbreviated variable
-## #   names ¹​hair_color, ²​skin_color, ³​eye_color, ⁴​birth_year</code></pre>
+##   species name       height  mass hair_color skin_color eye_color
+##   &lt;chr&gt;   &lt;chr&gt;       &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;    
+## 1 Human   Luke Skyw…    172    77 blond      fair       blue     
+## 2 Droid   C-3PO         167    75 &lt;NA&gt;       gold       yellow   
+## 3 Droid   R2-D2          96    32 &lt;NA&gt;       white, bl… red      
+## # ℹ 38 more rows
+## # ℹ 4 more variables: birth_year &lt;dbl&gt;, sex &lt;chr&gt;, gender &lt;chr&gt;,
+## #   homeworld &lt;chr&gt;</code></pre>
 <ul>
 <li>speciesがDroidかつ身長が100未満のケースのみ選ぶ
 <ul>
@@ -247,17 +244,16 @@
 </li>
 </ul>
 <div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_st</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">species</span> <span class="op">==</span> <span class="st">"Droid"</span> <span class="op">&amp;</span> <span class="va">height</span> <span class="op">&lt;</span> <span class="fl">100</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df_st</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">species</span> <span class="op">==</span> <span class="st">"Droid"</span> <span class="op">&amp;</span> <span class="va">height</span> <span class="op">&lt;</span> <span class="fl">100</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 3 × 11
-##   species name   height  mass hair_color skin_c…¹ eye_c…² birth…³
-##   &lt;chr&gt;   &lt;chr&gt;   &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;    &lt;chr&gt;     &lt;dbl&gt;
-## 1 Droid   R2-D2      96    32 &lt;NA&gt;       white, … red          33
-## 2 Droid   R5-D4      97    32 &lt;NA&gt;       white, … red          NA
-## 3 Droid   R4-P17     96    NA none       silver,… red, b…      NA
-## # … with 3 more variables: sex &lt;chr&gt;, gender &lt;chr&gt;,
-## #   homeworld &lt;chr&gt;, and abbreviated variable names ¹​skin_color,
-## #   ²​eye_color, ³​birth_year</code></pre>
+##   species name   height  mass hair_color skin_color  eye_color
+##   &lt;chr&gt;   &lt;chr&gt;   &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;    
+## 1 Droid   R2-D2      96    32 &lt;NA&gt;       white, blue red      
+## 2 Droid   R5-D4      97    32 &lt;NA&gt;       white, red  red      
+## 3 Droid   R4-P17     96    NA none       silver, red red, blue
+## # ℹ 4 more variables: birth_year &lt;dbl&gt;, sex &lt;chr&gt;, gender &lt;chr&gt;,
+## #   homeworld &lt;chr&gt;</code></pre>
 <div id="filter-multi-eff" class="section level3" number="4.3.1">
 <h3>
 <span class="header-section-number">4.3.1</span> 【効率化】<a class="anchor" aria-label="anchor" href="#filter-multi-eff"><i class="fas fa-link"></i></a>
@@ -267,18 +263,17 @@
 <li>例: speciesで”Aleena”または “Dug”または “Yoda’s species”を選びたいとき</li>
 </ul>
 <div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_st</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">species</span> <span class="op">==</span> <span class="st">"Aleena"</span> <span class="op">|</span> <span class="va">species</span> <span class="op">==</span> <span class="st">"Dug"</span> <span class="op">|</span> 
-         <span class="va">species</span> <span class="op">==</span> <span class="st">"Yoda's species"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df_st</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">species</span> <span class="op">==</span> <span class="st">"Aleena"</span> <span class="op">|</span> <span class="va">species</span> <span class="op">==</span> <span class="st">"Dug"</span> <span class="op">|</span> </span>
+<span>         <span class="va">species</span> <span class="op">==</span> <span class="st">"Yoda's species"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 3 × 11
-##   species      name  height  mass hair_…¹ skin_…² eye_c…³ birth…⁴
-##   &lt;chr&gt;        &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;
-## 1 Yoda's spec… Yoda      66    17 white   green   brown       896
-## 2 Dug          Sebu…    112    40 none    grey, … orange       NA
-## 3 Aleena       Ratt…     79    15 none    grey, … unknown      NA
-## # … with 3 more variables: sex &lt;chr&gt;, gender &lt;chr&gt;,
-## #   homeworld &lt;chr&gt;, and abbreviated variable names ¹​hair_color,
-## #   ²​skin_color, ³​eye_color, ⁴​birth_year</code></pre>
+##   species      name  height  mass hair_color skin_color eye_color
+##   &lt;chr&gt;        &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;    
+## 1 Yoda's spec… Yoda      66    17 white      green      brown    
+## 2 Dug          Sebu…    112    40 none       grey, red  orange   
+## 3 Aleena       Ratt…     79    15 none       grey, blue unknown  
+## # ℹ 4 more variables: birth_year &lt;dbl&gt;, sex &lt;chr&gt;, gender &lt;chr&gt;,
+## #   homeworld &lt;chr&gt;</code></pre>
 <ul>
 <li>効率化するには<code>%in%</code>で解決
 <ul>
@@ -288,17 +283,16 @@
 </li>
 </ul>
 <div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_st</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">species</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Aleena"</span>, <span class="st">"Dug"</span>, <span class="st">"Yoda's species"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df_st</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">species</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Aleena"</span>, <span class="st">"Dug"</span>, <span class="st">"Yoda's species"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 3 × 11
-##   species      name  height  mass hair_…¹ skin_…² eye_c…³ birth…⁴
-##   &lt;chr&gt;        &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;
-## 1 Yoda's spec… Yoda      66    17 white   green   brown       896
-## 2 Dug          Sebu…    112    40 none    grey, … orange       NA
-## 3 Aleena       Ratt…     79    15 none    grey, … unknown      NA
-## # … with 3 more variables: sex &lt;chr&gt;, gender &lt;chr&gt;,
-## #   homeworld &lt;chr&gt;, and abbreviated variable names ¹​hair_color,
-## #   ²​skin_color, ³​eye_color, ⁴​birth_year</code></pre>
+##   species      name  height  mass hair_color skin_color eye_color
+##   &lt;chr&gt;        &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;    
+## 1 Yoda's spec… Yoda      66    17 white      green      brown    
+## 2 Dug          Sebu…    112    40 none       grey, red  orange   
+## 3 Aleena       Ratt…     79    15 none       grey, blue unknown  
+## # ℹ 4 more variables: birth_year &lt;dbl&gt;, sex &lt;chr&gt;, gender &lt;chr&gt;,
+## #   homeworld &lt;chr&gt;</code></pre>
 <ul>
 <li>例: 種で”Droid”, “Human”以外を選びたいとき
 <ul>
@@ -308,23 +302,23 @@
 </li>
 </ul>
 <div class="sourceCode" id="cb136"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_st</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">species</span> <span class="op">!=</span> <span class="st">"Droid"</span> <span class="op">&amp;</span> <span class="va">species</span> <span class="op">!=</span> <span class="st">"Human"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df_st</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">species</span> <span class="op">!=</span> <span class="st">"Droid"</span> <span class="op">&amp;</span> <span class="va">species</span> <span class="op">!=</span> <span class="st">"Human"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 42 × 11
-##   species name       height  mass hair_…¹ skin_…² eye_c…³ birth…⁴
-##   &lt;chr&gt;   &lt;chr&gt;       &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;
-## 1 Wookiee Chewbacca     228   112 brown   unknown blue        200
-## 2 Rodian  Greedo        173    74 &lt;NA&gt;    green   black        44
-## 3 Hutt    Jabba Des…    175  1358 &lt;NA&gt;    green-… orange      600
-## # … with 39 more rows, 3 more variables: sex &lt;chr&gt;,
-## #   gender &lt;chr&gt;, homeworld &lt;chr&gt;, and abbreviated variable
-## #   names ¹​hair_color, ²​skin_color, ³​eye_color, ⁴​birth_year</code></pre>
+##   species name       height  mass hair_color skin_color eye_color
+##   &lt;chr&gt;   &lt;chr&gt;       &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;    
+## 1 Wookiee Chewbacca     228   112 brown      unknown    blue     
+## 2 Rodian  Greedo        173    74 &lt;NA&gt;       green      black    
+## 3 Hutt    Jabba Des…    175  1358 &lt;NA&gt;       green-tan… orange   
+## # ℹ 39 more rows
+## # ℹ 4 more variables: birth_year &lt;dbl&gt;, sex &lt;chr&gt;, gender &lt;chr&gt;,
+## #   homeworld &lt;chr&gt;</code></pre>
 <div class="sourceCode" id="cb138"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># 確認</span>
-<span class="va">df_st</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">species</span> <span class="op">!=</span> <span class="st">"Droid"</span> <span class="op">&amp;</span> <span class="va">species</span> <span class="op">!=</span> <span class="st">"Human"</span><span class="op">)</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span> |&gt; 
-  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># 確認</span></span>
+<span><span class="va">df_st</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">species</span> <span class="op">!=</span> <span class="st">"Droid"</span> <span class="op">&amp;</span> <span class="va">species</span> <span class="op">!=</span> <span class="st">"Human"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 6 × 2
 ##   species            n
 ##   &lt;chr&gt;          &lt;int&gt;
@@ -339,23 +333,23 @@
 <li><p>例: 種で”Droid”, “Human”以外を選び，かつNAも含みたい時</p></li>
 </ul>
 <div class="sourceCode" id="cb140"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_st</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">species</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Droid"</span>, <span class="st">"Human"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df_st</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">species</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Droid"</span>, <span class="st">"Human"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 46 × 11
-##   species name       height  mass hair_…¹ skin_…² eye_c…³ birth…⁴
-##   &lt;chr&gt;   &lt;chr&gt;       &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;
-## 1 Wookiee Chewbacca     228   112 brown   unknown blue        200
-## 2 Rodian  Greedo        173    74 &lt;NA&gt;    green   black        44
-## 3 Hutt    Jabba Des…    175  1358 &lt;NA&gt;    green-… orange      600
-## # … with 43 more rows, 3 more variables: sex &lt;chr&gt;,
-## #   gender &lt;chr&gt;, homeworld &lt;chr&gt;, and abbreviated variable
-## #   names ¹​hair_color, ²​skin_color, ³​eye_color, ⁴​birth_year</code></pre>
+##   species name       height  mass hair_color skin_color eye_color
+##   &lt;chr&gt;   &lt;chr&gt;       &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;    
+## 1 Wookiee Chewbacca     228   112 brown      unknown    blue     
+## 2 Rodian  Greedo        173    74 &lt;NA&gt;       green      black    
+## 3 Hutt    Jabba Des…    175  1358 &lt;NA&gt;       green-tan… orange   
+## # ℹ 43 more rows
+## # ℹ 4 more variables: birth_year &lt;dbl&gt;, sex &lt;chr&gt;, gender &lt;chr&gt;,
+## #   homeworld &lt;chr&gt;</code></pre>
 <div class="sourceCode" id="cb142"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># 確認</span>
-<span class="va">df_st</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">species</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Droid"</span>, <span class="st">"Human"</span><span class="op">)</span><span class="op">)</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span> |&gt; 
-  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># 確認</span></span>
+<span><span class="va">df_st</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">species</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Droid"</span>, <span class="st">"Human"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 6 × 2
 ##   species            n
 ##   &lt;chr&gt;          &lt;int&gt;
@@ -386,15 +380,14 @@
 <li><p>例：変数nameに”Luke”を含む行を見たい</p></li>
 </ul>
 <div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_st</span> |&gt;
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">name</span>, <span class="st">"Luke"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df_st</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">name</span>, <span class="st">"Luke"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 1 × 11
-##   species name       height  mass hair_…¹ skin_…² eye_c…³ birth…⁴
-##   &lt;chr&gt;   &lt;chr&gt;       &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;
-## 1 Human   Luke Skyw…    172    77 blond   fair    blue         19
-## # … with 3 more variables: sex &lt;chr&gt;, gender &lt;chr&gt;,
-## #   homeworld &lt;chr&gt;, and abbreviated variable names ¹​hair_color,
-## #   ²​skin_color, ³​eye_color, ⁴​birth_year</code></pre>
+##   species name       height  mass hair_color skin_color eye_color
+##   &lt;chr&gt;   &lt;chr&gt;       &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;    
+## 1 Human   Luke Skyw…    172    77 blond      fair       blue     
+## # ℹ 4 more variables: birth_year &lt;dbl&gt;, sex &lt;chr&gt;, gender &lt;chr&gt;,
+## #   homeworld &lt;chr&gt;</code></pre>
 <ul>
 <li>例：変数nameが”R”で始まる行を見たい
 <ul>
@@ -403,23 +396,22 @@
 </li>
 </ul>
 <div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_st</span> |&gt;
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">name</span>, <span class="st">"^R"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df_st</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">name</span>, <span class="st">"^R"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 9 × 11
-##   species name       height  mass hair_…¹ skin_…² eye_c…³ birth…⁴
-##   &lt;chr&gt;   &lt;chr&gt;       &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;
-## 1 Droid   R2-D2          96    32 &lt;NA&gt;    white,… red          33
-## 2 Droid   R5-D4          97    32 &lt;NA&gt;    white,… red          NA
-## 3 Gungan  Roos Tarp…    224    82 none    grey    orange       NA
-## 4 Gungan  Rugor Nass    206    NA none    green   orange       NA
-## 5 &lt;NA&gt;    Ric Olié      183    NA brown   fair    blue         NA
-## 6 Aleena  Ratts Tye…     79    15 none    grey, … unknown      NA
-## 7 Droid   R4-P17         96    NA none    silver… red, b…      NA
-## 8 Human   Raymus An…    188    79 brown   light   brown        NA
-## 9 Human   Rey            NA    NA brown   light   hazel        NA
-## # … with 3 more variables: sex &lt;chr&gt;, gender &lt;chr&gt;,
-## #   homeworld &lt;chr&gt;, and abbreviated variable names ¹​hair_color,
-## #   ²​skin_color, ³​eye_color, ⁴​birth_year</code></pre>
+##   species name       height  mass hair_color skin_color eye_color
+##   &lt;chr&gt;   &lt;chr&gt;       &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;    
+## 1 Droid   R2-D2          96    32 &lt;NA&gt;       white, bl… red      
+## 2 Droid   R5-D4          97    32 &lt;NA&gt;       white, red red      
+## 3 Gungan  Roos Tarp…    224    82 none       grey       orange   
+## 4 Gungan  Rugor Nass    206    NA none       green      orange   
+## 5 &lt;NA&gt;    Ric Olié      183    NA brown      fair       blue     
+## 6 Aleena  Ratts Tye…     79    15 none       grey, blue unknown  
+## 7 Droid   R4-P17         96    NA none       silver, r… red, blue
+## 8 Human   Raymus An…    188    79 brown      light      brown    
+## 9 Human   Rey            NA    NA brown      light      hazel    
+## # ℹ 4 more variables: birth_year &lt;dbl&gt;, sex &lt;chr&gt;, gender &lt;chr&gt;,
+## #   homeworld &lt;chr&gt;</code></pre>
 <ul>
 <li>例：変数nameが”Y”または”L”で始まる行を見たい
 <ul>
@@ -428,22 +420,21 @@
 </li>
 </ul>
 <div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_st</span> |&gt;
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">name</span>, <span class="st">"^Y|^L"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df_st</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">name</span>, <span class="st">"^Y|^L"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 8 × 11
-##   species      name  height  mass hair_…¹ skin_…² eye_c…³ birth…⁴
-##   &lt;chr&gt;        &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;
-## 1 Human        Luke…    172  77   blond   fair    blue         19
-## 2 Human        Leia…    150  49   brown   light   brown        19
-## 3 Yoda's spec… Yoda      66  17   white   green   brown       896
-## 4 Human        Land…    177  79   black   dark    brown        31
-## 5 Human        Lobot    175  79   none    light   blue         37
-## 6 Quermian     Yara…    264  NA   none    white   yellow       NA
-## 7 Mirialan     Lumi…    170  56.2 black   yellow  blue         58
-## 8 Kaminoan     Lama…    229  88   none    grey    black        NA
-## # … with 3 more variables: sex &lt;chr&gt;, gender &lt;chr&gt;,
-## #   homeworld &lt;chr&gt;, and abbreviated variable names ¹​hair_color,
-## #   ²​skin_color, ³​eye_color, ⁴​birth_year</code></pre>
+##   species      name  height  mass hair_color skin_color eye_color
+##   &lt;chr&gt;        &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;    
+## 1 Human        Luke…    172  77   blond      fair       blue     
+## 2 Human        Leia…    150  49   brown      light      brown    
+## 3 Yoda's spec… Yoda      66  17   white      green      brown    
+## 4 Human        Land…    177  79   black      dark       brown    
+## 5 Human        Lobot    175  79   none       light      blue     
+## 6 Quermian     Yara…    264  NA   none       white      yellow   
+## 7 Mirialan     Lumi…    170  56.2 black      yellow     blue     
+## 8 Kaminoan     Lama…    229  88   none       grey       black    
+## # ℹ 4 more variables: birth_year &lt;dbl&gt;, sex &lt;chr&gt;, gender &lt;chr&gt;,
+## #   homeworld &lt;chr&gt;</code></pre>
 <div id="練習問題-8" class="section level3" number="4.4.1">
 <h3>
 <span class="header-section-number">4.4.1</span> [練習問題]<a class="anchor" aria-label="anchor" href="#%E7%B7%B4%E7%BF%92%E5%95%8F%E9%A1%8C-8"><i class="fas fa-link"></i></a>

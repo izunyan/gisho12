@@ -8,6 +8,7 @@
 ## 使用データ {#mu-read}
 
 * `psychTools`パッケージに入っている国際パーソナリティ項目プールからの2800名分のデータ
+  + 名前が似ている`psychotools`パッケージもあるので注意
   + 質問項目が25問あり，5つの構成概念（ここでは因子という）に対応する項目への回答を足し合わせたスコアを計算する
   + 性，教育歴，年齢の変数もあり
 * 項目に対し想定される因子（因子名の頭文字が変数名と対応）
@@ -26,8 +27,9 @@
   + 6 Very Accurate          非常にあてはまる
   
 ```{r}
-# パッケージが入ってなければ下記の#を外して実行
+# パッケージが入ってなければ下記の#を外して実行。
 # install.packages("psychTools")
+
 
 # まだtidyverseパッケージを読み込んでない場合は以下の#を外して実行
 # library(tidyverse)
@@ -461,7 +463,8 @@ df_bfi <-
 * `base::rowSums()`
   + データフレームで行の単位で総計するので，行（ケース）ごとに合計点を作成できる
 * まず総計の対象となる変数名を\@ref(select-cha)で解説したように文字ベクトルのオブジェクトに格納して定義していく
-* `rowSums()`の中で`across()`が使えるので，あとは定義した項目のオブジェクトを指定していくだけ
+* `rowSums()`の中で~~across()が使える~~ので，あとは定義した項目のオブジェクトを指定していくだけ
+  + `dplyr 1.1.0`より`picks()`に変更([tidyverse blogの記事](https://www.tidyverse.org/blog/2023/02/dplyr-1-1-0-pick-reframe-arrange/); [適用例](https://stackoverflow.com/questions/76051075/rowsum-several-groups-of-columns-with-a-particular-pattern-of-names))
 
 ```{r}
 # 合計する項目の定義
@@ -495,12 +498,24 @@ df_bfi |>
 df_bfi <- 
   df_bfi |> 
   mutate(
-    Agree         = rowSums(across(all_of(Ag))),
-    Conscientious = rowSums(across(all_of(Co))),
-    Extraversion  = rowSums(across(all_of(Ex))),
-    Neuroticism   = rowSums(across(all_of(Ne))),
-    Openness      = rowSums(across(all_of(Op)))
+    Agree         = rowSums(pick(all_of(Ag))),
+    Conscientious = rowSums(pick(all_of(Co))),
+    Extraversion  = rowSums(pick(all_of(Ex))),
+    Neuroticism   = rowSums(pick(all_of(Ne))),
+    Openness      = rowSums(pick(all_of(Op)))
     )
+
+# dplyr < 1.1.0の例
+
+# df_bfi <- 
+#   df_bfi |> 
+#   mutate(
+#     Agree         = rowSums(across(all_of(Ag))),
+#     Conscientious = rowSums(across(all_of(Co))),
+#     Extraversion  = rowSums(across(all_of(Ex))),
+#     Neuroticism   = rowSums(across(all_of(Ne))),
+#     Openness      = rowSums(across(all_of(Op)))
+#     )
 
 ```
 

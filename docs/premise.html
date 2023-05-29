@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>1 前提知識 | がんばらないデータ加工</title>
 <meta name="author" content="やわらかクジラ">
-<meta name="generator" content="bookdown 0.32 with bs4_book()">
+<meta name="generator" content="bookdown 0.34 with bs4_book()">
 <meta property="og:title" content="1 前提知識 | がんばらないデータ加工">
 <meta property="og:type" content="book">
 <meta property="og:image" content="/images/cover.png">
@@ -171,7 +171,7 @@ Figure 1.6: 文字エンコーディングの指定
 <li>グレーの背景部分はRのコードが書いてあり，その下の<code>##</code>で始まる部分は出力結果を表す</li>
 </ul>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fl">1</span> <span class="op">+</span> <span class="fl">1</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fl">1</span> <span class="op">+</span> <span class="fl">1</span></span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
 <ul>
 <li>ここでは<code>1 + 1</code>がコード部分で，<code>## [1] 2</code>が出力結果部分</li>
@@ -184,16 +184,16 @@ Figure 1.6: 文字エンコーディングの指定
 </li>
 </ul>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fl">1</span><span class="op">:</span><span class="fl">50</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fl">1</span><span class="op">:</span><span class="fl">50</span></span></code></pre></div>
 <pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
 ## [26] 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50</code></pre>
 <ul>
 <li>コード部分に<code>#</code>で始まる文章がある場合は，コメントを表す。ここは実行されないので説明のために書かれる</li>
 </ul>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># *（アスタリスク） は掛け算であることを示す</span>
-
-<span class="fl">2</span> <span class="op">*</span> <span class="fl">3</span>  <span class="co"># ここにもコメントを入れられる</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># *（アスタリスク） は掛け算であることを示す</span></span>
+<span></span>
+<span><span class="fl">2</span> <span class="op">*</span> <span class="fl">3</span>  <span class="co"># ここにもコメントを入れられる</span></span></code></pre></div>
 <pre><code>## [1] 6</code></pre>
 </div>
 <div id="p-package" class="section level2" number="1.3">
@@ -221,7 +221,7 @@ Figure 1.6: 文字エンコーディングの指定
 </li>
 </ul>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code></pre></div>
 <ul>
 <li>インストールされているパッケージはRStudioのデフォルト画面で右下にあるウィンドウ（ペインと呼ぶ）のパッケージタブで確認可能<br>
 </li>
@@ -289,14 +289,14 @@ Figure 1.7: パッケージタブからのインストール
 <li>ベクトルは，<a href="premise.html#p-df">1.6</a>）で解説するデータフレームでの列単位のデータを扱う際にも有用</li>
 </ul>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 1 2 3</code></pre>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span><span class="op">)</span> <span class="co"># " "で囲まれる値は文字を表す</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span><span class="op">)</span> <span class="co"># " "で囲まれる値は文字を表す</span></span></code></pre></div>
 <pre><code>## [1] "a" "b" "c"</code></pre>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># 複数あるように見えるが実は1つのベクトルになっている例</span>
-<span class="fl">1</span><span class="op">:</span><span class="fl">10</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># 複数あるように見えるが実は1つのベクトルになっている例</span></span>
+<span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span></span></code></pre></div>
 <pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
 </div>
 <div id="p-function-ex-m" class="section level4" number="1.4.1.2">
@@ -314,16 +314,16 @@ Figure 1.8: ベクトルのイメージ
 </p>
 </div>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># 欠損値（NA）があると結果がNA</span>
-<span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="cn">NA</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># 欠損値（NA）があると結果がNA</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="cn">NA</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] NA</code></pre>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># 引数にna.rm = TRUEを追加すると結果が出る</span>
-<span class="co"># 基本的に実務上は常につけておいたほうがよい</span>
-<span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="cn">NA</span>, <span class="fl">3</span><span class="op">)</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># 引数にna.rm = TRUEを追加すると結果が出る</span></span>
+<span><span class="co"># 基本的に実務上は常につけておいたほうがよい</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="cn">NA</span>, <span class="fl">3</span><span class="op">)</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
 </div>
 </div>
@@ -362,15 +362,15 @@ Figure 1.8: ベクトルのイメージ
 </li>
 </ul>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">add_one</span> <span class="op">&lt;-</span> 
-  <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span>
-    <span class="va">x</span> <span class="op">+</span> <span class="fl">1</span>
-  <span class="op">}</span>
-
-<span class="fu">add_one</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">add_one</span> <span class="op">&lt;-</span> </span>
+<span>  <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="va">x</span> <span class="op">+</span> <span class="fl">1</span></span>
+<span>  <span class="op">}</span></span>
+<span></span>
+<span><span class="fu">add_one</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">add_one</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">add_one</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
 </div>
 <div id="p-function-make-anonymous" class="section level4" number="1.4.2.2">
@@ -387,10 +387,10 @@ Figure 1.8: ベクトルのイメージ
 <li>右端の部分の<code>()</code>に引数を入れることで実行できる</li>
 </ul>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
 <ul>
 <li>R 4.1.0より，<code>function</code>を省略して<strong>バックスラッシュ<code>\</code>で示せるように</strong>なった</li>
@@ -401,7 +401,7 @@ Figure 1.8: ベクトルのイメージ
 </li>
 </ul>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
 </div>
 </div>
@@ -426,20 +426,20 @@ Figure 1.8: ベクトルのイメージ
 <span class="header-section-number">1.5.1</span> 例<a class="anchor" aria-label="anchor" href="#p-object-ex"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">res</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">+</span> <span class="fl">1</span>
-<span class="va">res</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">+</span> <span class="fl">1</span></span>
+<span><span class="va">res</span></span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">res2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">4</span>, <span class="fl">5</span><span class="op">)</span>
-<span class="va">res2</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">res2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">4</span>, <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="va">res2</span></span></code></pre></div>
 <pre><code>## [1] 1 2 3 4 5</code></pre>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">res3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span>
-<span class="va">res3</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">res3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span></span>
+<span><span class="va">res3</span></span></code></pre></div>
 <pre><code>## [1] "a" "b"</code></pre>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># この後は不要なので削除</span>
-<span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span><span class="va">res</span>, <span class="va">res2</span>, <span class="va">res3</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># この後は不要なので削除</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span><span class="va">res</span>, <span class="va">res2</span>, <span class="va">res3</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 <div id="p-df" class="section level2" number="1.6">
@@ -508,19 +508,18 @@ Figure 1.10: Rのデータフレーム(tibble形式)
 </li>
 </ul>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># パッケージが入ってなければ下記実行</span>
-<span class="co"># install.packages("palmerpenguins")</span>
-
-<span class="fu">palmerpenguins</span><span class="fu">::</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/reference/penguins.html">penguins</a></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># パッケージが入ってなければ下記実行</span></span>
+<span><span class="co"># install.packages("palmerpenguins")</span></span>
+<span></span>
+<span><span class="fu">palmerpenguins</span><span class="fu">::</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/reference/penguins.html">penguins</a></span></span></code></pre></div>
 <pre><code>## # A tibble: 344 × 8
-##   species island    bill_le…¹ bill_…² flipp…³ body_…⁴ sex    year
-##   &lt;fct&gt;   &lt;fct&gt;         &lt;dbl&gt;   &lt;dbl&gt;   &lt;int&gt;   &lt;int&gt; &lt;fct&gt; &lt;int&gt;
-## 1 Adelie  Torgersen      39.1    18.7     181    3750 male   2007
-## 2 Adelie  Torgersen      39.5    17.4     186    3800 fema…  2007
-## 3 Adelie  Torgersen      40.3    18       195    3250 fema…  2007
-## # … with 341 more rows, and abbreviated variable names
-## #   ¹​bill_length_mm, ²​bill_depth_mm, ³​flipper_length_mm,
-## #   ⁴​body_mass_g</code></pre>
+##   species island   bill_length_mm bill_depth_mm flipper_length_mm
+##   &lt;fct&gt;   &lt;fct&gt;             &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;
+## 1 Adelie  Torgers…           39.1          18.7               181
+## 2 Adelie  Torgers…           39.5          17.4               186
+## 3 Adelie  Torgers…           40.3          18                 195
+## # ℹ 341 more rows
+## # ℹ 3 more variables: body_mass_g &lt;int&gt;, sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
 <ul>
 <li>tibble形式のデータフレームの出力の見方
 <ul>
@@ -540,20 +539,20 @@ Figure 1.10: Rのデータフレーム(tibble形式)
 <li>より大きいデータフレームで情報が多い場合の出力例を次に示す</li>
 </ul>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">palmerpenguins</span><span class="fu">::</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/reference/penguins_raw.html">penguins_raw</a></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">palmerpenguins</span><span class="fu">::</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/reference/penguins_raw.html">penguins_raw</a></span></span></code></pre></div>
 <pre><code>## # A tibble: 344 × 17
-##   studyName Sample …¹ Species Region Island Stage Indiv…² Clutc…³
-##   &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;  
-## 1 PAL0708           1 Adelie… Anvers Torge… Adul… N1A1    Yes    
-## 2 PAL0708           2 Adelie… Anvers Torge… Adul… N1A2    Yes    
-## 3 PAL0708           3 Adelie… Anvers Torge… Adul… N2A1    Yes    
-## # … with 341 more rows, 9 more variables: `Date Egg` &lt;date&gt;,
+##   studyName `Sample Number` Species           Region Island Stage
+##   &lt;chr&gt;               &lt;dbl&gt; &lt;chr&gt;             &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;
+## 1 PAL0708                 1 Adelie Penguin (… Anvers Torge… Adul…
+## 2 PAL0708                 2 Adelie Penguin (… Anvers Torge… Adul…
+## 3 PAL0708                 3 Adelie Penguin (… Anvers Torge… Adul…
+## # ℹ 341 more rows
+## # ℹ 11 more variables: `Individual ID` &lt;chr&gt;,
+## #   `Clutch Completion` &lt;chr&gt;, `Date Egg` &lt;date&gt;,
 ## #   `Culmen Length (mm)` &lt;dbl&gt;, `Culmen Depth (mm)` &lt;dbl&gt;,
 ## #   `Flipper Length (mm)` &lt;dbl&gt;, `Body Mass (g)` &lt;dbl&gt;,
 ## #   Sex &lt;chr&gt;, `Delta 15 N (o/oo)` &lt;dbl&gt;,
-## #   `Delta 13 C (o/oo)` &lt;dbl&gt;, Comments &lt;chr&gt;, and abbreviated
-## #   variable names ¹​`Sample Number`, ²​`Individual ID`,
-## #   ³​`Clutch Completion`</code></pre>
+## #   `Delta 13 C (o/oo)` &lt;dbl&gt;, Comments &lt;chr&gt;</code></pre>
 <ul>
 <li>
 <p>tibble形式のデータフレームの出力の見方</p>
@@ -572,29 +571,28 @@ Figure 1.10: Rのデータフレーム(tibble形式)
 <li><p>例：最初の15行のみ表示させる</p></li>
 </ul>
 <div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">palmerpenguins</span><span class="fu">::</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/reference/penguins.html">penguins</a></span>  |&gt;  
-  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">15</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">palmerpenguins</span><span class="fu">::</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/reference/penguins.html">penguins</a></span>  <span class="op">|&gt;</span>  </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">15</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 344 × 8
-##    species island    bill_l…¹ bill_…² flipp…³ body_…⁴ sex    year
-##    &lt;fct&gt;   &lt;fct&gt;        &lt;dbl&gt;   &lt;dbl&gt;   &lt;int&gt;   &lt;int&gt; &lt;fct&gt; &lt;int&gt;
-##  1 Adelie  Torgersen     39.1    18.7     181    3750 male   2007
-##  2 Adelie  Torgersen     39.5    17.4     186    3800 fema…  2007
-##  3 Adelie  Torgersen     40.3    18       195    3250 fema…  2007
-##  4 Adelie  Torgersen     NA      NA        NA      NA &lt;NA&gt;   2007
-##  5 Adelie  Torgersen     36.7    19.3     193    3450 fema…  2007
-##  6 Adelie  Torgersen     39.3    20.6     190    3650 male   2007
-##  7 Adelie  Torgersen     38.9    17.8     181    3625 fema…  2007
-##  8 Adelie  Torgersen     39.2    19.6     195    4675 male   2007
-##  9 Adelie  Torgersen     34.1    18.1     193    3475 &lt;NA&gt;   2007
-## 10 Adelie  Torgersen     42      20.2     190    4250 &lt;NA&gt;   2007
-## 11 Adelie  Torgersen     37.8    17.1     186    3300 &lt;NA&gt;   2007
-## 12 Adelie  Torgersen     37.8    17.3     180    3700 &lt;NA&gt;   2007
-## 13 Adelie  Torgersen     41.1    17.6     182    3200 fema…  2007
-## 14 Adelie  Torgersen     38.6    21.2     191    3800 male   2007
-## 15 Adelie  Torgersen     34.6    21.1     198    4400 male   2007
-## # … with 329 more rows, and abbreviated variable names
-## #   ¹​bill_length_mm, ²​bill_depth_mm, ³​flipper_length_mm,
-## #   ⁴​body_mass_g</code></pre>
+##    species island  bill_length_mm bill_depth_mm flipper_length_mm
+##    &lt;fct&gt;   &lt;fct&gt;            &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;
+##  1 Adelie  Torger…           39.1          18.7               181
+##  2 Adelie  Torger…           39.5          17.4               186
+##  3 Adelie  Torger…           40.3          18                 195
+##  4 Adelie  Torger…           NA            NA                  NA
+##  5 Adelie  Torger…           36.7          19.3               193
+##  6 Adelie  Torger…           39.3          20.6               190
+##  7 Adelie  Torger…           38.9          17.8               181
+##  8 Adelie  Torger…           39.2          19.6               195
+##  9 Adelie  Torger…           34.1          18.1               193
+## 10 Adelie  Torger…           42            20.2               190
+## 11 Adelie  Torger…           37.8          17.1               186
+## 12 Adelie  Torger…           37.8          17.3               180
+## 13 Adelie  Torger…           41.1          17.6               182
+## 14 Adelie  Torger…           38.6          21.2               191
+## 15 Adelie  Torger…           34.6          21.1               198
+## # ℹ 329 more rows
+## # ℹ 3 more variables: body_mass_g &lt;int&gt;, sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
 </div>
 </div>
 </div>
