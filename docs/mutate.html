@@ -782,10 +782,10 @@
 </li>
 <li>まず総計の対象となる変数名を<a href="select.html#select-cha">2.2.3</a>で解説したように文字ベクトルのオブジェクトに格納して定義していく</li>
 <li>
-<code><a href="https://rdrr.io/r/base/colSums.html">rowSums()</a></code>の中で<del><code><a href="https://dplyr.tidyverse.org/reference/across.html">across()</a></code>が使える</del>ので，あとは定義した項目のオブジェクトを指定していくだけ
+<code><a href="https://rdrr.io/r/base/colSums.html">rowSums()</a></code>の中で<del>across()が使える</del>ので，あとは定義した項目のオブジェクトを指定していくだけ
 <ul>
 <li>
-<code>dplyr 1.1.0</code>より<code>picks()</code>に変更(<a href="https://www.tidyverse.org/blog/2023/02/dplyr-1-1-0-pick-reframe-arrange/">tidyverse blogの記事</a>; <a href="https://stackoverflow.com/questions/76051075/rowsum-several-groups-of-columns-with-a-particular-pattern-of-names">適用例</a>)</li>
+<code>dplyr 1.1.0</code>より<code><a href="https://dplyr.tidyverse.org/reference/pick.html">pick()</a></code>に変更(<a href="https://www.tidyverse.org/blog/2023/02/dplyr-1-1-0-pick-reframe-arrange/">tidyverse blogの記事</a>; <a href="https://stackoverflow.com/questions/76051075/rowsum-several-groups-of-columns-with-a-particular-pattern-of-names">適用例</a>)</li>
 </ul>
 </li>
 </ul>
@@ -1044,16 +1044,16 @@
 <pre><code>## # A tibble: 10 × 3
 ##      age age6         n
 ##    &lt;int&gt; &lt;chr&gt;    &lt;int&gt;
-##  1     3 20歳未満     1
-##  2    17 20歳未満   100
-##  3    30 30-39歳     65
+##  1     9 20歳未満     1
+##  2    12 20歳未満    28
+##  3    17 20歳未満   100
 ##  4    33 30-39歳     50
-##  5    36 30-39歳     50
-##  6    41 40-49歳     32
+##  5    39 30-39歳     50
+##  6    40 40-49歳     56
 ##  7    42 40-49歳     30
-##  8    47 40-49歳     21
-##  9    74 60歳以上     1
-## 10    86 60歳以上     1</code></pre>
+##  8    45 40-49歳     28
+##  9    61 60歳以上     4
+## 10    72 60歳以上     1</code></pre>
 <div class="sourceCode" id="cb219"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span><span class="va">res_age6</span><span class="op">)</span></span></code></pre></div>
 </div>

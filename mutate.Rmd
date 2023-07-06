@@ -464,7 +464,7 @@ df_bfi <-
   + データフレームで行の単位で総計するので，行（ケース）ごとに合計点を作成できる
 * まず総計の対象となる変数名を\@ref(select-cha)で解説したように文字ベクトルのオブジェクトに格納して定義していく
 * `rowSums()`の中で~~across()が使える~~ので，あとは定義した項目のオブジェクトを指定していくだけ
-  + `dplyr 1.1.0`より`picks()`に変更([tidyverse blogの記事](https://www.tidyverse.org/blog/2023/02/dplyr-1-1-0-pick-reframe-arrange/); [適用例](https://stackoverflow.com/questions/76051075/rowsum-several-groups-of-columns-with-a-particular-pattern-of-names))
+  + `dplyr 1.1.0`より`pick()`に変更([tidyverse blogの記事](https://www.tidyverse.org/blog/2023/02/dplyr-1-1-0-pick-reframe-arrange/); [適用例](https://stackoverflow.com/questions/76051075/rowsum-several-groups-of-columns-with-a-particular-pattern-of-names))
 
 ```{r}
 # 合計する項目の定義
